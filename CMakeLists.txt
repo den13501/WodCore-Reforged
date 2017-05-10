@@ -33,6 +33,10 @@ if( NOT CMAKE_BUILD_TYPE )
   set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+if( UNIX )
+    set (CMAKE_CXX_FLAGS "-std=c++0x")
+endif()
+
 include(CheckCXXSourceRuns)
 include(CheckIncludeFiles)
 
