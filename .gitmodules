@@ -1,5 +1,0 @@
-[submodule "dep/EasyJSon"]
-    path = dep/EasyJSon
-    url = https://github.com/MilleniumStudio/EasyJSon.git
-    branch = master
-    ignore = dirty
