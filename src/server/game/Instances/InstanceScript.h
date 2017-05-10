@@ -14,8 +14,6 @@
 #include "ObjectMgr.h"
 #include "ScriptMgr.h"
 #include "AchievementMgr.h"
-#include "Reporter.hpp"
-#include <EasyJSon.hpp>
 //#include "GameObject.h"
 //#include "Map.h"
 

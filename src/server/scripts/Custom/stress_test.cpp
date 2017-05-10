@@ -9,7 +9,6 @@
 #include <ScriptPCH.h>
 #include <ScriptMgr.h>
 #include "ChannelMgr.h"
-//#include <Reporting/Reporter.hpp>
 
 class StressTest : public PlayerScript
 {
