@@ -40,6 +40,8 @@ FIND_LIBRARY(CURL_LIBRARIES
     libcurl curl curl_a libcurl_a
   PATHS
     ${CURL_ROOT_DIR}/lib/MSVC_2015/x64/
+    /usr/lib
+    /usr/lib/x86_64-linux-gnu
 )
 message(STATUS "MSVC:  CURL MSVC 2015 x64")
 
@@ -50,6 +52,8 @@ FIND_LIBRARY(CURL_LIBRARIES
     libcurl curl curl_a libcurl_a
   PATHS
     ${CURL_ROOT_DIR}/lib/MSVC_2013/x64/
+    /usr/lib
+    /usr/lib/x86_64-linux-gnu
 )
 
 message(STATUS "MSVC: CURL MSVC 2013 x64")
@@ -80,6 +84,8 @@ FIND_LIBRARY(CURL_LIBRARIES
     libcurl curl curl_a libcurl_a
   PATHS
     ${CURL_ROOT_DIR}/lib/MSVC_2015/x32/
+    /usr/lib
+    /usr/lib/x86_64-linux-gnu
 )
 message(STATUS "MSVC:  CURL MSVC 2015 x32")
 
@@ -90,6 +96,8 @@ FIND_LIBRARY(CURL_LIBRARIES
     libcurl curl curl_a libcurl_a
   PATHS
     ${CURL_ROOT_DIR}/lib/MSVC_2013/x32/
+    /usr/lib
+    /usr/lib/x86_64-linux-gnu
 )
 
 message(STATUS "MSVC: CURL MSVC 2013 x32")
