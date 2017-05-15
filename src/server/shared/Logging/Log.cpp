@@ -15,9 +15,6 @@
 #include "AppenderDB.h"
 #include "LogOperation.h"
 
-# define CURL_STATICLIB
-#include "curl/curl.h"
-
 #include <cstdarg>
 #include <cstdio>
 #include <future>
@@ -466,49 +463,4 @@ void Log::outAshran(const char* str, ...)
     std::string date = GetTimestampStr();
     fprintf(ashranLog, "[%s] Ashran LOG : %s\n", date.c_str(), result);
     fflush(ashranLog);
-}
-
-/// Slack API Documentation : https://api.slack.com/docs/attachments
-void Log::outSlack(std::string const& p_Dest, std::string const& p_Color, bool p_IsAttachement, const char* p_Message, ...)
-{
-    if (!p_Message || !m_SlackEnable || m_SlackApiUrl.empty())
-        return;
-
-    char l_Result[MAX_QUERY_LEN];
-    va_list l_AP;
-
-    va_start(l_AP, p_Message);
-    vsnprintf(l_Result, MAX_QUERY_LEN, p_Message, l_AP);
-    va_end(l_AP);
-
-    std::string l_SlackApiUrl  = m_SlackApiUrl;
-    std::string l_SlackAppName = m_SlackAppName;
-    std::string l_Message      = l_Result;
-
-    std::thread([p_Dest, l_Message, p_Color, p_IsAttachement, l_SlackApiUrl, l_SlackAppName]
-    {
-        CURL* l_Curl = curl_easy_init();
-        if (l_Curl)
-        {
-            std::ostringstream l_PostData;
-            if (p_IsAttachement)
-                l_PostData << "payload={\"attachments\": [{\"pretext\": \"*" << std::string(l_SlackAppName) << "*\", \"text\": \"" << std::string(l_Message) << "\", \"color\": \"" << std::string(p_Color) << "\", \"mrkdwn_in\": [\"pretext\", \"text\"]}], \"channel\": \"" << std::string(p_Dest) << "\"}";
-            else
-                l_PostData << "payload={\"text\": \"" << std::string(l_Message) << "\", \"channel\": \"" << std::string(p_Dest) << "\"}";
-
-            std::string l_DataTxt = l_PostData.str();
-
-            curl_easy_setopt(l_Curl, CURLOPT_URL,           l_SlackApiUrl.c_str());
-            curl_easy_setopt(l_Curl, CURLOPT_POSTFIELDS,    l_DataTxt.c_str());
-            curl_easy_setopt(l_Curl, CURLOPT_POSTFIELDSIZE, l_DataTxt.size());
-            curl_easy_setopt(l_Curl, CURLOPT_POST,          1);
-
-            CURLcode l_CurlResult = curl_easy_perform(l_Curl);
-
-            if (l_CurlResult != CURLE_OK)
-                fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(l_CurlResult));
-
-            curl_easy_cleanup(l_Curl);
-        }
-    }).detach();
 }

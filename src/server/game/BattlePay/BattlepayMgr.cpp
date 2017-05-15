@@ -12,7 +12,6 @@
 #include "Chat.h"
 #include "ScriptMgr.h"
 #include "ObjectMgr.h"
-#include <EasyJSon.hpp>
 
 namespace Battlepay
 {
@@ -403,13 +402,12 @@ namespace Battlepay
 
     std::string Product::Serialize() const
     {
-        EasyJSon::Node<std::string> l_Node;
-        l_Node["Expansion"]    = std::to_string(5);    ///< WoD
-        l_Node["Type"]         = std::to_string(WebsiteType);
-        l_Node["Quantity"]     = std::to_string(1);
-        l_Node["IngameShop"]   = 1;
-
-        l_Node["CustomData"]   = sScriptMgr->BattlePayGetCustomData(*this);
+        std::string res = "";
+        res += "Expansion: " + std::to_string(5);
+        res += ", Type: " + std::to_string(WebsiteType);
+        res += ", Quantity: " + std::to_string(1);
+        res += ", IngameShop: " + std::to_string(1);
+        res += ", CustomData: " + sScriptMgr->BattlePayGetCustomData(*this);
 
         uint32 l_Idx = 0;
         for (Battlepay::ProductItem const& l_ItemProduct : Items)
@@ -433,47 +431,21 @@ namespace Battlepay
 
             if (WebsiteType == WebsiteType::Item)
             {
-                l_Node["Item"]["ItemID"] = std::to_string(l_ItemProduct.ItemID);
-                l_Node["Item"]["Quality"] = std::to_string(l_Item ? l_Item->Quality : 1);
-                l_Node["Item"]["Icon"] = l_Icon;
+                res += ", Item(ItemID: " + std::to_string(l_ItemProduct.ItemID) +
+                    ", Quality: " + std::to_string(l_Item ? l_Item->Quality : 1) +
+                    ", Icon: " + l_Icon + ")";
                 break;
             }
 
             if (WebsiteType == WebsiteType::PackItems)
             {
-                l_Node["Pack"]["Icon"] = l_Icon;
-                l_Node["Pack"]["ItemsEntry"][l_Idx] = std::to_string(l_ItemProduct.ItemID);
+                res += ", Pack(Icon: " + l_Icon + ", ItemsEntry: " + std::to_string(l_ItemProduct.ItemID) + ", Num: " + std::to_string(l_Idx) + ")";
             }
 
             l_Idx++;
         }
 
-        std::map<uint32, uint32> l_IngameToWebsiteLocale =
-        {
-            { LocaleConstant::LOCALE_enUS, 0 },
-            { LocaleConstant::LOCALE_frFR, 1 },
-            { LocaleConstant::LOCALE_deDE, 2 },
-            { LocaleConstant::LOCALE_esES, 3 },
-            { LocaleConstant::LOCALE_ruRU, 4 },
-            { LocaleConstant::LOCALE_itIT, 5 }
-        };
-
-        for (auto l_Itr : l_IngameToWebsiteLocale)
-        {
-            std::string l_Value = "";
-            if (l_Itr.first != DEFAULT_LOCALE)
-            {
-                if (Battlepay::DisplayInfoLocale const* l_Locale = sBattlepayMgr->GetDisplayInfoLocale(DisplayInfoID))
-                    ObjectMgr::GetLocaleString(l_Locale->Name, l_Itr.first, l_Value);
-            }
-            else if (Battlepay::DisplayInfo const* l_DisplayInfo = sBattlepayMgr->GetDisplayInfo(DisplayInfoID))
-                l_Value = l_DisplayInfo->Name1;
-
-            l_Node["Name"][std::to_string(l_Itr.second)]["Locale"] = l_Itr.second;
-            l_Node["Name"][std::to_string(l_Itr.second)]["Value"]  = l_Value;
-        }
-
-        return l_Node.Serialize<std::ostringstream>(true);
+        return res;
     }
 }
 #endif

@@ -1473,7 +1473,7 @@ class spell_warl_soul_leech: public SpellScriptLoader
                 DrainSoul = 103103
             };
 
-            int32 l_SpellID[12] = {48181 , 103103, 686, 6353, 104027, 103964, 6353, 104027, 29722, 17877, 116858, 108370};
+            // int32 l_SpellID[12] = {48181 , 103103, 686, 6353, 104027, 103964, 6353, 104027, 29722, 17877, 116858, 108370};
             void HandleAfterHit()
             {
                 Player* l_Player = GetCaster()->ToPlayer();
@@ -1534,7 +1534,7 @@ class spell_warl_soul_leech: public SpellScriptLoader
                 DrainSoul = 103103
             };
 
-            int32 l_SpellID[12] = { 48181 , 103103, 686, 6353, 104027, 103964, 6353, 104027, 29722, 17877, 116858, 108370 };
+            // int32 l_SpellID[12] = { 48181 , 103103, 686, 6353, 104027, 103964, 6353, 104027, 29722, 17877, 116858, 108370 };
             void OnTick(AuraEffect const* p_AurEff)
             {
                 if (GetCaster() == nullptr)

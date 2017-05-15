@@ -57,7 +57,6 @@ include_directories(
   ${ZLIB_INCLUDE_DIR}
   ${ACE_INCLUDE_DIR}
   ${MYSQL_INCLUDE_DIR}
-  ${CURL_INCLUDE_DIR}
 )
 
 add_executable(mmaps_generator ${mmap_gen_sources})
@@ -73,7 +72,6 @@ target_link_libraries(mmaps_generator
   ${CMAKE_THREAD_LIBS_INIT}
   ${ACE_LIBRARY}
   ${ZLIB_LIBRARIES}
-  ${CURL_LIBRARIES}
   ${MYSQL_LIBRARY}
 )
 

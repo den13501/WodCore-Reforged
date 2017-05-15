@@ -1111,9 +1111,8 @@ DumpReturn PlayerDumpReader::LoadDump(const std::string& p_File, uint32 p_Accoun
             case DTT_ACC_ACH_PRO:
                 break; // nothing to change, it's account id only
             default:
-                //sLog->outError("Unknown dump table type: %u", type);
                 {
-                    sLog->outSlack("#jarvis", "danger", true, "Transfer to realm [%u] on account [%u] failed. Reason: Unknow table", g_RealmID, p_Account);
+                    sLog->outAshran("LoadDump: Unknown dump table type");
                     ROLLBACK(DUMP_FILE_BROKEN);
                 }
                 break;
@@ -1134,7 +1133,6 @@ DumpReturn PlayerDumpReader::LoadDump(const std::string& p_File, uint32 p_Accoun
 
     if (!CharacterDatabase.DirectCommitTransaction(l_CharTransaction))
     {
-        sLog->outSlack("#jarvis", "danger", true, "Transfer to realm [%u] on account [%u] failed. Reason: Character transaction fail", g_RealmID, p_Account);
         return DUMP_FILE_BROKEN;
     }
 

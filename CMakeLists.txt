@@ -34,7 +34,11 @@ if( NOT CMAKE_BUILD_TYPE )
 endif()
 
 if( UNIX )
-    set (CMAKE_CXX_FLAGS "-std=c++0x")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+endif()
+
+if ( WIN32 )
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DACE_HAS_POSIX_TIME -DACE_LACKS_TIMESPEC_T")
 endif()
 
 include(CheckCXXSourceRuns)

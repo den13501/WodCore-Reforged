@@ -9,7 +9,6 @@ set(scripts_STAT_SRCS
 	Custom/event_april.cpp
 	Custom/duel_reset.cpp
 	Custom/promo_new_players.cpp
-	Custom/first_time_connexion.cpp
 	Custom/user_reporting.cpp
 	Custom/warning_update_client.cpp
 	Custom/npc_custom.cpp

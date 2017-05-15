@@ -4462,9 +4462,6 @@ void World::_updateTransfers()
                     continue;
                 }
 
-                if (l_Error != DUMP_TOO_MANY_CHARS)
-                    sLog->outSlack("#jarvis", "danger", true, "Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
-
                 LoginDatabase.PQuery("UPDATE webshop_delivery_interrealm_transfer SET error = %u, nb_attempt = nb_attempt + 1 WHERE id = %u", (uint32)l_Error, l_Transaction);
             }
             while (l_ToLoad->NextRow());
@@ -4537,8 +4534,8 @@ void World::_updateTransfers()
                     continue;
                 }
 
-                if (l_Error != DUMP_TOO_MANY_CHARS)
-                    sLog->outSlack("#jarvis", "danger", true, "Inter Exp Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
+                //if (l_Error != DUMP_TOO_MANY_CHARS)
+                //    sLog->outSlack("#jarvis", "danger", true, "Inter Exp Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
 
                 LoginDatabase.PQuery("UPDATE webshop_delivery_interexp_transfer SET error = %u, nb_attempt = nb_attempt + 1 WHERE id = %u", (uint32)l_Error, l_Transaction);
             }

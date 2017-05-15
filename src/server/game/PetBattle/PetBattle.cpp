@@ -1837,7 +1837,6 @@ void PetBattle::SetPetState(uint32 p_SourcePetID, uint32 p_TargetPetID, uint32 p
 {
     if (p_State >= NUM_BATTLEPET_STATES)
     {
-        sLog->outSlack("#jarvis", "danger", true, "PetBattle::SetPetState %u %u %u", p_FromAbilityEffectID, p_State, p_Value);
         return;
     }
 

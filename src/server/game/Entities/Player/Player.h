@@ -15,6 +15,7 @@
 #include "Battleground.h"
 #include "Bag.h"
 #include "Common.h"
+#include "LockedMap.h"
 #include "DatabaseEnv.h"
 #include "DBCEnums.h"
 #include "GroupReference.h"
