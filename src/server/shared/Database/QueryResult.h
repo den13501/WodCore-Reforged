@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "Field.h"
+#include "Errors.h"
 
 #ifdef _WIN32
   #include <winsock2.h>

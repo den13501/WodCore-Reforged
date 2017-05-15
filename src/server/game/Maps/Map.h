@@ -561,16 +561,7 @@ class Map : public GridRefManager<NGridType>
 
         void buildNGridLinkage(NGridType* pNGridType) { pNGridType->link(this); }
 
-        NGridType* getNGrid(uint32 x, uint32 y) const
-        {
-            //ASSERT(x < MAX_NUMBER_OF_GRIDS && y < MAX_NUMBER_OF_GRIDS);
-            if (x > MAX_NUMBER_OF_GRIDS && y > MAX_NUMBER_OF_GRIDS)
-            {
-                sLog->outError(LOG_FILTER_GENERAL, "CRASH::map::setNGrid() Invalid grid coordinates found: %d, %d!", x, y);
-                return NULL;
-            }
-            return i_grids[x][y];
-        }
+        NGridType* getNGrid(uint32 x, uint32 y) const;
 
         bool isGridObjectDataLoaded(uint32 x, uint32 y) const { return getNGrid(x, y) ? getNGrid(x, y)->isGridObjectDataLoaded() : false; }
         void setGridObjectDataLoaded(bool pLoaded, uint32 x, uint32 y) { getNGrid(x, y)->setGridObjectDataLoaded(pLoaded); }
