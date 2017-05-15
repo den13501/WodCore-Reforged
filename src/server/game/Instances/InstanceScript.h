@@ -163,8 +163,6 @@ struct RosterData
     uint32      ItemLevel;
 };
 
-typedef std::vector<RosterData> RosterDatas;
-
 struct EncounterDatas
 {
     EncounterDatas()
@@ -196,7 +194,7 @@ struct EncounterDatas
     uint32      EndTime;
     bool        Success;
     uint32      DeadCount;
-    RosterDatas RosterDatas;
+    std::vector<RosterData> RosterDatas;
     std::string EncounterHealth;
 };
 

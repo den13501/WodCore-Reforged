@@ -9,6 +9,7 @@
 #ifndef LOCKEDQUEUE_H
 #define LOCKEDQUEUE_H
 
+#include <ace/Guard_T.h>
 #include "Common.h"
 #include <deque>
 
