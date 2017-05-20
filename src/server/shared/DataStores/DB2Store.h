@@ -721,7 +721,7 @@ template<class T> class DB2Storage : public DB2StorageBase
 
         /// Load string from an other DB2
         /// @p_FileName : DB2 file path
-        bool LoadStringsFrom(char const* p_FileName)
+        bool LoadStringsFrom(char const* p_FileName, uint32 p_Locale)
         {
             /// DBC must be already loaded using Load
             if (!m_IndexTable)
@@ -736,7 +736,7 @@ template<class T> class DB2Storage : public DB2StorageBase
             m_DB2FileName = p_FileName;
 
             /// load strings from another locale dbc data
-            m_StringPoolList.push_back(l_DB2Reader.AutoProduceStrings(m_Format, (char*)m_DataTable));
+            m_StringPoolList.push_back(l_DB2Reader.AutoProduceStrings(m_Format, (char*)m_DataTable, p_Locale));
 
             return true;
         }
