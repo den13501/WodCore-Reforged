@@ -88,7 +88,7 @@ void WorldSession::HandleBattlePayStartPurchase(WorldPacket& p_RecvData)
 
     uint32 l_AccountId = GetAccountId();
 
-    WebDatabase.AsyncQuery(l_Statement, [l_AccountId, l_Product](PreparedQueryResult p_Result) -> void
+    AsyncQuery(WebDatabase, l_Statement, [l_AccountId, l_Product](PreparedQueryResult p_Result) -> void
     {
         WorldSession* l_Session = sWorld->FindSession(l_AccountId);
         if (l_Session == nullptr)
@@ -211,7 +211,7 @@ void WorldSession::HandleBattlePayConfirmPurchase(WorldPacket& p_RecvData)
 
     uint32 l_AccountId = GetAccountId();
 
-    WebDatabase.AsyncQuery(l_Statement, [l_AccountId, l_Purchase](PreparedQueryResult p_Result) -> void
+    AsyncQuery(WebDatabase, l_Statement, [l_AccountId, l_Purchase](PreparedQueryResult p_Result) -> void
     {
         /// Never buy points
         if (!p_Result)

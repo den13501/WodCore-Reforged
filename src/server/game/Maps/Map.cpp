@@ -3050,7 +3050,7 @@ void InstanceMap::CreateInstanceData(bool load)
         uint32 l_MapId            = GetId();
         uint32 l_InstanceId       = i_InstanceId;
 
-        CharacterDatabase.AsyncQuery(l_Statement, [l_MapId, l_InstanceId](PreparedQueryResult const& p_Result)
+        AsyncQuery(CharacterDatabase, l_Statement, [l_MapId, l_InstanceId](PreparedQueryResult const& p_Result)
         {
             Map* l_Map = sMapMgr->FindMap(l_MapId, l_InstanceId);
             if (l_Map == nullptr || l_Map->ToInstanceMap() == nullptr)

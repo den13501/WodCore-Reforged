@@ -277,7 +277,7 @@ namespace Battlepay
 
         uint32 l_SessionID = p_Session->GetAccountId();
 
-        WebDatabase.AsyncQuery(l_Statement, [l_SessionID](PreparedQueryResult p_Result) -> void
+        AsyncQuery(WebDatabase, l_Statement, [l_SessionID](PreparedQueryResult p_Result) -> void
         {
             if (WorldSession* l_Session = sWorld->FindSession(l_SessionID))
                 sBattlepayMgr->OnPrepareStatementCallbackEvent(l_Session, CallbackEvent::SavePurchase);

@@ -1210,5 +1210,34 @@ class World
 extern uint32 g_RealmID;
 
 #define sWorld ACE_Singleton<World, ACE_Null_Mutex>::instance()
+
+template <typename T>
+PreparedQueryResultFuture AsyncQuery(T& on, PreparedStatement* stmt, std::function<void(PreparedQueryResult)> p_Callback)
+{
+    uint32 index = stmt->getIndex();
+
+    PreparedQueryResultFuture res = on.AsyncQuery(stmt);
+
+    if (index != 0)
+    {
+        # ifdef GAME_SERVER_PROJECTS
+            sWorld->AddPrepareStatementCallback(std::make_pair(p_Callback, res));
+        # endif
+    }
+
+    return res;
+}
+
+template <typename T>
+void CommitTransaction(T& on, SQLTransaction transaction, MS::Utilities::CallBackPtr p_Callback)
+{
+    #ifdef GAME_SERVER_PROJECTS
+    if (p_Callback != nullptr)
+        sWorld->AddTransactionCallback(p_Callback);
+    #endif
+
+    on.CommitTransactionWithCallback(transaction, p_Callback);
+}
+
 #endif
 /// @}

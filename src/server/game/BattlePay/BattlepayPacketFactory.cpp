@@ -343,7 +343,7 @@ namespace Battlepay
             l_Statement->setUInt32(0, p_Session->GetAccountId());
             l_Statement->setUInt32(1, p_Session->GetAccountId());
 
-            WebDatabase.AsyncQuery(l_Statement, [l_SessionId](PreparedQueryResult p_Result) -> void
+            AsyncQuery(WebDatabase, l_Statement, [l_SessionId](PreparedQueryResult p_Result) -> void
             {
                 WorldSession* l_Session = sWorld->FindSession(l_SessionId);
                 if (l_Session == nullptr)

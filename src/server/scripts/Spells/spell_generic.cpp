@@ -301,7 +301,7 @@ class spell_gen_pet_summoned: public SpellScriptLoader
 #endif
 
                         PreparedStatement* l_PetStatement = PetQueryHolder::GenerateFirstLoadStatement(0, player->GetLastPetNumber(), player->GetRealGUIDLow(), true, PET_SLOT_UNK_SLOT, l_RealmID);
-                        CharacterDatabase.AsyncQuery(l_PetStatement, [l_NewPet, l_PlayerGUID, l_PetNumber, l_RealmID](PreparedQueryResult p_Result) -> void
+                        AsyncQuery(CharacterDatabase, l_PetStatement, [l_NewPet, l_PlayerGUID, l_PetNumber, l_RealmID](PreparedQueryResult p_Result) -> void
                         {
                             if (!p_Result)
                             {

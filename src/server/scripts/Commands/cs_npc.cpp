@@ -219,7 +219,7 @@ public:
         uint64 l_CharacterGuid = p_Handler->GetSession()->GetPlayer()->GetGUID();
 
         PreparedStatement* l_Statement = WorldDatabase.GetPreparedStatement(WORLD_SEL_MAX_CREATURE_GUID);
-        WorldDatabase.AsyncQuery(l_Statement, [l_Id, l_Teamval, l_CharacterGuid](PreparedQueryResult p_Result) -> void
+        AsyncQuery(WorldDatabase, l_Statement, [l_Id, l_Teamval, l_CharacterGuid](PreparedQueryResult p_Result) -> void
         {
             if (!p_Result)
                 return;

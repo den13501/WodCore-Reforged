@@ -206,7 +206,7 @@ void BattlePet::AddToPlayer(Player* p_Player)
             l_Player->ReloadPetBattles();
     });
 
-    LoginDatabase.CommitTransaction(l_Transaction, l_CallBack);
+    CommitTransaction(LoginDatabase, l_Transaction, l_CallBack);
 
     p_Player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_EARN_BATTLEPET, 1);
 }
