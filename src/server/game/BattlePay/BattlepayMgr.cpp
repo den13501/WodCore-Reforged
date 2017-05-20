@@ -429,7 +429,7 @@ namespace Battlepay
                     l_Icon = l_FileData->FileName;
             }
 
-            if (WebsiteType == WebsiteType::Item)
+            if (WebsiteType == static_cast<uint8>(WebsiteType::Item))
             {
                 res += ", Item(ItemID: " + std::to_string(l_ItemProduct.ItemID) +
                     ", Quality: " + std::to_string(l_Item ? l_Item->Quality : 1) +
@@ -437,7 +437,7 @@ namespace Battlepay
                 break;
             }
 
-            if (WebsiteType == WebsiteType::PackItems)
+            if (WebsiteType == static_cast<uint8>(WebsiteType::PackItems))
             {
                 res += ", Pack(Icon: " + l_Icon + ", ItemsEntry: " + std::to_string(l_ItemProduct.ItemID) + ", Num: " + std::to_string(l_Idx) + ")";
             }

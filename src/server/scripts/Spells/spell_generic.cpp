@@ -27,6 +27,7 @@
 #include "Player.h"
 #include "GameEventMgr.h"
 #include "DB2Stores.h"
+#include "Chat.h"
 
 class spell_gen_absorb0_hitlimit1: public SpellScriptLoader
 {
