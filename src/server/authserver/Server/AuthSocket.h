@@ -23,6 +23,16 @@
 #include "BigNumber.h"
 #include "RealmSocket.h"
 
+enum AuthStatus
+{
+    STATUS_CHALLENGE = 0,
+    STATUS_LOGON_PROOF,
+    STATUS_RECONNECT_PROOF,
+    STATUS_AUTHED,
+    STATUS_CLOSED,
+    STATUS_ANY
+};
+
 // Handle login commands
 class AuthSocket: public RealmSocket::Session
 {
@@ -61,7 +71,7 @@ private:
     BigNumber K;
     BigNumber _reconnectProof;
 
-    bool _authed;
+    AuthStatus _status;
 
     std::string _login;
     std::string _tokenKey;

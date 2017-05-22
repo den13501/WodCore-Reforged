@@ -51,12 +51,6 @@ enum eAuthCmd
     XFER_CANCEL                                  = 0x34
 };
 
-enum eStatus
-{
-    STATUS_CONNECTED                             = 0,
-    STATUS_AUTHED
-};
-
 // GCC have alternative #pragma pack(N) syntax and old gcc version not support pack(push, N), also any gcc version not support it at some paltform
 #if defined(__GNUC__)
 #pragma pack(1)
@@ -185,14 +179,14 @@ private:
 
 const AuthHandler table[] =
 {
-    { AUTH_LOGON_CHALLENGE,     STATUS_CONNECTED, &AuthSocket::_HandleLogonChallenge    },
-    { AUTH_LOGON_PROOF,         STATUS_CONNECTED, &AuthSocket::_HandleLogonProof        },
-    { AUTH_RECONNECT_CHALLENGE, STATUS_CONNECTED, &AuthSocket::_HandleReconnectChallenge},
-    { AUTH_RECONNECT_PROOF,     STATUS_CONNECTED, &AuthSocket::_HandleReconnectProof    },
-    { REALM_LIST,               STATUS_AUTHED,    &AuthSocket::_HandleRealmList         },
-    { XFER_ACCEPT,              STATUS_CONNECTED, &AuthSocket::_HandleXferAccept        },
-    { XFER_RESUME,              STATUS_CONNECTED, &AuthSocket::_HandleXferResume        },
-    { XFER_CANCEL,              STATUS_CONNECTED, &AuthSocket::_HandleXferCancel        }
+    { AUTH_LOGON_CHALLENGE,     STATUS_CHALLENGE,       &AuthSocket::_HandleLogonChallenge    },
+    { AUTH_LOGON_PROOF,         STATUS_LOGON_PROOF,     &AuthSocket::_HandleLogonProof        },
+    { AUTH_RECONNECT_CHALLENGE, STATUS_CHALLENGE,       &AuthSocket::_HandleReconnectChallenge},
+    { AUTH_RECONNECT_PROOF,     STATUS_RECONNECT_PROOF, &AuthSocket::_HandleReconnectProof    },
+    { REALM_LIST,               STATUS_AUTHED,          &AuthSocket::_HandleRealmList         },
+    { XFER_ACCEPT,              STATUS_ANY,             &AuthSocket::_HandleXferAccept        },
+    { XFER_RESUME,              STATUS_ANY,             &AuthSocket::_HandleXferResume        },
+    { XFER_CANCEL,              STATUS_ANY,             &AuthSocket::_HandleXferCancel        }
 };
 
 #define AUTH_TOTAL_COMMANDS 8
@@ -202,7 +196,7 @@ Patcher PatchesCache;
 
 // Constructor - set the N and g values for SRP6
 AuthSocket::AuthSocket(RealmSocket& socket) :
-    pPatch(NULL), socket_(socket), _authed(false), _build(0)
+    pPatch(NULL), socket_(socket), _status(STATUS_CHALLENGE), _build(0)
 {
     N.SetHexStr("894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7");
     g.SetDword(7);
@@ -248,7 +242,7 @@ void AuthSocket::OnRead()
         // Circle through known commands and call the correct command handler
         for (i = 0; i < AUTH_TOTAL_COMMANDS; ++i)
         {
-            if ((uint8)table[i].cmd == _cmd && (table[i].status == STATUS_CONNECTED || (_authed && table[i].status == STATUS_AUTHED)))
+            if ((uint8)table[i].cmd == _cmd && (table[i].status == _status || table[i].status == STATUS_ANY))
             {
                 sLog->outDebug(LOG_FILTER_AUTHSERVER, "Got data for cmd %u recv length %u", (uint32)_cmd, (uint32)socket().recv_len());
 
@@ -313,6 +307,8 @@ void AuthSocket::_SetVSFields(const std::string& rI)
 // Logon Challenge command handler
 bool AuthSocket::_HandleLogonChallenge()
 {
+    _status = STATUS_CLOSED;
+
     sLog->outDebug(LOG_FILTER_AUTHSERVER, "Entering _HandleLogonChallenge");
     if (socket().recv_len() < sizeof(sAuthLogonChallenge_C))
         return false;
@@ -468,9 +464,14 @@ bool AuthSocket::_HandleLogonChallenge()
                     // Fill the response packet with the result
                     // If the client has no valid version
                     if (!AuthHelper::IsAcceptedClientBuild(_build))
+                    {
                         pkt << uint8(WOW_FAIL_VERSION_INVALID);
+                    }
                     else
+                    {
                         pkt << uint8(WOW_SUCCESS);
+                        _status = STATUS_LOGON_PROOF;
+                    }
 
                     // B may be calculated < 32B so we force minimal length to 32B
                     pkt.append(B.AsByteArray(32), 32);      // 32 bytes
@@ -531,6 +532,8 @@ bool AuthSocket::_HandleLogonChallenge()
 // Logon Proof command handler
 bool AuthSocket::_HandleLogonProof()
 {
+    _status = STATUS_CLOSED;
+
     sLog->outDebug(LOG_FILTER_AUTHSERVER, "Entering _HandleLogonProof");
     // Read the packet
     sAuthLogonProof_C lp;
@@ -544,7 +547,7 @@ bool AuthSocket::_HandleLogonProof()
     A.SetBinary(lp.A, 32);
 
     // SRP safeguard: abort if A == 0
-    if (A.isZero())
+    if ((A % N).isZero())
     {
         socket().shutdown();
         return true;
@@ -678,7 +681,7 @@ bool AuthSocket::_HandleLogonProof()
         proof.unk3 = 0x00;
         socket().send((char *)&proof, sizeof(proof));
 
-        _authed = true;
+        _status = STATUS_AUTHED;
     }
     else
     {
@@ -694,6 +697,8 @@ bool AuthSocket::_HandleLogonProof()
 // Reconnect Challenge command handler
 bool AuthSocket::_HandleReconnectChallenge()
 {
+    _status = STATUS_CLOSED;
+
     sLog->outDebug(LOG_FILTER_AUTHSERVER, "Entering _HandleReconnectChallenge");
     if (socket().recv_len() < sizeof(sAuthLogonChallenge_C))
         return false;
@@ -759,6 +764,7 @@ bool AuthSocket::_HandleReconnectChallenge()
     pkt << uint8(AUTH_RECONNECT_CHALLENGE);
     pkt << uint8(0x00);
     _reconnectProof.SetRand(16 * 8);
+    _status = STATUS_RECONNECT_PROOF;
     pkt.append(_reconnectProof.AsByteArray(16), 16);        // 16 bytes random
     pkt << uint64(0x00) << uint64(0x00);                    // 16 bytes zeros
     socket().send((char const*)pkt.contents(), pkt.size());
@@ -768,6 +774,8 @@ bool AuthSocket::_HandleReconnectChallenge()
 // Reconnect Proof command handler
 bool AuthSocket::_HandleReconnectProof()
 {
+    _status = STATUS_CLOSED;
+
     sLog->outDebug(LOG_FILTER_AUTHSERVER, "Entering _HandleReconnectProof");
     // Read the packet
     sAuthReconnectProof_C lp;
@@ -794,7 +802,7 @@ bool AuthSocket::_HandleReconnectProof()
         pkt << uint8(0x00);
         pkt << uint16(0x00);                               // 2 bytes zeros
         socket().send((char const*)pkt.contents(), pkt.size());
-        _authed = true;
+        _status = STATUS_AUTHED;
         return true;
     }
     else
