@@ -6,8 +6,6 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "InstanceScript.h"
 #include "auchindoun.hpp"
 
 static BossScenarios const g_BossScenarios[] =

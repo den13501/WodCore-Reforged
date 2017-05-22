@@ -115,6 +115,7 @@ set_property(TARGET collision PROPERTY FOLDER "server")
 
 target_link_libraries(collision
   shared
+  g3dlib
 )
 
 # Generate precompiled header

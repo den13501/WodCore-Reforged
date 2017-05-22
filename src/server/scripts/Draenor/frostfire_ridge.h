@@ -1,3 +1,5 @@
+#ifndef FROSTFIRE_RIDGE_H
+#define FROSTFIRE_RIDGE_H
 
 namespace FrostfireRidgeSpells
 {
@@ -39,3 +41,4 @@ namespace FrostfireRidgeCreatures
     };
 }
 
+#endif

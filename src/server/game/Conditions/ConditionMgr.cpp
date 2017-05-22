@@ -16,6 +16,7 @@
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 #include "Spell.h"
+#include "LootMgr.h"
 #ifndef CROSS
 #include "GarrisonMgr.hpp"
 #endif /* not CROSS */

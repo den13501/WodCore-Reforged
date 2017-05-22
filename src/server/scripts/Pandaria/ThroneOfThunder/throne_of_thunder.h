@@ -9,7 +9,7 @@
 #ifndef THRONE_OF_THUNDER_H_
 #define THRONE_OF_THUNDER_H_
 
-#include "SpellScript.h"
+#include "ScriptPCH.h"
 #include "Map.h"
 #include "Creature.h"
 #include "CreatureAIImpl.h"

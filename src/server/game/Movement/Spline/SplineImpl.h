@@ -6,6 +6,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "Spline.h"
+#include "Errors.h"
+
 namespace Movement
 {
 template<typename length_type> void Spline<length_type>::evaluate_percent( float t, Vector3 & c ) const

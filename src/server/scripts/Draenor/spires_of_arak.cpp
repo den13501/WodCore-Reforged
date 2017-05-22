@@ -6,9 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "ScriptedGossip.h"
+#include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
 #include "spires_of_arak.h"
 #include "GameObjectAI.h"

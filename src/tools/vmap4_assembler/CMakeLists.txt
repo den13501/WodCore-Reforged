@@ -19,6 +19,10 @@ include_directories(
 add_executable(vmap4assembler VMapAssembler.cpp)
 add_dependencies(vmap4assembler casc)
 
+if( UNIX AND NOT NOJEM AND NOT APPLE )
+    set_target_properties(vmap4assembler PROPERTIES LINK_FLAGS "-pthread")
+endif()
+
 target_link_libraries(vmap4assembler
   collision
   g3dlib

@@ -13,6 +13,7 @@
 #include "Common.h"
 #include "DatabaseEnv.h"
 #include "DBCStructure.h"
+#include "DB2Structure.h"
 
 class Item;
 class Player;

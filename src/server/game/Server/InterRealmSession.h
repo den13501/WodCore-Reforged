@@ -30,6 +30,8 @@
 
 #include "IRSocketConnector.h"
 
+#include "SharedDefines.h"
+
 #define IR_PROTOCOL_VERSION     1
 #define IR_PROTOCOL_SUBVERSION  0
 #define IR_PROTOCOL_COMPRESS    0

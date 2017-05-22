@@ -6,10 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "SpellScript.h"
-#include "SpellAuraEffects.h"
-#include "GridNotifiers.h"
+#include "ScriptPCH.h"
 #ifndef CROSS
 #include "DBCStores.h"
 #endif /* not CROSS */

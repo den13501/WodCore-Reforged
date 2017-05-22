@@ -6,10 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
-#include "SpellScript.h"
 
 #define ACTION_TALK 1
 

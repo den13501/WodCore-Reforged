@@ -6,8 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "InstanceScript.h"
+#include "ScriptPCH.h"
+#include "LFGMgr.h"
 #include "VMapFactory.h"
 #include "throne_of_thunder.h"
 

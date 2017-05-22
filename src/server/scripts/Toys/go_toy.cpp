@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GameObjectAI.h"
-#include "ScriptMgr.h"
+#include "ScriptPCH.h"
 
 /// Train Set - 193963
 class go_toy_train_set : public GameObjectScript

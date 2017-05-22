@@ -6,9 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "ScriptedGossip.h"
+#include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
 #include "draenor_shadowmoon_valley.hpp"
 #include "GameObjectAI.h"

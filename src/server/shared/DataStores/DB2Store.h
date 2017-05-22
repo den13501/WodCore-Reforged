@@ -17,6 +17,7 @@
 #include "Implementation/HotfixDatabase.h"
 #include "DatabaseEnv.h"
 #include "Common.h"
+#include "ByteBuffer.h"
 
 struct SqlDb2
 {

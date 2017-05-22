@@ -7,7 +7,6 @@
 ///  Coded by Davethebrave
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptedCreature.h"
 #include "auchindoun.hpp"
 
 enum eAzzakelSpells

@@ -8,6 +8,7 @@
 
 #ifndef CROSS
 #include "BattlepayMgr.h"
+#include "ScriptPCH.h"
 
 namespace BattlePay
 {
@@ -61,7 +62,8 @@ namespace BattlePay
     };
 }
 
-template<uint32 t_SkillID, uint32 t_Value> class BattlePay_Profession : BattlePayProductScript
+template<uint32 t_SkillID, uint32 t_Value>
+class BattlePay_Profession : BattlePayProductScript
 {
     public:
         BattlePay_Profession(std::string p_ScriptName) : BattlePayProductScript(p_ScriptName) {}

@@ -6,10 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
-#include "SpellScript.h"
 #include "Vehicle.h"
 
 #define QUEST_SPIRIT_OF_WATER 29678

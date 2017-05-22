@@ -8,6 +8,7 @@
 
 #include "SpellLogMgr.h"
 #include "Chat.h"
+#include "Player.h"
 
 void SpellLogMgr::AddOrSetListener(Player* p_Player, uint32 p_SpellID)
 {

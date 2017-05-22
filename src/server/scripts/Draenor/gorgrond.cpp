@@ -6,11 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "ObjectMgr.h"
-#include "ScriptMgr.h"
-#include "SpellScript.h"
 #include "GameObjectAI.h"
 #include "Language.h"
 

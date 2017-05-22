@@ -6,16 +6,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "throne_of_thunder.h"
-#include "ScriptMgr.h"
-#include "ScriptedGossip.h"
 #include "ScriptedEscortAI.h"
 #include "CreatureAI.h"
 #include "MoveSplineInit.h"
-#include "GridNotifiers.h"
 #include "ObjectAccessor.h"
-#include "GridNotifiersImpl.h"
 #include "CellImpl.h"
 #include "Vehicle.h"
 
