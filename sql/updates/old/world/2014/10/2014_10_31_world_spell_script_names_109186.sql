@@ -1,1 +1,0 @@
-UPDATE spell_script_names SET ScriptName = 'spell_pri_surge_of_light' WHERE spell_id = 109186;

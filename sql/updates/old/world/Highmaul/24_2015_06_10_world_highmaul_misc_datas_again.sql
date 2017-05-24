@@ -1,1 +1,0 @@
-ALTER TABLE `gameobject` ADD COLUMN `custom_flags` INT(10) UNSIGNED DEFAULT '0' NOT NULL AFTER `isActive`;

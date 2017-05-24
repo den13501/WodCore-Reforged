@@ -1,1 +1,0 @@
-UPDATE `gameobject_template` SET `ScriptName`='go_frozen_phylactery' WHERE `entry`='188141';

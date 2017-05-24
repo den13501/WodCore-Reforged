@@ -1,1 +1,0 @@
-UPDATE `item_effect` SET SpellCooldown=60000 WHERE SpellID IN(182073, 170397);

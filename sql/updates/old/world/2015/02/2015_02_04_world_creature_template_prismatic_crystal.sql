@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = 'npc_mage_prismatic_crystal' WHERE entry = 76933;

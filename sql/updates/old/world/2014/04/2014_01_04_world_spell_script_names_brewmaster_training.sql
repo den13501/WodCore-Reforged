@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (100787, 'spell_monk_brewmaster_training_tiger_palm');

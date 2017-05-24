@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (102795, 'spell_dru_bear_hug');

@@ -1,1 +1,0 @@
-UPDATE `item_effect` SET SpellID=146939 WHERE ItemID=103557;

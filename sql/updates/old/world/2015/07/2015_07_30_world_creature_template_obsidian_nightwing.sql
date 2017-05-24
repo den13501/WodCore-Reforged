@@ -1,1 +1,0 @@
-UPDATE creature_template SET VehicleId = 2237 WHERE entry = 62454;

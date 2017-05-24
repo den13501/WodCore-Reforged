@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = 'mob_resin_flake' WHERE entry = 61910;

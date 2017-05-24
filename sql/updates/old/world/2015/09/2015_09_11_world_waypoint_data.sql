@@ -1,1 +1,0 @@
-ALTER TABLE `waypoint_data` CHANGE `delay` `delay` INT(10) UNSIGNED DEFAULT '0' NOT NULL, CHANGE `move_flag` `run` BOOL DEFAULT '0' NOT NULL;

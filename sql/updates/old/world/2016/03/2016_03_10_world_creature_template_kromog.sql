@@ -1,1 +1,0 @@
-UPDATE creature_template SET dmg_multiplier = 10 WHERE entry = 77692;

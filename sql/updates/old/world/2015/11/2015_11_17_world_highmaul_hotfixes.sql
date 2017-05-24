@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = 'npc_highmaul_koragh_volatile_anomaly' WHERE entry = 79956;

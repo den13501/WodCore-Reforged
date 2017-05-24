@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (116670, 'spell_monk_thunder_focus_tea');

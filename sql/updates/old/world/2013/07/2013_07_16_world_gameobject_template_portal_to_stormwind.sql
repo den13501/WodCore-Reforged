@@ -1,1 +1,0 @@
-UPDATE gameobject_template SET TYPE = 22, faction = 0 WHERE entry = 176296;

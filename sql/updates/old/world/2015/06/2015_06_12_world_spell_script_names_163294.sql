@@ -1,1 +1,0 @@
-INSERT spell_script_names VALUES (163294, 'spell_Skill_Darkmoon_Card_Of_Draenor');

@@ -1,1 +1,0 @@
-ALTER TABLE `gm_tickets` ADD COLUMN `response` TEXT AFTER `haveTicket`;

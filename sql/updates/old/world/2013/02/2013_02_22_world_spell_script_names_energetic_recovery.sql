@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (5171, 'spell_rog_energetic_recovery');

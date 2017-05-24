@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (73510, 'spell_pri_mind_spike');

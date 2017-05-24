@@ -1,1 +1,0 @@
-ALTER TABLE `gm_tickets` ADD COLUMN `haveTicket` TINYINT(3) UNSIGNED DEFAULT '0' NOT NULL AFTER `viewed`; 

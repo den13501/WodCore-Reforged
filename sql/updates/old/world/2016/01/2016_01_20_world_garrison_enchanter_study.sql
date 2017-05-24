@@ -1,1 +1,0 @@
-UPDATE gameobject_template SET ScriptName="go_garrison_essence_font" WHERE entry IN (237335, 237132);

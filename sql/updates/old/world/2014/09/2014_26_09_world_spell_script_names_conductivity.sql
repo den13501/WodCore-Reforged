@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (1064, 'spell_sha_conductivity');

@@ -1,2 +1,0 @@
-UPDATE creature_template SET scriptname = "npc_InspiringBattleStandard" WHERE entry IN (88277, 88010);
-UPDATE creature_template SET scriptname = "npc_FearsomeBattleStandard" WHERE entry IN (87594, 86734);

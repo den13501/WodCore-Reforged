@@ -1,1 +1,0 @@
-UPDATE `creature_template` SET ScriptName='npc_doomguard' WHERE entry=59000;

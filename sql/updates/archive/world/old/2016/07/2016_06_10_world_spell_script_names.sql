@@ -1,0 +1,2 @@
+DELETE FROM spell_script_names WHERE spell_id = 135920 AND ScriptName = "spell_monk_gift_of_the_serpent";
+INSERT INTO `spell_script_names`(`spell_id`,`ScriptName`) VALUES ( '135920','spell_monk_gift_of_the_serpent'); 

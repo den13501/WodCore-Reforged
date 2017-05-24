@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (2098, 'spell_rog_restless_blades');

@@ -1,1 +1,0 @@
-ALTER TABLE `gm_tickets` CHANGE `mapId` `mapId` INT(10) UNSIGNED DEFAULT '0' NOT NULL; 

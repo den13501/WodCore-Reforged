@@ -1,1 +1,0 @@
-INSERT INTO `areatrigger_template` (`spell_id`, `ScriptName`) VALUES (119392, 'spell_at_monk_charging_ox_wave');

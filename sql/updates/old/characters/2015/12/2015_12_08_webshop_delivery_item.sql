@@ -1,1 +1,0 @@
-ALTER TABLE `webshop_delivery_item` ADD COLUMN `ItemBonus` VARCHAR(255) NULL AFTER `delivery`; 

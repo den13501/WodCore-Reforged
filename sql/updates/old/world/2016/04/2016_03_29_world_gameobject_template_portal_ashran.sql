@@ -1,1 +1,0 @@
-UPDATE `gameobject_template` SET faction=1732 WHERE entry=239421;

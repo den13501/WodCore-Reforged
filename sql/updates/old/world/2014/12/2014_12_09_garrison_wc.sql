@@ -1,1 +1,0 @@
-UPDATE `gameobject_template` SET `ScriptName`='go_garrison_outhouse' WHERE `entry`=230298;

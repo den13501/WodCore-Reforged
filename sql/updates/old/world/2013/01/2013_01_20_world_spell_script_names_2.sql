@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (5405, 'spell_mage_replenish_mana');

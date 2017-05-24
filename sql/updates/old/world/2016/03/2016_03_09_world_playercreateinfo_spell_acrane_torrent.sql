@@ -1,1 +1,0 @@
-DELETE FROM `playercreateinfo_spell` WHERE class=2 AND race=10 AND spell=28730;

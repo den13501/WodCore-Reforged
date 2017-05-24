@@ -1,1 +1,0 @@
-UPDATE `creature_template` SET `ScriptName`='npc_GarrisonFord' WHERE `entry`='86058';

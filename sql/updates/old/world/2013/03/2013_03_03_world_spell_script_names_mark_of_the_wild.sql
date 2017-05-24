@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (1126, 'spell_dru_mark_of_the_wild');

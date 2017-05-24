@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (12051, 'spell_mage_evocation');

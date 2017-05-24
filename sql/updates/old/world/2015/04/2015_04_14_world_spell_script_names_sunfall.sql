@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUES (155598, 'spell_dru_starfall_dummy');

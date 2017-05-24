@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (145518, 'spell_dru_genesis');

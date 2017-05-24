@@ -1,1 +1,0 @@
-DELETE FROM spell_script_names WHERE ScriptName = 'spell_pri_power_word_insanity';

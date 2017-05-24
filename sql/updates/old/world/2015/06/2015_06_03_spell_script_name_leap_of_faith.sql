@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUES (159623, 'spell_pri_leap_of_faith');

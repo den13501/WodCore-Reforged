@@ -1,1 +1,0 @@
-UPDATE creature_template SET speed_walk = 0.83333, speed_run = 0.83333 WHERE entry = 62164;

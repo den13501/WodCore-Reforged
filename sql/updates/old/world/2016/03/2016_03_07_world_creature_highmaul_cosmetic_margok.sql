@@ -1,1 +1,0 @@
-UPDATE creature SET spawnMask = 245760 WHERE id = 83268;

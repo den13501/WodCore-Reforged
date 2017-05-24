@@ -1,1 +1,0 @@
-UPDATE creature_template SET family = 0 WHERE entry = 15630; -- Spawn of Fankriss

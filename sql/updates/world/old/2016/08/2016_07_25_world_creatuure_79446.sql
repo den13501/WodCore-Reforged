@@ -1,1 +1,0 @@
-UPDATE creature SET phasemask = 4294967295 WHERE id = 79446;

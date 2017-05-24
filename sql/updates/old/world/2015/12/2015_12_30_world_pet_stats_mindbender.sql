@@ -1,1 +1,0 @@
-UPDATE `pet_stats` SET damage_coef=1.598 WHERE entry=62982;

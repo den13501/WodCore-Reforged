@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUES (120672, "spell_implacable_strike");

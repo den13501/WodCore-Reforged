@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (1120, 'spell_warl_drain_soul');

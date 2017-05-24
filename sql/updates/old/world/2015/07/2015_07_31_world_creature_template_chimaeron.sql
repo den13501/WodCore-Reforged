@@ -1,1 +1,0 @@
-UPDATE creature_template SET type_flags = type_flags | 0x01 WHERE entry = 43296;

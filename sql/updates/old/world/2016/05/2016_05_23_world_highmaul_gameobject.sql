@@ -1,1 +1,0 @@
-UPDATE gameobject SET spawnMask = 245760 WHERE map = 1228 AND id = 236033;

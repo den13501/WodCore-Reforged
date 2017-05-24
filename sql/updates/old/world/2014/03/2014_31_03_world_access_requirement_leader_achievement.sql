@@ -1,1 +1,0 @@
-ALTER TABLE `access_requirement` ADD COLUMN `leader_achievement` MEDIUMINT(8) UNSIGNED DEFAULT '0' NOT NULL AFTER `completed_achievement`;

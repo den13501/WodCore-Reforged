@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (22568, 'spell_dru_ferocious_bite');

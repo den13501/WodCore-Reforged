@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = '' WHERE ScriptName = 'npc_power_word_barrier';

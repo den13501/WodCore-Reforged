@@ -1,1 +1,0 @@
-UPDATE creature_template SET unit_flags = unit_flags|0x4, ScriptName = 'mob_sha_of_anger_bunny' WHERE entry = 35114;

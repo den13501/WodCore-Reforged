@@ -1,1 +1,0 @@
-INSERT INTO `spell_script_names` VALUES (116858, 'spell_warl_soul_leech');

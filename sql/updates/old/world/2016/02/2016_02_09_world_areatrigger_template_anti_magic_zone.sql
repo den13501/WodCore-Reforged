@@ -1,1 +1,0 @@
-UPDATE `areatrigger_template` SET ScriptName='spell_at_dk_anti_magic_zone' WHERE spell_id=51052;

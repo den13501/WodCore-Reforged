@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (126748, "spell_mage_conjure_familiar_glyph");

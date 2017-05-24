@@ -1,1 +1,0 @@
-ALTER TABLE `auctionhouse` CHANGE `deposit` `deposit` BIGINT(20)  UNSIGNED  NOT NULL  DEFAULT '0';

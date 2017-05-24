@@ -1,2 +1,0 @@
-DELETE FROM spell_script_names WHERE spell_id=173321 AND ScriptName="spell_Mark_of_Bleeding_Hollow";
-INSERT INTO spell_script_names(spell_id, ScriptName) VALUES (173321, "spell_Mark_of_Bleeding_Hollow");

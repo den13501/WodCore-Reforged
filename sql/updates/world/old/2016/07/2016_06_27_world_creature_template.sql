@@ -1,1 +1,0 @@
-UPDATE `pet_stats` SET secondarystat_coef = 1 WHERE entry IN(78158, 78217);

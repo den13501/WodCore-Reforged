@@ -1,1 +1,0 @@
-ALTER TABLE `character_charges_cooldown` ADD COLUMN `charge` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' AFTER `guid`; 

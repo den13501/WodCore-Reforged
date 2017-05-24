@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (32216, 'spell_warr_victorious_state');

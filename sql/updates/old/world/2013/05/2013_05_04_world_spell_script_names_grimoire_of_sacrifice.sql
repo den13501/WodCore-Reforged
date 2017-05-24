@@ -1,1 +1,0 @@
-DELETE FROM spell_script_names WHERE ScriptName = 'spell_warl_grimoire_of_sacrifice';

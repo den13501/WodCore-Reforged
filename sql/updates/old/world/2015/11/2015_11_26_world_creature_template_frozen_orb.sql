@@ -1,1 +1,0 @@
-UPDATE creature_template SET modelid1 = 11686 WHERE entry = 45322;

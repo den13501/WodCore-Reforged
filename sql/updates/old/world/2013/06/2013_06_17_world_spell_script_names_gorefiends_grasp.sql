@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (108199, 'spell_dk_gorefiends_grasp');

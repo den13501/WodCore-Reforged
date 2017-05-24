@@ -1,1 +1,0 @@
-ALTER TABLE `areatrigger_template` ADD COLUMN `creature_visual` INT(10) UNSIGNED DEFAULT 0 NOT NULL AFTER `ScriptName`; 

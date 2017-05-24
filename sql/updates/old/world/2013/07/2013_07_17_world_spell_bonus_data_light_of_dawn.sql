@@ -1,1 +1,0 @@
-INSERT INTO spell_bonus_data VALUE (85222, 0.152, 0, 0, 0, 'Paladin - Light of Dawn');

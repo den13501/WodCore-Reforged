@@ -1,1 +1,0 @@
-UPDATE `pet_stats` SET attackspeed=1.8 WHERE entry=77726;

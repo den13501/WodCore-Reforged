@@ -1,1 +1,0 @@
-UPDATE spell_bonus_data SET ap_bonus = 1.05 WHERE entry = 83381; -- Kill Command

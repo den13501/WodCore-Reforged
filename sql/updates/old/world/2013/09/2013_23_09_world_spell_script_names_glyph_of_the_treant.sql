@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (125047, 'spell_dru_glyph_of_the_treant');

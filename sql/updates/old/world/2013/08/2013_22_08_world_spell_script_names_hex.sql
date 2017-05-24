@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (51514, 'spell_sha_hex');

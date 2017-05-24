@@ -1,1 +1,0 @@
-ALTER TABLE `character_glyphs` DROP COLUMN `glyph9`, DROP COLUMN `glyph8`, DROP COLUMN `glyph7`;

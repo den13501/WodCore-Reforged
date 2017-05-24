@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (172, 'spell_warl_nightfall');

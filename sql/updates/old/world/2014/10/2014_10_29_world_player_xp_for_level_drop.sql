@@ -1,1 +1,0 @@
-DROP TABLE `player_xp_for_level`; 

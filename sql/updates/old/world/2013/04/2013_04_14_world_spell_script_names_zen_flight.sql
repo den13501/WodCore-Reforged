@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (125883, 'spell_monk_zen_flight_check');

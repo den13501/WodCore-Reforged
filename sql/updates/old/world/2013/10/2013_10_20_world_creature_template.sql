@@ -1,1 +1,0 @@
-update creature_template set unit_flags=4 where entry IN (59390,59398);

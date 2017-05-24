@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = "npc_giant_lasher" WHERE entry = 88142;

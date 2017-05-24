@@ -1,1 +1,0 @@
-UPDATE `spell_proc_event` SET SpellFamilyMask1 = 0 WHERE entry = 20165;

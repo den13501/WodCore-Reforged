@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (114192, 'spell_warr_mocking_banner');

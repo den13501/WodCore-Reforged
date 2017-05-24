@@ -1,1 +1,0 @@
-UPDATE `game_event` SET LENGTH=8640 WHERE eventEntry IN(90, 91, 92, 93, 94, 95, 96);

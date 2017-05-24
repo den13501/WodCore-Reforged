@@ -1,1 +1,0 @@
-UPDATE spell_upgrade_item_stage SET InventoryTypeMask = 0x220000 WHERE ItemBonusTreeCategory = 197 AND itemClass = 2;

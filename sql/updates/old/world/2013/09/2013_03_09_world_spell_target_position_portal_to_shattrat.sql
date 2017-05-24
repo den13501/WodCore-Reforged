@@ -1,1 +1,0 @@
-UPDATE spell_target_position SET id = 121853 WHERE id = 33728;

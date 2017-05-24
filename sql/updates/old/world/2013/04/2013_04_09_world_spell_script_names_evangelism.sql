@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (47666, 'spell_pri_evangelism'); -- Penance

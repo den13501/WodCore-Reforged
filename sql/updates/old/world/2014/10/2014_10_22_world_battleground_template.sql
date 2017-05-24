@@ -1,1 +1,0 @@
-ALTER TABLE `battleground_template` DROP COLUMN `AllianceStartO`, DROP COLUMN `HordeStartO`;

@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (3044, 'spell_hun_cobra_strikes');

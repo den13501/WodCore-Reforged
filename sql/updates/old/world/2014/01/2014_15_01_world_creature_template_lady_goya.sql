@@ -1,1 +1,0 @@
-UPDATE creature_template SET npcflag = 0x80000000 WHERE entry = 62943;

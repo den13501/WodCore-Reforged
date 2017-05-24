@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (115288, 'spell_monk_energizing_brew');

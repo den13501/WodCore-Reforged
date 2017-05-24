@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUES (85288, 'spell_warr_meat_cleaver');

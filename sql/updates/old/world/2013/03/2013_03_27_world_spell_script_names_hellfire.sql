@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (5857, 'spell_warl_hellfire');

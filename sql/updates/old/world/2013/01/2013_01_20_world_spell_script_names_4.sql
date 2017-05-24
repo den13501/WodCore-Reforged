@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (1459, 'spell_mage_arcane_brilliance');

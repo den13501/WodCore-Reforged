@@ -1,1 +1,0 @@
-UPDATE creature_template SET scriptname = "npc_regzar" WHERE entry IN(12096, 13176);

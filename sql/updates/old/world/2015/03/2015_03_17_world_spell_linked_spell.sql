@@ -1,1 +1,0 @@
-INSERT INTO spell_linked_spell VALUES (115070, 119651, 2, 'Mana Usage');

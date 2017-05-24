@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = 'npc_force_of_nature' WHERE entry IN (54985, 54984, 54983, 1964);

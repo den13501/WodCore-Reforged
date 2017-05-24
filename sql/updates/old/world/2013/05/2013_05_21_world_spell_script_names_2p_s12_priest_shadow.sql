@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (47585, 'spell_pri_item_s12_2p_shadow');

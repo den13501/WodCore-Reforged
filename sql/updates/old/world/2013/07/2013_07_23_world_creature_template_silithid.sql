@@ -1,1 +1,0 @@
-UPDATE creature_template SET family = 41 WHERE family = 59; -- Silithid

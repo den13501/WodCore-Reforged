@@ -1,1 +1,0 @@
-UPDATE gameobject_loot_template SET maxcount = 1 WHERE item = 109586;

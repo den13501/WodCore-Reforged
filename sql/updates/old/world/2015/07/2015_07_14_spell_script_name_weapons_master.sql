@@ -1,1 +1,0 @@
-DELETE FROM spell_script_names WHERE ScriptName = 'spell_mastery_weapons_master';

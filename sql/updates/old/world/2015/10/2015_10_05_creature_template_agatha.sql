@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = "npc_agatha" WHERE entry = 49044;

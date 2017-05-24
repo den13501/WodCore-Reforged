@@ -1,1 +1,0 @@
-DELETE FROM spell_script_names WHERE spell_id = 167950 AND ScriptName = "spell_inscription_research";

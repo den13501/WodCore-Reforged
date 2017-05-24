@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (2782, 'spell_dru_natures_cure');

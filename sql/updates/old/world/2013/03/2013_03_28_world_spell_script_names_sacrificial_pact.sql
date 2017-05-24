@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUE (108416, 'spell_warl_sacrificial_pact');

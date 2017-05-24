@@ -1,1 +1,0 @@
-UPDATE `creature_classlevelstats` SET `basehp5` = '108328' WHERE `level` = '103' AND `class` = '1';

@@ -1,1 +1,0 @@
-DELETE FROM skill_discovery_template WHERE SpellID = 135535;

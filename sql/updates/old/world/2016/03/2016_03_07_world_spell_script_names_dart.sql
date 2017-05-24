@@ -1,1 +1,0 @@
-DELETE FROM `spell_script_names` WHERE `ScriptName` = 'spell_dart' AND spell_id = 119338;

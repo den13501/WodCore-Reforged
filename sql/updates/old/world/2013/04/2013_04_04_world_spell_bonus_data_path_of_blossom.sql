@@ -1,1 +1,0 @@
-INSERT INTO spell_bonus_data VALUE (122036, 0, 0, 0.233, 0, 'Monk - Path of Blossom damage (triggered)');

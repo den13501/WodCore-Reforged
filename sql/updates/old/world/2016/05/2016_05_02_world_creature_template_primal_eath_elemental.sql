@@ -1,1 +1,0 @@
-UPDATE `creature_template` SET spell2=118345, spell3=118337, spell4=118347 WHERE entry=61056;

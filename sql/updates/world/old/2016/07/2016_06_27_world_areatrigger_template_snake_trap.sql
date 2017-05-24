@@ -1,1 +1,0 @@
-UPDATE `areatrigger_template` SET  ScriptName = 'at_snake_trap' WHERE spell_id IN(34600, 82949);

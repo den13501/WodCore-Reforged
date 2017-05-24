@@ -1,1 +1,0 @@
-UPDATE creature_template SET ScriptName = 'spell_npc_warr_mocking_banner' WHERE entry = 59390;

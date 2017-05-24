@@ -1,1 +1,0 @@
-UPDATE characters SET knownTitles = SUBSTRING_INDEX(knownTitles, ' ', 10);

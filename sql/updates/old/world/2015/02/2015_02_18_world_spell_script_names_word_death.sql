@@ -1,1 +1,0 @@
-INSERT INTO spell_script_names VALUES (32379, 'spell_pri_shadow_word_death');
