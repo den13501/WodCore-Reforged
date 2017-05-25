@@ -125,9 +125,9 @@ hotfixDatabase.WorkerThreads         = 1
 #                     2 - (CharacterDatabase.WorkerThreads)
 #                     1 - (HotfixDatabase.WorkerThreads)
 
-LoginDatabase.SynchThreads      = 4
+LoginDatabase.SynchThreads      = 1
 WorldDatabase.SynchThreads      = 1
-CharacterDatabase.SynchThreads  = 8
+CharacterDatabase.SynchThreads  = 2
 HotfixDatabase.SynchThreads     = 1
 
 #
@@ -268,7 +268,7 @@ PlayerSaveInterval = 120000
 #        Default:     0  - (Disabled, Do not save character stats)
 #                     1+ - (Enabled, Level beyond which character stats are saved)
 
-PlayerSave.Stats.MinLevel = 0
+PlayerSave.Stats.MinLevel = 30
 
 #
 #    PlayerSave.Stats.SaveOnlyOnLogout
@@ -1920,15 +1920,15 @@ Rate.Skill.Discovery = 1
 #                     1 - (Rate.Drop.Item.Referenced)
 #                     1 - (Rate.Drop.Money)
 
-Rate.Drop.Item.Poor             = 5
-Rate.Drop.Item.Normal           = 5
-Rate.Drop.Item.Uncommon         = 5
-Rate.Drop.Item.Rare             = 5
-Rate.Drop.Item.Epic             = 5
-Rate.Drop.Item.Legendary        = 5
-Rate.Drop.Item.Artifact         = 5
-Rate.Drop.Item.Referenced       = 5
-Rate.Drop.Money                 = 5
+Rate.Drop.Item.Poor             = 1
+Rate.Drop.Item.Normal           = 1
+Rate.Drop.Item.Uncommon         = 1
+Rate.Drop.Item.Rare             = 1
+Rate.Drop.Item.Epic             = 1
+Rate.Drop.Item.Legendary        = 1
+Rate.Drop.Item.Artifact         = 1
+Rate.Drop.Item.Referenced       = 1
+Rate.Drop.Money                 = 1
 
 #
 #    Rate.Drop.Item.ReferencedAmount
@@ -1947,10 +1947,10 @@ Rate.Drop.Item.ReferencedAmount = 1
 #                     1 - (Rate.XP.Quest)
 #                     1 - (Rate.XP.Explore)
 
-Rate.XP.Kill      = 5
-Rate.XP.Quest     = 5
+Rate.XP.Kill      = 1
+Rate.XP.Quest     = 1
 Rate.XP.Explore   = 1
-Rate.XP.Gathering = 5
+Rate.XP.Gathering = 1
 
 #
 #    Rate.RepairCost
@@ -1968,9 +1968,9 @@ Rate.RepairCost = 1
 #                     1 - (Rate.Rest.Offline.InTavernOrCity)
 #                     1 - (Rate.Rest.Offline.InWilderness)
 
-Rate.Rest.InGame                 = 5
-Rate.Rest.Offline.InTavernOrCity = 5
-Rate.Rest.Offline.InWilderness   = 5
+Rate.Rest.InGame                 = 1
+Rate.Rest.Offline.InTavernOrCity = 1
+Rate.Rest.Offline.InWilderness   = 1
 
 #
 #    Rate.Damage.Fall
@@ -3162,7 +3162,7 @@ DisableRestart = 1
 #        Default:     1 - (Enable)
 
 LootAoe.Enabled = 1
-LastClientBuild = 19342
+LastClientBuild = 20779
 
 #   LogPackets
 #        Description: Print packet exchange (sent/received) to stdout, only works on Windows
@@ -3248,3 +3248,11 @@ loading.researchsite      = 1
 loading.onlyspecificmaps   = 0
 loading.onlymaps          = ""
 loading.itemspecload      = 1
+###################################################################################################
+
+###################################################################################################
+# security settings
+
+BattlePay.Security                      = 0
+BattlePay.Enable                        = 1
+Security.MustHaveAuthenticatorAccess    = 0
