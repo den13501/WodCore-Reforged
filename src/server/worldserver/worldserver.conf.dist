@@ -1653,14 +1653,14 @@ Channel.SilentlyGMJoin = 0
 #        Description: Level requirement for characters to be able to write in chat channels.
 #        Default:     1
 
-ChatLevelReq.Channel = 2
+ChatLevelReq.Channel = 1
 
 #
 #    ChatLevelReq.Whisper
 #        Description: Level requirement for characters to be able to whisper other characters.
 #        Default:     1
 
-ChatLevelReq.Whisper = 2
+ChatLevelReq.Whisper = 1
 
 #
 #    ChatLevelReq.Say
