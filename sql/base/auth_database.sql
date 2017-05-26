@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `expansion` tinyint(3) unsigned NOT NULL DEFAULT '5',
   `mutetime` bigint(20) NOT NULL DEFAULT '0',
   `locale` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `os` varchar(3) NOT NULL DEFAULT '',
+  `os` varchar(4) NOT NULL DEFAULT '',
   `recruiter` int(10) unsigned NOT NULL DEFAULT '0',
   `bnet2_pass_hash` varchar(256) NOT NULL DEFAULT '',
   `bnet2_salt` varchar(64) NOT NULL DEFAULT '',
