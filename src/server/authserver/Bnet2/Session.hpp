@@ -2,7 +2,7 @@
 #pragma once
 
 #include "AuthComponent.hpp"
-#include "SRP6a.hpp"
+#include "SRP6a.h"
 #include "Packet.hpp"
 #include "BNet2Crypt.hpp"
 #include "../Server/RealmSocket.h"

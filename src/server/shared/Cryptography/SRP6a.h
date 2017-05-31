@@ -1,8 +1,8 @@
 /// Credit merydwin@gmail.com
 #pragma once
 
-#include "Cryptography/BigNumber.h"
-#include "Cryptography/SHA1.h"
+#include "BigNumber.h"
+#include <openssl/sha.h>
 #include <inttypes.h>
 #include <string>
 

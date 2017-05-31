@@ -1,6 +1,5 @@
 /// Credit merydwin@gmail.com
-#include "SRP6a.hpp"
-#include <openssl/sha.h>
+#include "SRP6a.h"
 #include <algorithm>
 
 namespace BNet2 {

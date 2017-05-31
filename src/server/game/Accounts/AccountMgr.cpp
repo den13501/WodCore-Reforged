@@ -12,9 +12,52 @@
 #include "Player.h"
 #include "Util.h"
 #include "SHA1.h"
+#include "SHA256.h"
+#include "SRP6a.h"
 
 namespace AccountMgr
 {
+    std::string SRP6aGenerateSalt32()
+    {
+        uint8 salt[32];
+
+        for (int i = 0; i < 32; i++)
+            salt[i] = urand(0, 255);
+
+        return ByteArrayToHexStr(salt, 32);
+    }
+
+    std::string SRP6aCalculatePasswordVerifier(const std::string& email, const std::string& password, const std::string& salt)
+    {
+        SHA256Hash shaIdentitySalt;
+        shaIdentitySalt.Initialize();
+        shaIdentitySalt.UpdateData(email);
+        shaIdentitySalt.Finalize();
+
+        SHA256Hash shaPBytes;
+        shaPBytes.Initialize();
+        shaPBytes.UpdateData(shaIdentitySalt.GetDigest(), shaIdentitySalt.GetLength());
+        shaPBytes.UpdateData(":");
+        shaPBytes.UpdateData(password);
+        shaPBytes.Finalize();
+
+        SHA256Hash shaX;
+        shaX.Initialize();
+        shaX.UpdateData(salt);
+        shaX.UpdateData(shaPBytes.GetDigest(), shaPBytes.GetLength());
+        shaX.Finalize();
+
+        BigNumber G;
+        G.SetBinary(BNet2::SRP6a_G, sizeof(BNet2::SRP6a_G));
+        BigNumber N;
+        N.SetBinary(BNet2::SRP6a_N, sizeof(BNet2::SRP6a_N));
+        BigNumber X;
+        X.SetBinary(shaX.GetDigest(), shaX.GetLength());
+        BigNumber res = G.ModExp(X, N);
+
+        return std::string(res.AsHexStr());
+    }
+
 #ifndef CROSS
     AccountOpResult CreateAccount(std::string username, std::string password)
     {
@@ -27,10 +70,15 @@ namespace AccountMgr
         if (GetId(username))
             return AOR_NAME_ALREDY_EXIST;                       // Username does already exist
 
+        std::string salt = SRP6aGenerateSalt32();
+        std::string passwordVerifier = SRP6aCalculatePasswordVerifier(username, password, salt);
+
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ACCOUNT);
 
         stmt->setString(0, username);
         stmt->setString(1, CalculateShaPassHash(username, password));
+        stmt->setString(2, passwordVerifier);
+        stmt->setString(3, salt);
 
         LoginDatabase.Execute(stmt);
 
@@ -133,11 +181,16 @@ namespace AccountMgr
         normalizeString(newUsername);
         normalizeString(newPassword);
 
+        std::string salt = SRP6aGenerateSalt32();
+        std::string passwordVerifier = SRP6aCalculatePasswordVerifier(newUsername, newPassword, salt);
+
         stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_USERNAME);
 
         stmt->setString(0, newUsername);
         stmt->setString(1, CalculateShaPassHash(newUsername, newPassword));
-        stmt->setUInt32(2, accountId);
+        stmt->setString(2, passwordVerifier);
+        stmt->setString(3, salt);
+        stmt->setUInt32(4, accountId);
 
         LoginDatabase.Execute(stmt);
 
@@ -157,10 +210,15 @@ namespace AccountMgr
         normalizeString(username);
         normalizeString(newPassword);
 
+        std::string salt = SRP6aGenerateSalt32();
+        std::string passwordVerifier = SRP6aCalculatePasswordVerifier(username, newPassword, salt);
+
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_PASSWORD);
 
         stmt->setString(0, CalculateShaPassHash(username, newPassword));
-        stmt->setUInt32(1, accountId);
+        stmt->setString(1, passwordVerifier);
+        stmt->setString(2, salt);
+        stmt->setUInt32(3, accountId);
 
         LoginDatabase.Execute(stmt);
 
