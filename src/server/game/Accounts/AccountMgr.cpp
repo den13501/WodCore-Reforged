@@ -34,16 +34,22 @@ namespace AccountMgr
         shaIdentitySalt.UpdateData(email);
         shaIdentitySalt.Finalize();
 
+        std::string identitySalt = ByteArrayToHexStr(shaIdentitySalt.GetDigest(), shaIdentitySalt.GetLength());
+
         SHA256Hash shaPBytes;
         shaPBytes.Initialize();
-        shaPBytes.UpdateData(shaIdentitySalt.GetDigest(), shaIdentitySalt.GetLength());
+        shaPBytes.UpdateData(identitySalt);
         shaPBytes.UpdateData(":");
         shaPBytes.UpdateData(password);
         shaPBytes.Finalize();
 
+        uint8_t saltBytes[32];
+        for (int i = 0; i < 32; i++)
+            saltBytes[i] = std::stoi(salt.substr(i * 2, 2), nullptr, 16);
+
         SHA256Hash shaX;
         shaX.Initialize();
-        shaX.UpdateData(salt);
+        shaX.UpdateData(saltBytes, 32);
         shaX.UpdateData(shaPBytes.GetDigest(), shaPBytes.GetLength());
         shaX.Finalize();
 
@@ -54,8 +60,9 @@ namespace AccountMgr
         BigNumber X;
         X.SetBinary(shaX.GetDigest(), shaX.GetLength());
         BigNumber res = G.ModExp(X, N);
+        std::string temp = ByteArrayToHexStr(X.AsByteArray(), 32);
 
-        return std::string(res.AsHexStr());
+        return ByteArrayToHexStr(res.AsByteArray(), res.GetNumBytes());
     }
 
 #ifndef CROSS
@@ -64,14 +71,23 @@ namespace AccountMgr
         if (utf8length(username) > MAX_ACCOUNT_STR)
             return AOR_NAME_TOO_LONG;                           // Username's too long
 
+        if (utf8length(password) > MAX_PASSWORD_LENGTH)
+            return AOR_PASS_TOO_LONG;
+
         normalizeString(username);
         normalizeString(password);
 
         if (GetId(username))
             return AOR_NAME_ALREDY_EXIST;                       // Username does already exist
 
+        // SRP6aCalculatePasswordVerifier requires a lowercase email
+        normalizeString(username, false);
+
         std::string salt = SRP6aGenerateSalt32();
         std::string passwordVerifier = SRP6aCalculatePasswordVerifier(username, password, salt);
+
+        // everything else requires an uppercase email
+        normalizeString(username, true);
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ACCOUNT);
 
@@ -175,14 +191,18 @@ namespace AccountMgr
         if (utf8length(newUsername) > MAX_ACCOUNT_STR)
             return AOR_NAME_TOO_LONG;
 
-        if (utf8length(newPassword) > MAX_ACCOUNT_STR)
+        if (utf8length(newPassword) > MAX_PASSWORD_LENGTH)
             return AOR_PASS_TOO_LONG;
 
-        normalizeString(newUsername);
+        // SRP6aCalculatePasswordVerifier requires a lowercase email
+        normalizeString(newUsername, false);
         normalizeString(newPassword);
 
         std::string salt = SRP6aGenerateSalt32();
         std::string passwordVerifier = SRP6aCalculatePasswordVerifier(newUsername, newPassword, salt);
+
+        // everything else requires an uppercase email
+        normalizeString(newUsername, true);
 
         stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_USERNAME);
 
@@ -204,14 +224,18 @@ namespace AccountMgr
         if (!GetName(accountId, username))
             return AOR_NAME_NOT_EXIST;                          // Account doesn't exist
 
-        if (utf8length(newPassword) > MAX_ACCOUNT_STR)
+        if (utf8length(newPassword) > MAX_PASSWORD_LENGTH)
             return AOR_PASS_TOO_LONG;
 
-        normalizeString(username);
+        // SRP6aCalculatePasswordVerifier requires a lowercase email
+        normalizeString(username, false);
         normalizeString(newPassword);
 
         std::string salt = SRP6aGenerateSalt32();
         std::string passwordVerifier = SRP6aCalculatePasswordVerifier(username, newPassword, salt);
+
+        // everything else requires an uppercase email
+        normalizeString(username, true);
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_PASSWORD);
 
@@ -299,7 +323,7 @@ namespace AccountMgr
     }
 #endif
 
-    bool normalizeString(std::string& utf8String)
+    bool normalizeString(std::string& utf8String, bool upper /* = true */)
     {
         wchar_t buffer[MAX_ACCOUNT_STR + 1];
 
@@ -309,7 +333,7 @@ namespace AccountMgr
 #ifdef _MSC_VER
 #pragma warning(disable: 4996)
 #endif
-        std::transform(&buffer[0], buffer+maxLength, &buffer[0], wcharToUpperOnlyLatin);
+        std::transform(&buffer[0], buffer+maxLength, &buffer[0], upper ? wcharToUpperOnlyLatin : wcharToLowerOnlyLatin);
 #ifdef _MSC_VER
 #pragma warning(default: 4996)
 #endif

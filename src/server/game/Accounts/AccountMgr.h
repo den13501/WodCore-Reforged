@@ -23,6 +23,7 @@ enum AccountOpResult
 };
 
 #define MAX_ACCOUNT_STR 320
+#define MAX_PASSWORD_LENGTH 16
 
 namespace AccountMgr
 {
@@ -43,7 +44,7 @@ namespace AccountMgr
 
     std::string CalculateShaPassHash(std::string& name, std::string& password);
 
-    bool normalizeString(std::string& utf8String);
+    bool normalizeString(std::string& utf8String, bool upper = true);
     bool IsPlayerAccount(uint32 gmlevel);
     bool IsModeratorAccount(uint32 gmlevel);
     bool IsGMAccount(uint32 gmlevel);
