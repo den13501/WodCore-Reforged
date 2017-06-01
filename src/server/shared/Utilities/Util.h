@@ -309,11 +309,6 @@ inline wchar_t wcharToUpperOnlyLatin(wchar_t wchar)
     return isBasicLatinCharacter(wchar) ? wcharToUpper(wchar) : wchar;
 }
 
-inline wchar_t wcharToLowerOnlyLatin(wchar_t wchar)
-{
-    return isBasicLatinCharacter(wchar) ? wcharToLower(wchar) : wchar;
-}
-
 inline wchar_t wcharToLower(wchar_t wchar)
 {
     if (wchar >= L'A' && wchar <= L'Z')                      // LATIN CAPITAL LETTER A - LATIN CAPITAL LETTER Z
@@ -335,6 +330,11 @@ inline wchar_t wcharToLower(wchar_t wchar)
         return wchar_t(uint16(wchar)+0x0020);
 
     return wchar;
+}
+
+inline wchar_t wcharToLowerOnlyLatin(wchar_t wchar)
+{
+    return isBasicLatinCharacter(wchar) ? wcharToLower(wchar) : wchar;
 }
 
 inline void wstrToUpper(std::wstring& str)
