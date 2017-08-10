@@ -4027,7 +4027,9 @@ bool World::CanBeSaveInLoginDatabase() const
 {
     switch (m_int_configs[CONFIG_REALM_ZONE])
     {
-        case REALM_ZONE_DEVELOPMENT:
+        // REALM_ZONE_DEVELOPMENT is often used for international private servers
+        // so allow saving to the acc DB for this realm type
+        // case REALM_ZONE_DEVELOPMENT:
         case REALM_ZONE_TEST_SERVER:
         case REALM_ZONE_QA_SERVER:
             return false;
