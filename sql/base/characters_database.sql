@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `deleteDate` int(10) unsigned DEFAULT NULL,
   `RaidDifficulty` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `LegacyRaidDifficuly` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `xprate` float unsigned NOT NULL DEFAULT '5',
+  `xprate` float unsigned NOT NULL DEFAULT '1',
   `lastbattlepet` int(10) unsigned NOT NULL DEFAULT '0',
   `ilvl` int(10) unsigned NOT NULL DEFAULT '0',
   `end_sales` int(10) unsigned NOT NULL DEFAULT '0',
