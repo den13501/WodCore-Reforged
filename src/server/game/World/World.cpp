@@ -1161,6 +1161,9 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_BATTLEPAY_MIN_SECURITY] = ConfigMgr::GetIntDefault("BattlePay.Security", 0);
     m_bool_configs[CONFIG_BATTLEPAY_ENABLE]      = ConfigMgr::GetBoolDefault("BattlePay.Enable", true);
 
+    // Loyalty configs
+    m_bool_configs[CONFIG_LOYALTY_EVENTS_ENABLE] = ConfigMgr::GetBoolDefault("Loyalty.EnableLoyaltyEvents", false);
+
     if (int32 clientCacheId = ConfigMgr::GetIntDefault("ClientCacheVersion", 0))
     {
         // overwrite DB/old value

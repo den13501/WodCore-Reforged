@@ -95,6 +95,8 @@ LoginDatabaseInfo      = "127.0.0.1;3306;trinity;trinity;auth"
 WorldDatabaseInfo      = "127.0.0.1;3306;trinity;trinity;world"
 CharacterDatabaseInfo  = "127.0.0.1;3306;trinity;trinity;characters"
 HotfixDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;hotfix"
+WebDatabase.enable     = 0
+WebDatabaseInfo        = "127.0.0.1;3306;trinity;trinity;web"
 
 #
 #    LoginDatabase.WorkerThreads
@@ -113,6 +115,7 @@ LoginDatabase.WorkerThreads          = 2
 WorldDatabase.WorkerThreads          = 1
 CharacterDatabase.WorkerThreads      = 4
 hotfixDatabase.WorkerThreads         = 1
+WebDatabaseInfo.WorkerThreads        = 1
 
 #
 #    LoginDatabase.SynchThreads
@@ -129,6 +132,7 @@ LoginDatabase.SynchThreads      = 1
 WorldDatabase.SynchThreads      = 1
 CharacterDatabase.SynchThreads  = 2
 HotfixDatabase.SynchThreads     = 1
+WebDatabaseInfo.SynchThreads    = 1
 
 #
 #    MaxPingTime
@@ -3256,3 +3260,9 @@ loading.itemspecload      = 1
 BattlePay.Security                      = 0
 BattlePay.Enable                        = 1
 Security.MustHaveAuthenticatorAccess    = 0
+###################################################################################################
+
+###################################################################################################
+# loyalty settings
+
+Loyalty.EnableLoyaltyEvents             = 0

@@ -2156,6 +2156,9 @@ void WorldSession::AddLoyaltyPoints(uint32 p_Count, std::string p_Reason)
 
 void WorldSession::CompleteLoyaltyEvent(LoyaltyEvent p_Event)
 {
+    if (!sWorld->getBoolConfig(CONFIG_LOYALTY_EVENTS_ENABLE))
+        return;
+
     m_LoyaltyEvents[(uint32)p_Event]++;
 
     if (m_LoyaltyEvents[(uint32)p_Event] == g_LoyaltyEventObjectives[(uint32)p_Event])
