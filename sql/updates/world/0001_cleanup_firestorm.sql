@@ -31,3 +31,11 @@ DELETE FROM gameobject WHERE map=1 AND zoneid=876 AND areaid=876;
 DELETE FROM gameobject WHERE phasemask=65535 AND map=646 AND zoneid=5042 AND areaid=5042 AND guid BETWEEN 4000000 AND 79999999;
 DELETE FROM gameobject WHERE phasemask=1 AND map=648 AND zoneid=4737 AND areaid=4737 AND guid BETWEEN 50000000 AND 79999999;
 DELETE FROM gameobject WHERE phasemask=1 AND map=861 AND zoneid=5733 AND guid BETWEEN 50000000 AND 79999999;
+
+-- commands reset for our server
+-- command
+update command set security=3 where security <>3;
+
+-- commands players
+update command set security=0 where name in
+("account","account lock","account set password","commands","dismount","gm ingame","help","save","server","server info");
