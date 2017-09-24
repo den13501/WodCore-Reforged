@@ -11,10 +11,12 @@ CREATE TABLE IF NOT EXISTS `api_account_validate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `api_points` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `AccountID` int(10) unsigned NOT NULL,
   `Points` int(10) unsigned NOT NULL,
   `TypePoints` int(10) unsigned NOT NULL,
   `Data` text NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `AccountID` (`AccountID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
