@@ -8,6 +8,14 @@
 
 #include "VignetteMgr.hpp"
 #include "ObjectAccessor.h"
+#include "Player.h"
+#include "Creature.h"
+#include "GameObject.h"
+#include "Corpse.h"
+#include "DynamicObject.h"
+#include "AreaTrigger.h"
+#include "Conversation.hpp"
+#include "Object.h"
 
 namespace Vignette
 {

@@ -550,7 +550,7 @@ void Pet::SavePetToDB(PetSlot mode, bool stampeded)
             l_Player->GetSession()->SendStablePet(0);
         });
 
-        l_Database->CommitTransaction(trans, l_CallBack);
+        CommitTransaction(*l_Database, trans, l_CallBack);
     }
     // delete
     else

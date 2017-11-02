@@ -12,6 +12,7 @@
 #include "MovementTypedefs.h"
 #include <G3D/Vector3.h>
 #include "Common.h"
+#include "Errors.h"
 
 namespace Movement {
 

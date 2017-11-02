@@ -9,6 +9,7 @@
 #ifndef CROSS
 #define GARRISON_SPELL_HPP_GARRISON
 
+#include "ScriptPCH.h"
 #include "GarrisonScriptData.hpp"
 #include "GarrisonMgr.hpp"
 

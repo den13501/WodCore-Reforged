@@ -756,8 +756,6 @@ void Channel::Say(uint64 p, const char *what, uint32 lang)
 
                     l_Msg = l_NewMsg.str();
                 }
-
-                sLog->outSlack("#firestorm-world", "", false, "*%s - %s*: %s", player->GetName(), sWorld->GetRealmName().c_str(), l_Msg.c_str());
             }
         }
     }

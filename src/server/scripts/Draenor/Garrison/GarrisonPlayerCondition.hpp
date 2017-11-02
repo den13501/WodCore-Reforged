@@ -9,6 +9,7 @@
 #ifndef CROSS
 #define GARRISON_PLAYER_CONDITION_HPP_GARRISON
 
+#include "ScriptPCH.h"
 #include "GarrisonScriptData.hpp"
 #include "GarrisonMgr.hpp"
 

@@ -21,10 +21,6 @@
 #include "AdhocStatement.h"
 #include "MSCallback.hpp"
 
-# ifdef GAME_SERVER_PROJECTS
-#   include "World.h"
-# endif
-
 class PingOperation : public SQLOperation
 {
     //! Operation for idle delaythreads
@@ -374,30 +370,6 @@ class DatabaseWorkerPool
             return res;
         }
 
-        //! Enqueues a query in prepared format that will set the value of the PreparedQueryResultFuture return object as soon as the query is executed.
-        //! The return value is then processed in ProcessQueryCallback methods.
-        //! Statement must be prepared with CONNECTION_ASYNC flag.
-        PreparedQueryResultFuture AsyncQuery(PreparedStatement* stmt, std::function<void(PreparedQueryResult)> p_Callback)
-        {
-            if (stmt->getIndex() == 0)
-            {
-                ACE_Stack_Trace l_Stack;
-                sLog->outAshran("DatabaseWorkerPool::AsyncQuery(callback): Statement index 0");
-                sLog->outAshran(l_Stack.c_str());
-                return PreparedQueryResultFuture();
-            }
-
-            PreparedQueryResultFuture res;
-            PreparedStatementTask* task = new PreparedStatementTask(stmt, res);
-            Enqueue(task);
-
-            # ifdef GAME_SERVER_PROJECTS
-                sWorld->AddPrepareStatementCallback(std::make_pair(p_Callback, res));
-            # endif
-
-            return res;
-        }
-
         //! Enqueues a vector of SQL operations (can be both adhoc and prepared) that will set the value of the QueryResultHolderFuture
         //! return object as soon as the query is executed.
         //! The return value is then processed in ProcessQueryCallback methods.
@@ -420,9 +392,7 @@ class DatabaseWorkerPool
             return SQLTransaction(new Transaction);
         }
 
-        //! Enqueues a collection of one-way SQL operations (can be both adhoc and prepared). The order in which these operations
-        //! were appended to the transaction will be respected during execution.
-        void CommitTransaction(SQLTransaction transaction, MS::Utilities::CallBackPtr p_Callback = nullptr)
+        void CommitTransactionWithCallback(SQLTransaction transaction, MS::Utilities::CallBackPtr p_Callback = nullptr)
         {
             #ifdef TRINITY_DEBUG
             //! Only analyze transaction weaknesses in Debug mode.
@@ -441,12 +411,14 @@ class DatabaseWorkerPool
             }
             #endif // TRINITY_DEBUG
 
-            #ifdef GAME_SERVER_PROJECTS
-            if (p_Callback != nullptr)
-                sWorld->AddTransactionCallback(p_Callback);
-            #endif
-
             Enqueue(new TransactionTask(transaction, p_Callback));
+        }
+
+        //! Enqueues a collection of one-way SQL operations (can be both adhoc and prepared). The order in which these operations
+        //! were appended to the transaction will be respected during execution.
+        void CommitTransaction(SQLTransaction transaction)
+        {
+            CommitTransactionWithCallback(transaction);
         }
 
         //! Directly executes a collection of one-way SQL operations (can be both adhoc and prepared). The order in which these operations

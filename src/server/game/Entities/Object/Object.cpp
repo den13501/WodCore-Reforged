@@ -3121,7 +3121,7 @@ void Player::SummonPet(uint32 entry, float x, float y, float z, float ang, PetTy
             l_LoadPetSlotID = m_currentPetSlot;
 
         PreparedStatement* l_PetStatement = PetQueryHolder::GenerateFirstLoadStatement(entry, 0, GetGUIDLow(), currentPet, l_LoadPetSlotID, l_RealmID);
-        l_Database->AsyncQuery(l_PetStatement, [entry, x, y, z, ang, petType, duration, l_LoadPetSlotID, slotID, stampeded, p_Callback, l_Pet, currentPet, l_PlayerGUID, l_RealmID](PreparedQueryResult p_Result) -> void
+        AsyncQuery(*l_Database, l_PetStatement, [entry, x, y, z, ang, petType, duration, l_LoadPetSlotID, slotID, stampeded, p_Callback, l_Pet, currentPet, l_PlayerGUID, l_RealmID](PreparedQueryResult p_Result) -> void
         {
             if (!p_Result)
             {

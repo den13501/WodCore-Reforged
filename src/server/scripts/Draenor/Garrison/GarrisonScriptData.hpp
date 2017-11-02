@@ -9,9 +9,7 @@
 #ifndef CROSS
 #define GARRISON_SCRIPT_DATA_HPP_GARRISON
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "ScriptedGossip.h"
+#include "ScriptPCH.h"
 #include "GameObjectAI.h"
 #include "Spell.h"
 

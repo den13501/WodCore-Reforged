@@ -9,6 +9,7 @@
 #include "ScriptPCH.h"
 #include "ScriptMgr.h"
 #include "Config.h"
+#include "Chat.h"
 
 class PlayerScript_meta_achievement_midsummer : public PlayerScript
 {
@@ -31,12 +32,12 @@ class PlayerScript_meta_achievement_midsummer : public PlayerScript
         };
 
         std::array<uint32, eDatas::MaxAchievements> m_Achievements =
-        {
+        { {
             eDatas::BurningHotPoleDance,
             eDatas::TorchJuggler,
             eDatas::KingOfTheFireFestival,
             eDatas::IceTheFrostLord
-        };
+        } };
 
         void OnAchievementEarned(Player* p_Player, AchievementEntry const* p_Achievement, bool& p_SendAchievement, bool p_After) override
         {

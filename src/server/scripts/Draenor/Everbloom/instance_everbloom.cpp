@@ -6,7 +6,6 @@
 ///  Coded by Davethebrave
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "InstanceScript.h"
 #include "the_everbloom.hpp"
 
 class instance_everbloom : public InstanceMapScript

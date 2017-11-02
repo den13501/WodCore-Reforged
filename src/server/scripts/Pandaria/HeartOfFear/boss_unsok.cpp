@@ -6,9 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "ScriptPCH.h"
 #include "GameObjectAI.h"
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
 #include "heart_of_fear.h"
 
 enum eUnsokSpells

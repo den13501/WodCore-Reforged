@@ -27,6 +27,7 @@
 #include "WildBattlePet.h"
 #include "OutdoorPvPMgr.h"
 #include "DisableMgr.h"
+#include "Logger.h"
 
 u_map_magic MapMagic        = { {'M','A','P','S'} };
 u_map_magic MapVersionMagic = { {'v','1','.','8'} };
@@ -67,6 +68,17 @@ Map::~Map()
         sScriptMgr->DecreaseScheduledScriptCount(m_scriptSchedule.size());
 
     MMAP::MMapFactory::createOrGetMMapManager()->unloadMapInstance(GetId(), i_InstanceId);
+}
+
+NGridType* Map::getNGrid(uint32 x, uint32 y) const
+{
+    //ASSERT(x < MAX_NUMBER_OF_GRIDS && y < MAX_NUMBER_OF_GRIDS);
+    if (x > MAX_NUMBER_OF_GRIDS && y > MAX_NUMBER_OF_GRIDS)
+    {
+        sLog->outError(LOG_FILTER_GENERAL, "CRASH::map::setNGrid() Invalid grid coordinates found: %d, %d!", x, y);
+        return NULL;
+    }
+    return i_grids[x][y];
 }
 
 bool Map::ExistMap(uint32 mapid, int gx, int gy)
@@ -3038,7 +3050,7 @@ void InstanceMap::CreateInstanceData(bool load)
         uint32 l_MapId            = GetId();
         uint32 l_InstanceId       = i_InstanceId;
 
-        CharacterDatabase.AsyncQuery(l_Statement, [l_MapId, l_InstanceId](PreparedQueryResult const& p_Result)
+        AsyncQuery(CharacterDatabase, l_Statement, [l_MapId, l_InstanceId](PreparedQueryResult const& p_Result)
         {
             Map* l_Map = sMapMgr->FindMap(l_MapId, l_InstanceId);
             if (l_Map == nullptr || l_Map->ToInstanceMap() == nullptr)

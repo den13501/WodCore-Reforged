@@ -23,6 +23,7 @@
 #include "Define.h"
 #include "TypeContainer.h"
 #include "TypeContainerVisitor.h"
+#include "Errors.h"
 
 // forward declaration
 template<class A, class T, class O> class GridLoader;

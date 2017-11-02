@@ -332,6 +332,11 @@ inline wchar_t wcharToLower(wchar_t wchar)
     return wchar;
 }
 
+inline wchar_t wcharToLowerOnlyLatin(wchar_t wchar)
+{
+    return isBasicLatinCharacter(wchar) ? wcharToLower(wchar) : wchar;
+}
+
 inline void wstrToUpper(std::wstring& str)
 {
     std::transform( str.begin(), str.end(), str.begin(), wcharToUpper );

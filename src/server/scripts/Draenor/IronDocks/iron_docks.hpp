@@ -6,11 +6,8 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "SpellScript.h"
+#include "ScriptPCH.h"
 #include "Vehicle.h"
-#include "InstanceScript.h"
 #include "GameObjectAI.h"
 
 #ifndef IRON_DOCKS_HPP

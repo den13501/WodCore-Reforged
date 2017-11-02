@@ -9,7 +9,6 @@
 #ifndef TRINITY_CONDITIONMGR_H
 #define TRINITY_CONDITIONMGR_H
 
-#include "LootMgr.h"
 #include "Common.h"
 
 class Creature;

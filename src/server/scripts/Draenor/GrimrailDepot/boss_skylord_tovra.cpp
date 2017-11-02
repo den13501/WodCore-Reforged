@@ -9,7 +9,6 @@
 #include "grimrail_depot.hpp"
 #include "MoveSplineInit.h"
 #include "ScriptedCosmeticAI.hpp"
-#include "ScriptedCreature.h"
 #include "Vehicle.h"
 
 enum eSkylordTorvaTalks

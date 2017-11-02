@@ -43,6 +43,9 @@ void CharacterDatabaseCleaner::CleanDatabase()
     if (flags & CLEANING_FLAG_QUESTSTATUS)
         CleanCharacterQuestStatus();
 
+    if (flags & CLEANING_FLAG_AUTO_LEARNED_SPELLS)
+        CleanCharacterAutoLearnedSpells();
+
     // NOTE: In order to have persistentFlags be set in worldstates for the next cleanup,
     // you need to define them at least once in worldstates.
     flags &= sWorld->getIntConfig(CONFIG_PERSISTENT_CHARACTER_CLEAN_FLAGS);
@@ -134,4 +137,83 @@ void CharacterDatabaseCleaner::CleanCharacterQuestStatus()
 {
     CharacterDatabase.DirectExecute("DELETE FROM character_queststatus WHERE status = 0");
 }
+
+bool CharacterDatabaseCleaner::NotAutoLearnedSpell(uint32 spell_id)
+{
+    const SpellInfo* info = sSpellMgr->GetSpellInfo(spell_id);
+    // make sure the spell actually exists, if not also delete it
+    if (!info)
+        return false;
+
+    if (info->IsAbilityOfSkillType(SKILL_BLACKSMITHING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_LEATHERWORKING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_ALCHEMY))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_HERBALISM))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_COOKING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_MINING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_TAILORING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_ENGINEERING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_ENCHANTING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_FISHING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_SKINNING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_JEWELCRAFTING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_INSCRIPTION))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_MOUNTS))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_COMPANIONS))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_ARCHAEOLOGY))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_ALL_GLYPHS))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_APPRENTICE_COOKING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_JOURNEYMAN_COOKBOOK))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_GARRENCHANTING))
+        return true;
+
+    if (info->IsAbilityOfSkillType(SKILL_LOGGING))
+        return true;
+
+    return false;
+}
+
+void CharacterDatabaseCleaner::CleanCharacterAutoLearnedSpells()
+{
+    CheckUnique("spell", "character_spell", &NotAutoLearnedSpell);
+}
+
 #endif

@@ -6,11 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "SpellScript.h"
-#include "SpellAuraEffects.h"
-#include "GridNotifiers.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 
 /// Mini Mana Bomb - 65903
 class npc_toy_mini_maba_bomb : public CreatureScript

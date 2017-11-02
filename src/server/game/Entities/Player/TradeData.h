@@ -9,6 +9,11 @@
 #ifndef TradeData_h__
 #define TradeData_h__
 
+#include "Common.h"
+
+class Player;
+class Item;
+
 enum TradeSlots
 {
     TRADE_SLOT_TRADED_COUNT     = 6,

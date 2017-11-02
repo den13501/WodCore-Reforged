@@ -10,6 +10,7 @@
 #define _LFG_H
 
 #include "Common.h"
+#include "LockedMap.h"
 
 enum LfgRoles : uint8
 {

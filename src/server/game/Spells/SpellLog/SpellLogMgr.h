@@ -10,6 +10,9 @@
 
 #pragma once
 
+class Unit;
+class Player;
+
 enum SpellLogOutputFlags
 {
     SPELLLOG_OUTPUT_FLAG_PLAYER  = 1,
@@ -31,7 +34,7 @@ private:
     void PrintToConsole(char* p_Str);
 };
 
+#define sSpellLogMgr ACE_Singleton<SpellLogMgr, ACE_Null_Mutex>::instance()
+
 #define LOG_SPELL(c, s, ...) sSpellLogMgr->LogSpell(c, s, __VA_ARGS__)
 #define LOG_SPELL_DOUBLE(c, s1, s2, fmt, ...) sSpellLogMgr->LogSpell(c, s1, s2, __VA_ARGS__)
-
-#define sSpellLogMgr ACE_Singleton<SpellLogMgr, ACE_Null_Mutex>::instance()

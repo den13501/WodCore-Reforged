@@ -7,6 +7,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /// TradeData
+#include "TradeData.h"
+#include "Player.h"
+#include "Item.h"
 
 TradeData* TradeData::GetTraderData() const
 {

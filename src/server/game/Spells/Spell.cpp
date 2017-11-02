@@ -36,6 +36,7 @@
 #include "Util.h"
 #include "TemporarySummon.h"
 #include "Vehicle.h"
+#include "SharedDefines.h"
 #include "SpellAuraEffects.h"
 #include "ScriptMgr.h"
 #include "ConditionMgr.h"
@@ -3850,7 +3851,7 @@ void Spell::prepare(SpellCastTargets const* targets, AuraEffect const* triggered
     // Why check duration? 29350: channeled triggers channeled
     if ((_triggeredCastFlags & TRIGGERED_CAST_DIRECTLY) && (!m_spellInfo->IsChanneled() || !m_spellInfo->GetMaxDuration()))
     {
-        if (m_spellInfo->HasEffect(SpellEffects::SPELL_EFFECT_LOOT_BONUS))
+        if (m_spellInfo->HasEffect(SPELL_EFFECT_LOOT_BONUS))
             SendSpellStart();
 
         if (!(_triggeredCastFlags & TRIGGERED_IGNORE_GCD) && result == SPELL_CAST_OK) ///< Global cooldown should be trigger before cast
@@ -4945,7 +4946,7 @@ void Spell::SendSpellStart()
     if (m_targets.HasTraj())
         l_CastFlags |= CAST_FLAG_ADJUST_MISSILE;
 
-    if (m_spellInfo->HasEffect(SpellEffects::SPELL_EFFECT_LOOT_BONUS))
+    if (m_spellInfo->HasEffect(SPELL_EFFECT_LOOT_BONUS))
         l_CastFlags = SpellCastFlags::CAST_FLAG_HAS_TRAJECTORY | SpellCastFlags::CAST_FLAG_NO_GCD;
 
     WorldPacket data(SMSG_SPELL_START);
@@ -5131,7 +5132,7 @@ void Spell::SendSpellGo()
         l_CastFlagsEx |= CastFlagsEx::CAST_FLAG_EX_TOY_COOLDOWN;
 
     /// Sniffed values - It triggers the bonus roll animation
-    if (m_spellInfo->HasEffect(SpellEffects::SPELL_EFFECT_LOOT_BONUS))
+    if (m_spellInfo->HasEffect(SPELL_EFFECT_LOOT_BONUS))
     {
         l_CastFlags     = SpellCastFlags::CAST_FLAG_HAS_TRAJECTORY | SpellCastFlags::CAST_FLAG_NO_GCD;
         l_CastFlagsEx   = CastFlagsEx::CAST_FLAG_EX_UNK_5;
@@ -8615,7 +8616,7 @@ bool Spell::IsNeedSendToClient() const
     if (SpellXSpellVisualEntry const* l_VisualEntry = sSpellXSpellVisualStore.LookupEntry(m_spellInfo->GetSpellXSpellVisualId(m_originalCaster)))
         l_VisualID = l_VisualEntry->VisualID;
 
-    return l_VisualID[0] || l_VisualID[1] || m_spellInfo->IsChanneled() || m_spellInfo->HasEffect(SpellEffects::SPELL_EFFECT_LOOT_BONUS) ||
+    return l_VisualID[0] || l_VisualID[1] || m_spellInfo->IsChanneled() || m_spellInfo->HasEffect(SPELL_EFFECT_LOOT_BONUS) ||
         (m_spellInfo->AttributesEx8 & SPELL_ATTR8_AURA_SEND_AMOUNT) || m_spellInfo->Speed > 0.0f || (!m_triggeredByAuraSpell && !IsTriggered());
 }
 
