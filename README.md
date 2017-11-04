@@ -4,11 +4,11 @@ World of Warcraft Warlords of Draenor (6.2.3.20779) emulator based on TrinityCor
 
 ## Downloads
 
-[Patched Executable](http://www.mediafire.com/file/nltflkn5nx7fhci/Wow-64-Patched.exe)
+Patched Executable: [link](http://www.mediafire.com/file/nltflkn5nx7fhci/Wow-64-Patched.exe)
 
-[Full Client](http://wowcircle.com/files/WowCircle%206.2.3.torrent)
+Full Client: [torrent](http://wowcircle.com/files/WowCircle%206.2.3.torrent), direct download (mega.nz) ([part1](https://mega.nz/#!OIkXVb7Y!cFWofTc1CzCxvdrF0K_ypL-IYZurRRnnnJY5ZzVwwDk),[part2](https://mega.nz/#!zFsgDYga!K4KPWaU4LFtN2EBc9K4bJs33IX3g61nwykGzyQCuwxQ),[part3](https://mega.nz/#!bA8zEJjC!rFAC8LTzhK9aGwUtUUVsZd7drI4O8aKHTHD3rfm15m0),[part4](https://mega.nz/#!zIUlSSzb!60rfg4mmYzOv6T1fLpP8sNTxGdUkTmOgg0b2BhtF1N8),[part5](https://mega.nz/#!WB8h0IYL!dlyU6LK0piS9h9mf7b6dDr1VXVVvc2pbjkFegZTvKYI),[part6](https://mega.nz/#!uU0SwTKS!PUpkBVrsiKjD6gEYwZn3xl2mTuzWC8mYot7QoxqRYFk),[part7](https://mega.nz/#!rMsjEbLS!7EVdlOjUN-iUcRYKMNvrPO0xOgM_CEo-u4IQjSQd50E))
 
-[dbc/vmaps/maps/mmaps](http://www.mediafire.com/file/x191aw91im1391e/ServerData.7z)
+dbc/vmaps/maps/mmaps: [mediafire](http://www.mediafire.com/file/x191aw91im1391e/ServerData.7z), [mega](https://mega.nz/#!GUlUlB6J!mefm3EudO3lLn1FLLfJJxv8DH6a1Zh1iCOmQAl_WC48)
 
 
 ## Requirements
