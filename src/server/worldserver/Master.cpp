@@ -36,7 +36,6 @@
 #include "Util.h"
 
 #include "BigNumber.h"
-#include "Reporter.hpp"
 
 #ifdef CROSS
 #include "Cross/IRSocketMgr.h"
@@ -469,24 +468,6 @@ int Master::Run()
     Handler.register_handler(SIGBREAK, &SignalBREAK);
     #endif /* _WIN32 */
 
-    ///- Initializing the Reporter.
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Reporter: Initializing instance...");
-
-    sReporter->SetAddress(ConfigMgr::GetStringDefault("Reporting.Address", "http://127.0.0.1:9200/"));
-    sReporter->SetIndex(ConfigMgr::GetStringDefault("Reporting.Index", "firestorm/guild_ranking/?pretty"));
-
-    /// Thread which repeat reporting.
-    std::thread l_Reporter([]()
-    {
-        while (!World::IsStopped())
-        {
-            if (sReporter->HasReports())
-                sReporter->ScheduleNextReport();
-
-            ACE_Based::Thread::current()->Sleep(1);
-        }
-    });
-
     ///- Launch WorldRunnable thread
     ACE_Based::Thread world_thread(new WorldRunnable, "WorldRunnable");
     world_thread.setPriority(ACE_Based::Highest);
@@ -611,7 +592,6 @@ int Master::Run()
     // since worldrunnable uses them, it will crash if unloaded after master
     world_thread.wait();
     rar_thread.wait();
-    l_Reporter.join();
 
     if (soap_thread)
     {

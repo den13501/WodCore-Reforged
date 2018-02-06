@@ -30,6 +30,7 @@
 #include "Player.h"
 #include "SpellScript.h"
 #include "MapManager.h"
+#include "Chat.h"
 
 /// 300007 - World Boss Teleporter
 /// No SQL commit with this script, must stay on PTR.

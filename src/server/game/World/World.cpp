@@ -1161,6 +1161,9 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_BATTLEPAY_MIN_SECURITY] = ConfigMgr::GetIntDefault("BattlePay.Security", 0);
     m_bool_configs[CONFIG_BATTLEPAY_ENABLE]      = ConfigMgr::GetBoolDefault("BattlePay.Enable", true);
 
+    // Loyalty configs
+    m_bool_configs[CONFIG_LOYALTY_EVENTS_ENABLE] = ConfigMgr::GetBoolDefault("Loyalty.EnableLoyaltyEvents", false);
+
     if (int32 clientCacheId = ConfigMgr::GetIntDefault("ClientCacheVersion", 0))
     {
         // overwrite DB/old value
@@ -1497,8 +1500,6 @@ void World::LoadConfigSettings(bool reload)
 #endif
 
     m_int_configs[CONFIG_SPELLOG_FLAGS] = ConfigMgr::GetIntDefault("SpellLog.Flags", SPELLLOG_OUTPUT_FLAG_PLAYER);
-
-    sReporter->SetActiveState(ConfigMgr::GetBoolDefault("Reporting.Enabled", false));
 
     if (reload)
         sScriptMgr->OnConfigLoad(reload);
@@ -4029,7 +4030,9 @@ bool World::CanBeSaveInLoginDatabase() const
 {
     switch (m_int_configs[CONFIG_REALM_ZONE])
     {
-        case REALM_ZONE_DEVELOPMENT:
+        // REALM_ZONE_DEVELOPMENT is often used for international private servers
+        // so allow saving to the acc DB for this realm type
+        // case REALM_ZONE_DEVELOPMENT:
         case REALM_ZONE_TEST_SERVER:
         case REALM_ZONE_QA_SERVER:
             return false;
@@ -4464,9 +4467,6 @@ void World::_updateTransfers()
                     continue;
                 }
 
-                if (l_Error != DUMP_TOO_MANY_CHARS)
-                    sLog->outSlack("#jarvis", "danger", true, "Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
-
                 LoginDatabase.PQuery("UPDATE webshop_delivery_interrealm_transfer SET error = %u, nb_attempt = nb_attempt + 1 WHERE id = %u", (uint32)l_Error, l_Transaction);
             }
             while (l_ToLoad->NextRow());
@@ -4539,8 +4539,8 @@ void World::_updateTransfers()
                     continue;
                 }
 
-                if (l_Error != DUMP_TOO_MANY_CHARS)
-                    sLog->outSlack("#jarvis", "danger", true, "Inter Exp Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
+                //if (l_Error != DUMP_TOO_MANY_CHARS)
+                //    sLog->outSlack("#jarvis", "danger", true, "Inter Exp Transfer to realm [%u] on account [%u] failed. ErrorCode [%u]", g_RealmID, l_AccountID, l_Error);
 
                 LoginDatabase.PQuery("UPDATE webshop_delivery_interexp_transfer SET error = %u, nb_attempt = nb_attempt + 1 WHERE id = %u", (uint32)l_Error, l_Transaction);
             }

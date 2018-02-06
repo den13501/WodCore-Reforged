@@ -10,7 +10,7 @@
 #define SC_SCRIPTLOADER_H
 
 void AddScripts();
-void AddExampleScripts();
+void AddWorldScripts();
 void AddSpellScripts();
 #ifndef CROSS
 void AddCommandScripts();

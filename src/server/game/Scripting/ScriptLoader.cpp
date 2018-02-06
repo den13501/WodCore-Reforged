@@ -12,7 +12,6 @@
 /// Customs
 void AddSC_event_april();
 void AddSC_promotion_new_players();
-void AddSC_first_time_connexion();
 void AddSC_user_reporting();
 void AddSC_warning_update_client();
 void AddSC_DuelReset();
@@ -43,7 +42,6 @@ void AddSC_monk_spell_scripts();
 void AddSC_mastery_spell_scripts();
 void AddSC_quest_spell_scripts();
 void AddSC_item_spell_scripts();
-void AddSC_example_spell_scripts();
 void AddSC_holiday_spell_scripts();
 void AddSC_spell_skill();
 void AddSC_npc_spell_scripts();
@@ -119,9 +117,7 @@ void AddSC_npc_professions();
 void AddSC_npc_innkeeper();
 void AddSC_npcs_special();
 void AddSC_npc_taxi();
-void AddSC_npc_companions();
 void AddSC_achievement_scripts();
-void AddSC_EncounterScripts();
 void AddSC_WeeklyEventBonusScripts();
 
 /// Player
@@ -1303,7 +1299,6 @@ void AddWorldScripts()
     AddSC_npc_taxi();
     AddSC_achievement_scripts();
     AddSC_chat_log();
-    AddSC_EncounterScripts();
     AddSC_WeeklyEventBonusScripts();
 }
 
@@ -2196,7 +2191,6 @@ void AddCustomScripts()
     AddSC_StressTest();
     AddSC_event_april();
     AddSC_promotion_new_players();
-    AddSC_first_time_connexion();
     AddSC_user_reporting();
     AddSC_warning_update_client();
     AddSC_DuelReset();

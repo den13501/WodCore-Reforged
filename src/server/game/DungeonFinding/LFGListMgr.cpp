@@ -9,6 +9,7 @@
 #include "Object.h"
 #include "LFGListMgr.h"
 #include "GroupMgr.h"
+#include "ObjectMgr.h"
 
 LFGListMgr::LFGListMgr()
 {

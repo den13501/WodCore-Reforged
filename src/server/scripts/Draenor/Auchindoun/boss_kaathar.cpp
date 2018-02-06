@@ -7,10 +7,6 @@
 ///  Coded by Davethebrave
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "GridNotifiers.h"
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "SpellScript.h"
 #include "auchindoun.hpp"
 
 enum eKaatharSpells

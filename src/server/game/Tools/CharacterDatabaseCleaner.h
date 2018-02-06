@@ -18,7 +18,8 @@ namespace CharacterDatabaseCleaner
         CLEANING_FLAG_SKILLS                = 0x2,
         CLEANING_FLAG_SPELLS                = 0x4,
         CLEANING_FLAG_TALENTS               = 0x8,
-        CLEANING_FLAG_QUESTSTATUS           = 0x10
+        CLEANING_FLAG_QUESTSTATUS           = 0x10,
+        CLEANING_FLAG_AUTO_LEARNED_SPELLS   = 0x20
     };
 
     void CleanDatabase();
@@ -28,11 +29,13 @@ namespace CharacterDatabaseCleaner
     bool SkillCheck(uint32 skill);
     bool SpellCheck(uint32 spell_id);
     bool TalentCheck(uint32 talent_id);
+    bool NotAutoLearnedSpell(uint32 spell_id);
 
     void CleanCharacterSkills();
     void CleanCharacterSpell();
     void CleanCharacterTalent();
     void CleanCharacterQuestStatus();
+    void CleanCharacterAutoLearnedSpells();
 }
 
 #endif

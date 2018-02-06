@@ -8,9 +8,7 @@
 
 #ifndef CROSS
 #include "GarrisonGO.hpp"
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-#include "ScriptedGossip.h"
+#include "ScriptPCH.h"
 #include "GameObjectAI.h"
 #include "Spell.h"
 #include "GarrisonMgr.hpp"

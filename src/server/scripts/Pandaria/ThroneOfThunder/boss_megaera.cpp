@@ -6,10 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "ObjectMgr.h"
-#include "ScriptMgr.h"
 #include "throne_of_thunder.h"
 #include "WorldPacket.h"
 

@@ -13,7 +13,7 @@
 #include "VMapManager2.h"
 #include "MapTree.h"
 #include "ModelInstance.h"
-#include "Database\DatabaseEnv.h"
+#include "DatabaseEnv.h"
 WorldDatabaseWorkerPool WorldDatabase;                      ///< Accessor to the world database
 CharacterDatabaseWorkerPool CharacterDatabase;              ///< Accessor to the character database
 LoginDatabaseWorkerPool LoginDatabase;                      ///< Accessor to the realm/login database

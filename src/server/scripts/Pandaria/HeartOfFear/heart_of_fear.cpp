@@ -6,10 +6,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "heart_of_fear.h"
-#include "ScriptMgr.h"
-#include "ScriptedGossip.h"
 #include "ScriptedEscortAI.h"
 #include "CreatureAI.h"
 #include "MoveSplineInit.h"

@@ -64,8 +64,6 @@
 #include "../../../scripts/Draenor/Garrison/GarrisonScriptData.hpp"
 #endif /* not CROSS */
 
-//#include <Reporting/Reporter.hpp>
-
 float baseMoveSpeed[MAX_MOVE_TYPE] =
 {
     2.5f,                  // MOVE_WALK
@@ -1212,25 +1210,6 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
             he->DuelComplete(DUEL_WON);
         }
     }
-
-//     if (damage > 10000 && spellProto != nullptr && IsPlayer() && (ToPlayer()->InBattleground() || ToPlayer()->InArena()) && victim->IsPlayer())
-//     {
-//         auto l_Row = sChrSpecializationsStore.LookupEntry(ToPlayer()->GetSpecializationId(ToPlayer()->GetActiveSpec()));
-//         std::string l_SpeName = "";
-//         if (l_Row != nullptr)
-//             l_SpeName = l_Row->specializationName;
-//
-//         sReporter->Report(MS::Reporting::MakeReport<MS::Reporting::Opcodes::BattlegroundDealDamageWatcher>::Craft
-//                           (
-//                           GetGUIDLow(),
-//                           sWorld->GetRealmName(),
-//                           spellProto->Id,
-//                           damage,
-//                           getClass(),
-//                           getRace(),
-//                           l_SpeName
-//                           ));
-//     }
 
     if (getClass() == CLASS_WARLOCK)
     {

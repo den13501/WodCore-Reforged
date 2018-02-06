@@ -4,8 +4,10 @@ CREATE DATABASE `world` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE DATABASE `characters` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE DATABASE `auth` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE DATABASE `hotfix` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE `web` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 GRANT ALL PRIVILEGES ON `world` . * TO 'msstudio'@'localhost' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON `characters` . * TO 'msstudio'@'localhost' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON `auth` . * TO 'msstudio'@'localhost' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON `hotfix` . * TO 'msstudio'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `web` . * TO 'msstudio'@'localhost' WITH GRANT OPTION;

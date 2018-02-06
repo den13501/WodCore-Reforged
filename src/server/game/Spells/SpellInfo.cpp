@@ -6,6 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "SharedDefines.h"
 #include "SpellAuraDefines.h"
 #include "SpellInfo.h"
 #include "SpellMgr.h"
@@ -3577,18 +3578,18 @@ bool SpellInfo::_IsPositiveTarget(uint32 p_TargetA, uint32 p_TargetB)
     /// Non-positive targets
     switch (p_TargetA)
     {
-        case Targets::TARGET_UNIT_NEARBY_ENEMY:
-        case Targets::TARGET_UNIT_TARGET_ENEMY:
-        case Targets::TARGET_UNIT_SRC_AREA_ENEMY:
-        case Targets::TARGET_UNIT_DEST_AREA_ENEMY:
-        case Targets::TARGET_UNIT_CONE_ENEMY_24:
-        case Targets::TARGET_UNIT_CONE_ENEMY_104:
-        case Targets::TARGET_UNIT_CONE_ENEMY_110:
-        case Targets::TARGET_UNIT_CONE_ENEMY_129:
-        case Targets::TARGET_UNIT_CONE_ENEMY_130:
-        case Targets::TARGET_DEST_DYNOBJ_ENEMY:
-        case Targets::TARGET_DEST_TARGET_ENEMY:
-        case Targets::TARGET_ENNEMIES_AROUND_CASTER:
+        case TARGET_UNIT_NEARBY_ENEMY:
+        case TARGET_UNIT_TARGET_ENEMY:
+        case TARGET_UNIT_SRC_AREA_ENEMY:
+        case TARGET_UNIT_DEST_AREA_ENEMY:
+        case TARGET_UNIT_CONE_ENEMY_24:
+        case TARGET_UNIT_CONE_ENEMY_104:
+        case TARGET_UNIT_CONE_ENEMY_110:
+        case TARGET_UNIT_CONE_ENEMY_129:
+        case TARGET_UNIT_CONE_ENEMY_130:
+        case TARGET_DEST_DYNOBJ_ENEMY:
+        case TARGET_DEST_TARGET_ENEMY:
+        case TARGET_ENNEMIES_AROUND_CASTER:
             return false;
         default:
             break;

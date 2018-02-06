@@ -8,8 +8,10 @@
 
 #ifndef CROSS
 #include "BattlepayMgr.h"
+#include "ScriptPCH.h"
 
-template<uint32 t_Level> class BattlePay_Level : BattlePayProductScript
+template<uint32 t_Level>
+class BattlePay_Level : BattlePayProductScript
 {
     public:
         BattlePay_Level(std::string p_ScriptName) : BattlePayProductScript(p_ScriptName) {}

@@ -10,6 +10,7 @@
 #ifndef GARRISON_NPC_HPP_GARRISON
 # define GARRISON_NPC_HPP_GARRISON
 
+#include "ScriptPCH.h"
 #include "GarrisonScriptData.hpp"
 #include "GarrisonMgr.hpp"
 #include "../../../game/AI/ScriptedAI/ScriptedEscortAI.h"

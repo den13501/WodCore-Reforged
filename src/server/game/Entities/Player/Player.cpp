@@ -6865,7 +6865,7 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
                 });
             }
 
-            CharacterDatabase.CommitTransaction(trans, l_CharCreateCallback);
+            CommitTransaction(CharacterDatabase, trans, l_CharCreateCallback);
             break;
         }
         // The character gets unlinked from the account, the name gets freed up and appears as deleted ingame
@@ -22463,7 +22463,7 @@ Item* Player::_LoadItem(SQLTransaction& trans, uint32 zoneId, uint32 timeDiff, F
                     l_Statement->setUInt32(0, item->GetRealGUIDLow());
                     l_Statement->setUInt32(1, GetRealGUIDLow());
 
-                    l_Database->AsyncQuery(l_Statement, [itemGuid, l_PlayerGUID](PreparedQueryResult p_Result) -> void
+                    AsyncQuery(*l_Database, l_Statement, [itemGuid, l_PlayerGUID](PreparedQueryResult p_Result) -> void
                     {
                         Player* l_Player = sObjectAccessor->FindPlayer(l_PlayerGUID);
                         if (l_Player == nullptr)
@@ -22496,7 +22496,7 @@ Item* Player::_LoadItem(SQLTransaction& trans, uint32 zoneId, uint32 timeDiff, F
                 PreparedStatement* l_Statement = l_Database->GetPreparedStatement(CHAR_SEL_ITEM_BOP_TRADE);
                 l_Statement->setUInt32(0, item->GetRealGUIDLow());
 
-                l_Database->AsyncQuery(l_Statement, [itemGuid, l_PlayerGUID](PreparedQueryResult p_Result) -> void
+                AsyncQuery(*l_Database, l_Statement, [itemGuid, l_PlayerGUID](PreparedQueryResult p_Result) -> void
                 {
                     Player* l_Player = sObjectAccessor->FindPlayer(l_PlayerGUID);
                     if (l_Player == nullptr)
@@ -23980,7 +23980,7 @@ void Player::SaveToDB(bool create /*=false*/, MS::Utilities::CallBackPtr p_Callb
         l_Pet->Save(accountTrans);
     }
 
-    RealmDatabase.CommitTransaction(trans, p_Callback);
+    CommitTransaction(RealmDatabase, trans, p_Callback);
     LoginDatabase.CommitTransaction(accountTrans);
 
     // we save the data here to prevent spamming
@@ -31198,7 +31198,7 @@ void Player::ResummonPetTemporaryUnSummonedIfAny()
 #endif
 
     PreparedStatement* l_PetStatement = PetQueryHolder::GenerateFirstLoadStatement(0, m_temporaryUnsummonedPetNumber, GetRealGUIDLow(), true, PET_SLOT_UNK_SLOT, l_RealmID);
-    RealmDatabase.AsyncQuery(l_PetStatement, [l_NewPet, l_PlayerGUID, l_PetNumber, l_RealmID](PreparedQueryResult p_Result) -> void
+    AsyncQuery(RealmDatabase, l_PetStatement, [l_NewPet, l_PlayerGUID, l_PetNumber, l_RealmID](PreparedQueryResult p_Result) -> void
     {
         if (!p_Result)
         {
@@ -33860,7 +33860,7 @@ void Player::ReloadPetBattles()
         }
     });
 
-    LoginDatabase.CommitTransaction(l_Transaction, l_CallBack);
+    CommitTransaction(LoginDatabase, l_Transaction, l_CallBack);
 }
 
 /// PetBattleCountBattleSpecies
@@ -34550,7 +34550,7 @@ bool Player::_LoadPetBattles(PreparedQueryResult&& p_Result)
 
         if (l_Add)
         {
-            LoginDatabase.CommitTransaction(l_Transaction, l_CallBack);
+            CommitTransaction(LoginDatabase, l_Transaction, l_CallBack);
             return true;
         }
     }
@@ -34637,7 +34637,7 @@ bool Player::_LoadPetBattles(PreparedQueryResult&& p_Result)
 
     if (l_OldPetAdded)
     {
-        LoginDatabase.CommitTransaction(l_Transaction, l_CallBack);
+        CommitTransaction(LoginDatabase, l_Transaction, l_CallBack);
         return true;
     }
 

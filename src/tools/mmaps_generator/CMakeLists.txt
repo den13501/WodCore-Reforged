@@ -11,7 +11,6 @@ set(mmap_gen_Includes
   ${CMAKE_SOURCE_DIR}/dep/cppformat
   ${CMAKE_SOURCE_DIR}/dep/zlib
   ${CMAKE_SOURCE_DIR}/dep/bzip2
-  ${CMAKE_SOURCE_DIR}/dep/g3dlite/include
   ${CMAKE_SOURCE_DIR}/dep/recastnavigation/Recast
   ${CMAKE_SOURCE_DIR}/dep/recastnavigation/Recast/Include
   ${CMAKE_SOURCE_DIR}/dep/recastnavigation/Detour
@@ -29,7 +28,6 @@ set(mmap_gen_Includes
 
 include_directories(
   ${mmap_gen_Includes}
-  ${CMAKE_SOURCE_DIR}/dep/g3dlite/include
   ${CMAKE_SOURCE_DIR}/src/server/shared
   ${CMAKE_SOURCE_DIR}/src/server/shared/Debugging
   ${CMAKE_SOURCE_DIR}/src/server/collision
@@ -49,6 +47,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/server/shared/Utilities
   ${CMAKE_SOURCE_DIR}/src/server/shared/Threading
   ${CMAKE_SOURCE_DIR}/src/server/shared/Logging
+  ${CMAKE_SOURCE_DIR}/src/server/shared/Database
   ${CMAKE_SOURCE_DIR}/src/server/game/Conditions
   ${CMAKE_SOURCE_DIR}/src/server/shared/Collision
   ${CMAKE_SOURCE_DIR}/src/server/shared/Collision/Management
@@ -57,10 +56,13 @@ include_directories(
   ${ZLIB_INCLUDE_DIR}
   ${ACE_INCLUDE_DIR}
   ${MYSQL_INCLUDE_DIR}
-  ${CURL_INCLUDE_DIR}
 )
 
 add_executable(mmaps_generator ${mmap_gen_sources})
+
+if( UNIX AND NOT NOJEM AND NOT APPLE )
+    set_target_properties(mmaps_generator PROPERTIES LINK_FLAGS "-pthread")
+endif()
 
 target_link_libraries(mmaps_generator
   shared
@@ -73,7 +75,6 @@ target_link_libraries(mmaps_generator
   ${CMAKE_THREAD_LIBS_INIT}
   ${ACE_LIBRARY}
   ${ZLIB_LIBRARIES}
-  ${CURL_LIBRARIES}
   ${MYSQL_LIBRARY}
 )
 

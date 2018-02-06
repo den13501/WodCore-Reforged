@@ -13,6 +13,7 @@
 #include "Object.h"
 #include "DB2Stores.h"
 #include "GameObject.h"
+#include "Creature.h"
 
 namespace Vignette
 {

@@ -10,6 +10,7 @@
 #define __TRINITY_ACHIEVEMENTMGR_H
 
 #include "Common.h"
+#include "LockedMap.h"
 #include "DatabaseEnv.h"
 #include "DBCEnums.h"
 #include "DBCStores.h"

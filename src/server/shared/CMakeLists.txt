@@ -99,8 +99,6 @@ include_directories(
   ${ACE_INCLUDE_DIR}
   ${MYSQL_INCLUDE_DIR}
   ${OPENSSL_INCLUDE_DIR}
-  ${CURL_INCLUDE_DIR}
-  ${EASYJSON_INCLUDE_DIR}
 )
 
 add_library(shared STATIC
@@ -111,7 +109,6 @@ set_property(TARGET shared PROPERTY FOLDER "server")
 
 target_link_libraries(shared
   ${ACE_LIBRARY}
-  ${CURL_LIBRARY}
 )
 
 add_dependencies(shared revision_data.h)

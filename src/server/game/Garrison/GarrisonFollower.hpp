@@ -12,7 +12,10 @@
 
 #include "Common.h"
 #include "ByteBuffer.h"
+#include "DB2Structure.h"
 
+class Player;
+class WorldSession;
 
 namespace MS { namespace Garrison
 {

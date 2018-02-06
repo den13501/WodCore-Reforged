@@ -95,6 +95,8 @@ LoginDatabaseInfo      = "127.0.0.1;3306;trinity;trinity;auth"
 WorldDatabaseInfo      = "127.0.0.1;3306;trinity;trinity;world"
 CharacterDatabaseInfo  = "127.0.0.1;3306;trinity;trinity;characters"
 HotfixDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;hotfix"
+WebDatabase.enable     = 0
+WebDatabaseInfo        = "127.0.0.1;3306;trinity;trinity;web"
 
 #
 #    LoginDatabase.WorkerThreads
@@ -113,6 +115,7 @@ LoginDatabase.WorkerThreads          = 2
 WorldDatabase.WorkerThreads          = 1
 CharacterDatabase.WorkerThreads      = 4
 hotfixDatabase.WorkerThreads         = 1
+WebDatabaseInfo.WorkerThreads        = 1
 
 #
 #    LoginDatabase.SynchThreads
@@ -125,10 +128,11 @@ hotfixDatabase.WorkerThreads         = 1
 #                     2 - (CharacterDatabase.WorkerThreads)
 #                     1 - (HotfixDatabase.WorkerThreads)
 
-LoginDatabase.SynchThreads      = 4
+LoginDatabase.SynchThreads      = 1
 WorldDatabase.SynchThreads      = 1
-CharacterDatabase.SynchThreads  = 8
+CharacterDatabase.SynchThreads  = 2
 HotfixDatabase.SynchThreads     = 1
+WebDatabaseInfo.SynchThreads    = 1
 
 #
 #    MaxPingTime
@@ -150,23 +154,6 @@ WorldServerPort = 8085
 #        Default:     "0.0.0.0" - (Bind to all IPs on the system)
 
 BindIP = "0.0.0.0"
-
-#
-###################################################################################################
-
-###################################################################################################
-# REPORTING SETTINGS
-#
-#   ReporterActivated
-#       Description: Says if the reporter is activated.
-#       Default: "1"
-#
-#   ReporterAddress
-#       Description: HTTP address of the ReportingConnector that will handle reports and insert them in a database.
-#       Default:    "localhost:3000"
-
-ReporterActivated = "1"
-ReporterAddress = "localhost:3000"
 
 #
 ###################################################################################################
@@ -285,7 +272,7 @@ PlayerSaveInterval = 120000
 #        Default:     0  - (Disabled, Do not save character stats)
 #                     1+ - (Enabled, Level beyond which character stats are saved)
 
-PlayerSave.Stats.MinLevel = 0
+PlayerSave.Stats.MinLevel = 30
 
 #
 #    PlayerSave.Stats.SaveOnlyOnLogout
@@ -1670,14 +1657,14 @@ Channel.SilentlyGMJoin = 0
 #        Description: Level requirement for characters to be able to write in chat channels.
 #        Default:     1
 
-ChatLevelReq.Channel = 2
+ChatLevelReq.Channel = 1
 
 #
 #    ChatLevelReq.Whisper
 #        Description: Level requirement for characters to be able to whisper other characters.
 #        Default:     1
 
-ChatLevelReq.Whisper = 2
+ChatLevelReq.Whisper = 1
 
 #
 #    ChatLevelReq.Say
@@ -1937,15 +1924,15 @@ Rate.Skill.Discovery = 1
 #                     1 - (Rate.Drop.Item.Referenced)
 #                     1 - (Rate.Drop.Money)
 
-Rate.Drop.Item.Poor             = 5
-Rate.Drop.Item.Normal           = 5
-Rate.Drop.Item.Uncommon         = 5
-Rate.Drop.Item.Rare             = 5
-Rate.Drop.Item.Epic             = 5
-Rate.Drop.Item.Legendary        = 5
-Rate.Drop.Item.Artifact         = 5
-Rate.Drop.Item.Referenced       = 5
-Rate.Drop.Money                 = 5
+Rate.Drop.Item.Poor             = 1
+Rate.Drop.Item.Normal           = 1
+Rate.Drop.Item.Uncommon         = 1
+Rate.Drop.Item.Rare             = 1
+Rate.Drop.Item.Epic             = 1
+Rate.Drop.Item.Legendary        = 1
+Rate.Drop.Item.Artifact         = 1
+Rate.Drop.Item.Referenced       = 1
+Rate.Drop.Money                 = 1
 
 #
 #    Rate.Drop.Item.ReferencedAmount
@@ -1964,10 +1951,10 @@ Rate.Drop.Item.ReferencedAmount = 1
 #                     1 - (Rate.XP.Quest)
 #                     1 - (Rate.XP.Explore)
 
-Rate.XP.Kill      = 5
-Rate.XP.Quest     = 5
+Rate.XP.Kill      = 1
+Rate.XP.Quest     = 1
 Rate.XP.Explore   = 1
-Rate.XP.Gathering = 5
+Rate.XP.Gathering = 1
 
 #
 #    Rate.RepairCost
@@ -1985,9 +1972,9 @@ Rate.RepairCost = 1
 #                     1 - (Rate.Rest.Offline.InTavernOrCity)
 #                     1 - (Rate.Rest.Offline.InWilderness)
 
-Rate.Rest.InGame                 = 5
-Rate.Rest.Offline.InTavernOrCity = 5
-Rate.Rest.Offline.InWilderness   = 5
+Rate.Rest.InGame                 = 1
+Rate.Rest.Offline.InTavernOrCity = 1
+Rate.Rest.Offline.InWilderness   = 1
 
 #
 #    Rate.Damage.Fall
@@ -3179,7 +3166,7 @@ DisableRestart = 1
 #        Default:     1 - (Enable)
 
 LootAoe.Enabled = 1
-LastClientBuild = 19342
+LastClientBuild = 20779
 
 #   LogPackets
 #        Description: Print packet exchange (sent/received) to stdout, only works on Windows
@@ -3265,3 +3252,17 @@ loading.researchsite      = 1
 loading.onlyspecificmaps   = 0
 loading.onlymaps          = ""
 loading.itemspecload      = 1
+###################################################################################################
+
+###################################################################################################
+# security settings
+
+BattlePay.Security                      = 0
+BattlePay.Enable                        = 1
+Security.MustHaveAuthenticatorAccess    = 0
+###################################################################################################
+
+###################################################################################################
+# loyalty settings
+
+Loyalty.EnableLoyaltyEvents             = 0

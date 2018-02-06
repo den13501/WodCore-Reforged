@@ -7,6 +7,8 @@
 ///  Coded by Davethebrave
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "ScriptPCH.h"
+
 static void DespawnCreaturesInArea(uint32 p_Entry, WorldObject* p_Object)
 {
     std::list<Creature*> l_CreaturesList;

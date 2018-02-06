@@ -1,7 +1,6 @@
 // Serves as a placeholder for other branches so we dont have to recmake every time
 
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
+#include "ScriptPCH.h"
 #include "GameObjectAI.h"
 
 #define DUEL_AREA_RANGE 200.f
