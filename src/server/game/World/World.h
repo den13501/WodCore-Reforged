@@ -686,6 +686,8 @@ typedef std::unordered_map<uint64 /*Guid*/, Player*> PlayerMap;
 struct MotdText
 {
     std::string Text;
+    std::string TextCN;
+    std::string TextTW;
     std::string TextFR;
     std::string TextES;
     std::string TextRU;
@@ -1166,6 +1168,8 @@ class World
         struct AutoBroadcastText
         {
             std::string Text;
+            std::string TextCN;
+            std::string TextTW;
             std::string TextFR;
             std::string TextRU;
             std::string TextES;

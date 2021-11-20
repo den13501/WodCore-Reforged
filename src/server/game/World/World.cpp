@@ -2379,7 +2379,7 @@ void World::LoadAutobroadcasts()
 
     m_Autobroadcasts.clear();
 
-    std::string l_Query = "SELECT Text, TextFR, TextES, TextRU FROM autobroadcast WHERE Expension IN(-1, 5) AND RealmID IN(-1, " + std::to_string(g_RealmID) + ")";
+    std::string l_Query = "SELECT Text, TextCN, TextTW, TextFR, TextES, TextRU FROM autobroadcast WHERE Expension IN(-1, 5) AND RealmID IN(-1, " + std::to_string(g_RealmID) + ")";
 
     QueryResult result = LoginDatabase.Query(l_Query.c_str());
 
@@ -2399,9 +2399,11 @@ void World::LoadAutobroadcasts()
 
         AutoBroadcastText l_AutobrodCastText;
         l_AutobrodCastText.Text   = fields[0].GetString();
-        l_AutobrodCastText.TextFR = fields[1].GetString();
-        l_AutobrodCastText.TextES = fields[2].GetString();
-        l_AutobrodCastText.TextRU = fields[3].GetString();
+        l_AutobrodCastText.TextCN = fields[1].GetString();
+        l_AutobrodCastText.TextTW = fields[2].GetString();
+        l_AutobrodCastText.TextFR = fields[3].GetString();
+        l_AutobrodCastText.TextES = fields[4].GetString();
+        l_AutobrodCastText.TextRU = fields[5].GetString();
 
         m_Autobroadcasts.push_back(l_AutobrodCastText);
 
@@ -3495,10 +3497,15 @@ void World::SendAutoBroadcast()
 
             switch (itr->second->GetSessionDbLocaleIndex())
             {
+                case LocaleConstant::LOCALE_zhCN:
+                    l_AutoBrodcast = l_AutobroadcastText.TextCN;
+                    break;
+                case LocaleConstant::LOCALE_zhTW:
+                    l_AutoBrodcast = l_AutobroadcastText.TextTW;
+                    break;
                 case LocaleConstant::LOCALE_frFR:
                     l_AutoBrodcast = l_AutobroadcastText.TextFR;
                     break;
-                case LocaleConstant::LOCALE_esMX:
                 case LocaleConstant::LOCALE_esES:
                     l_AutoBrodcast = l_AutobroadcastText.TextES;
                     break;
@@ -3525,16 +3532,18 @@ void World::SendAutoBroadcast()
 
 void World::LoadDBMotd()
 {
-    QueryResult l_Result = LoginDatabase.PQuery("SELECT Text, TextFR, TextES, TextRU FROM motd WHERE RealmID = '%d'", g_RealmID);
+    QueryResult l_Result = LoginDatabase.PQuery("SELECT Text, TextCN, TextTW, TextFR, TextES, TextRU FROM motd WHERE RealmID = '%d'", g_RealmID);
     if (l_Result)
     {
         Field* l_Fields = l_Result->Fetch();
 
         MotdText l_Motd;
         l_Motd.Text = l_Fields[0].GetString();
-        l_Motd.TextFR = l_Fields[1].GetString();
-        l_Motd.TextES = l_Fields[2].GetString();
-        l_Motd.TextRU = l_Fields[3].GetString();
+        l_Motd.TextCN = l_Fields[1].GetString();
+        l_Motd.TextTW = l_Fields[2].GetString();
+        l_Motd.TextFR = l_Fields[3].GetString();
+        l_Motd.TextES = l_Fields[4].GetString();
+        l_Motd.TextRU = l_Fields[5].GetString();
 
         SetDBMotd(l_Motd);
     }

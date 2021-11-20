@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_username` (`username`),
   KEY `recruiterIndex` (`recruiter`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Account System';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Account System';
 
 CREATE TABLE IF NOT EXISTS `account_access` (
   `id` int(10) unsigned NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `account_access` (
   `RealmID` int(11) NOT NULL DEFAULT '-1',
   `comment` text,
   PRIMARY KEY (`id`,`RealmID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `account_banned` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account id',
@@ -55,13 +55,13 @@ CREATE TABLE IF NOT EXISTS `account_banned` (
   `banreason` varchar(255) NOT NULL,
   `active` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`bandate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ban List';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Ban List';
 
 CREATE TABLE IF NOT EXISTS `account_battlepay` (
   `accountId` int(11) unsigned NOT NULL,
   `points` int(11) NOT NULL,
   PRIMARY KEY (`accountId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_battlepet` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `account_battlepet` (
   `declinedPrepositional` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_heirlooms` (
   `account_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `account_heirlooms` (
   `upgrade_flags` int(10) unsigned NOT NULL DEFAULT '0',
   `groupRealmMask` int(10) unsigned NOT NULL,
   PRIMARY KEY (`account_id`,`heirloom_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_log_ip` (
   `accountid` int(11) unsigned NOT NULL,
@@ -106,21 +106,21 @@ CREATE TABLE IF NOT EXISTS `account_log_ip` (
   `error` int(10) unsigned NOT NULL DEFAULT '0',
   `source` int(10) unsigned NOT NULL DEFAULT '2',
   PRIMARY KEY (`accountid`,`ip`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_loyalty` (
   `AccountID` int(11) unsigned NOT NULL,
   `LastClaim` int(11) NOT NULL DEFAULT '0',
   `LastEventReset` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`AccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `account_loyalty_event` (
   `AccountID` int(11) unsigned NOT NULL,
   `Event` int(11) unsigned NOT NULL DEFAULT '0',
   `Count` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`AccountID`,`Event`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `account_note` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `account_note` (
   `date` int(11) DEFAULT NULL,
   `notedby` varchar(255) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `account_premium` (
   `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Account id',
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `account_premium` (
   `gm` varchar(12) NOT NULL DEFAULT '0',
   `active` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`setdate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `account_spell` (
   `accountId` int(11) NOT NULL,
@@ -151,30 +151,32 @@ CREATE TABLE IF NOT EXISTS `account_spell` (
   PRIMARY KEY (`accountId`,`spell`),
   KEY `account` (`accountId`) USING HASH,
   KEY `account_spell` (`accountId`,`spell`) USING HASH
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_toys` (
   `account_id` int(10) unsigned NOT NULL,
   `item_id` int(10) unsigned NOT NULL,
   `is_favorite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`,`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `account_vote` (
   `account` int(11) unsigned NOT NULL,
   `remainingTime` int(11) unsigned NOT NULL,
   PRIMARY KEY (`account`),
   UNIQUE KEY `account` (`account`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `autobroadcast` (
   `Expension` int(11) DEFAULT NULL,
   `RealmID` int(11) DEFAULT NULL,
   `Text` blob,
+  `textCN` blob,
+  `textTW` blob,
   `TextFR` blob,
   `TextES` blob,
   `textRU` blob
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `battlenet_modules` (
   `Hash` varchar(64) NOT NULL,
@@ -184,12 +186,12 @@ CREATE TABLE IF NOT EXISTS `battlenet_modules` (
   `Data` text,
   PRIMARY KEY (`Name`,`System`),
   UNIQUE KEY `uk_name_type_system` (`Name`,`Type`,`System`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4;
 
 CREATE TABLE IF NOT EXISTS `bnet_allowed_build` (
   `build` int(11) DEFAULT NULL,
   `version` varchar(40) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `bnet_allowed_build` (`build`, `version`) VALUES
 	(20779, '6.2.3.20779'),
@@ -207,12 +209,12 @@ CREATE TABLE IF NOT EXISTS `character_renderer_queue` (
   `hairColor` tinyint(3) DEFAULT NULL,
   `facialHair` tinyint(3) DEFAULT NULL,
   `equipment` blob
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE=utf8_bin;
 
 CREATE TABLE IF NOT EXISTS `firewall_farms` (
   `ip` tinytext NOT NULL,
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `ip_banned` (
   `ip` varchar(15) NOT NULL DEFAULT '127.0.0.1',
@@ -221,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `ip_banned` (
   `bannedby` varchar(50) NOT NULL DEFAULT '[Console]',
   `banreason` varchar(255) NOT NULL DEFAULT 'no reason',
   PRIMARY KEY (`ip`,`bandate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Banned IPs';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COMMENT='Banned IPs';
 
 CREATE TABLE IF NOT EXISTS `ip_to_country` (
   `IP_FROM` bigint(20) unsigned NOT NULL,
@@ -234,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `ip_to_country` (
   PRIMARY KEY (`IP_FROM`,`IP_TO`),
   KEY `IP_FROM` (`IP_FROM`),
   KEY `IP_TO` (`IP_TO`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `logs` (
   `time` int(10) unsigned NOT NULL,
@@ -242,26 +244,28 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `type` tinyint(3) unsigned NOT NULL,
   `level` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `string` text CHARACTER SET latin1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4;
 
 CREATE TABLE IF NOT EXISTS `log_vote` (
   `top_name` varchar(15) NOT NULL DEFAULT 'top',
   `ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',
   `date` int(11) NOT NULL,
   PRIMARY KEY (`top_name`,`ip`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `motd` (
   `RealmID` int(10) unsigned NOT NULL,
   `Text` text NOT NULL,
+  `TextCN` text NOT NULL,
+  `TextTW` text NOT NULL,  
   `TextFR` text NOT NULL,
   `TextES` text NOT NULL,
   `TextRU` text NOT NULL,
   PRIMARY KEY (`RealmID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO `motd` (`RealmID`, `Text`, `TextFR`, `TextES`, `TextRU`) VALUES
-	(1, 'english motd', 'french motd', 'spanish motd', 'russian motd');
+INSERT INTO `motd` (`RealmID`, `Text`, `TextCN`, `TextTW`, `TextFR`, `TextES`, `TextRU`) VALUES
+	(1, 'english motd', 'Chinese motd', 'Taiwanese motd', 'french motd', 'spanish motd', 'russian motd');
 
 CREATE TABLE IF NOT EXISTS `realmcharacters` (
   `realmid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -269,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `realmcharacters` (
   `numchars` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`realmid`,`acctid`),
   KEY `acctid` (`acctid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Realm Character Tracker';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Realm Character Tracker';
 
 CREATE TABLE IF NOT EXISTS `realmlist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -289,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `realmlist` (
   `lastupdate` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Realm System';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4mb4 COMMENT='Realm System';
 
 INSERT INTO `realmlist` (`id`, `name`, `address`, `port`, `icon`, `flag`, `timezone`, `allowedSecurityLevel`, `motd`, `population`, `gamebuild`, `online`, `delay`, `queue`, `lastupdate`) VALUES
 	(1, 'TrinityCore Server', '127.0.0.1', 8085, 0, 0, 1, 0, 'Welcome on our server.', 0, 20726, 0, 10, 0, 1495119746);
@@ -297,7 +301,7 @@ INSERT INTO `realmlist` (`id`, `name`, `address`, `port`, `icon`, `flag`, `timez
 CREATE TABLE IF NOT EXISTS `stat_lifetime_retention` (
   `minutes` int(11) NOT NULL,
   `usersPercentage` float(11,8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `transferts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -312,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `transferts` (
   `state` int(10) NOT NULL DEFAULT '0',
   `error` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `transferts_logs` (
   `id` int(11) DEFAULT NULL,
@@ -321,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `transferts_logs` (
   `from` int(2) DEFAULT NULL,
   `to` int(2) DEFAULT NULL,
   `dump` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `uptime` (
   `realmid` int(10) unsigned NOT NULL,
@@ -330,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `uptime` (
   `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '0',
   `revision` varchar(255) NOT NULL DEFAULT 'Trinitycore',
   PRIMARY KEY (`realmid`,`starttime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Uptime system';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Uptime system';
 
 CREATE TABLE IF NOT EXISTS `user_reporting` (
   `ga` int(10) unsigned NOT NULL,
@@ -342,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `user_reporting` (
   `has_view_creation` tinyint(3) unsigned DEFAULT '0',
   PRIMARY KEY (`ga`,`account_id`),
   KEY `ga_idx` (`ga`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `webshop_delivery_interexp_transfer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -352,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `webshop_delivery_interexp_transfer` (
   `destrealm` int(11) NOT NULL,
   `state` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `webshop_delivery_interrealm_transfer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -371,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `webshop_delivery_interrealm_transfer` (
   KEY `guid` (`guid`),
   KEY `startrealm` (`startrealm`),
   KEY `destrealm` (`destrealm`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4mb4 COLLATE utf8mb4_unicode_ci;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

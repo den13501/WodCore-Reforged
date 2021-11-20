@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `api_account_validate` (
   `AccountID` int(10) unsigned NOT NULL,
   `IsValidated` tinyint(3) unsigned NOT NULL,
   KEY `AccountID` (`AccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `api_points` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `api_points` (
   `Data` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `AccountID` (`AccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `api_purchase` (
   `AccountID` int(10) unsigned NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `api_purchase` (
   `Price` int(10) unsigned NOT NULL,
   `IP` text NOT NULL,
   KEY `AccountID` (`AccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

@@ -1013,10 +1013,15 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* l_CharacterHolder, LoginD
 
         switch (GetSessionDbLocaleIndex())
         {
+            case LocaleConstant::LOCALE_zhCN:
+                l_MotdStr = l_MotdText.TextCN;
+                break;
+            case LocaleConstant::LOCALE_zhTW:
+                l_MotdStr = l_MotdText.TextTW;
+                break;
             case LocaleConstant::LOCALE_frFR:
                 l_MotdStr = l_MotdText.TextFR;
                 break;
-            case LocaleConstant::LOCALE_esMX:
             case LocaleConstant::LOCALE_esES:
                 l_MotdStr = l_MotdText.TextES;
                 break;
