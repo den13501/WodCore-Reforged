@@ -1404,6 +1404,11 @@ enum TrinityStrings
     LANG_POPUP_REMOVE_ONE                   = 30027,
     LANG_POPUP_TRANSMOGRIFY                 = 30028,
 
+    // Instant Flight
+    LANG_TOGGLE_INSTANT_FLIGHT              = 30077,
+    LANG_INSTANT_FLIGHT_ON                  = 30078,
+    LANG_INSTANT_FLIGHT_OFF                 = 30079,
+
     /// Chat filtering
     ChatFilteringOff = 300000,
     ChatFilteringOn

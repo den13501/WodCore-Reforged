@@ -1254,6 +1254,11 @@ enum PlayerCommandStates
     CHEAT_NO_DR         = 0x40
 };
 
+enum InstantFlightGossipAction //Instant flight switch
+{
+    GOSSIP_ACTION_TOGGLE_INSTANT_FLIGHT = 500
+};
+
 enum AttackSwingError
 {
     ATTACKSWINGERR_CANT_ATTACK  = 0,
@@ -1941,6 +1946,11 @@ class Player : public Unit, public GridObject<Player>
         uint32 GetGossipTextId(uint32 menuId, WorldObject* source);
         uint32 GetGossipTextId(WorldObject* source);
         static uint32 GetDefaultGossipMenuForSource(WorldObject* source);
+        
+        /*********************************************************/
+        /***                    INSTANT FLIGHT OPTION          ***/
+        /*********************************************************/
+		void ToggleInstantFlight();
 
         /*********************************************************/
         /***                    QUEST SYSTEM                   ***/
@@ -4211,6 +4221,8 @@ class Player : public Unit, public GridObject<Player>
 
         uint32 _activeCheats;
         uint32 _maxPersonalArenaRate;
+
+        bool m_isInstantFlightOn; //Instant flight 瞬飛系統
 
         PhaseMgr phaseMgr;
 

@@ -587,6 +587,8 @@ Player::Player(WorldSession* session) : Unit(true), m_achievementMgr(this), m_re
     m_BonusQuestTimer = 0;
 
     m_EndSalesTimestamp = 0;
+	
+	m_isInstantFlightOn = true; //Instant flight 瞬飛系統
 }
 
 Player::~Player()
@@ -17996,6 +17998,9 @@ void Player::PrepareGossipMenu(WorldObject* source, uint32 menuId /*= 0*/, bool 
             menu->GetGossipMenu().AddGossipMenuItemData(itr->second.OptionIndex, itr->second.ActionMenuId, itr->second.ActionPoiId);
         }
     }
+	
+    if (sWorld->getIntConfig(CONFIG_INSTANT_TAXI) == 2 && npcflags & UNIT_NPC_FLAG_FLIGHTMASTER)
+        menu->GetGossipMenu().AddMenuItem(-1, GOSSIP_ICON_INTERACT_1, GetSession()->GetTrinityString(LANG_TOGGLE_INSTANT_FLIGHT), 0, GOSSIP_ACTION_TOGGLE_INSTANT_FLIGHT, "", 0, false); // instant flight toggle option
 }
 
 void Player::SendPreparedGossip(WorldObject* source)
@@ -18047,6 +18052,23 @@ void Player::OnGossipSelect(WorldObject* source, uint32 gossipListId, uint32 men
 
     uint32 gossipOptionId = item->OptionType;
     uint64 guid = source->GetGUID();
+	
+	//Instant flight瞬飛開關
+    if (sWorld->getIntConfig(CONFIG_INSTANT_TAXI) == 2 && source->GetTypeId() == TYPEID_UNIT)
+    {
+        if (gossipOptionId == GOSSIP_ACTION_TOGGLE_INSTANT_FLIGHT && source->GetUInt32Value(UNIT_FIELD_NPC_FLAGS) & UNIT_NPC_FLAG_FLIGHTMASTER)
+        {
+            ToggleInstantFlight();
+
+            if (m_isInstantFlightOn)
+                GetSession()->SendNotification(LANG_INSTANT_FLIGHT_ON);
+            else
+                GetSession()->SendNotification(LANG_INSTANT_FLIGHT_OFF);
+
+            PlayerTalkClass->SendCloseGossip();
+            return;
+        }
+    }	
 
     if (source->GetTypeId() == TYPEID_GAMEOBJECT)
     {
@@ -18219,6 +18241,11 @@ uint32 Player::GetDefaultGossipMenuForSource(WorldObject* source)
     }
 
     return 0;
+}
+
+void Player::ToggleInstantFlight() //Instant flight 瞬飛開關
+{
+	m_isInstantFlightOn = !m_isInstantFlightOn;
 }
 
 /*********************************************************/
@@ -26301,8 +26328,8 @@ bool Player::ActivateTaxiPathTo(std::vector<uint32> const& nodes, Creature* npc 
 
     // prevent stealth flight
     //RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TALK);
-
-    if (sWorld->getBoolConfig(CONFIG_INSTANT_TAXI))
+	
+    if ((sWorld->getIntConfig(CONFIG_INSTANT_TAXI) == 1 || (sWorld->getIntConfig(CONFIG_INSTANT_TAXI) == 2 && m_isInstantFlightOn)) && !spellid) //add instant flight option
     {
         TaxiNodesEntry const* lastPathNode = sTaxiNodesStore.LookupEntry(nodes[nodes.size()-1]);
         ASSERT(lastPathNode);

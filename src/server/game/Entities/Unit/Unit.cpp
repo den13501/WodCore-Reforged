@@ -22621,9 +22621,13 @@ void Unit::BuildValuesUpdate(uint8 updateType, ByteBuffer* data, Player* target)
                 uint32 appendValue = m_uint32Values[UNIT_FIELD_NPC_FLAGS];
 
                 if (creature)
+                {
+                    if (sWorld->getIntConfig(CONFIG_INSTANT_TAXI) == 2 && appendValue & UNIT_NPC_FLAG_FLIGHTMASTER)
+                        appendValue |= UNIT_NPC_FLAG_GOSSIP; // flight masters need NPC gossip flag to show instant flight toggle option
+
                     if (!target->canSeeSpellClickOn(creature))
                         appendValue &= ~UNIT_NPC_FLAG_SPELLCLICK;
-
+				}
                 fieldBuffer << uint32(appendValue);
             }
             else if (index == UNIT_FIELD_AURA_STATE)
