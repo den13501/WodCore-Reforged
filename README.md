@@ -1,3 +1,15 @@
+# WodCore Reforged
+<b>WodCore : Reforged</b> is a open-source project for World of Warcraft, currently supporting the 6.3.3 (build 20779) game version.
+
+## Why WodCore (Reforged) ?
+* OpenSource
+* Everybody can participate
+* Most complete Wod source
+
+The goal of the project is to reproduce the World of Warcraft© game world in a Blizzlike way and as similar as possible to the official game, 
+but also to encourage the development of World of Warcraft© emulators. Correcting and implementing missing content is one of our priorities.
+
+
 ## Overview
 World of Warcraft Warlords of Draenor (6.2.3.20779) emulator based on TrinityCore project, JadeCore (5.0.5), Garrosh (5.4.X)
 
