@@ -32,6 +32,10 @@ gSOAP (a portable development toolkit for C and C++ XML Web services and XML dat
   http://gsoap2.sourceforge.net/
   Version: 2.8.2
 
+recastnavigation (Recast is state of the art navigation mesh construction toolset for games)
+  https://github.com/memononen/recastnavigation
+  Version: 740a7ba51600a3c87ce5667ae276a38284a1ce75
+
 CURL (command line tool and library for transferring data with URL syntax)
 https://curl.haxx.se/
 Version: 7.47.1
