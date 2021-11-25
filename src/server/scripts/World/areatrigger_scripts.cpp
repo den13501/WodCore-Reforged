@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Areatrigger_Scripts
@@ -216,29 +227,27 @@ class AreaTrigger_at_last_rites : public AreaTriggerScript
 
 enum eWaygate
 {
-    SPELL_SHOLAZAR_TO_UNGORO_TELEPORT           = 52056,
-    SPELL_UNGORO_TO_SHOLAZAR_TELEPORT           = 52057,
+    SPELL_SHOLAZAR_TO_UNGORO_TELEPORT = 52056,
+    SPELL_UNGORO_TO_SHOLAZAR_TELEPORT = 52057,
 
-    AT_SHOLAZAR                                 = 5046,
-    AT_UNGORO                                   = 5047,
+    AT_SHOLAZAR = 5046,
+    AT_UNGORO = 5047,
 
-    QUEST_THE_MAKERS_OVERLOOK                   = 12613,
-    QUEST_THE_MAKERS_PERCH                      = 12559
+    QUEST_THE_MAKERS_OVERLOOK = 12613,
+    QUEST_THE_MAKERS_PERCH = 12559,
+    QUEST_MEETING_A_GREAT_ONE = 13956,
 };
 
 class AreaTrigger_at_sholazar_waygate : public AreaTriggerScript
 {
     public:
 
-        AreaTrigger_at_sholazar_waygate()
-            : AreaTriggerScript("at_sholazar_waygate")
-        {
-        }
+        AreaTrigger_at_sholazar_waygate() : AreaTriggerScript("at_sholazar_waygate") {}
 
         bool OnTrigger(Player* player, AreaTriggerEntry const* trigger)
         {
-            if (player->GetQuestStatus(QUEST_THE_MAKERS_OVERLOOK) == QUEST_STATUS_REWARDED && !player->isDead() &&
-                player->GetQuestStatus(QUEST_THE_MAKERS_PERCH)    == QUEST_STATUS_REWARDED)
+            if (!player->isDead() && (player->GetQuestStatus(QUEST_MEETING_A_GREAT_ONE) != QUEST_STATUS_NONE ||
+                (player->GetQuestStatus(QUEST_THE_MAKERS_OVERLOOK) == QUEST_STATUS_REWARDED && player->GetQuestStatus(QUEST_THE_MAKERS_PERCH) == QUEST_STATUS_REWARDED)))
             {
                 switch (trigger->ID)
                 {
@@ -287,76 +296,6 @@ class AreaTrigger_at_nats_landing : public AreaTriggerScript
                     return false;
                 }
             }
-            return true;
-        }
-};
-
-/*######
-## at_bring_your_orphan_to
-######*/
-
-enum BringYourOrphanTo
-{
-    QUEST_DOWN_AT_THE_DOCKS         = 910,
-    QUEST_GATEWAY_TO_THE_FRONTIER   = 911,
-    QUEST_LORDAERON_THRONE_ROOM     = 1800,
-    QUEST_BOUGHT_OF_ETERNALS        = 1479,
-    QUEST_SPOOKY_LIGHTHOUSE         = 1687,
-    QUEST_STONEWROUGHT_DAM          = 1558,
-    QUEST_DARK_PORTAL_H             = 10951,
-    QUEST_DARK_PORTAL_A             = 10952,
-
-    AT_DOWN_AT_THE_DOCKS            = 3551,
-    AT_GATEWAY_TO_THE_FRONTIER      = 3549,
-    AT_LORDAERON_THRONE_ROOM        = 3547,
-    AT_BOUGHT_OF_ETERNALS           = 3546,
-    AT_SPOOKY_LIGHTHOUSE            = 3552,
-    AT_STONEWROUGHT_DAM             = 3548,
-    AT_DARK_PORTAL                  = 4356,
-
-    AURA_ORPHAN_OUT                 = 58818
-};
-
-class AreaTrigger_at_bring_your_orphan_to : public AreaTriggerScript
-{
-    public:
-        AreaTrigger_at_bring_your_orphan_to() : AreaTriggerScript("at_bring_your_orphan_to") { }
-
-        bool OnTrigger(Player* player, AreaTriggerEntry const* trigger)
-        {
-            uint32 questId = 0;
-
-            if (player->isDead() || !player->HasAura(AURA_ORPHAN_OUT))
-                return false;
-
-            switch (trigger->ID)
-            {
-                case AT_DOWN_AT_THE_DOCKS:
-                    questId = QUEST_DOWN_AT_THE_DOCKS;
-                    break;
-                case AT_GATEWAY_TO_THE_FRONTIER:
-                    questId = QUEST_GATEWAY_TO_THE_FRONTIER;
-                    break;
-                case AT_LORDAERON_THRONE_ROOM:
-                    questId = QUEST_LORDAERON_THRONE_ROOM;
-                    break;
-                case AT_BOUGHT_OF_ETERNALS:
-                    questId = QUEST_BOUGHT_OF_ETERNALS;
-                    break;
-                case AT_SPOOKY_LIGHTHOUSE:
-                    questId = QUEST_SPOOKY_LIGHTHOUSE;
-                    break;
-                case AT_STONEWROUGHT_DAM:
-                    questId = QUEST_STONEWROUGHT_DAM;
-                    break;
-                case AT_DARK_PORTAL:
-                    questId = player->GetTeam() == ALLIANCE ? QUEST_DARK_PORTAL_A : QUEST_DARK_PORTAL_H;
-                    break;
-            }
-
-            if (questId && player->GetQuestStatus(questId) == QUEST_STATUS_INCOMPLETE)
-                player->AreaExploredOrEventHappens(questId);
-
             return true;
         }
 };
@@ -608,7 +547,6 @@ void AddSC_areatrigger_scripts()
     new AreaTrigger_at_last_rites();
     new AreaTrigger_at_sholazar_waygate();
     new AreaTrigger_at_nats_landing();
-    new AreaTrigger_at_bring_your_orphan_to();
     new AreaTrigger_at_brewfest();
     new AreaTrigger_at_area_52_entrance();
     new AreaTrigger_at_bael_modan();

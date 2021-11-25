@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Sholazar_Basin
@@ -24,6 +35,10 @@ EndContentData */
 #include "ScriptedGossip.h"
 #include "ScriptedEscortAI.h"
 #include "SpellScript.h"
+#include "SpellAuras.h"
+#include "Vehicle.h"
+#include "CombatAI.h"
+#include "Player.h"
 
 /*######
 ## npc_injured_rainspeaker_oracle
@@ -462,11 +477,27 @@ public:
 
 enum utils
 {
-    NPC_HEMET   = 27986,
+    NPC_HEMET = 27986,
     NPC_HADRIUS = 28047,
-    NPC_TAMARA  = 28568,
+    NPC_TAMARA = 28568,
     SPELL_OFFER = 51962,
-    QUEST_ENTRY = 12645
+    QUEST_ENTRY = 12645,
+};
+
+enum NesingwaryChildrensWeek
+{
+    SPELL_ORPHAN_OUT = 58818,
+
+    QUEST_THE_MIGHTY_HEMET_NESINGWARY = 13957,
+
+    ORPHAN_WOLVAR = 33532,
+
+    TEXT_WOLVAR_ORPHAN_6 = 6,
+    TEXT_WOLVAR_ORPHAN_7 = 7,
+    TEXT_WOLVAR_ORPHAN_8 = 8,
+    TEXT_WOLVAR_ORPHAN_9 = 9,
+
+    TEXT_NESINGWARY_1 = 1,
 };
 
 class npc_jungle_punch_target : public CreatureScript
@@ -478,17 +509,86 @@ public:
     {
         npc_jungle_punch_targetAI(Creature* creature) : ScriptedAI(creature) {}
 
-        uint16 sayTimer;
-        uint8 sayStep;
-
         void Reset()
         {
             sayTimer = 3500;
             sayStep = 0;
+            timer = 0;
+            phase = 0;
+            playerGUID = 0;
+            orphanGUID = 0;
+        }
+
+        void MoveInLineOfSight(Unit* who)
+        {
+            if (!phase && who && who->GetDistance2d(me) < 10.0f)
+                if (Player* player = who->ToPlayer())
+                    if (player->GetQuestStatus(QUEST_THE_MIGHTY_HEMET_NESINGWARY) == QUEST_STATUS_INCOMPLETE)
+                    {
+                        playerGUID = player->GetGUID();
+                        if (Aura* orphanOut = player->GetAura(SPELL_ORPHAN_OUT))
+                            if (orphanOut->GetCaster() && orphanOut->GetCaster()->GetEntry() == ORPHAN_WOLVAR)
+                            {
+                                orphanGUID = orphanOut->GetCaster()->GetGUID();
+                                phase = 1;
+                            }
+                    }
+        }
+
+        void proceedCwEvent(const uint32 diff)
+        {
+            if (timer <= diff)
+            {
+                Player* player = Player::GetPlayer(*me, playerGUID);
+                Creature* orphan = Creature::GetCreature(*me, orphanGUID);
+
+                if (!orphan || !player)
+                {
+                    Reset();
+                    return;
+                }
+
+                switch (phase)
+                {
+                case 1:
+                    orphan->GetMotionMaster()->MovePoint(0, me->GetPositionX() + cos(me->GetOrientation()) * 5, me->GetPositionY() + sin(me->GetOrientation()) * 5, me->GetPositionZ());
+                    orphan->AI()->Talk(TEXT_WOLVAR_ORPHAN_6);
+                    timer = 5000;
+                    break;
+                case 2:
+                    orphan->SetFacingToObject(me);
+                    orphan->AI()->Talk(TEXT_WOLVAR_ORPHAN_7);
+                    timer = 5000;
+                    break;
+                case 3:
+                    Talk(TEXT_NESINGWARY_1);
+                    timer = 5000;
+                    break;
+                case 4:
+                    orphan->AI()->Talk(TEXT_WOLVAR_ORPHAN_8);
+                    timer = 5000;
+                    break;
+                case 5:
+                    orphan->AI()->Talk(TEXT_WOLVAR_ORPHAN_9);
+                    timer = 5000;
+                    break;
+                case 6:
+                    orphan->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, PET_FOLLOW_ANGLE);
+                    player->GroupEventHappens(QUEST_THE_MIGHTY_HEMET_NESINGWARY, me);
+                    Reset();
+                    return;
+                }
+                ++phase;
+            }
+            else
+                timer -= diff;
         }
 
         void UpdateAI(const uint32 uiDiff)
         {
+            if (phase)
+                proceedCwEvent(uiDiff);
+
             if (!sayStep)
                 return;
 
@@ -550,15 +650,44 @@ public:
             if (itr->second.Status != QUEST_STATUS_INCOMPLETE)
                 return;
 
-            const Quest * quest = sObjectMgr->GetQuestTemplate(QUEST_ENTRY);
+            for (uint8 i = 0; i < 3; i++)
+            {
+                switch (i)
+                {
+                case 0:
+                    if (NPC_HEMET != me->GetEntry())
+                        continue;
+                    else
+                        break;
+                case 1:
+                    if (NPC_HADRIUS != me->GetEntry())
+                        continue;
+                    else
+                        break;
+                case 2:
+                    if (NPC_TAMARA != me->GetEntry())
+                        continue;
+                    else
+                        break;
+                }
 
-            if (!quest->GetQuestObjectiveXObjectId(me->GetEntry()))
-                return;
+                if (itr->second.CreatureOrGOCount[i] != 0)
+                    continue;
 
-            caster->ToPlayer()->KilledMonsterCredit(me->GetEntry(), 0);
-            caster->ToPlayer()->Say(SAY_OFFER, LANG_UNIVERSAL);
-            sayStep = 1;
+                caster->ToPlayer()->KilledMonsterCredit(me->GetEntry(), 0);
+                caster->ToPlayer()->Say(SAY_OFFER, LANG_UNIVERSAL);
+                sayStep = 0;
+                break;
+            }
         }
+
+        private:
+            uint16 sayTimer;
+            uint8 sayStep;
+            uint32 timer;
+            int8 phase;
+            uint64 playerGUID;
+            uint64 orphanGUID;
     };
 
     CreatureAI* GetAI(Creature* creature) const
@@ -628,9 +757,15 @@ public:
         uint32 spellId = 0;
         switch (action)
         {
-            case GOSSIP_ACTION_INFO_DEF + 1: spellId = SPELL_ADD_ORANGE;     break;
-            case GOSSIP_ACTION_INFO_DEF + 2: spellId = SPELL_ADD_BANANAS;    break;
-            case GOSSIP_ACTION_INFO_DEF + 3: spellId = SPELL_ADD_PAPAYA;     break;
+            case GOSSIP_ACTION_INFO_DEF + 1:
+                spellId = SPELL_ADD_ORANGE;
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 2:
+                spellId = SPELL_ADD_BANANAS;
+                break;
+            case GOSSIP_ACTION_INFO_DEF + 3:
+                spellId = SPELL_ADD_PAPAYA;
+                break;
         }
         if (spellId)
             player->CastSpell(player, spellId, true);
@@ -656,10 +791,11 @@ enum MiscLifewarden
     SPELL_LIFEFORCE = 51395,
     SPELL_FREYA_DUMMY_TRIGGER = 51335,
     SPELL_LASHER_EMERGE = 48195,
-    SPELL_WILD_GROWTH = 52948
+    SPELL_WILD_GROWTH = 52948,
 };
 
-class spell_q12620_the_lifewarden_wrath: public SpellScriptLoader
+// 51957 - Call of the Lifewarden
+class spell_q12620_the_lifewarden_wrath : public SpellScriptLoader
 {
 public:
     spell_q12620_the_lifewarden_wrath() : SpellScriptLoader("spell_q12620_the_lifewarden_wrath") { }
@@ -744,10 +880,10 @@ enum KickWhatKick
 
     SAY_WILHELM_MISS = 0,
     SAY_WILHELM_HIT = 1,
-    SAY_DROSTAN_REPLY_MISS = 0
+    SAY_DROSTAN_REPLY_MISS = 0,
 };
 
-class spell_q12589_shoot_rjr: public SpellScriptLoader
+class spell_q12589_shoot_rjr : public SpellScriptLoader
 {
 public:
     spell_q12589_shoot_rjr() : SpellScriptLoader("spell_q12589_shoot_rjr") { }
@@ -845,6 +981,51 @@ public:
 };
 
 #ifndef __clang_analyzer__
+/*######
+## Quest: Song of Wind and Water ID: 12726
+######*/
+/*This quest precisly needs core script since battle vehicles are not well integrated with SAI,
+may be easily converted to SAI when they get.*/
+enum SongOfWindAndWater
+{
+    // Spells
+    SPELL_DEVOUR_WIND = 52862,
+    SPELL_DEVOUR_WATER = 52864,
+    // NPCs
+    NPC_HAIPHOON_WATER = 28999,
+    NPC_HAIPHOON_AIR = 28985
+};
+class npc_haiphoon : public CreatureScript
+{
+public:
+    npc_haiphoon() : CreatureScript("npc_haiphoon") { }
+
+    struct npc_haiphoonAI : public VehicleAI
+    {
+        npc_haiphoonAI(Creature* creature) : VehicleAI(creature) { }
+
+        void SpellHitTarget(Unit* target, SpellInfo const* spell)
+        {
+            if (target == me)
+                return;
+
+            if (spell->Id == SPELL_DEVOUR_WIND && me->GetCharmerOrOwnerPlayerOrPlayerItself())
+            {
+                me->UpdateEntry(NPC_HAIPHOON_AIR);
+            }
+            else if (spell->Id == SPELL_DEVOUR_WATER && me->GetCharmerOrOwnerPlayerOrPlayerItself())
+            {
+                me->UpdateEntry(NPC_HAIPHOON_WATER);
+            }
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const
+    {
+        return new npc_haiphoonAI(creature);
+    }
+};
+
 void AddSC_sholazar_basin()
 {
     new npc_injured_rainspeaker_oracle();
@@ -856,5 +1037,6 @@ void AddSC_sholazar_basin()
     new npc_jungle_punch_target();
     new spell_q12620_the_lifewarden_wrath();
     new spell_q12589_shoot_rjr();
+    new npc_haiphoon();
 }
 #endif

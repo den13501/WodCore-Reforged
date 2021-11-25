@@ -695,7 +695,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    async_threads = ConfigMgr::GetIntDefault("WorldDatabase.WorkerThreads", 1);
+    async_threads = uint8(ConfigMgr::GetIntDefault("WorldDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "World database: invalid number of worker threads specified. "
@@ -703,7 +703,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = ConfigMgr::GetIntDefault("WorldDatabase.SynchThreads", 1);
+    synch_threads = uint8(ConfigMgr::GetIntDefault("WorldDatabase.SynchThreads", 1));
     ///- Initialize the world database
     if (!WorldDatabase.Open(dbstring, async_threads, synch_threads))
     {
@@ -722,7 +722,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    async_threads = ConfigMgr::GetIntDefault("CharacterDatabase.WorkerThreads", 1);
+    async_threads = uint8(ConfigMgr::GetIntDefault("CharacterDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Character database: invalid number of worker threads specified. "
@@ -730,7 +730,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = ConfigMgr::GetIntDefault("CharacterDatabase.SynchThreads", 2);
+    synch_threads = uint8(ConfigMgr::GetIntDefault("CharacterDatabase.SynchThreads", 2));
 
     ///- Initialize the Character database
     if (!CharacterDatabase.Open(dbstring, async_threads, synch_threads))
@@ -750,7 +750,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    async_threads = ConfigMgr::GetIntDefault("LoginDatabase.WorkerThreads", 1);
+    async_threads = uint8(ConfigMgr::GetIntDefault("LoginDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Login database: invalid number of worker threads specified. "
@@ -758,7 +758,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = ConfigMgr::GetIntDefault("LoginDatabase.SynchThreads", 1);
+    synch_threads = uint8(ConfigMgr::GetIntDefault("LoginDatabase.SynchThreads", 1));
     ///- Initialize the login database
     if (!LoginDatabase.Open(dbstring, async_threads, synch_threads))
     {

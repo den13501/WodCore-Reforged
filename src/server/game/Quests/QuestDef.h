@@ -1,13 +1,24 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
-#ifndef QUEST_H
-#define QUEST_H
+#ifndef TRINITYCORE_QUEST_H
+#define TRINITYCORE_QUEST_H
 
 #include "DB2Structure.h"
 #include "Define.h"
@@ -22,6 +33,8 @@ class ObjectMgr;
 
 #define MAX_QUEST_LOG_SIZE 50           ///< Last update 6.0.3 19116, idk if blizzard has unlock to 50 quest on live servers, but somes quest packet client-side & updatefield are update to 50
 
+#define QUEST_OBJECTIVES_COUNT 4
+#define QUEST_ITEM_OBJECTIVES_COUNT 6
 #define QUEST_SOURCE_ITEM_IDS_COUNT 4
 #define QUEST_REWARD_CHOICES_COUNT 6
 #define QUEST_REWARDS_COUNT 4
@@ -504,11 +517,15 @@ struct QuestStatusData
 {
     QuestStatusData(): Status(QUEST_STATUS_NONE), Timer(0), Explored(false)
     {
-
+        memset(ItemCount, 0, QUEST_ITEM_OBJECTIVES_COUNT * sizeof(uint16));
+        memset(CreatureOrGOCount, 0, QUEST_OBJECTIVES_COUNT * sizeof(uint16));
     }
 
     QuestStatus Status;
     uint32 Timer;
+    uint16 ItemCount[QUEST_ITEM_OBJECTIVES_COUNT];
+    uint16 CreatureOrGOCount[QUEST_OBJECTIVES_COUNT];
+    uint16 PlayerCount;
     bool Explored;
 };
 #endif
