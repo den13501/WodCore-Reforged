@@ -1699,11 +1699,16 @@ class Player : public Unit, public GridObject<Player>
 
         PhaseMgr& GetPhaseMgr() { return phaseMgr; }
 
+        /// Handles said message in regular chat based on declared language and in config pre-defined Range.
         void Say(const std::string& text, const uint32 language);
+        /// Handles yelled message in regular chat based on declared language and in config pre-defined Range.
         void Yell(const std::string& text, const uint32 language);
+        /// Outputs an universal text which is supposed to be an action.
         void TextEmote(const std::string& text);
+        /// Handles whispers from Addons and players based on sender, receiver's guid and language.
         void Whisper(const std::string& text, const uint32 language, uint64 receiver);
         void WhisperAddon(const std::string& text, const std::string& prefix, Player* receiver);
+        /// Constructs the player Chat data for the specific functions to use
         void BuildPlayerChat(WorldPacket* p_Data, uint64 p_Target, uint8 p_MsgType, std::string const& p_Text, uint32 p_LangID, char const* p_AddonPrefix = nullptr, std::string const& p_Channel = "") const;
 
         MS::Skill::Archaeology::Manager& GetArchaeologyMgr() { return m_archaeologyMgr; }

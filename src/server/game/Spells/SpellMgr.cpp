@@ -7066,6 +7066,7 @@ void SpellMgr::LoadSpellCustomAttr()
                 spellInfo->AttributesEx |= (SPELL_ATTR1_CANT_BE_REFLECTED|SPELL_ATTR1_CANT_BE_REDIRECTED);
                 break;
             /// ENDOF RUBY SANCTUM SPELLS
+            
             /// EYE OF ETERNITY SPELLS
             /// All spells below work even without these changes. The LOS attribute is due to problem
             /// from collision between maps & gos with active destroyed state.
@@ -7083,7 +7084,7 @@ void SpellMgr::LoadSpellCustomAttr()
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
                 break;
             /// ENDOF EYE OF ETERNITY SPELLS
-            ///
+            
             /// ICECROWN CITADEL SPELLS
             ///
             /// THESE SPELLS ARE WORKING CORRECTLY EVEN WITHOUT THIS HACK

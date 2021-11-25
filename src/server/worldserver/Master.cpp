@@ -1,19 +1,21 @@
 /*
- * Copyright (C) 2021 WodCore Reforged
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include <ace/Sig_Handler.h>
 
@@ -564,7 +566,7 @@ int Master::Run()
 
 #ifndef CROSS
     ///- Launch the world listener socket
-    uint16 wsport = sWorld->getIntConfig(CONFIG_PORT_WORLD);
+    uint16 wsport = uint16(sWorld->getIntConfig(CONFIG_PORT_WORLD));
     std::string bind_ip = ConfigMgr::GetStringDefault("BindIP", "0.0.0.0");
 #else /* CROSS */
     uint16 wsport = ConfigMgr::GetIntDefault("InterRealmServer.Port", 12345);
@@ -779,7 +781,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        async_threads = ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1);
+        async_threads = uint8(ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Login mop database: invalid number of worker threads specified. "
@@ -787,7 +789,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        synch_threads = ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.SynchThreads", 1);
+        async_threads = uint8(ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
         ///- Initialize the login database
         if (!LoginMopDatabase.Open(dbstring, async_threads, synch_threads))
         {
@@ -805,7 +807,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        async_threads = ConfigMgr::GetIntDefault("WebDatabaseInfo.WorkerThreads", 1);
+        async_threads = uint8(ConfigMgr::GetIntDefault("WebDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Web database: invalid number of worker threads specified. "
@@ -813,7 +815,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        synch_threads = ConfigMgr::GetIntDefault("WebDatabaseInfo.SynchThreads", 1);
+        synch_threads = uint8(ConfigMgr::GetIntDefault("WebDatabaseInfo.SynchThreads", 1));
         ///- Initialize the login database
         if (!WebDatabase.Open(dbstring, async_threads, synch_threads))
         {
