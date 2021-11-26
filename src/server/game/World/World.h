@@ -437,6 +437,7 @@ enum WorldIntConfigs
     CONFIG_ACCOUNT_BIND_ALLOWED_GROUP_MASK,
     CONFIG_ONLY_MAP,
     CONFIG_INSTANT_TAXI, //Instant flight 瞬飛系統
+    CONFIG_TOGGLE_XP_COST, //toggle XP price
     INT_CONFIG_VALUE_COUNT
 };
 

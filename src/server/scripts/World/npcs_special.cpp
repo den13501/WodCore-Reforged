@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Npcs_Special
@@ -1267,6 +1278,7 @@ class npc_mount_vendor : public CreatureScript
 #define GOSSIP_HELLO_ROGUE2 "<Take the letter>"
 #define GOSSIP_HELLO_ROGUE3 "Purchase a Dual Talent Specialization."
 #define GOSSIP_HELLO_ROGUE4 "I wish to unlearn my specialization"
+#define EXP_COST                100000 //10 00 00 copper (10golds)
 
 class npc_rogue_trainer : public CreatureScript
 {
@@ -2671,7 +2683,6 @@ class npc_locksmith : public CreatureScript
 ## npc_experience
 ######*/
 
-#define EXP_COST                100000 //10 00 00 copper (10golds)
 #define GOSSIP_TEXT_EXP         14736
 #define GOSSIP_XP_OFF           "I no longer wish to gain experience."
 #define GOSSIP_XP_ON            "I wish to start gaining experience again."
@@ -2694,6 +2705,7 @@ class npc_experience : public CreatureScript
             player->PlayerTalkClass->ClearMenus();
             bool noXPGain = player->HasFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_NO_XP_GAIN);
             bool doSwitch = false;
+            auto toggleXpCost = sWorld->getIntConfig(CONFIG_TOGGLE_XP_COST);
 
             switch (action)
             {
@@ -2713,15 +2725,17 @@ class npc_experience : public CreatureScript
             if (doSwitch)
             {
                 if (!player->HasEnoughMoney(uint64(EXP_COST)))
+                {
                     player->SendBuyError(BUY_ERR_NOT_ENOUGHT_MONEY, 0, 0, 0);
+                }
                 else if (noXPGain)
                 {
-                    player->ModifyMoney(-int64(EXP_COST));
+                    player->ModifyMoney(-uint64(toggleXpCost));
                     player->RemoveFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_NO_XP_GAIN);
                 }
                 else if (!noXPGain)
                 {
-                    player->ModifyMoney(-EXP_COST);
+                    player->ModifyMoney(-uint64(toggleXpCost));
                     player->SetFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_NO_XP_GAIN);
                 }
             }
