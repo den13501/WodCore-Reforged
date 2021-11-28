@@ -680,7 +680,7 @@ public:
             {
                 if (Creature* l_Nerzul = m_Instance->instance->GetCreature(m_Instance->GetData64(eShadowmoonBurialGroundsDatas::DataBossNerzul)))
                 {
-                    if (!l_Nerzul->isInCombat())
+                    if (!l_Nerzul->IsInCombat())
                     {
                         if (Player* l_NearestPlayer = me->FindNearestPlayer(5.0f, true))
                             l_NearestPlayer->NearTeleportTo(g_PositionNerzulHome.GetPositionX(), g_PositionNerzulHome.GetPositionY(), g_PositionNerzulHome.GetPositionZ(), g_PositionNerzulHome.GetOrientation());

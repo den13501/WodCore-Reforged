@@ -181,7 +181,7 @@ void WipeOnFight(InstanceScript* p_Instance, Creature* me)
     {
         if (Creature* l_Boss = Creature::GetCreature(*me, p_Instance->GetData64(g_CouncilBossEntries[l_Idx])))
         {
-            if (!l_Boss->isAlive())
+            if (!l_Boss->IsAlive())
                 l_Boss->Respawn(true);
 
             p_Instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, l_Boss);
@@ -339,7 +339,7 @@ class npc_gara_jal_s_soul : public CreatureScript
                         {
                             if (Creature* l_Boss = m_Instance->instance->GetCreature(m_Instance->GetData64(g_CouncilBossEntries[l_Idx])))
                             {
-                                if (l_Boss->isAlive() && !l_Boss->HasAura(SPELL_POSSESSED))
+                                if (l_Boss->IsAlive() && !l_Boss->HasAura(SPELL_POSSESSED))
                                     l_BossList.push_back(l_Boss);
                             }
                         }
@@ -741,7 +741,7 @@ class boss_king_malakk : public CreatureScript
 
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         me->CombatStop();
                     EnterEvadeMode();
                     return;
@@ -1117,7 +1117,7 @@ class boss_kazra_jin : public CreatureScript
                 {
                     if (!UpdateVictim())
                     {
-                        if (me->isInCombat())
+                        if (me->IsInCombat())
                             me->CombatStop();
                         EnterEvadeMode();
                         return;
@@ -1131,7 +1131,7 @@ class boss_kazra_jin : public CreatureScript
                 }
 
                 if (me->HasAura(SPELL_OVERLOAD))
-                    me->SendMeleeAttackStop(me->getVictim());
+                    me->SendMeleeAttackStop(me->GetVictim());
 
                 if (me->HasAura(SPELL_RECKLESS_CHARGE_ROLLING))
                 {
@@ -1557,7 +1557,7 @@ class boss_sul_the_sandcrawler : public CreatureScript
 
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         me->CombatStop();
                     EnterEvadeMode();
                     return;
@@ -2030,7 +2030,7 @@ class boss_high_priestress_mar_li : public CreatureScript
 
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         me->CombatStop();
                     EnterEvadeMode();
                     return;
@@ -2318,7 +2318,7 @@ class mob_blessed_loa_spirit : public CreatureScript
                                         minBoss = boss;
                                     }
 
-                                    if (minHealth > boss->GetHealth() && boss->isAlive())
+                                    if (minHealth > boss->GetHealth() && boss->IsAlive())
                                     {
                                         minHealth = boss->GetHealth();
                                         minBoss = boss;

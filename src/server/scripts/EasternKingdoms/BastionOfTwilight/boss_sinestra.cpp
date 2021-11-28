@@ -383,7 +383,7 @@ class boss_sinestra : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -451,8 +451,8 @@ class boss_sinestra : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_MELEE_CHECK:
-                            if (!me->IsWithinMeleeRange(me->getVictim()))
-                                DoCast(me->getVictim(), SPELL_TWILIGHT_BLAST_DMG);
+                            if (!me->IsWithinMeleeRange(me->GetVictim()))
+                                DoCast(me->GetVictim(), SPELL_TWILIGHT_BLAST_DMG);
                             events.ScheduleEvent(EVENT_MELEE_CHECK, 2000);
                             break;
                         case EVENT_WIPE:
@@ -478,7 +478,7 @@ class boss_sinestra : public CreatureScript
 
                             DefaultTargetSelector targetSelector(me, 0.0f, true, 0);
                             for (std::list<HostileReference*>::const_iterator itr = threatlist.begin(); itr != threatlist.end(); ++itr)
-                                if (targetSelector((*itr)->getTarget()) && me->getVictim() != (*itr)->getTarget())
+                                if (targetSelector((*itr)->getTarget()) && me->GetVictim() != (*itr)->getTarget())
                                     targetList.push_back((*itr)->getTarget());
 
                             if (targetList.size() < 2)
@@ -762,7 +762,7 @@ class npc_sinestra_twilight_whelp : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_TWILIGHT_SPIT:
-                            DoCast(me->getVictim(), SPELL_TWILIGHT_SPIT_10H);
+                            DoCast(me->GetVictim(), SPELL_TWILIGHT_SPIT_10H);
                             events.ScheduleEvent(EVENT_TWILIGHT_SPIT, urand(7000, 15000));
                             break;
                         case EVENT_SUMMON_ESSENCE:
@@ -775,7 +775,7 @@ class npc_sinestra_twilight_whelp : public CreatureScript
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_DISABLE_MOVE);
                             me->SetStandState(UNIT_STAND_STATE_STAND);
                             me->SetHealth(me->GetMaxHealth());
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                     }
                 }

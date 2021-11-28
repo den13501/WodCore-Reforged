@@ -305,7 +305,7 @@ class boss_chogall : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     DoZoneInCombat(summon);
             }
 
@@ -382,7 +382,7 @@ class boss_chogall : public CreatureScript
                         DoCast(me, SPELL_BERSERK);
                         break;
                     case EVENT_FURY_OF_CHOGALL:
-                        DoCast(me->getVictim(), SPELL_FURY_OF_CHOGALL);
+                        DoCast(me->GetVictim(), SPELL_FURY_OF_CHOGALL);
                         events.ScheduleEvent(EVENT_FURY_OF_CHOGALL, urand(47000, 48000));
                         break;
                     case EVENT_CONVERSION:
@@ -896,7 +896,7 @@ class npc_chogall_darkened_creation : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_DEBILITATING_BEAM:
-                        DoCast(me->getVictim(), SPELL_DEBILITATING_BEAM);
+                        DoCast(me->GetVictim(), SPELL_DEBILITATING_BEAM);
                         events.ScheduleEvent(EVENT_DEBILITATING_BEAM, 11600);
                         break;
                     }
@@ -1184,7 +1184,7 @@ class spell_chogall_conversion: public SpellScriptLoader
                     return;
                 
 
-                if (GetCaster()->getVictim() != GetHitUnit())
+                if (GetCaster()->GetVictim() != GetHitUnit())
                     GetHitUnit()->CastSpell(GetHitUnit(), SPELL_WORSHIPPING, true);
             }
 

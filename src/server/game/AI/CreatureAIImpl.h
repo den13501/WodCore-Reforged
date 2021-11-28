@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 #ifndef CREATUREAIIMPL_H
 #define CREATUREAIIMPL_H
 
@@ -307,12 +318,12 @@ inline void CreatureAI::SetGazeOn(Unit* target)
 
 inline bool CreatureAI::UpdateVictimWithGaze()
 {
-    if (!me->isInCombat())
+    if (!me->IsInCombat())
         return false;
 
     if (me->HasReactState(REACT_PASSIVE))
     {
-        if (me->getVictim())
+        if (me->GetVictim())
             return true;
         else
             me->SetReactState(REACT_AGGRESSIVE);
@@ -320,19 +331,19 @@ inline bool CreatureAI::UpdateVictimWithGaze()
 
     if (Unit* victim = me->SelectVictim())
         AttackStart(victim);
-    return me->getVictim();
+    return me->GetVictim();
 }
 
 inline bool CreatureAI::UpdateVictim()
 {
-    if (!me->isInCombat())
+    if (!me->IsInCombat())
         return false;
 
     if (!me->HasReactState(REACT_PASSIVE))
     {
         if (Unit* victim = me->SelectVictim())
             AttackStart(victim);
-        return me->getVictim();
+        return me->GetVictim();
     }
     else if (me->getThreatManager().isThreatListEmpty())
     {
@@ -345,7 +356,7 @@ inline bool CreatureAI::UpdateVictim()
 
 inline bool CreatureAI::_EnterEvadeMode()
 {
-    if (!me->isAlive() || me->EvadeModeIsDisable())
+    if (!me->IsAlive() || me->EvadeModeIsDisable())
         return false;
 
     // dont remove vehicle auras, passengers arent supposed to drop off the vehicle
@@ -375,7 +386,7 @@ inline void UnitAI::DoCast(Unit* victim, uint32 spellId, bool triggered)
 
 inline void UnitAI::DoCastVictim(uint32 spellId, bool triggered)
 {
-    if (Unit* l_Target = me->getVictim())
+    if (Unit* l_Target = me->GetVictim())
         me->CastSpell(l_Target, spellId, triggered);
 }
 
@@ -405,6 +416,17 @@ inline Creature* CreatureAI::DoSummonFlyer(uint32 entry, WorldObject* obj, float
     obj->GetRandomNearPosition(pos, radius);
     pos.m_positionZ += flightZ;
     return me->SummonCreature(entry, pos, summonType, despawnTime);
+}
+
+bool InstanceHasScript(WorldObject const* obj, char const* scriptName);
+
+template <class AI, class T>
+AI* GetInstanceAI(T* obj, char const* scriptName)
+{
+    if (InstanceHasScript(obj, scriptName))
+        return new AI(obj);
+
+    return nullptr;
 }
 
 #endif

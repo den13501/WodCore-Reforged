@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Boss_Reliquary_of_Souls
@@ -176,7 +187,7 @@ public:
         {
             if (!who)
                 return;
-            if (me->isInCombat())
+            if (me->IsInCombat())
                 return;
             if (who->GetTypeId() != TYPEID_PLAYER)
                 return;
@@ -291,7 +302,7 @@ public:
                     Timer = 1000;
                     if (Phase == 3)
                     {
-                        if (Essence && !Essence->isAlive())
+                        if (Essence && !Essence->IsAlive())
                             DoCast(me, 7, true);
                         else return;
                     }
@@ -448,7 +459,7 @@ public:
             for (; itr != m_threatlist.end(); ++itr)
             {
                 Unit* unit = Unit::GetUnit(*me, (*itr)->getUnitGuid());
-                if (unit && unit->isAlive() && (unit->IsPlayer())) // Only alive players
+                if (unit && unit->IsAlive() && (unit->IsPlayer())) // Only alive players
                     targets.push_back(unit);
             }
             if (targets.empty())
@@ -464,7 +475,7 @@ public:
 
         void UpdateAI(const uint32 diff)
         {
-            if (me->isInCombat())
+            if (me->IsInCombat())
             {
                 //Supposed to be cast on nearest target
                 if (FixateTimer <= diff)
@@ -584,14 +595,14 @@ public:
 
             if (SoulShockTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_SOUL_SHOCK);
+                DoCast(me->GetVictim(), SPELL_SOUL_SHOCK);
                 SoulShockTimer = 5000;
             } else SoulShockTimer -= diff;
 
             if (DeadenTimer <= diff)
             {
                 me->InterruptNonMeleeSpells(false);
-                DoCast(me->getVictim(), SPELL_DEADEN);
+                DoCast(me->GetVictim(), SPELL_DEADEN);
                 DeadenTimer = urand(25000, 35000);
                 if (!(rand()%2))
                 {
@@ -668,24 +679,24 @@ public:
 
             if (!CheckedAggro)
             {
-                AggroTargetGUID = me->getVictim()->GetGUID();
+                AggroTargetGUID = me->EnsureVictim()->GetGUID();
                 CheckedAggro = true;
             }
 
             if (CheckTankTimer <= diff)
             {
-                if (me->getVictim()->GetGUID() != AggroTargetGUID)
+                if (me->EnsureVictim()->GetGUID() != AggroTargetGUID)
                 {
                     DoScriptText(ANGER_SAY_BEFORE, me);
                     DoCast(me, SPELL_SELF_SEETHE, true);
-                    AggroTargetGUID = me->getVictim()->GetGUID();
+                    AggroTargetGUID = me->EnsureVictim()->GetGUID();
                 }
                 CheckTankTimer = 2000;
             } else CheckTankTimer -= diff;
 
             if (SoulScreamTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_SOUL_SCREAM);
+                DoCast(me->GetVictim(), SPELL_SOUL_SCREAM);
                 SoulScreamTimer = urand(9000, 11000);
                 if (!(rand()%3))
                 {

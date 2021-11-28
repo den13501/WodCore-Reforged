@@ -309,8 +309,8 @@ class mob_black_iron_leadbelcher : public CreatureScript
                     {
                         l_Canon->RemoveFlag(EUnitFields::UNIT_FIELD_FLAGS, eUnitFlags::UNIT_FLAG_NON_ATTACKABLE | eUnitFlags::UNIT_FLAG_NOT_SELECTABLE | eUnitFlags::UNIT_FLAG_IMMUNE_TO_PC);
 
-                        if (me->getVictim() != nullptr)
-                            l_Canon->AI()->AttackStart(me->getVictim());
+                        if (me->GetVictim() != nullptr)
+                            l_Canon->AI()->AttackStart(me->GetVictim());
                     }
                 }
             }
@@ -1417,7 +1417,7 @@ class mob_leeroy_jenkins : public CreatureScript
                 {
                     if (Creature* l_SonOfBeast = Creature::GetCreature(*me, m_Instance->GetData64(eCreatures::NPC_SON_OF_THE_BEAST)))
                     {
-                        if (!l_SonOfBeast->isAlive())
+                        if (!l_SonOfBeast->IsAlive())
                         {
                             m_BigRun = false;
 
@@ -1922,14 +1922,14 @@ class areatrigger_rallying_banner : public AreaTriggerEntityScript
 
             for (Unit* l_Unit : l_TargetList)
             {
-                if (l_Unit->isInCombat())
+                if (l_Unit->IsInCombat())
                     continue;
 
-                if (l_Caster->getVictim() == nullptr)
+                if (l_Caster->GetVictim() == nullptr)
                     continue;
 
                 if (l_Unit->ToCreature()->GetAI() && l_Unit->ToCreature()->GetAI())
-                    l_Unit->ToCreature()->AI()->AttackStart(l_Caster->getVictim());
+                    l_Unit->ToCreature()->AI()->AttackStart(l_Caster->GetVictim());
             }
 
             if (m_GrowTime <= p_Time)

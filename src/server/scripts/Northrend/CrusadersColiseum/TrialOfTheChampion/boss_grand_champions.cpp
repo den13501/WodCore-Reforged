@@ -253,10 +253,10 @@ struct npc_mounted_championAI : ScriptedAI
         }else shieldBreakerTimer -= uiDiff;
 
         // Use Thrust instead of melee attack
-        if (me->isAttackReady() && me->IsWithinMeleeRange(me->getVictim()))
+        if (me->isAttackReady() && me->IsWithinMeleeRange(me->GetVictim()))
         {
             me->AddUnitState(UNIT_STATE_ONVEHICLE);
-            DoCast(me->getVictim(), SPELL_THRUST);
+            DoCast(me->GetVictim(), SPELL_THRUST);
             me->resetAttackTimer();
             me->ClearUnitState(UNIT_STATE_ONVEHICLE);
         }
@@ -907,12 +907,12 @@ public:
             if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-            if(me->GetDistance(me->getVictim()) >= 30.0f)
-                me->GetMotionMaster()->MoveChase(me->getVictim(), 25.0f);
+            if(me->GetDistance(me->GetVictim()) >= 30.0f)
+                me->GetMotionMaster()->MoveChase(me->GetVictim(), 25.0f);
 
             if (disengageTimer <= diff)
             {
-                if(me->GetDistance(me->getVictim()) <= 3.0f)
+                if(me->GetDistance(me->GetVictim()) <= 3.0f)
                 {
                     DoCast(SPELL_DISENGAGE);
                     disengageTimer = 7000;
@@ -950,10 +950,10 @@ public:
             {
                 if(Aura* lArrows = me->GetAura(SPELL_LIGHTNING_ARROWS))
                 {
-                    DoCast(me->getVictim(), SPELL_LIGHTNING_ARROWS_DAMAGE, true);
+                    DoCast(me->GetVictim(), SPELL_LIGHTNING_ARROWS_DAMAGE, true);
                     lArrows->ModCharges(-1);
                 }
-                DoCast(me->getVictim(), SPELL_SHOOT, true);
+                DoCast(me->GetVictim(), SPELL_SHOOT, true);
                 me->resetAttackTimer();
             }
         }
@@ -1095,7 +1095,7 @@ public:
 
             if (eviscerateTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_EVISCERATE);
+                DoCast(me->GetVictim(), SPELL_EVISCERATE);
                 eviscerateTimer = 8000;
             } else eviscerateTimer -= diff;
 

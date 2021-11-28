@@ -217,7 +217,7 @@ class boss_mannoroth : public CreatureScript
             void EnterCombat(Unit* /*p_Attacker*/)
             {
                 if (Creature* pVarothen = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_VAROTHEN)))
-                    if (!pVarothen->isInCombat())
+                    if (!pVarothen->IsInCombat())
                         DoZoneInCombat(pVarothen);
 
                 if (Creature* pIllidan = me->FindNearestCreature(NPC_ILLIDAN_2, 150.0f))
@@ -527,7 +527,7 @@ class npc_mannoroth_varothen : public CreatureScript
 
                 if (pInstance)
                     if (Creature* pMannoroth = ObjectAccessor::GetCreature(*me, pInstance->GetData64(DATA_MANNOROTH)))
-                        if (!pMannoroth->isInCombat())
+                        if (!pMannoroth->IsInCombat())
                             DoZoneInCombat(pMannoroth);
             }
             

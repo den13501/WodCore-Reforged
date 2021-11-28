@@ -44,7 +44,7 @@ void TotemAI::UpdateAI(uint32 const /*diff*/)
     if (me->ToTotem()->GetTotemType() != TOTEM_ACTIVE)
         return;
 
-    if (!me->isAlive())
+    if (!me->IsAlive())
         return;
 
     // pointer to appropriate target if found any

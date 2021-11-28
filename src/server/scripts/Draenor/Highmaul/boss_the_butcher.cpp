@@ -343,7 +343,7 @@ class boss_the_butcher : public CreatureScript
 
                     AddTimedDelayedOperation(50, [this]() -> void
                     {
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                         {
                             me->GetMotionMaster()->Clear();
                             me->GetMotionMaster()->MoveChase(l_Target);

@@ -269,7 +269,7 @@ class boss_echo_of_sylvanas : public CreatureScript
                         case EVENT_START:
                             me->RemoveAura(SPELL_CALL_OF_THE_HIGHBORNE);
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             events.ScheduleEvent(EVENT_UNHOLY_SHOT, urand(5000, 20000));
                             events.ScheduleEvent(EVENT_SHRIEK_OF_THE_HIGHBORNE, urand(5000, 20000));
                             events.ScheduleEvent(EVENT_TELEPORT, 40000);
@@ -432,7 +432,7 @@ class spell_echo_of_sylvanas_wracking_pain_dmg: public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                if (!GetCaster() || !GetCaster()->isAlive())
+                if (!GetCaster() || !GetCaster()->IsAlive())
                 {
                     targets.clear();
                     return;
@@ -447,7 +447,7 @@ class spell_echo_of_sylvanas_wracking_pain_dmg: public SpellScriptLoader
                 uint64 _guid = GetCaster()->GetAI()->GetGUID(DATA_GUID);
                 if (Creature* pTarget = ObjectAccessor::GetCreature(*GetCaster(), _guid))
                 {
-                    if (pTarget->isAlive())
+                    if (pTarget->IsAlive())
                         targets.remove_if(WrackingPainTargetSelector(GetCaster(), pTarget));
                     else
                         targets.clear();

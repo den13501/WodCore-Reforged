@@ -193,7 +193,7 @@ class boss_rajh : public CreatureScript
                     me->SetReactState(REACT_AGGRESSIVE);
                     events.ScheduleEvent(EVENT_SUN_STRIKE, urand(5000, 10000));
                     events.ScheduleEvent(EVENT_SUMMON_SOLAR_WINDS, urand(6000, 11000));
-                    me->GetMotionMaster()->MoveChase(me->getVictim());
+                    me->GetMotionMaster()->MoveChase(me->GetVictim());
                     return;
                 }
 

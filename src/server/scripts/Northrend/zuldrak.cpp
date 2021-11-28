@@ -658,7 +658,7 @@ public:
             if (!bSummoned && !HealthAbovePct(50))
             {
                 DoScriptText(SAY_CALL_FOR_HELP, me);
-                //DoCast(me->getVictim(), SPELL_SUMMON_WHISKER); petai is not working correctly???
+                //DoCast(me->GetVictim(), SPELL_SUMMON_WHISKER); petai is not working correctly???
 
                 if (Creature* pWhisker = me->SummonCreature(NPC_WHISKER, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 0))
                     uiWhisker = pWhisker->GetGUID();
@@ -673,12 +673,12 @@ public:
             switch (summon->GetEntry())
             {
                 case NPC_WHISKER:
-                    summon->AI()->AttackStart(me->getVictim());
+                    summon->AI()->AttackStart(me->GetVictim());
                     break;
                 case NPC_HUNGRY_PENGUIN:
                     if (Unit* pAffected = Unit::GetUnit(*me, AffectedGUID))
                     {
-                        if (pAffected->isAlive())
+                        if (pAffected->IsAlive())
                             summon->AI()->AttackStart(pAffected);
                     }
                     break;
@@ -839,7 +839,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (me->getVictim() && me->getVictim()->GetPositionZ() >= 286.276f)
+            if (me->GetVictim() && me->GetVictim()->GetPositionZ() >= 286.276f)
             {
                 bool evadeMode = false;
                 std::list<HostileReference*> t_list = me->getThreatManager().getThreatList();
@@ -865,7 +865,7 @@ public:
 
             if (uiCleaveTimer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_CLEAVE);
+                DoCast(me->GetVictim(), SPELL_CLEAVE);
                 uiCleaveTimer = 9000;
             }
             else
@@ -873,7 +873,7 @@ public:
 
             if (uiCorrodeFleshTimer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_CORRODE_FLESH);
+                DoCast(me->GetVictim(), SPELL_CORRODE_FLESH);
                 uiCorrodeFleshTimer = 6000;
             }
             else
@@ -969,7 +969,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (Unit* victim = me->getVictim())
+            if (Unit* victim = me->GetVictim())
             {
                 if (victim->GetPositionZ() >= 286.276f)
                 {
@@ -1000,7 +1000,7 @@ public:
             {
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
                 {
-                    if (target && target->isAlive())
+                    if (target && target->IsAlive())
                         DoCast(target, SPELL_KNOCK_AWAY);
                 }
                 uiKnockAwayTimer = 10000;
@@ -1012,7 +1012,7 @@ public:
             {
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
                 {
-                    if (target && target->isAlive())
+                    if (target && target->IsAlive())
                         DoCast(target, SPELL_STINKY_BEARD);
                 }
                 uiStinkyBeardTimer = 15000;
@@ -1120,7 +1120,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (me->getVictim() && me->getVictim()->GetPositionZ() >= 286.276f)
+            if (me->GetVictim() && me->GetVictim()->GetPositionZ() >= 286.276f)
             {
                 bool evadeMode = false;
                 std::list<HostileReference*> t_list = me->getThreatManager().getThreatList();
@@ -1161,8 +1161,8 @@ public:
                             if (temp->GetPositionZ() >= 287.00f)
                                 continue;
 
-                            if (temp->getVictim())
-                                temp->GetMotionMaster()->MoveChase(temp->getVictim());
+                            if (temp->GetVictim())
+                                temp->GetMotionMaster()->MoveChase(temp->GetVictim());
                         }
                     }
 

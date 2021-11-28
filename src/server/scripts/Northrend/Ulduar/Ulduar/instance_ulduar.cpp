@@ -694,7 +694,7 @@ class instance_ulduar : public InstanceMapScript
             {
                 // Flame Leviathan's Tower Event triggers
                 Creature* FlameLeviathan = instance->GetCreature(LeviathanGUID);
-                if (FlameLeviathan && FlameLeviathan->isAlive()) // No leviathan, no event triggering ;)
+                if (FlameLeviathan && FlameLeviathan->IsAlive()) // No leviathan, no event triggering ;)
                 {
                     switch (eventId)
                     {

@@ -1469,7 +1469,7 @@ public:
                 amberCaller = Creature::GetCreature(*me, protectedAmberGuid);
 
             // Ambercaller not found, dead or too far
-            if (!amberCaller || !amberCaller->isAlive() || me->GetDistance(amberCaller) > 30.0f)
+            if (!amberCaller || !amberCaller->IsAlive() || me->GetDistance(amberCaller) > 30.0f)
             {
                 if (!me->HasAura(SPELL_SEPARATION_ANXIETY))
                     me->AddAura(SPELL_SEPARATION_ANXIETY, me);
@@ -1612,7 +1612,7 @@ public:
             point = me->GetPositionY() < 460.0f ? 0 : 1;
             direction = -1;
             me->SetWalk(true);
-            if (me->isAlive())
+            if (me->IsAlive())
                 me->GetMotionMaster()->MovePoint(point + 1, atriumPath[point]);
             walkTimer = 0;
         }
@@ -1870,7 +1870,7 @@ void ShekZeerTrashBuff(Creature* me)
 
         for (Creature* mob : addList)
         {
-            if (mob->isAlive() && mob != me)
+            if (mob->IsAlive() && mob != me)
             {
                 if (!buff)
                     buff = true;

@@ -2666,7 +2666,7 @@ class spell_sha_ghost_wolf: public SpellScriptLoader
                 {
                     if (l_Owner->HasGlyph(l_GhostlySpeed->Id))
                     {
-                        if (!l_Owner->isInCombat())
+                        if (!l_Owner->IsInCombat())
                         {
                             if (Map* l_Map = l_Owner->GetMap())
                             {

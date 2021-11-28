@@ -114,7 +114,7 @@ class boss_occuthar : public CreatureScript
                             DoCast(me, SPELL_BERSERK, true);
                             break;
                         case EVENT_SEARING_SHADOWS:
-                            DoCast(me->getVictim(), SPELL_SEARING_SHADOW);
+                            DoCast(me->GetVictim(), SPELL_SEARING_SHADOW);
                             events.ScheduleEvent(EVENT_SEARING_SHADOWS, 24000);
                             break;
                         case EVENT_FOCUSED_FIRE:
@@ -157,7 +157,7 @@ class npc_occuthar_eyestalk : public CreatureScript
             {
                 if (Creature* pOccuthar = me->FindNearestCreature(NPC_OCCUTHAR, 200.0f))
                 {
-                    if (pOccuthar->isInCombat())
+                    if (pOccuthar->IsInCombat())
                         me->SetInCombatWithZone();
 
                     pOccuthar->CastSpell(me, SPELL_FOCUSED_FIRE_1, true);

@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "DBCStructure.h"
 #include "ObjectMgr.h"
@@ -3144,7 +3155,7 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(CriteriaEntry const* p_C
                     return false;
                 break;
             case CRITERIA_CONDITION_TARGET_MUST_BE_DEAD:                // 6
-                if (!p_Unit || p_Unit->isAlive())
+                if (!p_Unit || p_Unit->IsAlive())
                     return false;
                 break;
             case CRITERIA_CONDITION_TARGET_MUST_BE_ENEMY:               // 7
@@ -3330,7 +3341,7 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(CriteriaEntry const* p_C
                         if (l_Player == p_ReferencePlayer)
                             continue;
 
-                        if (l_Player->isAlive())
+                        if (l_Player->IsAlive())
                             l_LastOne = false;
                     }
                 }
@@ -3501,7 +3512,7 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(CriteriaEntry const* p_C
                     return false;
                 break;
             case CRITERIA_CONDITION_REQUIRE_DEATH_IN_DUNGEON_OR_RAID:   // 122
-                if (!p_ReferencePlayer || p_ReferencePlayer->isAlive())
+                if (!p_ReferencePlayer || p_ReferencePlayer->IsAlive())
                     return false;
                 break;
             default:

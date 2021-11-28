@@ -192,7 +192,7 @@ class npc_jeron_emberfall : public CreatureScript
 
                 if (m_PhoenixStrikeTimer <= p_Diff)
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         me->CastSpell(me, eSpells::PhoenixStrikeSearcher, true);
                     m_PhoenixStrikeTimer = 10000;
                 }

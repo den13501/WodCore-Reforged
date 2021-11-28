@@ -236,7 +236,7 @@ class npc_end_time_infinite_warden : public CreatureScript
                             DoCast(me, SPELL_VOID_SHIELD);
                             break;
                         case EVENT_VOID_STRIKE:
-                            DoCast(me->getVictim(), SPELL_VOID_STRIKE);
+                            DoCast(me->GetVictim(), SPELL_VOID_STRIKE);
                             events.ScheduleEvent(EVENT_VOID_STRIKE, urand(8000, 15000));
                             break;
                         default:
@@ -296,11 +296,11 @@ class npc_end_time_infinite_suppressor : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_ARCANE_WAVE:
-                            DoCast(me->getVictim(), SPELL_ARCANE_WAVE);
+                            DoCast(me->GetVictim(), SPELL_ARCANE_WAVE);
                             events.ScheduleEvent(EVENT_ARCANE_WAVE, 3000);
                             break;
                         case EVENT_TEMPORAL_VORTEX:
-                            DoCast(me->getVictim(), SPELL_TEMPORAL_VORTEX);
+                            DoCast(me->GetVictim(), SPELL_TEMPORAL_VORTEX);
                             events.ScheduleEvent(SPELL_TEMPORAL_VORTEX, urand(15000, 20000));
                             break;
                         default:

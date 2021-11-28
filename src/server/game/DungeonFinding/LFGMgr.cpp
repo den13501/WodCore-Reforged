@@ -2232,7 +2232,7 @@ void LFGMgr::TeleportPlayer(Player* player, bool out, bool fromOpcode /*= false*
 
     if (!grp || !grp->isLFGGroup())                        // should never happen, but just in case...
         error = LFG_TELEPORTERROR_INVALID_LOCATION;
-    else if (!player->isAlive())
+    else if (!player->IsAlive())
         error = LFG_TELEPORTERROR_PLAYER_DEAD;
     else if (player->IsMirrorTimerActive(FATIGUE_TIMER))
         error = LFG_TELEPORTERROR_FATIGUE;

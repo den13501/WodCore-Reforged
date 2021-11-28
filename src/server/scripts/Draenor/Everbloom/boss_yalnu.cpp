@@ -664,7 +664,7 @@ public:
             switch (events.ExecuteEvent())
             {
             case eSwiftSproutlingEvents::EventTendonRip:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSwiftSproutlingSpells::SpellTendonRip);
                     events.ScheduleEvent(eSwiftSproutlingEvents::EventTendonRip, urand(7 * TimeConstants::IN_MILLISECONDS, 11 * TimeConstants::IN_MILLISECONDS));
                     break;
@@ -732,7 +732,7 @@ public:
             switch (events.ExecuteEvent())
             {
                 case eYalnuEvents::EventNoxiousBreath:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eViciousMandragoraSpells::SpellNoxiousBreath);
                     events.ScheduleEvent(eYalnuEvents::EventNoxiousBreath, 12 * TimeConstants::IN_MILLISECONDS);
                     break; 

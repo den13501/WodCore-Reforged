@@ -1435,7 +1435,7 @@ class npc_foundry_darkshard_gnasher : public CreatureScript
                 {
                     if (Unit* l_Target = Unit::GetUnit(*me, m_FixateTarget))
                     {
-                        if (l_Target->isAlive())
+                        if (l_Target->IsAlive())
                         {
                             AttackStart(l_Target);
                             DoMeleeAttackIfReady();
@@ -3512,7 +3512,7 @@ class npc_foundry_iron_raider : public CreatureScript
                     }
                     case eEvents::EventSerratedSlash:
                     {
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eSpells::SpellSerratedSlash, true);
                         m_Events.ScheduleEvent(eEvents::EventSerratedSlash, 12 * TimeConstants::IN_MILLISECONDS);
                         break;

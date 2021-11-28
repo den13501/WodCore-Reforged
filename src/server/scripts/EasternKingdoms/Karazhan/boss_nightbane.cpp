@@ -190,8 +190,8 @@ public:
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_UNK_6);
                 me->SetReactState(REACT_AGGRESSIVE);
                 me->SetInCombatWithZone();
-                if (me->getVictim())
-                    me->GetMotionMaster()->MoveChase(me->getVictim());
+                if (me->GetVictim())
+                    me->GetMotionMaster()->MoveChase(me->GetVictim());
                 return;
             }
 

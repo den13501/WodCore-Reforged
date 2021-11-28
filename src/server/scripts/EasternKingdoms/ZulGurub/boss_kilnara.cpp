@@ -276,7 +276,7 @@ class boss_kilnara : public CreatureScript
                             break;
                         case EVENT_CONTINUE:
                             me->SetReactState(REACT_AGGRESSIVE);
-                            AttackStart(me->getVictim());
+                            AttackStart(me->GetVictim());
                             events.ScheduleEvent(EVENT_VENGEFUL_SMASH, urand(4000, 10000));
                             events.ScheduleEvent(EVENT_RAVAGE, urand(2000, 6000));
                             break;
@@ -471,7 +471,7 @@ class PrideCheck
         {
             if (!obj->ToCreature())
                 return true;
-            return ((obj->ToCreature()->GetEntry() != NPC_PRIDE_OF_BETHEKK) || !obj->ToCreature()->isAlive() || obj->ToCreature()->HasAura(SPELL_DARK_SLUMBER) || obj->ToCreature()->HasAura(SPELL_BLOOD_FRENZY));
+            return ((obj->ToCreature()->GetEntry() != NPC_PRIDE_OF_BETHEKK) || !obj->ToCreature()->IsAlive() || obj->ToCreature()->HasAura(SPELL_DARK_SLUMBER) || obj->ToCreature()->HasAura(SPELL_BLOOD_FRENZY));
         }
 };
 

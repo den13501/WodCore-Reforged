@@ -317,7 +317,7 @@ class npc_isiset_astral_rain : public CreatureScript
                     {
                         case EVENT_ENTER_COMBAT:
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                         case EVENT_ASTRAL_RAIN:
                             DoCast(me, SPELL_ASTRAL_RAIN1);
@@ -395,7 +395,7 @@ class npc_isiset_celestial_call : public CreatureScript
                     {
                         case EVENT_ENTER_COMBAT:
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                         case EVENT_CELESTIAL_CALL:
                             DoCast(me, SPELL_CELESTIAL_CALL1);
@@ -473,7 +473,7 @@ class npc_isiset_veil_of_sky : public CreatureScript
                     {
                         case EVENT_ENTER_COMBAT:
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                         case EVENT_VEIL_OF_SKY:
                             DoCast(me, SPELL_VEIL_OF_SKY1);

@@ -721,7 +721,7 @@ class shadowmoon_burial_grounds_sadana_creature_defiled_spirit : public Creature
         void MovementInform(uint32 p_Type, uint32 p_Id) override
         {
 			/*
-            if (me && me->IsInWorld() && me->isAlive())
+            if (me && me->IsInWorld() && me->IsAlive())
             {
                 if (p_Id == m_MovementIndentifier)
                 {
@@ -737,7 +737,7 @@ class shadowmoon_burial_grounds_sadana_creature_defiled_spirit : public Creature
                 }
             }
 			*/
-			if (me && me->IsInWorld() && me->isAlive())
+			if (me && me->IsInWorld() && me->IsAlive())
 			{
 				if (p_Id == eSadanaMovements::MovementCreatureGoDown)
 				{

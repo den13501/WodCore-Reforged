@@ -29,7 +29,7 @@ class go_end_time_teleport : public GameObjectScript
 
         bool OnGossipHello(Player* pPlayer, GameObject* pGo)
         {
-            if (pPlayer->isInCombat())
+            if (pPlayer->IsInCombat())
                 return true;
 
             if (InstanceScript* pInstance = pGo->GetInstanceScript())
@@ -98,7 +98,7 @@ class go_end_time_teleport : public GameObjectScript
         bool OnGossipSelect(Player* player, GameObject* /*go*/, uint32 /*p_Sender*/, uint32 action)
         {
             //player->PlayerTalkClass->ClearMenus();
-            if (player->isInCombat())
+            if (player->IsInCombat())
                 return true;
 
             InstanceScript* pInstance = player->GetInstanceScript();

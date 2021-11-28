@@ -477,7 +477,7 @@ class boss_deathbringer_saurfang : public CreatureScript
                                 {
                                     if (Unit* unit = ObjectAccessor::GetUnit(*me, *itr))
                                     {
-                                        if (unit->isAlive() && unit->GetEntry() == NPC_BLOOD_BEAST)
+                                        if (unit->IsAlive() && unit->GetEntry() == NPC_BLOOD_BEAST)
                                         {
                                             unit->RemoveAurasDueToSpell(SPELL_SCENT_OF_BLOOD_TRIGGERED);
                                             unit->AddAura(SPELL_SCENT_OF_BLOOD_TRIGGERED, unit);

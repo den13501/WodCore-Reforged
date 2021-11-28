@@ -1041,10 +1041,10 @@ void Battleground::EndBattleground(uint32 p_Winner)
             l_Player->RemoveAurasByType(SPELL_AURA_MOD_SHAPESHIFT);
 
         // Last standing - Rated 5v5 arena & be solely alive player
-        if (l_Team == p_Winner && isArena() && !IsSkirmish() && !IsWargame() && GetArenaType() == ArenaType::Arena5v5 && aliveWinners == 1 && l_Player->isAlive())
+        if (l_Team == p_Winner && isArena() && !IsSkirmish() && !IsWargame() && GetArenaType() == ArenaType::Arena5v5 && aliveWinners == 1 && l_Player->IsAlive())
             l_Player->CastSpell(l_Player, SPELL_THE_LAST_STANDING, true);
 
-        if (!l_Player->isAlive())
+        if (!l_Player->IsAlive())
         {
             l_Player->ResurrectPlayer(1.0f);
             l_Player->SpawnCorpseBones();
@@ -1247,7 +1247,7 @@ void Battleground::RemovePlayerAtLeave(uint64 guid, bool Transport, bool SendPac
         if (player->HasAuraType(SPELL_AURA_SPIRIT_OF_REDEMPTION))
             player->RemoveAurasByType(SPELL_AURA_MOD_SHAPESHIFT);
 
-        if (!player->isAlive())                              // resurrect on exit
+        if (!player->IsAlive())                              // resurrect on exit
         {
             player->ResurrectPlayer(1.0f);
             player->SpawnCorpseBones();
@@ -1516,7 +1516,7 @@ void Battleground::AddPlayer(Player* player)
         // Removing pet's buffs and debuffs which are not permanent on Arena enter
         if (Pet* pet = player->GetPet())
         {
-            if (!pet->isAlive())
+            if (!pet->IsAlive())
                 pet->setDeathState(ALIVE);
 
             // Set pet at full health
@@ -2210,7 +2210,7 @@ uint32 Battleground::GetAlivePlayersCountByTeam(uint32 Team) const
         if (itr->second.Team == Team)
         {
             Player* player = ObjectAccessor::FindPlayer(itr->first);
-            if (player && player->isAlive() && player->GetByteValue(UNIT_FIELD_SHAPESHIFT_FORM, 3) != FORM_SPIRITOFREDEMPTION)
+            if (player && player->IsAlive() && player->GetByteValue(UNIT_FIELD_SHAPESHIFT_FORM, 3) != FORM_SPIRITOFREDEMPTION)
                 ++count;
         }
     }

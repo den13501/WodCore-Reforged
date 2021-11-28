@@ -2562,7 +2562,7 @@ eBattlePetRequests PetBattleSystem::CanPlayerEnterInPetBattle(Player* p_Player, 
     }
 
     // Player can't be in combat
-    if (p_Player->isInCombat())
+    if (p_Player->IsInCombat())
         return PETBATTLE_REQUEST_NOT_WHILE_IN_COMBAT;
 
     // Check positions

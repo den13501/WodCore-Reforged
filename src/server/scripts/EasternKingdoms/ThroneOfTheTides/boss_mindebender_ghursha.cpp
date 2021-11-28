@@ -146,7 +146,7 @@ class boss_erunak_stonespeaker : public CreatureScript
 
             void JustSummoned(Creature* summon)
             {
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -189,7 +189,7 @@ class boss_erunak_stonespeaker : public CreatureScript
                         events.ScheduleEvent(EVENT_EARTH_SHARDS, 20000);
                         break;
                     case EVENT_EMBERSTRIKE:
-                        DoCast(me->getVictim(), SPELL_EMBERSTRIKE);
+                        DoCast(me->GetVictim(), SPELL_EMBERSTRIKE);
                         events.ScheduleEvent(EVENT_EMBERSTRIKE, 11000);
                         break;
                     case EVENT_LAVA_BOLT:

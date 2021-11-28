@@ -277,7 +277,7 @@ static void AggroAllPlayers(Creature* creature)
             if (player->isGameMaster())
                 continue;
 
-            if (player->isAlive())
+            if (player->IsAlive())
             {
                 if (Unit* mount = player->GetVehicleBase())
                 {

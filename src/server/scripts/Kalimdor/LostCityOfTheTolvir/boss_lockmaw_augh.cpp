@@ -246,7 +246,7 @@ public:
                                 if (itr == lStalkers.end())
                                     itr = lStalkers.begin();
 
-                                if ((*itr) && (*itr)->isAlive())
+                                if ((*itr) && (*itr)->IsAlive())
                                     (*itr)->CastSpell((*itr), 84242, false);
 
                                 ++itr;
@@ -341,7 +341,7 @@ public:
                         break;
                     case EVENT_VICIOUS_CROC_VICIOUS_BITE:
                         events.ScheduleEvent(EVENT_VICIOUS_CROC_VICIOUS_BITE, urand(5000, 10000));
-                        me->CastSpell(me->getVictim(), SPELL_VICIOUS_BITE, false);
+                        me->CastSpell(me->GetVictim(), SPELL_VICIOUS_BITE, false);
                         break;
                 }
             }
@@ -446,7 +446,7 @@ public:
                     {
                         case AUGH_PHASE_ACTIVE:
                             me->SetControlled(true, UNIT_STATE_ROOT);
-                            me->CastSpell(me->getVictim(), SPELL_PARALYTIC_BLOW_DART, false);
+                            me->CastSpell(me->GetVictim(), SPELL_PARALYTIC_BLOW_DART, false);
                             me->CastSpell(me, SPELL_SMOKE_BOMB, false);
                             uiPhase = AUGH_PHASE_STEALTHED;
                             uiEventTimer = 1500;
@@ -610,7 +610,7 @@ public:
                     case AUGH_PHASE_DISMOUNTED:
                         uiPhase = AUGH_PHASE_DESPAWNED;
                         uiEventTimer = 2500;
-                        me->CastSpell(me->getVictim(), 83776, false);
+                        me->CastSpell(me->GetVictim(), 83776, false);
                         me->CastSpell(me, SPELL_SMOKE_BOMB, false);
                         break;
                     case AUGH_PHASE_DESPAWNED:
@@ -780,12 +780,12 @@ public:
                     }
                     case EVENT_BLOW_DART:
                         if (SelectTarget(SELECT_TARGET_RANDOM, 0, 100.0f, true))
-                            me->CastSpell(me->getVictim(), SPELL_PARALYTIC_BLOW_DART, false);
+                            me->CastSpell(me->GetVictim(), SPELL_PARALYTIC_BLOW_DART, false);
 
                         events.ScheduleEvent(EVENT_BLOW_DART, urand(5000, 10000));
                         break;
                     case EVENT_DRAGONS_BREATH:
-                        me->CastSpell(me->getVictim(), 83776, false);
+                        me->CastSpell(me->GetVictim(), 83776, false);
                         events.ScheduleEvent(EVENT_DRAGONS_BREATH, urand(5000, 10000));
                         break;
                     case EVENT_SMOKE_BOMB:

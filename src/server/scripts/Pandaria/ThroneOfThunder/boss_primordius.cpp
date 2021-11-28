@@ -323,7 +323,7 @@ class boss_primordius : public CreatureScript
 
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         me->CombatStop();
 
                     EnterEvadeMode();

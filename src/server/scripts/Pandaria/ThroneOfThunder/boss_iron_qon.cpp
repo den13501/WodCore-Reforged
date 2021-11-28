@@ -240,7 +240,7 @@ void EncounterDone(Creature* me)
         {
             if (Creature* l_Boss = l_Instance->instance->GetCreature(l_Instance->GetData64(g_QonBossEntries[l_Idx])))
             {
-                if (l_Boss->isAlive())
+                if (l_Boss->IsAlive())
                     l_AllDead = false;
             }
         }
@@ -623,7 +623,7 @@ public:
                         {
                             if (Creature* l_Quilen = me->GetVehicleCreatureBase())
                             {
-                                if (Unit* l_Target = l_Quilen->getVictim())
+                                if (Unit* l_Target = l_Quilen->GetVictim())
                                     me->CastSpell(l_Target, SPELL_IMPALE, false);
                             }
                         }
@@ -641,7 +641,7 @@ public:
                         {
                             if (Creature* l_Quilen = m_Instance->instance->GetCreature(m_Instance->GetData64(g_QonBossEntries[l_Idx])))
                             {
-                                if (l_Quilen->isAlive())
+                                if (l_Quilen->IsAlive())
                                     me->CastSpell(l_Quilen, SPELL_BERSERK, false);
                             }
                         }
@@ -902,7 +902,7 @@ class mob_roshak : public CreatureScript
                         }
                         case EVENT_LAND:
                         {
-                            if (me->getVictim())
+                            if (me->GetVictim())
                             {
                                 me->RemoveByteFlag(UNIT_FIELD_ANIM_TIER, 3, UNIT_BYTE1_FLAG_HOVER);
                                 me->SetDisableGravity(false);
@@ -1141,7 +1141,7 @@ class mob_quetzal : public CreatureScript
                             l_IronQon->AI()->DoAction(ACTION_WINDSTORM_DELAY);
 
                             // Reminding current target
-                            if (Unit* l_Victim = me->getVictim())
+                            if (Unit* l_Victim = me->GetVictim())
                                 m_PreWindstormTargetGuid = l_Victim->GetGUID();
 
                             // Going to central point. Next part in Movement Inform...

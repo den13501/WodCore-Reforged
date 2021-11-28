@@ -965,7 +965,7 @@ class TrashRespawnWorker
                 case NPC_ABYSSAL:
                 case NPC_VAROTHEN:
                 case NPC_DOOMGUARD:
-                    if (!creature->isAlive())
+                    if (!creature->IsAlive())
                         creature->Respawn(true);
                     break;
             }
@@ -1009,7 +1009,7 @@ class npc_well_of_eternity_doomguard_annihilator : public CreatureScript
                 GetCreatureListWithEntryInGrid(creatures, me, me->GetEntry(), 200.0f);
                 if (!creatures.empty())
                     for (std::list<Creature*>::const_iterator itr = creatures.begin(); itr != creatures.end(); ++itr)
-                        if (!(*itr)->isInCombat())
+                        if (!(*itr)->IsInCombat())
                             (*itr)->AI()->AttackStart(who);
             }
 

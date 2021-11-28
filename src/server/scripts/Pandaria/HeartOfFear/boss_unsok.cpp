@@ -621,7 +621,7 @@ class mob_mutated_construct : public CreatureScript
                 }
                 else
                     if (UpdateVictim())
-                        me->CastSpell(me->getVictim(), SPELL_MUTATED_SLAM, true);
+                        me->CastSpell(me->GetVictim(), SPELL_MUTATED_SLAM, true);
             }
 
         };

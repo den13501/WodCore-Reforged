@@ -120,7 +120,7 @@ class SanctumSentrySearcher
 
         bool operator()(Unit* unit)
         {
-            if (!unit->isAlive() || unit->GetEntry() != NPC_SANCTUM_SENTRY || !unit->IsWithinDist(_source, _range, false))
+            if (!unit->IsAlive() || unit->GetEntry() != NPC_SANCTUM_SENTRY || !unit->IsWithinDist(_source, _range, false))
                 return false;
 
             return true;
@@ -197,8 +197,8 @@ class boss_auriaya : public CreatureScript
 
                 if (summoned->GetEntry() == NPC_FERAL_DEFENDER)
                 {
-                    if (!summoned->isInCombat() && me->getVictim())
-                        summoned->AI()->AttackStart(me->getVictim());
+                    if (!summoned->IsInCombat() && me->GetVictim())
+                        summoned->AI()->AttackStart(me->GetVictim());
                     summoned->SetAuraStack(SPELL_FERAL_ESSENCE, summoned, defenderLives);
                     DoZoneInCombat(summoned);
                 }
@@ -387,7 +387,7 @@ class npc_sanctum_sentry : public CreatureScript
                 if (me->ToTempSummon())
                 {
                     Unit* auriaya = me->ToTempSummon()->GetSummoner();
-                    if (auriaya && auriaya->ToCreature() && !auriaya->isInCombat())
+                    if (auriaya && auriaya->ToCreature() && !auriaya->IsInCombat())
                         auriaya->ToCreature()->SetInCombatWithZone();
                 }
             }

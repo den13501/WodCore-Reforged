@@ -266,9 +266,9 @@ class boss_bonemaw : public CreatureScript
 								{
 									if (l_Itr->IsWithinDist(l_BonemawMouth, 100.0f, true))
 									{
-										if (l_Itr->isAlive() && !l_Itr->HasMovementForce(l_BonemawMouth->GetGUID()))
+										if (l_Itr->IsAlive() && !l_Itr->HasMovementForce(l_BonemawMouth->GetGUID()))
 											l_Itr->SendApplyMovementForce(l_BonemawMouth->GetGUID(), true, l_Position, 5.5f, 1);
-										else if (!l_Itr->isAlive() && l_Itr->HasMovementForce(l_BonemawMouth->GetGUID()))
+										else if (!l_Itr->IsAlive() && l_Itr->HasMovementForce(l_BonemawMouth->GetGUID()))
 											l_Itr->SendApplyMovementForce(l_BonemawMouth->GetGUID(), false, l_Position);
 									}
 									else if (l_Itr->HasMovementForce(l_BonemawMouth->GetGUID()))
@@ -292,7 +292,7 @@ class boss_bonemaw : public CreatureScript
             }
 
             /// Fetid Spit mechanism - hardcoded.
-            if (Unit* l_Target = me->getVictim())
+            if (Unit* l_Target = me->GetVictim())
             {
                 if (me->IsWithinMeleeRange(l_Target))
                 {
@@ -356,7 +356,7 @@ class boss_bonemaw : public CreatureScript
                     {
                         for (Creature* l_Itr : l_ListCarrionWorms)
                         {
-                            if (l_Itr->isAlive())
+                            if (l_Itr->IsAlive())
                                 l_Itr->RemoveAura(eBoneMawSpells::SpellVisualSubmerge);
                         }
                     }
@@ -487,7 +487,7 @@ public:
             events.Update(p_Diff);
 
             /// Fetid Spit mechanism - hardcoded.
-            if (Unit* l_Target = me->getVictim())
+            if (Unit* l_Target = me->GetVictim())
             {
                 if (me->IsWithinMeleeRange(l_Target))
                 {

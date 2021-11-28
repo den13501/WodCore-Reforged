@@ -535,7 +535,7 @@ class spell_dru_wild_charge_moonkin: public SpellScriptLoader
             {
                 if (GetCaster())
                 {
-                    if (!GetCaster()->isInCombat())
+                    if (!GetCaster()->IsInCombat())
                         return SPELL_FAILED_DONT_REPORT;
                 }
                 else
@@ -3596,10 +3596,10 @@ class spell_dru_travel_form_playerscript: public PlayerScript
 
             if (p_Player->IsInWater() && p_Player->GetShapeshiftForm() != FORM_AQUA)
                 p_Player->CastSpell(p_Player, SPELL_DRUID_AQUATIC_FORM, true);
-            else if (!p_Player->IsInWater() && p_Player->getLevel() >= 71 && CheckIfCanFlyInLoc(p_Player) && !p_Player->isInCombat() &&
+            else if (!p_Player->IsInWater() && p_Player->getLevel() >= 71 && CheckIfCanFlyInLoc(p_Player) && !p_Player->IsInCombat() &&
                      p_Player->GetShapeshiftForm() != FORM_FLIGHT_EPIC && !p_Player->HasAura(SPELL_DRUID_GLYPH_OF_THE_STAG))
                 p_Player->CastSpell(p_Player, SPELL_DRUID_SWIFT_FLIGHT_FORM, true);
-            else if (!p_Player->IsInWater() && p_Player->getLevel() >= 60 && CheckIfCanFlyInLoc(p_Player) && !p_Player->isInCombat() &&
+            else if (!p_Player->IsInWater() && p_Player->getLevel() >= 60 && CheckIfCanFlyInLoc(p_Player) && !p_Player->IsInCombat() &&
                      p_Player->GetShapeshiftForm() != FORM_FLIGHT_EPIC && p_Player->GetShapeshiftForm() != FORM_FLIGHT && !p_Player->HasAura(SPELL_DRUID_GLYPH_OF_THE_STAG))
                 p_Player->CastSpell(p_Player, SPELL_DRUID_FLIGHT_FORM, true);
             else if (!p_Player->IsInWater() && !p_Player->IsFlying() && p_Player->GetShapeshiftForm() != FORM_FLIGHT_EPIC &&
@@ -3775,7 +3775,7 @@ class spell_dru_glyph_of_travel: public SpellScriptLoader
                     return;
 
                 if (AuraEffect* l_GlyphOfTravel = l_Caster->GetAuraEffect(eSpells::GlyphOfTravel, EFFECT_0))
-                    if (!l_Caster->isInCombat() && !l_Player->InBattleground() && !l_Player->InArena())
+                    if (!l_Caster->IsInCombat() && !l_Player->InBattleground() && !l_Player->InArena())
                         amount += l_GlyphOfTravel->GetAmount();
             }
 
@@ -4584,7 +4584,7 @@ class spell_dru_ursa_major_aura : public SpellScriptLoader
                     float l_Percent = l_Caster->GetHealthPct();
                     l_Caster->HandleStatModifier(UNIT_MOD_HEALTH, TOTAL_PCT, p_AurEff->GetAmount(), false);
                     l_Caster->HandleStatModifier(UNIT_MOD_HEALTH, TOTAL_PCT, l_Stack->GetTotalAmount(), true);
-                    if (l_Caster->isAlive())
+                    if (l_Caster->IsAlive())
                         l_Caster->SetHealth(l_Caster->CountPctFromMaxHealth(int32(l_Percent)));
                 }
 

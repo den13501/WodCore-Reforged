@@ -755,7 +755,7 @@ public:
                         events.ScheduleEvent(ePutridPyromancerEvents::EventDragonsBreath, urand(40 * TimeConstants::IN_MILLISECONDS, 50 * TimeConstants::IN_MILLISECONDS));
                         break;
                     case ePutridPyromancerEvents::EventFireball:
-                        if (Unit* l_Victim = me->getVictim())
+                        if (Unit* l_Victim = me->GetVictim())
                             me->CastSpell(l_Victim, ePutridPyromancerSpells::SpellFireBall);
                         events.ScheduleEvent(ePutridPyromancerEvents::EventFireball, 6 * TimeConstants::IN_MILLISECONDS);
                         break;

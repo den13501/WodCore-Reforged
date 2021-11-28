@@ -280,7 +280,7 @@ class instance_siege_of_orgrimmar : public InstanceMapScript
                     if (!player)
                         continue;
 
-                    if (player->isAlive() && !player->isGameMaster())
+                    if (player->IsAlive() && !player->isGameMaster())
                         return false;
                 }
 

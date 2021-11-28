@@ -791,7 +791,7 @@ class spell_rog_killing_spree: public SpellScriptLoader
                 {
                     l_Caster->CastSpell(l_Caster, eSpells::KillingSpreeDeselect, true);
 
-                    Unit* l_Target = l_Caster->getVictim();
+                    Unit* l_Target = l_Caster->GetVictim();
                     if (!l_Target && l_Caster->ToPlayer())
                         l_Target = l_Caster->ToPlayer()->GetSelectedUnit();
                     if (!l_Target)
@@ -1834,7 +1834,7 @@ class spell_rog_shroud_of_concealment: public SpellScriptLoader
                     if (Unit* l_Target = itr->ToUnit())
                     {
                         if ((!l_Target->IsInRaidWith(l_Caster) && !l_Target->IsInPartyWith(l_Caster)) ||
-                            l_Target->isInCombat() || l_Target->HasUnitState(UNIT_STATE_CASTING))
+                            l_Target->IsInCombat() || l_Target->HasUnitState(UNIT_STATE_CASTING))
                             targetsToRemove.push_back(itr);
                     }
                 }
@@ -1854,7 +1854,7 @@ class spell_rog_shroud_of_concealment: public SpellScriptLoader
                 if (Aura* l_ShroudOfConcealment = l_Target->GetAura(ROGUE_SPELL_SHROUD_OF_CONCEALMENT_AURA, l_Caster->GetGUID()))
                 {
                     if ((!l_Target->IsInRaidWith(l_Caster) && !l_Target->IsInPartyWith(l_Caster)) ||
-                        l_Target->isInCombat() || l_Target->HasUnitState(UNIT_STATE_CASTING) ||
+                        l_Target->IsInCombat() || l_Target->HasUnitState(UNIT_STATE_CASTING) ||
                         l_Target->HasAura(BG_WS_SPELL_WARSONG_FLAG) || l_Target->HasAura(BG_WS_SPELL_SILVERWING_FLAG) ||
                         l_Target->HasAura(BG_KT_SPELL_ORB_PICKED_UP_1) || l_Target->HasAura(BG_KT_SPELL_ORB_PICKED_UP_2) ||
                         l_Target->HasAura(BG_KT_SPELL_ORB_PICKED_UP_3) || l_Target->HasAura(BG_KT_SPELL_ORB_PICKED_UP_4))

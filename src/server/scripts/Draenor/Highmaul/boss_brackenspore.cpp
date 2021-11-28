@@ -499,7 +499,7 @@ class boss_brackenspore : public CreatureScript
                     {
                         if (Creature* l_Add = Creature::GetCreature(*me, l_Guid))
                         {
-                            if (l_Add->isAlive())
+                            if (l_Add->IsAlive())
                             {
                                 l_CanSchedule = false;
                                 break;
@@ -519,10 +519,10 @@ class boss_brackenspore : public CreatureScript
                 m_Events.Update(p_Diff);
 
                 /// Update moves here, avoid some movements problems during Infesting Spores
-                if (me->getVictim() && !me->IsWithinMeleeRange(me->getVictim()) && me->HasAura(eSpells::SpellInfestingSpores))
+                if (me->GetVictim() && !me->IsWithinMeleeRange(me->GetVictim()) && me->HasAura(eSpells::SpellInfestingSpores))
                 {
                     Position l_Pos;
-                    me->getVictim()->GetPosition(&l_Pos);
+                    me->GetVictim()->GetPosition(&l_Pos);
 
                     me->GetMotionMaster()->Clear();
                     me->GetMotionMaster()->MovePoint(0, l_Pos);
@@ -1789,7 +1789,7 @@ class areatrigger_highmaul_creeping_moss : public AreaTriggerEntityScript
         {
             if (Unit* l_Caster = p_AreaTrigger->GetCaster())
             {
-                if (!l_Caster->isInCombat())
+                if (!l_Caster->IsInCombat())
                     return;
 
                 std::list<Unit*> l_TargetList;

@@ -211,7 +211,7 @@ class boss_echo_of_jaina : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_PYROBLAST:
-                            DoCast(me->getVictim(), SPELL_PYROBLAST);
+                            DoCast(me->GetVictim(), SPELL_PYROBLAST);
                             events.ScheduleEvent(EVENT_PYROBLAST, urand(3500, 4500));
                             break;
                         case EVENT_FLARECORE:

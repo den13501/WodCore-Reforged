@@ -108,7 +108,7 @@ class boss_karsh_steelbender : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_CLEAVE:
-                            DoCast(me->getVictim(), SPELL_CLEAVE);
+                            DoCast(me->GetVictim(), SPELL_CLEAVE);
                             events.ScheduleEvent(EVENT_CLEAVE, urand(5000, 7000));
                             break;
                         case EVENT_HEAT_ARMOR:

@@ -490,7 +490,7 @@ class FrostwingVrykulSearcher
 
         bool operator()(WorldObject* object) const
         {
-            if (!object->ToUnit()->isAlive())
+            if (!object->ToUnit()->IsAlive())
                 return false;
 
             switch (object->ToUnit()->GetEntry())
@@ -1108,7 +1108,7 @@ class boss_sister_svalna : public CreatureScript
                 {
                     if (Creature* crusader = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_CAPTAIN_ARNATH + i)))
                     {
-                        if (crusader->isAlive() && crusader->GetEntry() == crusader->GetCreatureData()->id)
+                        if (crusader->IsAlive() && crusader->GetEntry() == crusader->GetCreatureData()->id)
                         {
                             crusader->m_Events.AddEvent(new CaptainSurviveTalk(*crusader), crusader->m_Events.CalculateTime(delay));
                             delay += 6000;
@@ -1315,7 +1315,7 @@ class npc_crok_scourgebane : public CreatureScript
             {
                 if (action == ACTION_START_GAUNTLET)
                 {
-                    if (_isEventDone || !me->isAlive())
+                    if (_isEventDone || !me->IsAlive())
                         return;
 
                     _isEventActive = true;
@@ -2139,7 +2139,7 @@ class spell_icc_sprit_alarm: public SpellScriptLoader
                 wards.sort(JadeCore::ObjectDistanceOrderPred(GetCaster()));
                 for (std::list<Creature*>::iterator itr = wards.begin(); itr != wards.end(); ++itr)
                 {
-                    if ((*itr)->isAlive() && (*itr)->HasAura(SPELL_STONEFORM))
+                    if ((*itr)->IsAlive() && (*itr)->HasAura(SPELL_STONEFORM))
                     {
                         (*itr)->AI()->Talk(SAY_TRAP_ACTIVATE);
                         (*itr)->RemoveAurasDueToSpell(SPELL_STONEFORM);
@@ -2286,7 +2286,7 @@ class AliveCheck
         bool operator()(WorldObject* object) const
         {
             if (Unit* unit = object->ToUnit())
-                return unit->isAlive();
+                return unit->IsAlive();
             return true;
         }
 };
@@ -2567,7 +2567,7 @@ class npc_sindragosas_ward : public CreatureScript
                         if (player->isGameMaster())
                             continue;
 
-                        if (player->isAlive() && me->GetDistance(player) > 125.0f)
+                        if (player->IsAlive() && me->GetDistance(player) > 125.0f)
                             return true;
                     }
                 }
@@ -2595,7 +2595,7 @@ class npc_sindragosas_ward : public CreatureScript
             void SummonedCreatureDespawn(Creature* summon)
             {
                 // This one should never happen, if summoned creature despawns alive, reset!
-                if (summon->isAlive())
+                if (summon->IsAlive())
                 {
                     EnterEvadeMode();
                     return;
@@ -3101,7 +3101,7 @@ class npc_darkfallen_blood_knight : public CreatureScript
                             {
                                 DoCastVictim(SPELL_BLOOD_MIRROR_DUMMY);
 
-                                if (Unit* victim = me->getVictim())
+                                if (Unit* victim = me->GetVictim())
                                 {
                                     victim->CastSpell(target, SPELL_BLOOD_MIRROR_DAMAGE, true);
                                     me->CastSpell(victim, SPELL_BLOOD_MIRROR_BUFF, true);
@@ -3721,7 +3721,7 @@ class npc_ymirjar_huntress : public CreatureScript
 
                 if (me->isAttackReady())
                 {
-                    if (me->IsWithinMeleeRange(me->getVictim()))
+                    if (me->IsWithinMeleeRange(me->GetVictim()))
                         DoMeleeAttackIfReady();
                     else
                         Events.ScheduleEvent(EVENT_SHOT, 1000);

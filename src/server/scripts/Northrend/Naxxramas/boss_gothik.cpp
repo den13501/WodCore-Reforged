@@ -315,7 +315,7 @@ class boss_gothik : public CreatureScript
                         bool checkdead = false;
                         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                         {
-                            if (i->getSource() && i->getSource()->isAlive() &&
+                            if (i->getSource() && i->getSource()->IsAlive() &&
                                 i->getSource()->GetPositionX() <= POS_X_NORTH &&
                                 i->getSource()->GetPositionX() >= POS_X_SOUTH &&
                                 i->getSource()->GetPositionY() <= POS_Y_GATE &&
@@ -323,7 +323,7 @@ class boss_gothik : public CreatureScript
                             {
                                 checklife = true;
                             }
-                            else if (i->getSource() && i->getSource()->isAlive() &&
+                            else if (i->getSource() && i->getSource()->IsAlive() &&
                                 i->getSource()->GetPositionX() <= POS_X_NORTH &&
                                 i->getSource()->GetPositionX() >= POS_X_SOUTH &&
                                 i->getSource()->GetPositionY() >= POS_Y_GATE &&
@@ -350,7 +350,7 @@ class boss_gothik : public CreatureScript
                     case SPELL_INFORM_LIVE_KNIGHT:  spellId = SPELL_INFORM_DEAD_KNIGHT;     break;
                     case SPELL_INFORM_LIVE_RIDER:   spellId = SPELL_INFORM_DEAD_RIDER;      break;
                 }
-                if (spellId && me->isInCombat())
+                if (spellId && me->IsInCombat())
                 {
                     me->HandleEmoteCommand(EMOTE_ONESHOT_SPELL_CAST);
                     if (Creature* pRandomDeadTrigger = Unit::GetCreature(*me, DeadTriggerGUID[rand() % POS_DEAD]))
@@ -366,7 +366,7 @@ class boss_gothik : public CreatureScript
 
             void SpellHitTarget(Unit* target, SpellInfo const* spell)
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 switch (spell->Id)
@@ -455,11 +455,11 @@ class boss_gothik : public CreatureScript
                             }
                             break;
                         case EVENT_BOLT:
-                            DoCast(me->getVictim(), RAID_MODE(SPELL_SHADOW_BOLT, H_SPELL_SHADOW_BOLT));
+                            DoCast(me->GetVictim(), RAID_MODE(SPELL_SHADOW_BOLT, H_SPELL_SHADOW_BOLT));
                             events.ScheduleEvent(EVENT_BOLT, 1000);
                             break;
                         case EVENT_HARVEST:
-                            DoCast(me->getVictim(), SPELL_HARVEST_SOUL, true);
+                            DoCast(me->GetVictim(), SPELL_HARVEST_SOUL, true);
                             events.ScheduleEvent(EVENT_HARVEST, urand(20000, 25000));
                             break;
                         case EVENT_TELEPORT:
@@ -552,7 +552,7 @@ class mob_gothik_minion : public CreatureScript
                     {
                         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                         {
-                            if (i->getSource() && i->getSource()->isAlive() && isOnSameSide(i->getSource()))
+                            if (i->getSource() && i->getSource()->IsAlive() && isOnSameSide(i->getSource()))
                             {
                                 AttackStart(i->getSource());
                                 return;
@@ -567,7 +567,7 @@ class mob_gothik_minion : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if (gateClose && (!isOnSameSide(me) || (me->getVictim() && !isOnSameSide(me->getVictim()))))
+                if (gateClose && (!isOnSameSide(me) || (me->GetVictim() && !isOnSameSide(me->GetVictim()))))
                 {
                     EnterEvadeMode();
                     return;

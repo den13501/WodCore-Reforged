@@ -1279,7 +1279,7 @@ class mob_lun_chi : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1441,7 +1441,7 @@ class mob_brewmaster_chani : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1599,7 +1599,7 @@ class mob_kang_bramblestaff : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1783,7 +1783,7 @@ class mob_clever_ashyo : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1962,7 +1962,7 @@ class mob_ken_ken : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2120,7 +2120,7 @@ class mob_the_wrestler : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2282,7 +2282,7 @@ class mob_master_boom_boom : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2439,7 +2439,7 @@ class mob_master_windfur : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2631,7 +2631,7 @@ class mob_tankiss : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2828,7 +2828,7 @@ class mob_healiss : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -3025,7 +3025,7 @@ class mob_hackiss : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;

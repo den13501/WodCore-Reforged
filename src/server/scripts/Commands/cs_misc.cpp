@@ -996,7 +996,7 @@ class misc_commandscript: public CommandScript
                     return false;
             }
 
-            if (target->isAlive())
+            if (target->IsAlive())
             {
                 if (sWorld->getBoolConfig(CONFIG_DIE_COMMAND_MODE))
                     handler->GetSession()->GetPlayer()->Kill(target);
@@ -1292,7 +1292,7 @@ class misc_commandscript: public CommandScript
                 return false;
             }
 
-            if (player->isInCombat())
+            if (player->IsInCombat())
             {
                 handler->SendSysMessage(LANG_YOU_IN_COMBAT);
                 handler->SetSentErrorMessage(true);
@@ -2474,7 +2474,7 @@ class misc_commandscript: public CommandScript
                     return false;
             }
 
-            if (!target->isAlive())
+            if (!target->IsAlive())
                 return true;
 
             char* damageStr = str;
@@ -3004,7 +3004,7 @@ class misc_commandscript: public CommandScript
                     {
                         pet->SavePetToDB(PET_SLOT_ACTUAL_PET_SLOT, pet->m_Stampeded);
                         // not let dismiss dead pet
-                        if (pet && pet->isAlive())
+                        if (pet && pet->IsAlive())
                             player->RemovePet(pet, PET_SLOT_HUNTER_FIRST, false, pet->m_Stampeded);
                     }
                 }

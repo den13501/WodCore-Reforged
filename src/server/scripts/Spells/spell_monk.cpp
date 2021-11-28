@@ -2584,7 +2584,7 @@ class spell_monk_energizing_brew: public SpellScriptLoader
 
             SpellCastResult CheckFight()
             {
-                if (!GetCaster()->isInCombat())
+                if (!GetCaster()->IsInCombat())
                     return SPELL_FAILED_CASTER_AURASTATE;
                 return SPELL_CAST_OK;
             }
@@ -3350,7 +3350,7 @@ class spell_monk_disable : public SpellScriptLoader
 
             SpellCastResult CheckCast()
             {
-                Unit* l_Target = GetCaster()->getVictim();
+                Unit* l_Target = GetCaster()->GetVictim();
 
                 if (l_Target == nullptr)
                     return SPELL_FAILED_BAD_TARGETS;
@@ -3714,7 +3714,7 @@ class spell_monk_roll: public SpellScriptLoader
             {
                 Unit* l_Caster = GetCaster();
 
-                if (!l_Caster->isAlive() && !l_Caster->HasAura(eSpells::GlyphofSpiritRoll))
+                if (!l_Caster->IsAlive() && !l_Caster->HasAura(eSpells::GlyphofSpiritRoll))
                     return SPELL_FAILED_CASTER_DEAD;
 
                 return SPELL_CAST_OK;
@@ -4010,7 +4010,7 @@ class spell_monk_rushing_jade_wind: public SpellScriptLoader
                     }
                 }
 
-                if (l_FirstSpirit && (l_FirstSpirit->getVictim()))
+                if (l_FirstSpirit && (l_FirstSpirit->GetVictim()))
                 {
                     if (!l_FirstSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {
@@ -4019,7 +4019,7 @@ class spell_monk_rushing_jade_wind: public SpellScriptLoader
                     }
                 }
 
-                if (l_SecondSpirit && (l_SecondSpirit->getVictim()))
+                if (l_SecondSpirit && (l_SecondSpirit->GetVictim()))
                 {
                     if (!l_SecondSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {
@@ -4787,7 +4787,7 @@ class spell_monk_hurricane_strike : public SpellScriptLoader
                     }
                 }
 
-                if (l_FirstSpirit && (l_FirstSpirit->getVictim()))
+                if (l_FirstSpirit && (l_FirstSpirit->GetVictim()))
                 {
                     if (!l_FirstSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {
@@ -4796,7 +4796,7 @@ class spell_monk_hurricane_strike : public SpellScriptLoader
                     }
                 }
 
-                if (l_SecondSpirit && (l_SecondSpirit->getVictim()))
+                if (l_SecondSpirit && (l_SecondSpirit->GetVictim()))
                 {
                     if (!l_SecondSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {
@@ -6321,7 +6321,7 @@ class spell_monk_chi_burst_cast : public SpellScriptLoader
                     }
                 }
 
-                if (l_FirstSpirit && (l_FirstSpirit->getVictim()))
+                if (l_FirstSpirit && (l_FirstSpirit->GetVictim()))
                 {
                     if (!l_FirstSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {
@@ -6330,7 +6330,7 @@ class spell_monk_chi_burst_cast : public SpellScriptLoader
                     }
                 }
 
-                if (l_SecondSpirit && (l_SecondSpirit->getVictim()))
+                if (l_SecondSpirit && (l_SecondSpirit->GetVictim()))
                 {
                     if (!l_SecondSpirit->ToCreature()->HasSpellCooldown(GetSpellInfo()->Id))
                     {

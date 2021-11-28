@@ -437,7 +437,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     if ((Events)events.ExecuteEvent() == Events::CastSpell)
                     {
                         me->SetControlled(true, UNIT_STATE_ROOT);
-                        DoCast(me->getVictim(), urand(0, 1) ? Spells::ShatterEarth : Spells::EarthSmash, false);
+                        DoCast(me->GetVictim(), urand(0, 1) ? Spells::ShatterEarth : Spells::EarthSmash, false);
                         events.ScheduleEvent((uint32)Events::CastSpell, 5000);
                     }
 
@@ -525,7 +525,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                             if (me->HasUnitState(UNIT_STATE_CASTING) || me->GetCurrentSpell(CURRENT_CHANNELED_SPELL))
                                 break;
 
-                            me->CastSpell(me->getVictim(), (uint32)Spells::Scorch, false);
+                            me->CastSpell(me->GetVictim(), (uint32)Spells::Scorch, false);
                             break;
                         }
                         case Events::RefreshFlames:

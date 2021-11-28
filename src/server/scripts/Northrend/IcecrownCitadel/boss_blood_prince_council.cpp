@@ -207,7 +207,7 @@ class boss_blood_council_controller : public CreatureScript
                 {
                     instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, keleseth);
                     keleseth->SetInCombatWithZone();
-                    if (!keleseth->isInCombat())
+                    if (!keleseth->IsInCombat())
                         keleseth->AI()->EnterCombat(who);
                 }
 
@@ -215,7 +215,7 @@ class boss_blood_council_controller : public CreatureScript
                 {
                     instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, taldaram);
                     taldaram->SetInCombatWithZone();
-                    if (who && !taldaram->isInCombat())
+                    if (who && !taldaram->IsInCombat())
                         taldaram->AI()->EnterCombat(who);
                 }
 
@@ -223,7 +223,7 @@ class boss_blood_council_controller : public CreatureScript
                 {
                     instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, valanar);
                     valanar->SetInCombatWithZone();
-                    if (who && !valanar->isInCombat())
+                    if (who && !valanar->IsInCombat())
                         valanar->AI()->EnterCombat(who);
                 }
 
@@ -901,7 +901,7 @@ class boss_prince_valanar_icc : public CreatureScript
                         break;
                 }
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     DoZoneInCombat(summon);
             }
 
@@ -1329,19 +1329,19 @@ class npc_dark_nucleus : public CreatureScript
                     return;
 
                 if (!lockedTarget)
-                    if (me->getVictim() == attacker)
+                    if (me->GetVictim() == attacker)
                         lockedTarget = true;
             }
 
             void UpdateAI(const uint32 diff)
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 if (targetAuraCheck <= diff)
                 {
                     targetAuraCheck = 1000;
-                    if (Unit* victim = me->getVictim())
+                    if (Unit* victim = me->GetVictim())
                         if (me->GetDistance(victim) < 15.0f &&
                             !victim->HasAura(SPELL_SHADOW_RESONANCE_RESIST, me->GetGUID()))
                         {
@@ -1349,7 +1349,7 @@ class npc_dark_nucleus : public CreatureScript
                             me->ClearUnitState(UNIT_STATE_CASTING);
                         }
                         else
-                            MoveInLineOfSight(me->getVictim());
+                            MoveInLineOfSight(me->GetVictim());
                 }
                 else
                     targetAuraCheck -= diff;
@@ -1358,9 +1358,9 @@ class npc_dark_nucleus : public CreatureScript
                 {
                     if (Unit* victim = me->SelectVictim())
                     {
-                        if (me->getVictim() && me->getVictim() != victim)
+                        if (me->GetVictim() && me->GetVictim() != victim)
                         {
-                            me->getVictim()->RemoveAurasDueToSpell(SPELL_SHADOW_RESONANCE_RESIST, me->GetGUID());
+                            me->GetVictim()->RemoveAurasDueToSpell(SPELL_SHADOW_RESONANCE_RESIST, me->GetGUID());
                             lockedTarget = true;
                         }
 

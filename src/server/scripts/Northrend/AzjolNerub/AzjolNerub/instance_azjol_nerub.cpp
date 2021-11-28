@@ -254,17 +254,17 @@ public:
             {
                 if (reset)
                 {
-                    if (pHadronox->isAlive())
+                    if (pHadronox->IsAlive())
                     {
                         pHadronox->setFaction(35);
                         pHadronox->SetVisible(false);
                     }
-                    if (!pCrusher->isAlive())
+                    if (!pCrusher->IsAlive())
                         pCrusher->Respawn();
                 }
                 else
                 {
-                    if (pHadronox->isAlive())
+                    if (pHadronox->IsAlive())
                     {
                         pHadronox->RestoreFaction();
                         pHadronox->SetVisible(true);
@@ -285,15 +285,15 @@ public:
                 if (reset)
                 {
                     // only respawn if boss is still alive
-                    if (pKrikthir->isAlive())
+                    if (pKrikthir->IsAlive())
                     {
-                        if (!pGashra->isAlive())
+                        if (!pGashra->IsAlive())
                             pGashra->Respawn();
 
-                        if (!pSilthik->isAlive())
+                        if (!pSilthik->IsAlive())
                             pSilthik->Respawn();
 
-                        if (!pNarjil->isAlive())
+                        if (!pNarjil->IsAlive())
                             pNarjil->Respawn();
 
                         pGashra->AI()->EnterEvadeMode();
@@ -308,7 +308,7 @@ public:
                                 Creature* pTemp = instance->GetCreature(*itr);
                                 if (pTemp)
                                 {
-                                    if (!pTemp->isAlive())
+                                    if (!pTemp->IsAlive())
                                         pTemp->Respawn();
 
                                     pTemp->AI()->EnterEvadeMode();
@@ -319,13 +319,13 @@ public:
                 else
                 {
                     // if boss is pulled set adds in combat if still alive
-                    if (pKrikthir->isAlive() && pKrikthir->isInCombat())
+                    if (pKrikthir->IsAlive() && pKrikthir->IsInCombat())
                     {
-                        if (pGashra->isAlive() && !pGashra->isInCombat())
+                        if (pGashra->IsAlive() && !pGashra->IsInCombat())
                             pGashra->SetInCombatWithZone();
-                        if (pSilthik->isAlive() && !pSilthik->isInCombat())
+                        if (pSilthik->IsAlive() && !pSilthik->IsInCombat())
                             pSilthik->SetInCombatWithZone();
-                        if (pNarjil->isAlive() && !pNarjil->isInCombat())
+                        if (pNarjil->IsAlive() && !pNarjil->IsInCombat())
                             pNarjil->SetInCombatWithZone();
 
                         if (auiEncounter[0] == SPECIAL)
@@ -350,13 +350,13 @@ public:
 
                     if (pGashra && pSilthik && pNarjil && pKrikthir)
                     {
-                        if (pGashra->isAlive() && !pGashra->isInCombat())
+                        if (pGashra->IsAlive() && !pGashra->IsInCombat())
                             pGashra->SetInCombatWithZone();
-                        else if (pSilthik->isAlive() && !pSilthik->isInCombat())
+                        else if (pSilthik->IsAlive() && !pSilthik->IsInCombat())
                             pSilthik->SetInCombatWithZone();
-                        else if (pNarjil->isAlive() && !pNarjil->isInCombat())
+                        else if (pNarjil->IsAlive() && !pNarjil->IsInCombat())
                             pNarjil->SetInCombatWithZone();
-                        else if (pKrikthir->isAlive() && !pKrikthir->isInCombat())
+                        else if (pKrikthir->IsAlive() && !pKrikthir->IsInCombat())
                             pKrikthir->SetInCombatWithZone();
 
                         uiEngageTimer = 45*IN_MILLISECONDS;

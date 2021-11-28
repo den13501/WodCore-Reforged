@@ -193,8 +193,8 @@ class boss_high_priestess_azil : public CreatureScript
                     case EVENT_MOVE_2:
                         me->RemoveAurasDueToSpell(DUNGEON_MODE(SPELL_ARCANE_SHIELD, SPELL_ARCANE_SHIELD_H));
                         SetCombatMovement(true);
-                        if (me->getVictim())
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                        if (me->GetVictim())
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                         events.ScheduleEvent(EVENT_CURSE_OF_BLOOD, 3000);
                         break;
                     }

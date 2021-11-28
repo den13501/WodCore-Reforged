@@ -373,9 +373,9 @@ class boss_nitrogg_thundertower : public CreatureScript
                             {
                                 if (l_Itr->IsWithinDist(me, 100.0f, true))
                                 {
-                                    if (l_Itr->isAlive() && !l_Itr->HasMovementForce(me->GetGUID()))
+                                    if (l_Itr->IsAlive() && !l_Itr->HasMovementForce(me->GetGUID()))
                                         l_Itr->SendApplyMovementForce(me->GetGUID(), true, l_Position, -3.0f, 1);
-                                    else if (!l_Itr->isAlive() && l_Itr->HasMovementForce(me->GetGUID()))
+                                    else if (!l_Itr->IsAlive() && l_Itr->HasMovementForce(me->GetGUID()))
                                         l_Itr->SendApplyMovementForce(me->GetGUID(), false, l_Position);
                                 }
                                 else if (l_Itr->HasMovementForce(me->GetGUID()))

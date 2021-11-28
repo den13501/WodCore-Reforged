@@ -492,7 +492,7 @@ bool DoWipeCheck(Transport* /*ship*/)
         Player* plr = *itr;
         ++itr;
 
-        if (plr && plr->isAlive())
+        if (plr && plr->IsAlive())
             return true;
     }*/
     return false;
@@ -1079,9 +1079,9 @@ class npc_muradin_gunship : public CreatureScript
                             }
                             break;
                         case EVENT_RENDING_THROW:
-                            if (me->getVictim())
+                            if (me->GetVictim())
                             {
-                                if (me->getVictim()->IsWithinDistInMap(me, 50.0f, false)) // Todo: Fix the distance
+                                if (me->GetVictim()->IsWithinDistInMap(me, 50.0f, false)) // Todo: Fix the distance
                                 {
                                     DoCastVictim(SPELL_RENDING_THROW);
                                     EventScheduled = false;
@@ -1173,7 +1173,7 @@ class npc_muradin_gunship : public CreatureScript
                       }*/
                 }
 
-                if (me->getVictim() && !me->GetCurrentSpell(CURRENT_MELEE_SPELL))
+                if (me->GetVictim() && !me->GetCurrentSpell(CURRENT_MELEE_SPELL))
                     DoCastVictim(SPELL_CLEAVE);
 
                 DoMeleeAttackIfReady();
@@ -2334,9 +2334,9 @@ class npc_saurfang_gunship : public CreatureScript
                             RestartEvent(hordeShip, CheckUnfriendlyShip(me,_instance,DATA_GB_MURADIN_BRONZEBEARD), map, HORDE);
                             break;
                         case EVENT_RENDING_THROW:
-                            if (me->getVictim())
+                            if (me->GetVictim())
                             {
-                                if (me->getVictim()->IsWithinDistInMap(me, 50.0f, false)) // Todo: Fix the distance
+                                if (me->GetVictim()->IsWithinDistInMap(me, 50.0f, false)) // Todo: Fix the distance
                                 {
                                     DoCastVictim(SPELL_RENDING_THROW);
                                     EventScheduled = false;
@@ -2378,7 +2378,7 @@ class npc_saurfang_gunship : public CreatureScript
                       }
                 }
 
-                if (me->getVictim() && !me->GetCurrentSpell(CURRENT_MELEE_SPELL))
+                if (me->GetVictim() && !me->GetCurrentSpell(CURRENT_MELEE_SPELL))
                     DoCastVictim(SPELL_CLEAVE);
 
                 DoMeleeAttackIfReady();

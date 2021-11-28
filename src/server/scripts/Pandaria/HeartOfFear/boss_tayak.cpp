@@ -212,7 +212,7 @@ class boss_tayak : public CreatureScript
 
                         for (Player* player : playerList)
                         {
-                            if (player->isAlive() && !player->HasMovementForce(me->GetGUID()))
+                            if (player->IsAlive() && !player->HasMovementForce(me->GetGUID()))
                                 player->SendApplyMovementForce(me->GetGUID(), true, pos, 3.0f);
                         }
 
@@ -446,7 +446,7 @@ class boss_tayak : public CreatureScript
                 summons.Summon(summon);
                 summon->setActive(true);
 
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -458,7 +458,7 @@ class boss_tayak : public CreatureScript
                 {
                     if (Player* playr = i->getSource())
                     {
-                        if (playr->isAlive())
+                        if (playr->IsAlive())
                             playr->TeleportTo(me->GetMapId(), PlayerTelePos.GetPositionX(), PlayerTelePos.GetPositionY(), PlayerTelePos.GetPositionZ(), PlayerTelePos.GetOrientation(), TELE_TO_NOT_LEAVE_COMBAT | TELE_TO_NOT_UNSUMMON_PET);
                     }
                 }
@@ -543,7 +543,7 @@ class boss_tayak : public CreatureScript
                         }
                         case EVENT_UNSEEN_STRIKE:
                         {
-                            unseenTank = me->getVictim() ? me->getVictim()->GetGUID() : 0;
+                            unseenTank = me->GetVictim() ? me->GetVictim()->GetGUID() : 0;
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
                             {
                                 Talk(ANN_UNSEEN, target->GetGUID());
@@ -564,7 +564,7 @@ class boss_tayak : public CreatureScript
                                 me->SetReactState(REACT_AGGRESSIVE);
                                 if (Player* unseenTarget = ObjectAccessor::FindPlayer(unseenTank))
                                 {
-                                    if (unseenTarget->isAlive())
+                                    if (unseenTarget->IsAlive())
                                         AttackStart(unseenTarget);
                                     else
                                         SetAggro();
@@ -580,7 +580,7 @@ class boss_tayak : public CreatureScript
                         case EVENT_TAYAK_WIND_STEP:
                         {
                             // Store current victim to return to it afterwards
-                            currentTank = me->getVictim() ? me->getVictim()->GetGUID() : 0;
+                            currentTank = me->GetVictim() ? me->GetVictim()->GetGUID() : 0;
                             if (Unit* target = SelectTarget(SELECT_TARGET_FARTHEST, 0, 50.0f, true))
                                 DoCast(target, SPELL_WIND_STEP_TP);
                             events.ScheduleEvent(EVENT_WIND_STEP_RETURN, 1000);
@@ -592,7 +592,7 @@ class boss_tayak : public CreatureScript
                             // Return to old target
                             if (Player* currentVictim = ObjectAccessor::FindPlayer(currentTank))
                             {
-                                if (currentVictim->isAlive())
+                                if (currentVictim->IsAlive())
                                     DoCast(currentVictim, SPELL_WIND_STEP_TP_BACK);
                                 else
                                     SetAggro();
@@ -1029,10 +1029,10 @@ class mob_gale_winds_stalker : public CreatureScript
                         if (player->GetPositionX() > -2109.51f || player->GetPositionX() < -2129.05f)
                         {
                             // Player doesn't have forcedMovement
-                            if (player->isAlive() && !player->HasMovementForce(NPC_GALE_WINDS_STALKER, true))
+                            if (player->IsAlive() && !player->HasMovementForce(NPC_GALE_WINDS_STALKER, true))
                                 player->SendApplyMovementForce(me->GetGUID(), true, pos, -7.0f, 1);
                             // Dead player has forcedMovement
-                            else if (!player->isAlive() && player->HasMovementForce(NPC_GALE_WINDS_STALKER, true))
+                            else if (!player->IsAlive() && player->HasMovementForce(NPC_GALE_WINDS_STALKER, true))
                                 player->RemoveAllMovementForces(NPC_GALE_WINDS_STALKER);
                         }
                         // player not in wind gale

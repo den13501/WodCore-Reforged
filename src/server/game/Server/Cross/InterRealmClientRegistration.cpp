@@ -1138,7 +1138,7 @@ void InterRealmClient::Handle_BattlefieldPort(WorldPacket& packet)
                 return;                                 ///< cheating?
 
             /// Resurrect the player
-            if (!l_Player->isAlive())
+            if (!l_Player->IsAlive())
             {
                 l_Player->ResurrectPlayer(1.0f);
                 l_Player->SpawnCorpseBones();

@@ -783,19 +783,19 @@ class boss_tectus : public CreatureScript
 
                 if (Creature* l_Rokka = Creature::GetCreature(*me, m_Instance->GetData64(eHighmaulCreatures::Rokka)))
                 {
-                    if (l_Rokka->isAlive())
+                    if (l_Rokka->IsAlive())
                         return false;
                 }
 
                 if (Creature* l_Lokk = Creature::GetCreature(*me, m_Instance->GetData64(eHighmaulCreatures::Lokk)))
                 {
-                    if (l_Lokk->isAlive())
+                    if (l_Lokk->IsAlive())
                         return false;
                 }
 
                 if (Creature* l_Oro = Creature::GetCreature(*me, m_Instance->GetData64(eHighmaulCreatures::Oro)))
                 {
-                    if (l_Oro->isAlive())
+                    if (l_Oro->IsAlive())
                         return false;
                 }
 
@@ -1616,7 +1616,7 @@ class spell_highmaul_tectus_energy_gain : public SpellScriptLoader
             {
                 if (Creature* l_Target = GetTarget()->ToCreature())
                 {
-                    if (!l_Target->isInCombat())
+                    if (!l_Target->IsInCombat())
                         return;
 
                     uint32 l_OldPower = l_Target->GetPower(Powers::POWER_ENERGY);

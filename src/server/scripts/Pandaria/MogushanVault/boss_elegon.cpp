@@ -613,7 +613,7 @@ class boss_elegon : public CreatureScript
                                 if (player->isGameMaster())
                                     continue;
 
-                                if (player->isAlive())
+                                if (player->IsAlive())
                                 {
                                     player->CombatStop();
                                     player->CombatStopWithPets(true);
@@ -689,7 +689,7 @@ class boss_elegon : public CreatureScript
                         if (phase != PHASE_1)
                             break;
 
-                        if (!me->IsWithinMeleeRange(me->getVictim(), 10.0f))
+                        if (!me->IsWithinMeleeRange(me->GetVictim(), 10.0f))
                             me->CastSpell(me, SPELL_GRASPING_ENERGY_TENDRILS, false);
 
                         events.ScheduleEvent(EVENT_CHECK_MELEE, 2500);
@@ -1211,7 +1211,7 @@ class mob_cosmic_spark : public CreatureScript
                         }
                         case EVENT_COSMICSPARK_ATTACK:
                         {
-                            if (!me->getVictim() || !me->getVictim()->isAlive())
+                            if (!me->GetVictim() || !me->GetVictim()->IsAlive())
                             {
                                 std::list<Player*> playerList;
                                 GetPlayerListInGrid(playerList, me, 200.0f);

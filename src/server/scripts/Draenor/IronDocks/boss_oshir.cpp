@@ -826,7 +826,7 @@ public:
 
         void MovementInform(uint32 /*p_Type*/, uint32 p_Id) override
         {
-            if (me->isInCombat())
+            if (me->IsInCombat())
                 return;
 
             if (m_Instance != nullptr)
@@ -909,7 +909,7 @@ public:
             switch (events.ExecuteEvent())
             {
                 case eThunderWandlerEvents::EventCultTraps:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                     {
                         me->CastSpell(l_Target, eThunderingWandlerSpells::SpellCultTraps, true);
                         me->GetMotionMaster()->MoveKnockbackFrom(me->GetPositionX(), me->GetPositionY(), 10.0f, 8.0f);
@@ -924,7 +924,7 @@ public:
                     events.ScheduleEvent(eThunderWandlerEvents::EventSpearThrow, 18 * TimeConstants::IN_MILLISECONDS);
                     break;
                 case eThunderWandlerEvents::EventRendingCleave:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eThunderingWandlerSpells::SpellRendingCleave);
 
                     events.ScheduleEvent(eThunderWandlerEvents::EventRendingCleave, urand(8 * TimeConstants::IN_MILLISECONDS, 12 * TimeConstants::IN_MILLISECONDS));

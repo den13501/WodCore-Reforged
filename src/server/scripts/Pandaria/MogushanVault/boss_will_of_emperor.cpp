@@ -239,7 +239,7 @@ class boss_jin_qin_xi : public CreatureScript
                 _Reset();
                 isActive = false;
 
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 me->ResetLootMode();
@@ -340,7 +340,7 @@ class boss_jin_qin_xi : public CreatureScript
 
                 // Assume the 2 bosses die at the same time
                 if (Creature* otherBoss = getOtherBoss())
-                    if (otherBoss->isAlive())
+                    if (otherBoss->IsAlive())
                         killer->Kill(otherBoss);
 
                 if (Creature* cho = GetClosestCreatureWithEntry(me, NPC_LOREWALKER_CHO, 60.0f, true))
@@ -509,7 +509,7 @@ class boss_jin_qin_xi : public CreatureScript
             {
                 UpdateVictim();
 
-                if (me->HasUnitState(UNIT_STATE_CASTING) || !me->isAlive())
+                if (me->HasUnitState(UNIT_STATE_CASTING) || !me->IsAlive())
                     return;
 
                 // Check wipe
@@ -729,7 +729,7 @@ class boss_jin_qin_xi : public CreatureScript
                             aliveList.clear();
                             GetPlayerListInGrid(plyrList, me, 200.0f);
                             for (auto plyr : plyrList)
-                                if (plyr->isAlive())
+                                if (plyr->IsAlive())
                                     aliveList.push_back(plyr);
 
                             // Scheduling
@@ -782,7 +782,7 @@ class boss_jin_qin_xi : public CreatureScript
                     /* END OF DEVASTATING COMBO */
                     case EVENT_CHECK_MAGNETIC_ARMOR:
                     {
-                        if (!me->getVictim())
+                        if (!me->GetVictim())
                         {
                             if (!victimWithMagneticArmor)
                             {
@@ -791,7 +791,7 @@ class boss_jin_qin_xi : public CreatureScript
                             }
                             else if (Player* player = me->GetPlayer(*me, victimWithMagneticArmor))
                             {
-                                if (!player->isAlive())
+                                if (!player->IsAlive())
                                 {
                                     victimWithMagneticArmor = 0;
                                     events.ScheduleEvent(EVENT_CHECK_MAGNETIC_ARMOR, 500);
@@ -799,7 +799,7 @@ class boss_jin_qin_xi : public CreatureScript
                                 }
                             }
                         }
-                        else if (Unit* victim = me->getVictim())
+                        else if (Unit* victim = me->GetVictim())
                         {
                             if (victim->GetTypeId() != TYPEID_PLAYER)
                             {
@@ -815,7 +815,7 @@ class boss_jin_qin_xi : public CreatureScript
                         if (victimWithMagneticArmor)
                             target = ObjectAccessor::FindPlayer(victimWithMagneticArmor);
                         else
-                            target = me->getVictim()->ToPlayer();
+                            target = me->GetVictim()->ToPlayer();
 
                         if (!target)
                             break;
@@ -1023,7 +1023,7 @@ class mob_woe_add_generic : public CreatureScript
                     // No more target: should fixates on a new one
                     if (Player* target = ObjectAccessor::FindPlayer(targetGuid))
                     {
-                        if (!target->isAlive())
+                        if (!target->IsAlive())
                             shouldSwitchVictim = true;
                     }
                     else
@@ -1035,7 +1035,7 @@ class mob_woe_add_generic : public CreatureScript
                         DoAction(ACTION_CHOOSE_TARGET);
                     }
 
-                    if (!me->getVictim() || me->getVictim()->GetGUID() != targetGuid)
+                    if (!me->GetVictim() || me->GetVictim()->GetGUID() != targetGuid)
                     {
                         if (Player* target = ObjectAccessor::FindPlayer(targetGuid))
                         {
@@ -1143,7 +1143,7 @@ class mob_woe_add_generic : public CreatureScript
                         }
                         case EVENT_IMPEDING_THRUST:
                         {
-                            if (Unit* victim = me->getVictim())
+                            if (Unit* victim = me->GetVictim())
                             {
                                 if (me->IsWithinMeleeRange(victim))
                                 {
@@ -1162,15 +1162,15 @@ class mob_woe_add_generic : public CreatureScript
                             if (!canAttack)
                                 canAttack = true;
                             Unit* target;
-                            if (!me->getVictim())
+                            if (!me->GetVictim())
                             {
                                 // Check bosses
                                 if (Creature* janxi = pInstance->instance->GetCreature(pInstance->GetData64(NPC_JAN_XI)))
                                     if (Creature* qinxi = pInstance->instance->GetCreature(pInstance->GetData64(NPC_QIN_XI)))
                                 {
                                     // Retrieving tanks on bosses
-                                    Unit* tankj = janxi->getVictim();
-                                    Unit* tankq = qinxi->getVictim();
+                                    Unit* tankj = janxi->GetVictim();
+                                    Unit* tankq = qinxi->GetVictim();
 
                                     // Checking distance : Courage will go on the further tank
                                     if (tankj && tankq)
@@ -1212,7 +1212,7 @@ class mob_woe_add_generic : public CreatureScript
                         // Strenght
                         case EVENT_ENERGIZING_SMASH:
                         {
-                            if (Unit* victim = me->getVictim())
+                            if (Unit* victim = me->GetVictim())
                             {
                                 me->CastSpell(me, SPELL_ENERGIZING_SMASH, false);
 
@@ -1286,7 +1286,7 @@ class mob_woe_titan_spark : public CreatureScript
 
                 while (searching)
                 {
-                    if ((*itr)->isAlive())
+                    if ((*itr)->IsAlive())
                     {
                         if (urand(0, 1))
                         {
@@ -1326,7 +1326,7 @@ class mob_woe_titan_spark : public CreatureScript
                     if (Player* target = ObjectAccessor::FindPlayer(targetGuid))
                     {
                         // If near enough, or if player is already dead, then suicide to inflict damages
-                        if (me->GetDistance(target) < 0.5f || !target->isAlive())
+                        if (me->GetDistance(target) < 0.5f || !target->IsAlive())
                         {
                             me->CastSpell(target, SPELL_ENERGY_OF_CREATION, false);
                             me->RemoveAura(SPELL_ENERGY_OF_CREATION);

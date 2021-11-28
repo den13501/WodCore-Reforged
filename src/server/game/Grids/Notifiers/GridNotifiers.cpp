@@ -129,7 +129,7 @@ void VisibleChangesNotifier::Visit(DynamicObjectMapType &m)
 
 inline void CreatureUnitRelocationWorker(Creature* c, Unit* u)
 {
-    if (!u->isAlive() || !c->isAlive() || c == u || u->isInFlight())
+    if (!u->IsAlive() || !c->IsAlive() || c == u || u->isInFlight())
         return;
 
     if (!c->HasUnitState(UNIT_STATE_SIGHTLESS))
@@ -268,7 +268,7 @@ void ObjectUpdater::Visit(GridRefManager<T> &m)
 
 bool AnyDeadUnitObjectInRangeCheck::operator()(Player* u)
 {
-    return !u->isAlive() && !u->HasAuraType(SPELL_AURA_GHOST) && i_searchObj->IsWithinDistInMap(u, i_range);
+    return !u->IsAlive() && !u->HasAuraType(SPELL_AURA_GHOST) && i_searchObj->IsWithinDistInMap(u, i_range);
 }
 
 bool AnyDeadUnitObjectInRangeCheck::operator()(Corpse* u)
@@ -278,7 +278,7 @@ bool AnyDeadUnitObjectInRangeCheck::operator()(Corpse* u)
 
 bool AnyDeadUnitObjectInRangeCheck::operator()(Creature* u)
 {
-    return !u->isAlive() && i_searchObj->IsWithinDistInMap(u, i_range);
+    return !u->IsAlive() && i_searchObj->IsWithinDistInMap(u, i_range);
 }
 
 bool AnyDeadUnitSpellTargetInRangeCheck::operator()(Player* u)

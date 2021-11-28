@@ -293,7 +293,7 @@ class boss_murozond : public CreatureScript
                         case EVENT_CONTINUE:
                             Talk(SAY_GLASS_5 - hourglass);
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                         case EVENT_DESPAWN:
                             me->RemoveAllDynObjects();
@@ -326,7 +326,7 @@ class boss_murozond : public CreatureScript
                 //for (std::list<Creature*>::const_iterator itr = mirrorList.begin(); itr != mirrorList.end(); ++itr)
                 //{
                 //    if (Creature* pMirror = (*itr)->ToCreature())
-                //        if (pMirror->isAlive() && pMirror->IsInWorld())
+                //        if (pMirror->IsAlive() && pMirror->IsInWorld())
                 //            pMirror->AI()->DoAction(ACTION_HOURGLASS);
                 //}
                 Map::PlayerList const &PlayerList = instance->instance->GetPlayers();
@@ -337,7 +337,7 @@ class boss_murozond : public CreatureScript
                             if (!pPlayer->IsInWorld())
                                 continue;
 
-                            if (!pPlayer->isAlive())
+                            if (!pPlayer->IsAlive())
                                 pPlayer->ResurrectPlayer(1.0f, false);
 
                             std::list<uint32> spell_list;
@@ -398,7 +398,7 @@ class npc_murozond_mirror_image : public CreatureScript
 
             void IsSummonedBy(Unit* owner)
             {
-                if (owner && owner->isAlive() && owner->IsInWorld())
+                if (owner && owner->IsAlive() && owner->IsInWorld())
                     if (owner->IsPlayer())
                         m_owner = owner->ToPlayer();
             }
@@ -409,7 +409,7 @@ class npc_murozond_mirror_image : public CreatureScript
                 {
                     if (m_owner && m_owner->IsInWorld())
                     {
-                        if (!m_owner->isAlive())
+                        if (!m_owner->IsAlive())
                             m_owner->ResurrectPlayer(1.0f, false);
 
                         std::list<uint32> spell_list;

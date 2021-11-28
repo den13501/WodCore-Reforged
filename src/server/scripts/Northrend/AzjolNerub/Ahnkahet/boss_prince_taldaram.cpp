@@ -175,7 +175,7 @@ public:
                         Talk(SAY_FEED);
                         me->GetMotionMaster()->Clear();
                         me->SetSpeed(MOVE_WALK, 1.0f, true);
-                        me->GetMotionMaster()->MoveChase(me->getVictim());
+                        me->GetMotionMaster()->MoveChase(me->GetVictim());
                         Phase = FEEDING;
                         uiPhaseTimer = 20*IN_MILLISECONDS;
                         break;
@@ -210,7 +210,7 @@ public:
                             {
                                 target = Unit::GetUnit(*me, (*itr)->getUnitGuid());
                                 // exclude pets & totems
-                                if (target && target->IsPlayer() && target->isAlive())
+                                if (target && target->IsPlayer() && target->IsAlive())
                                     target_list.push_back(target);
                                 target = NULL;
                             }
@@ -238,7 +238,7 @@ public:
         {
             Unit* pEmbraceTarget = GetEmbraceTarget();
 
-            if (Phase == FEEDING && pEmbraceTarget && pEmbraceTarget->isAlive())
+            if (Phase == FEEDING && pEmbraceTarget && pEmbraceTarget->IsAlive())
             {
               uiEmbraceTakenDamage += damage;
               if (uiEmbraceTakenDamage > (uint32) DUNGEON_MODE(DATA_EMBRACE_DMG, H_DATA_EMBRACE_DMG))
@@ -388,7 +388,7 @@ public:
             return true;
 
         Creature* pPrinceTaldaram = Unit::GetCreature(*go, instance->GetData64(DATA_PRINCE_TALDARAM));
-        if (pPrinceTaldaram && pPrinceTaldaram->isAlive())
+        if (pPrinceTaldaram && pPrinceTaldaram->IsAlive())
         {
             // maybe these are hacks :(
             go->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);

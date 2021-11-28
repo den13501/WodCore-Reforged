@@ -197,7 +197,7 @@ class grimrail_depot_mob_grimrail_bombadier : public CreatureScript
                 events.ScheduleEvent(eGrimrailBombadierEvents::EventBlackrockBombs, 5 * TimeConstants::IN_MILLISECONDS);
                 break;
             case eGrimrailBombadierEvents::EventDoubleSlash:
-                if (Unit* l_Victim = me->getVictim())
+                if (Unit* l_Victim = me->GetVictim())
                     me->CastSpell(l_Victim, eGrimrailBombadierSpells::SpellDoubleSlash);
 
                 events.ScheduleEvent(eGrimrailBombadierEvents::EventDoubleSlash, 7 * TimeConstants::IN_MILLISECONDS);
@@ -280,7 +280,7 @@ class grimrail_depot_mob_grimrail_laborer : public CreatureScript
             switch (events.ExecuteEvent())
             {
             case eGrimrailLaborerEvents::EventHaymaker:
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                     events.ScheduleEvent(eGrimrailLaborerEvents::EventHaymaker, 8 * TimeConstants::IN_MILLISECONDS);
                 break;
             default:
@@ -403,7 +403,7 @@ class grimrail_depot_mob_grimrail_overseer : public CreatureScript
                 events.ScheduleEvent(eGrimrailOverseerEvents::EventDash, 15 * TimeConstants::IN_MILLISECONDS);
                 break;
             case eGrimrailOverseerEvents::EventHewingSwipe:
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                     me->CastSpell(l_Target, eGrimrailOverseerSpells::SpellHewingSwipe);
                 events.ScheduleEvent(eGrimrailOverseerEvents::EventHewingSwipe, 6 * TimeConstants::IN_MILLISECONDS);
                 break;
@@ -831,7 +831,7 @@ class grimrail_depot_mob_gromkar_cinderseer : public CreatureScript
             switch (events.ExecuteEvent())
             {
             case eGromkarCinderseerEvents::EventFlametongue:
-                if (Unit* l_Victim = me->getVictim())
+                if (Unit* l_Victim = me->GetVictim())
                     me->CastSpell(l_Victim, eGromkarCinderseerSpells::SpellFlametongueTriggerMissile);
                 events.ScheduleEvent(eGromkarCinderseerEvents::EventFlametongue, 20 * TimeConstants::IN_MILLISECONDS);
                 break;
@@ -1004,7 +1004,7 @@ public:
             switch (events.ExecuteEvent())
             {
             case eGromkarGunnerEvents::EventShrapnelBlast:
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                     me->CastSpell(l_Target, eGromkarGunnerSpells::SpellShrapnelBlast);
 
                 events.ScheduleEvent(eGromkarGunnerEvents::EventShrapnelBlast, 4 * TimeConstants::IN_MILLISECONDS);

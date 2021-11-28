@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Boss_Midnight
@@ -154,7 +165,7 @@ public:
                 if (Creature* pAttumen = me->SummonCreature(SUMMON_ATTUMEN, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 30000))
                 {
                     Attumen = pAttumen->GetGUID();
-                    pAttumen->AI()->AttackStart(me->getVictim());
+                    pAttumen->AI()->AttackStart(me->GetVictim());
                     SetMidnight(pAttumen, me->GetGUID());
                     DoScriptText(RAND(SAY_APPEAR1, SAY_APPEAR2, SAY_APPEAR3), pAttumen);
                 }
@@ -177,10 +188,10 @@ public:
                         {
                             pAttumen->SetDisplayId(MOUNTED_DISPLAYID);
                             pAttumen->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                            if (pAttumen->getVictim())
+                            if (pAttumen->GetVictim())
                             {
-                                pAttumen->GetMotionMaster()->MoveChase(pAttumen->getVictim());
-                                pAttumen->SetTarget(pAttumen->getVictim()->GetGUID());
+                                pAttumen->GetMotionMaster()->MoveChase(pAttumen->GetVictim());
+                                pAttumen->SetTarget(pAttumen->EnsureVictim()->GetGUID());
                             }
                             pAttumen->SetObjectScale(1);
                         }
@@ -253,13 +264,13 @@ void boss_attumen::boss_attumenAI::UpdateAI(const uint32 diff)
 
     if (CleaveTimer <= diff)
     {
-        DoCast(me->getVictim(), SPELL_SHADOWCLEAVE);
+        DoCast(me->GetVictim(), SPELL_SHADOWCLEAVE);
         CleaveTimer = urand(10000, 15000);
     } else CleaveTimer -= diff;
 
     if (CurseTimer <= diff)
     {
-        DoCast(me->getVictim(), SPELL_INTANGIBLE_PRESENCE);
+        DoCast(me->GetVictim(), SPELL_INTANGIBLE_PRESENCE);
         CurseTimer = 30000;
     } else CurseTimer -= diff;
 

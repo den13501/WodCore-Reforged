@@ -17,7 +17,7 @@ NullCreatureAI::NullCreatureAI(Creature* c) : CreatureAI(c) { me->SetReactState(
 
 void PassiveAI::UpdateAI(const uint32)
 {
-    if (me->isInCombat() && me->getAttackers().empty())
+    if (me->IsInCombat() && me->getAttackers().empty())
         EnterEvadeMode();
 }
 
@@ -28,9 +28,9 @@ void PossessedAI::AttackStart(Unit* target)
 
 void PossessedAI::UpdateAI(const uint32 /*diff*/)
 {
-    if (me->getVictim())
+    if (me->GetVictim())
     {
-        if (!me->IsValidAttackTarget(me->getVictim()))
+        if (!me->IsValidAttackTarget(me->GetVictim()))
             me->AttackStop();
         else
             DoMeleeAttackIfReady();

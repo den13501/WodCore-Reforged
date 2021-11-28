@@ -2007,7 +2007,7 @@ void WorldSession::HandleEquipmentSetUse(WorldPacket& p_RecvData)
         p_RecvData >> l_ItemBag[l_Iter];
     }
 
-    EquipmentSlots l_StartSlot = m_Player->isInCombat() ? EQUIPMENT_SLOT_MAINHAND : EQUIPMENT_SLOT_START;
+    EquipmentSlots l_StartSlot = m_Player->IsInCombat() ? EQUIPMENT_SLOT_MAINHAND : EQUIPMENT_SLOT_START;
 
     for (uint32 l_Iter = 0; l_Iter < EQUIPMENT_SLOT_END; ++l_Iter)
     {

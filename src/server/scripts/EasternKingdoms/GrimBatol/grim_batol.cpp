@@ -364,7 +364,7 @@ class npc_ascended_rockbreaker : public CreatureScript
                         events.ScheduleEvent(EVENT_BURNING_FISTS, 45000);
                         break;
                     case EVENT_PETRIFIED_SKIN:
-                        DoCast(me->getVictim(), SPELL_PETRIFIED_SKIN);
+                        DoCast(me->GetVictim(), SPELL_PETRIFIED_SKIN);
                         events.ScheduleEvent(EVENT_PETRIFIED_SKIN, urand(8000, 12000));
                         break;
                     case EVENT_ROCK_SMASH:
@@ -429,7 +429,7 @@ class npc_ascended_waterlasher : public CreatureScript
                         events.ScheduleEvent(EVENT_FOCUSED_GAYSER, urand(15000, 20000));
                         break;
                     case EVENT_WATER_SPOUT:
-                        DoCast(me->getVictim(), SPELL_WATER_SPOUT);
+                        DoCast(me->GetVictim(), SPELL_WATER_SPOUT);
                         events.ScheduleEvent(EVENT_WATER_SPOUT, urand(15000, 20000));
                         break;
                     case EVENT_ABSORB_THUNDER:
@@ -610,7 +610,7 @@ class npc_azureborne_seer : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_TWILIGHT_BOLT:
-                        DoCast(me->getVictim(), SPELL_TWILIGHT_BOLT);
+                        DoCast(me->GetVictim(), SPELL_TWILIGHT_BOLT);
                         events.ScheduleEvent(EVENT_TWILIGHT_BOLT, 3500);
                         break;
                     case EVENT_WARPED_TWILIGHT:
@@ -843,7 +843,7 @@ class npc_crimsonborne_warlord : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_DISARMING_BLAZE:
-                        DoCast(me->getVictim(), SPELL_DISARMING_BLAZE);
+                        DoCast(me->GetVictim(), SPELL_DISARMING_BLAZE);
                         events.ScheduleEvent(EVENT_DISARMING_BLAZE, urand(10000, 12000));
                         break;
                     case EVENT_EMPOWERING_TWILIGHT:
@@ -1010,7 +1010,7 @@ class npc_enslaved_gronn_brute : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_CRUNCH_ARMOR:
-                        DoCast(me->getVictim(), SPELL_CRUNCH_ARMOR);
+                        DoCast(me->GetVictim(), SPELL_CRUNCH_ARMOR);
                         events.ScheduleEvent(EVENT_CRUNCH_ARMOR, urand(10000, 15000));
                         break;
                     }
@@ -1131,7 +1131,7 @@ class npc_trogg_dweller : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_CLAW_PUNCTURE:
-                        DoCast(me->getVictim(), SPELL_CLAW_PUNCTURE);
+                        DoCast(me->GetVictim(), SPELL_CLAW_PUNCTURE);
                         events.ScheduleEvent(EVENT_CLAW_PUNCTURE, urand(5000, 7000));
                         break;
                     }
@@ -1186,7 +1186,7 @@ class npc_twilight_armsmaster : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_MORTAL_STRIKE:
-                        DoCast(me->getVictim(), SPELL_MORTAL_STRIKE);
+                        DoCast(me->GetVictim(), SPELL_MORTAL_STRIKE);
                         events.ScheduleEvent(EVENT_MORTAL_STRIKE, urand(6000, 8000));
                         break;
                     case EVENT_FLURRY_OF_BLOWS:
@@ -1479,7 +1479,7 @@ class npc_twilight_firecatcher : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_MOLTEN_BLAST:
-                        DoCast(me->getVictim(), SPELL_MOLTEN_BLAST);
+                        DoCast(me->GetVictim(), SPELL_MOLTEN_BLAST);
                         events.ScheduleEvent(EVENT_MOLTEN_BLAST, urand(8000, 10000));
                         break;
                     case EVENT_FLAME_CONDUIT:
@@ -1542,7 +1542,7 @@ class npc_twilight_shadow_weaver : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_SHADOW_BOLT:
-                        DoCast(me->getVictim(), SPELL_SHADOW_BOLT);
+                        DoCast(me->GetVictim(), SPELL_SHADOW_BOLT);
                         events.ScheduleEvent(EVENT_SHADOW_BOLT, urand(2500, 3000));
                         break;
                     case EVENT_SHADOW_WEAVE:
@@ -1603,7 +1603,7 @@ class npc_twilight_stormbreaker : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_WATER_BOLT:
-                        DoCast(me->getVictim(), SPELL_WATER_BOLT);
+                        DoCast(me->GetVictim(), SPELL_WATER_BOLT);
                         events.ScheduleEvent(EVENT_WATER_BOLT, urand(2500, 3000));
                         break;
                     case EVENT_WATER_SHELL:
@@ -1663,7 +1663,7 @@ class npc_twilight_thundercaller : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_CHAIN_LIGHTNING:
-                        DoCast(me->getVictim(), SPELL_CHAIN_LIGHTNING);
+                        DoCast(me->GetVictim(), SPELL_CHAIN_LIGHTNING);
                         events.ScheduleEvent(EVENT_CHAIN_LIGHTNING, urand(5000, 7000));
                         break;
                     case EVENT_OVERCHARGE:

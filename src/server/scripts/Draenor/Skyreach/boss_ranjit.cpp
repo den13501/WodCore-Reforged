@@ -169,7 +169,7 @@ namespace MS
                     switch (events.ExecuteEvent())
                     {
                     case uint32(Events::FOUR_WINDS):
-                        me->CastSpell(me->getVictim(), uint32(Spells::FOUR_WINDS));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::FOUR_WINDS));
 
                         m_countWindwalls = 0;
                         if (urand(0, 1))

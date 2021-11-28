@@ -290,8 +290,8 @@ class mob_figment_of_doubt : public CreatureScript
                                 events.ScheduleEvent(EVENT_GATHERING_DOUBT, 1000);
                             break;
                         case EVENT_SPELL_PHANTOM_STRIKE:
-                            if (me->getVictim())
-                                me->CastSpell(me->getVictim(), 9806, false);
+                            if (me->GetVictim())
+                                me->CastSpell(me->GetVictim(), 9806, false);
                             events.ScheduleEvent(EVENT_SPELL_PHANTOM_STRIKE, 20000);
                             break;
                         case EVENT_SPELL_ARMOR_BUFF:
@@ -311,8 +311,8 @@ class mob_figment_of_doubt : public CreatureScript
                             events.ScheduleEvent(EVENT_SIPHON_ESSENCE, 8000);
                             break;
                         case EVENT_STUN:
-                            if (me->getVictim())
-                                me->CastSpell(me->getVictim(), 23454, false);
+                            if (me->GetVictim())
+                                me->CastSpell(me->GetVictim(), 23454, false);
                             events.ScheduleEvent(EVENT_STUN, 7000);
                             break;
                         case EVENT_BLADE_SONG:
@@ -324,8 +324,8 @@ class mob_figment_of_doubt : public CreatureScript
                             events.ScheduleEvent(EVENT_UNTAMED_FURY, 9000);
                             break;
                         case EVENT_GLIMPSE_OF_MADNESS:
-                            if (me->getVictim())
-                                me->CastSpell(me->getVictim(), 26108, false);
+                            if (me->GetVictim())
+                                me->CastSpell(me->GetVictim(), 26108, false);
                             events.ScheduleEvent(EVENT_GLIMPSE_OF_MADNESS, 8000);
                             break;
                     }

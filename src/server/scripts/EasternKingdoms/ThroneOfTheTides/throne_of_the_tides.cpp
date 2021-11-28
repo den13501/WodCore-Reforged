@@ -109,7 +109,7 @@ class npc_throne_of_the_tides_teleporter : public CreatureScript
 
         bool OnGossipHello(Player* pPlayer, Creature* pCreature)
         {
-            if (pPlayer->isInCombat())
+            if (pPlayer->IsInCombat())
                 return false;
             switch (pCreature->GetEntry())
             {

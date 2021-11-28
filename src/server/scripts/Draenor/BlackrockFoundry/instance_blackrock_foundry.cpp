@@ -444,7 +444,7 @@ class instance_blackrock_foundry : public InstanceMapScript
                     }
                     case eFoundryCreatures::ForgemistressFlamehand:
                     {
-                        if (!p_Creature->isAlive())
+                        if (!p_Creature->IsAlive())
                         {
                             instance->SetObjectVisibility(500.0f);
 

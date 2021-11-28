@@ -323,7 +323,7 @@ class boss_ji_kun : public CreatureScript
 
             void InitializeAI()
             {
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     SpawnExitFeathers();
                 else
                     Reset();
@@ -487,7 +487,7 @@ class boss_ji_kun : public CreatureScript
             {
                 if (p_Type == DIRECT_DAMAGE)
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                     {
                         if (l_Victim == p_Victim)
                             me->CastSpell(p_Victim, SPELL_INFECTED_TALONS_AURA, true);
@@ -612,7 +612,7 @@ class boss_ji_kun : public CreatureScript
                     for (std::list<Creature*>::iterator itr = l_HatchlingList.begin(); itr != l_HatchlingList.end(); ++itr)
                     {
                         /// We're not feeding dead hatchling or hatchling which has evolved into fledgling or already eating fledgling
-                        if (!(*itr)->isAlive() || !(*itr)->AI()->GetData(TYPE_IS_HATCHLING) || (*itr)->HasAura(SPELL_EAT))
+                        if (!(*itr)->IsAlive() || !(*itr)->AI()->GetData(TYPE_IS_HATCHLING) || (*itr)->HasAura(SPELL_EAT))
                             continue;
 
                         (*itr)->AI()->DoAction(ACTION_TAKE_FEED);
@@ -912,7 +912,7 @@ class mob_fall_catcher : public CreatureScript
                     for (Player* l_Player : l_PlayerList)
                     {
                         /// Don't bring back dead players
-                        if (!l_Player->isAlive())
+                        if (!l_Player->IsAlive())
                             continue;
 
                         /// If player is supposed to have the aura
@@ -949,7 +949,7 @@ class mob_fall_catcher : public CreatureScript
 
             bool IsPlayerInPreventDamageArea(Player* p_Player)
             {
-                if (p_Player->isAlive())
+                if (p_Player->IsAlive())
                 {
                     float l_PlayerX = p_Player->GetPositionX();
                     float l_PlayerY = p_Player->GetPositionY();
@@ -963,7 +963,7 @@ class mob_fall_catcher : public CreatureScript
 
             bool IsTransportablePlayer(Player* p_Player)
             {
-                if (!IsPlayerInPreventDamageArea(p_Player) || !p_Player->isAlive() || p_Player->HasAura(SPELL_SAFETY_NET_TRIGGER) || p_Player->IsOnVehicle() || p_Player->GetPositionZ() > -183.0f)
+                if (!IsPlayerInPreventDamageArea(p_Player) || !p_Player->IsAlive() || p_Player->HasAura(SPELL_SAFETY_NET_TRIGGER) || p_Player->IsOnVehicle() || p_Player->GetPositionZ() > -183.0f)
                     return false;
                 return true;
             }
@@ -1798,7 +1798,7 @@ class mob_nest_guardian : public CreatureScript
                     {
                         case EVENT_TALON_STRIKE:
                         {
-                            Unit* l_Victim = me->getVictim();
+                            Unit* l_Victim = me->GetVictim();
                             if (!l_Victim)
                                 l_Victim = SelectTarget(SELECT_TARGET_TOPAGGRO, 0, 5.0f, true);
 
@@ -1810,7 +1810,7 @@ class mob_nest_guardian : public CreatureScript
                         }
                         case EVENT_SCREECH:
                         {
-                            if (!me->SelectNearbyTarget() && (!me->getVictim() || me->getVictim()->GetDistance2d(me) > NOMINAL_MELEE_RANGE))
+                            if (!me->SelectNearbyTarget() && (!me->GetVictim() || me->GetVictim()->GetDistance2d(me) > NOMINAL_MELEE_RANGE))
                                 me->CastSpell(me, SPELL_SCREECH, true);
                             m_Events.ScheduleEvent(EVENT_SCREECH, 2000);
                             break;
@@ -1892,7 +1892,7 @@ class spell_regurgitate : public SpellScriptLoader
         public:
             bool operator()(Creature* p_Creature) const
             {
-                if (!p_Creature->isAlive())
+                if (!p_Creature->IsAlive())
                 {
                     if (p_Creature->AI()->GetData(TYPE_IS_HATCHLING))
                         return true;
@@ -2183,9 +2183,9 @@ class at_down_draft : public AreaTriggerEntityScript
             {
                 if (l_Player->IsWithinDist(l_Caster, 30.0f, false))
                 {
-                    if (l_Player->isAlive() && !l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
+                    if (l_Player->IsAlive() && !l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
                         l_Player->SendApplyMovementForce(p_AreaTrigger->GetGUID(), true, l_Pos, -7.0f, 1);
-                    else if (!l_Player->isAlive() && l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
+                    else if (!l_Player->IsAlive() && l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
                         l_Player->SendApplyMovementForce(p_AreaTrigger->GetGUID(), false, l_Pos);
                 }
                 else if (l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))

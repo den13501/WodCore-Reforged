@@ -60,7 +60,7 @@ class shadowmoon_burial_grounds_creature_talker : public CreatureScript
                 /// Reset handling - encounter.
                 if (Creature * l_Sadana = m_Instance->instance->GetCreature(m_Instance->GetData64(eShadowmoonBurialGroundsDatas::DataBossSadana)))
                 {
-                    if (p_Who && p_Who->IsInWorld() && p_Who->GetTypeId() == TypeID::TYPEID_PLAYER && me->IsWithinDistInMap(p_Who, 18.0f) && !m_Intro && (l_Sadana->isDead() ? me->GetEntry() == 980006 : l_Sadana->isAlive()))
+                    if (p_Who && p_Who->IsInWorld() && p_Who->GetTypeId() == TypeID::TYPEID_PLAYER && me->IsWithinDistInMap(p_Who, 18.0f) && !m_Intro && (l_Sadana->isDead() ? me->GetEntry() == 980006 : l_Sadana->IsAlive()))
                     {
                         m_Intro = true;
                         Talk(eTalks::TalkSayMoveLosSay);
@@ -258,7 +258,7 @@ class shadowmoon_burial_grounds_creature_monstrous_corpse_spider : public Creatu
             switch (events.ExecuteEvent())
             {
                 case eMonstrousCorpseSpiderEvents::EventDeathVenom:
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             me->CastSpell(target, eMonstrousCorpseSpiderSpells::SpellDeathVenoumDamage);
                         events.ScheduleEvent(eMonstrousCorpseSpiderEvents::EventDeathVenom, 16 * TimeConstants::IN_MILLISECONDS);
                         break;
@@ -450,7 +450,7 @@ class shadowmoon_burial_grounds_creature_bone_mender : public CreatureScript
                         events.ScheduleEvent(eShadowmoonBoneMenderEvents::EventFratlity, urand(18 * TimeConstants::IN_MILLISECONDS, 20 * TimeConstants::IN_MILLISECONDS));
                         break;
                     case eShadowmoonBoneMenderEvents::EventShadowBolt:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eShadowmoonBoneMenderSpells::SpellShadowBolt);
                         events.ScheduleEvent(eShadowmoonBoneMenderEvents::EventShadowBolt, urand(8 * TimeConstants::IN_MILLISECONDS, 10 * TimeConstants::IN_MILLISECONDS));
                         break;
@@ -1014,7 +1014,7 @@ class shadowmoon_burial_grounds_creature_ritual_of_bones_mob : public CreatureSc
             switch (events.ExecuteEvent())
             {
                 case eRitualOfBonesEvents::EventVoidCleave:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eRitualOfBonesSpells::SpellVoidCleaveDamage);
                         events.ScheduleEvent(eRitualOfBonesEvents::EventVoidCleave, urand(8 * TimeConstants::IN_MILLISECONDS, 15 * TimeConstants::IN_MILLISECONDS));
                         break;

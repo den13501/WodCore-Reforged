@@ -130,7 +130,7 @@ class boss_halazzi : public CreatureScript
 
             void EnterPhase(Phases NextPhase)
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
                 switch (NextPhase)
                 {

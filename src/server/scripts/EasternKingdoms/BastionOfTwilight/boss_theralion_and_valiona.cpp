@@ -390,7 +390,7 @@ class boss_theralion : public CreatureScript
 
             void DamageTaken(Unit* attacker, uint32& damage, SpellInfo const* /*p_SpellInfo*/)
             {
-                if (!me || !me->isAlive())
+                if (!me || !me->IsAlive())
                     return;
                 if (attacker->GetGUID() == me->GetGUID())
                     return;
@@ -435,7 +435,7 @@ class boss_theralion : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -451,7 +451,7 @@ class boss_theralion : public CreatureScript
                 events.ScheduleEvent(EVENT_BERSERK, IsHeroic()? 10*MINUTE*IN_MILLISECONDS: 6*MINUTE*IN_MILLISECONDS);
                 DoAction(ACTION_THERALION_FLY_START);
                 if (Creature* pValiona = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_VALIONA)))
-                    if (!pValiona->isInCombat())
+                    if (!pValiona->IsInCombat())
                         pValiona->SetInCombatWithZone();
                 instance->SetBossState(DATA_VALIONA_THERALION, IN_PROGRESS);
             }
@@ -497,7 +497,7 @@ class boss_theralion : public CreatureScript
                                 events.ScheduleEvent(EVENT_TWILIGHT_SENTRY, urand(3000, 7000));
                                 events.ScheduleEvent(EVENT_TWILIGHT_SHIFT_STACK, urand(15000, 20000));
                             }
-                            AttackStart(me->getVictim());
+                            AttackStart(me->GetVictim());
                             break;
                         case POINT_FLY:
                             events.ScheduleEvent(EVENT_TWILIGHT_BLAST, urand(3000, 4000));
@@ -534,7 +534,7 @@ class boss_theralion : public CreatureScript
                             _sentry->SetPhaseMask(16, true);
                         break;
                     case EVENT_TWILIGHT_SHIFT_STACK:
-                        DoCast(me->getVictim(), SPELL_TWILIGHT_SHIFT_STACK);
+                        DoCast(me->GetVictim(), SPELL_TWILIGHT_SHIFT_STACK);
                         events.ScheduleEvent(EVENT_TWILIGHT_SHIFT_STACK, urand(19000, 20000));
                         break;
                     case EVENT_FABOLOUS_FLAMES:
@@ -702,7 +702,7 @@ class boss_valiona : public CreatureScript
 
             void DamageTaken(Unit* attacker, uint32& damage, SpellInfo const* /*p_SpellInfo*/)
             {
-                if (!me || !me->isAlive())
+                if (!me || !me->IsAlive())
                     return;
                 if (attacker->GetGUID() == me->GetGUID())
                     return;
@@ -743,7 +743,7 @@ class boss_valiona : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -824,7 +824,7 @@ class boss_valiona : public CreatureScript
                             events.ScheduleEvent(EVENT_TWILIGHT_SENTRY, urand(3000, 7000));
                             events.ScheduleEvent(EVENT_TWILIGHT_SHIFT_STACK, urand(10000, 20000));
                         }
-                        AttackStart(me->getVictim());
+                        AttackStart(me->GetVictim());
                         break;
                     case POINT_FLY:
                         events.ScheduleEvent(EVENT_TWILIGHT_METEORITE, urand(6000, 8000));
@@ -879,7 +879,7 @@ class boss_valiona : public CreatureScript
                             _sentry->SetPhaseMask(16, true);
                         break;
                     case EVENT_TWILIGHT_SHIFT_STACK:
-                        DoCast(me->getVictim(), SPELL_TWILIGHT_SHIFT_STACK);
+                        DoCast(me->GetVictim(), SPELL_TWILIGHT_SHIFT_STACK);
                         events.ScheduleEvent(EVENT_TWILIGHT_SHIFT_STACK, urand(19000, 20000));
                         break;
                     case EVENT_BLACKOUT:

@@ -114,11 +114,11 @@ namespace MS
                     {
                     case uint32(Events::Smash):
                         m_events.ScheduleEvent(uint32(Events::Smash), 16000);
-                        me->CastSpell(me->getVictim(), uint32(Spells::Smash));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::Smash));
                         break;
                     case uint32(Events::Burn):
                         m_events.ScheduleEvent(uint32(Events::Burn), 18000);
-                        me->CastSpell(me->getVictim(), uint32(Spells::Burn));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::Burn));
                         break;
                     default:
                         break;
@@ -293,7 +293,7 @@ namespace MS
                     {
                     case uint32(Events::SolarWrath):
                         m_events.ScheduleEvent(uint32(Events::SolarWrath), urand(1500, 2500));
-                        me->CastSpell(me->getVictim(), uint32(Spells::SolarWrath));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::SolarWrath));
                         break;
                     case uint32(Events::SolarDetonation):
                         m_events.ScheduleEvent(uint32(Events::SolarDetonation), urand(5000, 7000));
@@ -622,7 +622,7 @@ namespace MS
                     case uint32(Events::CHANGE_TARGET):
                         m_events.ScheduleEvent(uint32(Events::CHANGE_TARGET), 6000);
                         me->CastSpell(me, uint32(Spells::INVISIBILITY_DETECTION), true);
-                        me->CastSpell(me->getVictim(), uint32(Spells::FIXATED), true);
+                        me->CastSpell(me->GetVictim(), uint32(Spells::FIXATED), true);
                         me->getThreatManager().resetAllAggro();
 
                         if (Player* l_Plr = ScriptUtils::SelectRandomPlayerIncludedTank(me, 30.0f))
@@ -633,7 +633,7 @@ namespace MS
                         break;
                     case uint32(Events::EXPOSE_WEAKNESS):
                         m_events.ScheduleEvent(uint32(Events::EXPOSE_WEAKNESS), 10000);
-                        me->CastSpell(me->getVictim(), uint32(Spells::EXPOSE_WEAKNESS));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::EXPOSE_WEAKNESS));
                         break;
                     default:
                         break;
@@ -707,7 +707,7 @@ namespace MS
                     {
                     case uint32(Events::SLASH):
                         m_events.ScheduleEvent(uint32(Events::SLASH), urand(2500, 5000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::SLASH));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::SLASH));
                         break;
                     case uint32(Events::PIERCING_RUSH):
                         m_events.ScheduleEvent(uint32(Events::PIERCING_RUSH), urand(2500, 5000));
@@ -784,7 +784,7 @@ namespace MS
                     {
                     case uint32(Events::DERVISH):
                         m_events.ScheduleEvent(uint32(Events::DERVISH), urand(5000, 7000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::DERVISH));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::DERVISH));
                         break;
                     default:
                         break;
@@ -1022,7 +1022,7 @@ namespace MS
                     {
                     case uint32(Events::WIND_BURST):
                         m_events.ScheduleEvent(uint32(Events::WIND_BURST), urand(4000, 6000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::WIND_BURST));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::WIND_BURST));
                         break;
                     default:
                         break;
@@ -1192,7 +1192,7 @@ namespace MS
                             if (Player* l_plr = ScriptUtils::SelectFarEnoughPlayerIncludedTank(me, 5.0f))
                                 me->CastSpell(l_plr, uint32(Spells::THROW_CHAKRAM_WHITE));
                         }
-                        me->CastSpell(me->getVictim(), uint32(Spells::THROW_CHAKRAM_2)); // Always launched with the two others.
+                        me->CastSpell(me->GetVictim(), uint32(Spells::THROW_CHAKRAM_2)); // Always launched with the two others.
                         break;
                     case uint32(Events::SPINNING_BLADE):
                         m_events.ScheduleEvent(uint32(Events::SPINNING_BLADE), urand(8000, 10000));
@@ -1201,7 +1201,7 @@ namespace MS
                         break;
                     case uint32(Events::BLADE_DANCE):
                         m_events.ScheduleEvent(uint32(Events::BLADE_DANCE), urand(17000, 25000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::BLADE_DANCE));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::BLADE_DANCE));
                         break;
                     default:
                         break;
@@ -1436,7 +1436,7 @@ namespace MS
                     {
                     case uint32(Events::PIERCING_RUSH):
                         m_events.ScheduleEvent(uint32(Events::PIERCING_RUSH), urand(5000, 13000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::PIERCING_RUSH));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::PIERCING_RUSH));
                         break;
                     default:
                         break;
@@ -1602,7 +1602,7 @@ namespace MS
                             if (Player* l_plr = ScriptUtils::SelectFarEnoughPlayerIncludedTank(me, 5.0f))
                                 me->CastSpell(l_plr, uint32(Spells::THROW_CHAKRAM_WHITE));
                         }
-                        me->CastSpell(me->getVictim(), uint32(Spells::THROW_CHAKRAM_2)); // Always launched with the two others.
+                        me->CastSpell(me->GetVictim(), uint32(Spells::THROW_CHAKRAM_2)); // Always launched with the two others.
                         break;
                     case uint32(Events::SPINNING_BLADE):
                         m_events.ScheduleEvent(uint32(Events::SPINNING_BLADE), urand(8000, 10000));
@@ -1686,7 +1686,7 @@ namespace MS
                     {
                     case uint32(Events::SOLAR_WRATH):
                         m_events.ScheduleEvent(uint32(Events::SOLAR_WRATH), urand(3000, 5000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::SOLAR_WRATH));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::SOLAR_WRATH));
                         break;
                     case uint32(Events::SOLAR_DETONATION):
                         m_events.ScheduleEvent(uint32(Events::SOLAR_DETONATION), urand(10000, 14000));

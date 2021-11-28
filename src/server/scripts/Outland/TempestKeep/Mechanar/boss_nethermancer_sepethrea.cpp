@@ -108,7 +108,7 @@ class boss_nethermancer_sepethrea : public CreatureScript
                 //Frost Attack
                 if (frost_attack_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_FROST_ATTACK);
+                    DoCast(me->GetVictim(), SPELL_FROST_ATTACK);
 
                     frost_attack_Timer = urand(7000, 10000);
                 }
@@ -118,7 +118,7 @@ class boss_nethermancer_sepethrea : public CreatureScript
                 //Arcane Blast
                 if (arcane_blast_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_ARCANE_BLAST);
+                    DoCast(me->GetVictim(), SPELL_ARCANE_BLAST);
                     arcane_blast_Timer = 15000;
                 }
                 else
@@ -126,7 +126,7 @@ class boss_nethermancer_sepethrea : public CreatureScript
                 //Dragons Breath
                 if (dragons_breath_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_DRAGONS_BREATH);
+                    DoCast(me->GetVictim(), SPELL_DRAGONS_BREATH);
                     {
                         if (rand()%2)
                             return;
@@ -140,7 +140,7 @@ class boss_nethermancer_sepethrea : public CreatureScript
                 //Knockback
                 if (knockback_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_KNOCKBACK);
+                    DoCast(me->GetVictim(), SPELL_KNOCKBACK);
                     knockback_Timer = urand(15000, 25000);
                 }
                 else
@@ -149,7 +149,7 @@ class boss_nethermancer_sepethrea : public CreatureScript
                 //Solarburn
                 if (solarburn_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_SOLARBURN);
+                    DoCast(me->GetVictim(), SPELL_SOLARBURN);
                     solarburn_Timer = 30000;
                 }
                 else
@@ -231,8 +231,8 @@ class mob_ragin_flames : public CreatureScript
 
                     if (inferno_Timer <= diff)
                     {
-                        DoCast(me->getVictim(), SPELL_INFERNO);
-                        me->TauntApply(me->getVictim());
+                        DoCast(me->GetVictim(), SPELL_INFERNO);
+                        me->TauntApply(me->GetVictim());
                         inferno_Timer = 10000;
                     } else inferno_Timer -= diff;
 

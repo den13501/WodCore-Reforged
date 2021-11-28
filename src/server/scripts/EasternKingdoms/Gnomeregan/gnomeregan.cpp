@@ -229,7 +229,7 @@ public:
                 {
                     if (Creature* summon = Unit::GetCreature(*me, *itr))
                     {
-                        if (summon->isAlive())
+                        if (summon->IsAlive())
                             summon->DisappearAndDie();
                         else
                             summon->RemoveCorpse();
@@ -251,7 +251,7 @@ public:
                     if (player->isGameMaster())
                         continue;
 
-                    if (player->isAlive())
+                    if (player->IsAlive())
                     {
                         temp->SetInCombatWith(player);
                         player->SetInCombatWith(temp);

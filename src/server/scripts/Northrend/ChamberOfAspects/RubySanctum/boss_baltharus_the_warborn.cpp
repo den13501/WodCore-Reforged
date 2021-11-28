@@ -170,7 +170,7 @@ class boss_baltharus_the_warborn : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING) && !introPhase)
                     return;
 
-                if (Unit* victim = me->getVictim())
+                if (Unit* victim = me->GetVictim())
                     if (victim->HasAura(SPELL_REPELLING_WAVE))
                         return;
 
@@ -268,7 +268,7 @@ class npc_baltharus_the_warborn_clone : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                if (Unit* victim = me->getVictim())
+                if (Unit* victim = me->GetVictim())
                     if (victim->HasAura(SPELL_REPELLING_WAVE))
                         return;
 

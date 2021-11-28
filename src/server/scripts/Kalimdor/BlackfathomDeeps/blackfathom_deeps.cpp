@@ -112,7 +112,7 @@ public:
                     if (player->isGameMaster())
                         continue;
 
-                    if (player->isAlive())
+                    if (player->IsAlive())
                     {
                         me->SetInCombatWith(player);
                         player->SetInCombatWith(me);

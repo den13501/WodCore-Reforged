@@ -1618,7 +1618,7 @@ class npc_foundry_siegemaker : public CreatureScript
                     if (TempSummon* l_Temp = me->ToTempSummon())
                     {
                         if (Unit* l_Owner = me->ToTempSummon()->GetSummoner())
-                            EnterCombat(l_Owner->getVictim());
+                            EnterCombat(l_Owner->GetVictim());
                     }
 
                     AddTimedDelayedOperation(1 * TimeConstants::IN_MILLISECONDS, [this]() -> void
@@ -1749,7 +1749,7 @@ class npc_foundry_siegemaker : public CreatureScript
 
                 if (Player* l_Target = Player::GetPlayer(*me, m_Target))
                 {
-                    if (!l_Target->isAlive() || l_Target->HasAura(eSpells::ObscuredAura))
+                    if (!l_Target->IsAlive() || l_Target->HasAura(eSpells::ObscuredAura))
                     {
                         m_Target = 0;
                         me->CastSpell(me, eSpells::Fixate, true);

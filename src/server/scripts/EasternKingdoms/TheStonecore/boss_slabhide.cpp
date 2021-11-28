@@ -113,7 +113,7 @@ class boss_slabhide : public CreatureScript
                         events.ScheduleEvent(EVENT_SAND_BLAST, 10000);
                         events.ScheduleEvent(EVENT_LAVA_FISSURE, urand(15000, 28000));
                         events.ScheduleEvent(EVENT_FLY, 50000);
-                        AttackStart(me->getVictim());
+                        AttackStart(me->GetVictim());
                         break;
                     }
                 }

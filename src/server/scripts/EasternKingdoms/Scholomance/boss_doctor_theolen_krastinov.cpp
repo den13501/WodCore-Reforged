@@ -69,7 +69,7 @@ public:
             //Rend_Timer
             if (m_uiRend_Timer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_REND);
+                DoCast(me->GetVictim(), SPELL_REND);
                 m_uiRend_Timer = 10000;
             }
             else
@@ -78,7 +78,7 @@ public:
             //Backhand_Timer
             if (m_uiBackhand_Timer <= uiDiff)
             {
-                DoCast(me->getVictim(), SPELL_BACKHAND);
+                DoCast(me->GetVictim(), SPELL_BACKHAND);
                 m_uiBackhand_Timer = 10000;
             }
             else

@@ -247,8 +247,8 @@ public:
             events.Update(diff);
 
             // No kiting!
-            if (me->GetDistance(me->getVictim()) > 60.00f && me->GetDistance(me->getVictim()) < 120.00f)
-                DoCast(me->getVictim(), SPELL_SUMMON);
+            if (me->GetDistance(me->GetVictim()) > 60.00f && me->GetDistance(me->GetVictim()) < 120.00f)
+                DoCast(me->GetVictim(), SPELL_SUMMON);
 
             bool ApplySupreme = true;
 
@@ -281,7 +281,7 @@ public:
                     events.ScheduleEvent(EVENT_SILENCE, urand(20000, 30000));
                     break;
                 case EVENT_CYCLONE:
-                    DoCast(me->getVictim(), SPELL_CYCLONE);
+                    DoCast(me->GetVictim(), SPELL_CYCLONE);
                     events.ScheduleEvent(EVENT_CYCLONE, 20000);
                     break;
                 case EVENT_STOMP:

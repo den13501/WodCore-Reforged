@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "InstanceScript.h"
 #include "DatabaseEnv.h"
@@ -190,15 +201,15 @@ void InstanceScript::UpdateMinionState(Creature* minion, EncounterState state)
     switch (state)
     {
         case NOT_STARTED:
-            if (!minion->isAlive())
+            if (!minion->IsAlive())
                 minion->Respawn();
-            else if (minion->isInCombat())
+            else if (minion->IsInCombat())
                 minion->AI()->EnterEvadeMode();
             break;
         case IN_PROGRESS:
-            if (!minion->isAlive())
+            if (!minion->IsAlive())
                 minion->Respawn();
-            else if (!minion->getVictim())
+            else if (!minion->GetVictim())
                 minion->AI()->DoZoneInCombat();
             break;
         default:
@@ -369,7 +380,7 @@ bool InstanceScript::SetBossState(uint32 p_ID, EncounterState p_State)
                 {
                     for (MinionSet::iterator l_Iter = l_BossInfos->minion.begin(); l_Iter != l_BossInfos->minion.end(); ++l_Iter)
                     {
-                        if ((*l_Iter)->isWorldBoss() && (*l_Iter)->isAlive())
+                        if ((*l_Iter)->isWorldBoss() && (*l_Iter)->IsAlive())
                             return false;
                     }
 
@@ -804,7 +815,7 @@ void InstanceScript::DoCombatStopOnPlayers()
     {
         if (Player* l_Player = l_Iter->getSource())
         {
-            if (!l_Player->isInCombat())
+            if (!l_Player->IsInCombat())
                 continue;
 
             l_Player->CombatStop();
@@ -854,7 +865,7 @@ void InstanceScript::RespawnCreature(uint64 p_Guid /*= 0*/)
         if (p_Guid && l_Creature->GetGUID() != p_Guid)
             continue;
 
-        if (l_Creature->isAlive() && l_Creature->isInCombat() && l_Creature->IsAIEnabled)
+        if (l_Creature->IsAlive() && l_Creature->IsInCombat() && l_Creature->IsAIEnabled)
             l_Creature->AI()->EnterEvadeMode();
         else if (l_Creature->isDead())
         {
@@ -1593,7 +1604,7 @@ bool InstanceScript::IsWipe()
         if (!player)
             continue;
 
-        if (player->isAlive() && !player->isGameMaster())
+        if (player->IsAlive() && !player->isGameMaster())
             return false;
     }
 
@@ -1923,5 +1934,13 @@ void InstanceScript::ConsumeCombatResurrectionCharge()
 
     --m_InCombatResCount;
     SendEncounterUnit(EncounterFrameType::ENCOUNTER_FRAME_IN_COMBAT_RESURRECTION);
+}
+
+bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
+{
+    if (InstanceMap* instance = obj->GetMap()->ToInstanceMap())
+        return instance->GetScriptName() == scriptName;
+
+    return false;
 }
 //////////////////////////////////////////////////////////////////////////

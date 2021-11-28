@@ -877,7 +877,7 @@ public:
                 switch (eventId)
                 {
                     case EVENT_SOUL_STRIKE:
-                        DoCast(me->getVictim(), SPELL_SOUL_STRIKE);
+                        DoCast(me->GetVictim(), SPELL_SOUL_STRIKE);
                         events.RescheduleEvent(EVENT_SOUL_STRIKE, 8000);
                         return;
                 }

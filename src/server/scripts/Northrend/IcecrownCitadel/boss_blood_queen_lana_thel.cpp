@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "ObjectMgr.h"
 #include "ScriptMgr.h"
@@ -348,7 +359,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
                         case EVENT_BLOOD_MIRROR:
                         {
                             // victim can be NULL when this is processed in the same update tick as EVENT_AIR_PHASE
-                            if (me->getVictim())
+                            if (me->GetVictim())
                             {
                                 Player* newOfftank = SelectRandomTarget(true);
                                 if (newOfftank != nullptr && m_OffTankGuid != newOfftank->GetGUID())
@@ -359,8 +370,8 @@ class boss_blood_queen_lana_thel : public CreatureScript
                                         // both spells have SPELL_ATTR5_SINGLE_TARGET_SPELL, no manual removal needed
                                         if (Player* l_OffTank = Player::GetPlayer(*me, m_OffTankGuid))
                                         {
-                                            l_OffTank->CastSpell(me->getVictim(), SPELL_BLOOD_MIRROR_DAMAGE, true);
-                                            me->getVictim()->CastSpell(l_OffTank, SPELL_BLOOD_MIRROR_DUMMY, true);
+                                            l_OffTank->CastSpell(me->GetVictim(), SPELL_BLOOD_MIRROR_DAMAGE, true);
+                                            me->EnsureVictim()->CastSpell(l_OffTank, SPELL_BLOOD_MIRROR_DUMMY, true);
 
                                             DoCastVictim(SPELL_BLOOD_MIRROR_VISUAL);
 
@@ -474,7 +485,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
 
                 for (std::list<HostileReference*>::const_iterator itr = threatlist.begin(); itr != threatlist.end(); ++itr)
                     if (Unit* refTarget = (*itr)->getTarget())
-                        if (refTarget != me->getVictim() && refTarget->IsPlayer() && (includeOfftank ? true : (refTarget->GetGUID() != m_OffTankGuid)))
+                        if (refTarget != me->GetVictim() && refTarget->IsPlayer() && (includeOfftank ? true : (refTarget->GetGUID() != m_OffTankGuid)))
                             tempTargets.push_back(refTarget->ToPlayer());
 
                 if (tempTargets.empty())
@@ -488,7 +499,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
 
                 if (includeOfftank)
                 {
-                    tempTargets.sort(JadeCore::ObjectDistanceOrderPred(me->getVictim()));
+                    tempTargets.sort(JadeCore::ObjectDistanceOrderPred(me->GetVictim()));
                     return tempTargets.front();
                 }
 

@@ -156,7 +156,7 @@ class instance_iron_docks : public InstanceMapScript
                             {
                                 if (Creature* l_Gwarnok = instance->GetCreature(GetData64(eIronDocksDatas::DataGwarnok)))
                                 {
-                                    if (l_Gwarnok->isAlive() && l_Olugar->isAlive() && l_Daruna->isAlive())
+                                    if (l_Gwarnok->IsAlive() && l_Olugar->IsAlive() && l_Daruna->IsAlive())
                                         DoCompleteAchievement(eIronDocksAchievements::AchievementMilitaristicExpansionist);
                                 }
                             }

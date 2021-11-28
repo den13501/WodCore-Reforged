@@ -269,7 +269,7 @@ class boss_ming_the_cunning : public CreatureScript
                         break;
                     case EVENT_LIGHTNING_BOLT:
                         if (!me->HasAura(SPELL_MAGNETIC_FIELD))
-                            me->CastSpell(me->getVictim(), SPELL_LIGHTNING_BOLT, false);
+                            me->CastSpell(me->GetVictim(), SPELL_LIGHTNING_BOLT, false);
                         events.ScheduleEvent(EVENT_LIGHTNING_BOLT, 6000);
                         break;
                     case EVENT_WHIRLING_DERVISH:
@@ -334,7 +334,7 @@ class mob_whirling_dervish : public CreatureScript
 
                 events.Update(diff);
 
-                if (me->getVictim() && me->getVictim()->GetDistance2d(me) > 5.0f)
+                if (me->GetVictim() && me->GetVictim()->GetDistance2d(me) > 5.0f)
                     return;
 
                 while (uint32 eventId = events.ExecuteEvent())
@@ -342,8 +342,8 @@ class mob_whirling_dervish : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), SPELL_THROW, false);
-                        me->CastSpell(me->getVictim(), SPELL_THROW_2, false);
+                        me->CastSpell(me->GetVictim(), SPELL_THROW, false);
+                        me->CastSpell(me->GetVictim(), SPELL_THROW_2, false);
                         me->Attack(SelectTarget(SELECT_TARGET_RANDOM), false);
                         events.ScheduleEvent(1, 3000);
                         break;
@@ -463,7 +463,7 @@ class mob_adepts : public CreatureScript
 
             void UpdateAI(const uint32 diff)
             {
-                if (status == STATUS_ATTACK_GRUNTS && me->getVictim() && me->getVictim()->ToPlayer())
+                if (status == STATUS_ATTACK_GRUNTS && me->GetVictim() && me->GetVictim()->ToPlayer())
                     me->AttackStop();
 
                 events.Update(diff);
@@ -601,7 +601,7 @@ class boss_kuai_the_brute : public CreatureScript
                         me->GetInstanceScript()->SetData(TYPE_KUAI_RETIRED, 0);
 
                     Creature* mu_shiba = me->GetMap()->GetCreature(pet_guid);
-                    if (mu_shiba && mu_shiba->isAlive())
+                    if (mu_shiba && mu_shiba->IsAlive())
                     {
                         mu_shiba->GetMotionMaster()->MoveFollow(me, 2.0f, M_PI / 4);
                         if (mu_shiba->GetAI())
@@ -634,7 +634,7 @@ class boss_kuai_the_brute : public CreatureScript
                         break;
                     case EVENT_SHOCKWAVE:
                         {
-                            me->CastSpell(me->getVictim(), SPELL_SHOCKWAVE, false);
+                            me->CastSpell(me->GetVictim(), SPELL_SHOCKWAVE, false);
                             me->AddUnitState(UNIT_STATE_CANNOT_TURN);
                             events.ScheduleEvent(EVENT_SHOCKWAVE, 15000);
                             events.ScheduleEvent(EVENT_SHOCKWAVE_2, 4000);
@@ -729,7 +729,7 @@ class mob_mu_shiba : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), SPELL_RAVAGE, false);
+                        me->CastSpell(me->GetVictim(), SPELL_RAVAGE, false);
                         me->Attack(SelectTarget(SELECT_TARGET_RANDOM), false);
                         events.ScheduleEvent(1, 25000);
                         break;
@@ -867,11 +867,11 @@ class boss_haiyan_the_unstoppable : public CreatureScript
                             me->GetInstanceScript()->SetData(TYPE_OUTRO_03, 0);
                         break;
                     case EVENT_TRAUMATIC_BLOW:
-                        me->CastSpell(me->getVictim(), SPELL_TRAUMATIC_BLOW, false);
+                        me->CastSpell(me->GetVictim(), SPELL_TRAUMATIC_BLOW, false);
                         events.ScheduleEvent(EVENT_TRAUMATIC_BLOW, 6000);
                         break;
                     case EVENT_CONFLAGRATE:
-                        me->CastSpell(me->getVictim(), SPELL_CONFLAGRATE, false);
+                        me->CastSpell(me->GetVictim(), SPELL_CONFLAGRATE, false);
                         events.ScheduleEvent(EVENT_CONFLAGRATE, 10000);
                         events.ScheduleEvent(EVENT_CONFLAGRATE_2, 2000);
                         break;
@@ -884,7 +884,7 @@ class boss_haiyan_the_unstoppable : public CreatureScript
                             me->GetInstanceScript()->SetData(TYPE_ALL_ATTACK, 0);
                         break;
                     case EVENT_CONFLAGRATE_2:
-                        me->CastSpell(me->getVictim(), SPELL_CONFLAGRATE_4, false);
+                        me->CastSpell(me->GetVictim(), SPELL_CONFLAGRATE_4, false);
                         break;
                     }
                 }

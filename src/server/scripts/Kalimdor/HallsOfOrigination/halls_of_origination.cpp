@@ -449,7 +449,7 @@ class npc_water_warden_water_bubble : public CreatureScript
                     return;
                 }
 
-                if (me->GetOwner()->isAlive())
+                if (me->GetOwner()->IsAlive())
                     me->DespawnOrUnsummon();
 
                 if (!me->GetOwner()->HasAura(SPELL_BUBBLE_BOUND) &&
@@ -584,7 +584,7 @@ class go_halls_of_origination_transit_device : public GameObjectScript
 
         bool OnGossipHello(Player* pPlayer, GameObject* /*pGo*/)
         {
-            if (pPlayer->isInCombat())
+            if (pPlayer->IsInCombat())
                 return true;
             return false;
         }

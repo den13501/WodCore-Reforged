@@ -155,7 +155,7 @@ class boss_admiral_garan : public CreatureScript
 
                         for (Creature* l_Trash : l_TrashesList)
                         {
-                            if (l_Trash->isAlive())
+                            if (l_Trash->IsAlive())
                                 m_TrashesGuids.insert(l_Trash->GetGUID());
                         }
 
@@ -3309,7 +3309,7 @@ class npc_foundry_iron_eviscerator : public CreatureScript
 
                 if (Player* l_Target = Player::GetPlayer(*me, m_FixateTarget))
                 {
-                    if (!l_Target->isAlive() || me->GetCurrentSpell(CurrentSpellTypes::CURRENT_CHANNELED_SPELL) == nullptr)
+                    if (!l_Target->IsAlive() || me->GetCurrentSpell(CurrentSpellTypes::CURRENT_CHANNELED_SPELL) == nullptr)
                     {
                         m_FixateTarget = 0;
                         me->CastSpell(me, eSpells::SpellFixate, true);

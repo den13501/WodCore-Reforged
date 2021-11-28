@@ -190,7 +190,7 @@ class instance_mogu_shan_vault : public InstanceMapScript
                     case NPC_AMETHYST:
                     case NPC_COBALT:
                     {
-                        if (creature->isAlive())
+                        if (creature->IsAlive())
                         {
                             stoneGuardGUIDs.push_back(creature->GetGUID());
                             guardianAliveCount++;
@@ -615,7 +615,7 @@ class instance_mogu_shan_vault : public InstanceMapScript
                     if (!player)
                         continue;
 
-                    if (player->isAlive() && !player->isGameMaster() && !player->HasAura(115877)) // Aura 115877 = Totaly Petrified
+                    if (player->IsAlive() && !player->isGameMaster() && !player->HasAura(115877)) // Aura 115877 = Totaly Petrified
                         return false;
                 }
 

@@ -196,12 +196,12 @@ namespace MS { namespace Garrison
     {
         me->LoadEquipment(1, true);
 
-        if (m_Owner && m_Owner->getVictim() && m_Owner->getVictim() != me->getVictim())
+        if (m_Owner && m_Owner->GetVictim() && m_Owner->GetVictim() != me->GetVictim())
         {
             if (!m_Ranged)
-                AttackStart(m_Owner->getVictim());
+                AttackStart(m_Owner->GetVictim());
             else
-                AttackStartCaster(m_Owner->getVictim(), 8);
+                AttackStartCaster(m_Owner->GetVictim(), 8);
         }
     }
     /// On AI Update
@@ -216,7 +216,7 @@ namespace MS { namespace Garrison
 
         if (m_Ranged)
         {
-            if (me->IsWithinMeleeRange(me->getVictim(), 1.0f))
+            if (me->IsWithinMeleeRange(me->GetVictim(), 1.0f))
             {
                 me->CastSpell(me, Spells::Disengage, TRIGGERED_FULL_MASK);
                 me->resetAttackTimer();
@@ -1556,7 +1556,7 @@ namespace MS { namespace Garrison
         {
             if (m_AttackTimer <= p_Diff)
             {
-                if (Unit* l_Victim = me->getVictim())
+                if (Unit* l_Victim = me->GetVictim())
                     me->CastSpell(l_Victim, eSpells::SpellTurretFire, false);
 
                 m_AttackTimer = 4000;

@@ -103,13 +103,13 @@ public:
 
             if (Shock_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_SHOCK);
+                DoCast(me->GetVictim(), SPELL_SHOCK);
                 Shock_Timer = 10000;
             } else Shock_Timer -= diff;
 
             if (EnvelopingWinds_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_ENVELOPING_WINDS);
+                DoCast(me->GetVictim(), SPELL_ENVELOPING_WINDS);
                 EnvelopingWinds_Timer = 25000;
             } else EnvelopingWinds_Timer -= diff;
 
@@ -183,7 +183,7 @@ public:
                     DoScriptText(EMOTE_WOLF_HOWL, me);
                     break;
                 case 50:
-                    if (pRyga && pRyga->isAlive() && !pRyga->isInCombat())
+                    if (pRyga && pRyga->IsAlive() && !pRyga->IsInCombat())
                         DoScriptText(SAY_WOLF_WELCOME, pRyga);
                     break;
             }

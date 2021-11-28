@@ -38,7 +38,7 @@ class spell_toy_stonebound : public SpellScriptLoader
                     if (Unit* l_Target = GetUnitOwner())
                     {
                         bool l_Remove = false;
-                        if (l_Target->isAlive())
+                        if (l_Target->IsAlive())
                             l_Remove = true;
 
                         if (l_Target->GetTypeId() == TypeID::TYPEID_PLAYER)

@@ -348,7 +348,7 @@ class npc_neptulon : public CreatureScript
                 Map::PlayerList const &pPlayerList = me->GetMap()->GetPlayers();
                 if (!pPlayerList.isEmpty())
                     for (Map::PlayerList::const_iterator itr = pPlayerList.begin(); itr != pPlayerList.end(); ++itr)
-                        if (itr->getSource()->isAlive())
+                        if (itr->getSource()->IsAlive())
                             pAliveList.push_back(itr->getSource());
 
                 if (!pAliveList.empty())
@@ -366,7 +366,7 @@ class npc_neptulon : public CreatureScript
 
                 if (!pPlayerList.isEmpty())
                     for (Map::PlayerList::const_iterator itr = pPlayerList.begin(); itr != pPlayerList.end(); ++itr)
-                        if (itr->getSource()->isAlive())
+                        if (itr->getSource()->IsAlive())
                             return true;
                 return false;
             };
@@ -432,11 +432,11 @@ class npc_vicious_mindslasher : public CreatureScript
                         events.ScheduleEvent(EVENT_BRAIN_SPIKE, urand(15000, 20000));
                         break;
                     case EVENT_VEIL_OF_SHADOW:
-                        DoCast(me->getVictim(), SPELL_VEIL_OF_SHADOW);
+                        DoCast(me->GetVictim(), SPELL_VEIL_OF_SHADOW);
                         events.ScheduleEvent(EVENT_VEIL_OF_SHADOW, urand(13000, 20000));
                         break;
                     case EVENT_SHADOW_BOLT:
-                        DoCast(me->getVictim(), SPELL_SHADOW_BOLT);
+                        DoCast(me->GetVictim(), SPELL_SHADOW_BOLT);
                         events.ScheduleEvent(EVENT_SHADOW_BOLT, 2000);
                         break;
                     }

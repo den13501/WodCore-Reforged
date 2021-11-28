@@ -109,7 +109,7 @@ namespace MS
 
             l_TargetList.remove_if([p_Me, p_Range, p_CheckLoS](Unit* p_Unit) {
                 return !(p_Unit && (p_Me->IsWithinLOSInMap(p_Unit) || !p_CheckLoS) &&
-                    p_Me->IsWithinDistInMap(p_Unit, p_Range) && p_Unit->isAlive() && p_Unit->GetGUID() != p_Me->GetGUID());
+                    p_Me->IsWithinDistInMap(p_Unit, p_Range) && p_Unit->IsAlive() && p_Unit->GetGUID() != p_Me->GetGUID());
             });
             if (l_TargetList.empty())
                 return nullptr;
@@ -132,7 +132,7 @@ namespace MS
             for (Unit* l_Unit : l_TargetList)
             {
                 if (l_Unit && (p_Me->IsWithinLOSInMap(l_Unit) || !p_CheckLoS) &&
-                    p_Me->IsWithinDistInMap(l_Unit, p_Range) && l_Unit->isAlive() && l_Unit->GetGUID() != p_Me->GetGUID())
+                    p_Me->IsWithinDistInMap(l_Unit, p_Range) && l_Unit->IsAlive() && l_Unit->GetGUID() != p_Me->GetGUID())
                 {
                     return l_Unit;
                 }
@@ -155,7 +155,7 @@ namespace MS
             for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
             {
                 if (!i->getSource()->isGameMaster() && (p_me->IsWithinLOSInMap(i->getSource()) || !p_checkLoS) &&
-                    p_me->GetExactDist2d(i->getSource()) < p_range && i->getSource()->isAlive())
+                    p_me->GetExactDist2d(i->getSource()) < p_range && i->getSource()->IsAlive())
                     temp.push_back(i->getSource());
             }
 
@@ -193,8 +193,8 @@ namespace MS
             std::list<Player*> temp;
             for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
             {
-                if (!i->getSource()->isGameMaster() && (p_me->IsWithinLOSInMap(i->getSource()) || !p_checkLoS) && p_me->getVictim() != i->getSource() &&
-                    p_me->IsWithinDistInMap(i->getSource(), p_range) && i->getSource()->isAlive())
+                if (!i->getSource()->isGameMaster() && (p_me->IsWithinLOSInMap(i->getSource()) || !p_checkLoS) && p_me->GetVictim() != i->getSource() &&
+                    p_me->IsWithinDistInMap(i->getSource(), p_range) && i->getSource()->IsAlive())
                     temp.push_back(i->getSource());
             }
 
@@ -223,7 +223,7 @@ namespace MS
             {
                 if (!i->getSource()->isGameMaster() && (p_me->IsWithinLOSInMap(i->getSource()) || !p_checkLoS)
                     && !p_me->IsWithinDistInMap(i->getSource(), p_range)
-                    && i->getSource()->isAlive())
+                    && i->getSource()->IsAlive())
                     return i->getSource();
             }
 
@@ -245,7 +245,7 @@ namespace MS
             {
                 if (!i->getSource()->isGameMaster() && (p_me->IsWithinLOSInMap(i->getSource()) || !p_checkLoS)
                     && p_me->IsWithinDistInMap(i->getSource(), p_range)
-                    && i->getSource()->isAlive())
+                    && i->getSource()->IsAlive())
                     temp.push_back(i->getSource());
             }
 

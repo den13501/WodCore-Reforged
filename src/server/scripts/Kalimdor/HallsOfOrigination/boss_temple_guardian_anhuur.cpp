@@ -193,7 +193,7 @@ class boss_temple_guardian_anhuur : public CreatureScript
                             me->InterruptSpell(CURRENT_CHANNELED_SPELL);
                             phase++;
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             events.ScheduleEvent(EVENT_DIVINE_RECKONING, urand(3000, 10000));
                             events.ScheduleEvent(EVENT_SEARING_FLAME, urand(2000, 7000));
                         }
@@ -203,7 +203,7 @@ class boss_temple_guardian_anhuur : public CreatureScript
             {
                 summons.Summon(summon);
                 if (summon->GetEntry() != NPC_PIT_SNAKE)
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         DoZoneInCombat(summon);
             }
 
@@ -316,7 +316,7 @@ class npc_pit_snake : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_POISON_TIPPED_FANGS:
-                            DoCast(me->getVictim(), SPELL_POISON_TIPPED_FANGS);
+                            DoCast(me->GetVictim(), SPELL_POISON_TIPPED_FANGS);
                             events.ScheduleEvent(EVENT_POISON_TIPPED_FANGS, urand(5000, 10000));
                             break;
                     }

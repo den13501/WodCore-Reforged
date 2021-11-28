@@ -33,7 +33,7 @@ class npc_hour_of_twilight_life_warden : public CreatureScript
 
         bool OnGossipHello(Player* pPlayer, Creature* /*pCreature*/)
         {
-            if (pPlayer->isInCombat())
+            if (pPlayer->IsInCombat())
                 return true;
 
             pPlayer->NearTeleportTo(teleportPos.GetPositionX(), teleportPos.GetPositionY(), teleportPos.GetPositionZ(), teleportPos.GetOrientation());

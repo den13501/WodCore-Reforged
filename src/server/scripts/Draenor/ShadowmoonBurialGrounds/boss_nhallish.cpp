@@ -308,9 +308,9 @@ public:
 						{
 							if (l_Itr->IsWithinDist(me, 20.0f, true))
 							{
-								if (l_Itr->isAlive() && !l_Itr->HasMovementForce(me->GetGUID()))
+								if (l_Itr->IsAlive() && !l_Itr->HasMovementForce(me->GetGUID()))
 									l_Itr->SendApplyMovementForce(me->GetGUID(), true, l_Position, 3.0f, 1);
-								else if (!l_Itr->isAlive() && l_Itr->HasMovementForce(me->GetGUID()))
+								else if (!l_Itr->IsAlive() && l_Itr->HasMovementForce(me->GetGUID()))
 									l_Itr->SendApplyMovementForce(me->GetGUID(), false, l_Position);
 							}
 							else if (l_Itr->HasMovementForce(me->GetGUID()))
@@ -353,7 +353,7 @@ public:
 				events.ScheduleEvent(eNhalishEvents::EventSoulSteal, 48 * TimeConstants::IN_MILLISECONDS);
 				break;
 			case eNhalishEvents::EventVoidBlast:
-				if (Unit* l_Target = me->getVictim())
+				if (Unit* l_Target = me->GetVictim())
 					me->CastSpell(l_Target, eNhalishSpells::SpellVoidBlastSpellAuraDummy);
 				events.ScheduleEvent(eNhalishEvents::EventVoidBlast, 12 * TimeConstants::IN_MILLISECONDS);
 				break;
@@ -567,7 +567,7 @@ public:
 			{
 				if (Creature* l_Nhalish = m_Instance->instance->GetCreature(m_Instance->GetData64(eShadowmoonBurialGroundsDatas::DataBossNhallish)))
 				{
-					if (l_Nhalish->isAlive() && l_Nhalish->isInCombat())
+					if (l_Nhalish->IsAlive() && l_Nhalish->IsInCombat())
 						me->SetHealth(l_Nhalish->GetHealthPct());
 				}
 			}

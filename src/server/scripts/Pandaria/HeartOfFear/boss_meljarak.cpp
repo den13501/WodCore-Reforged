@@ -525,7 +525,7 @@ public:
             summons.Summon(summon);
             summon->setActive(true);
 
-            if (me->isInCombat())
+            if (me->IsInCombat())
                 summon->AI()->DoZoneInCombat();
         }
 
@@ -671,7 +671,7 @@ public:
 
                             // Cast it.
                             for (std::list<Creature*>::iterator iter = battleMasters.begin(); iter != battleMasters.end(); ++iter)
-                                if ((*iter)->isAlive())
+                                if ((*iter)->IsAlive())
                                     (*iter)->CastSpell(target, SPELL_KORTHIK_STRIKE, false);
                         }
 
@@ -750,7 +750,7 @@ public:
                 return livingAdds;
 
             for (Creature* add : allAdds)
-                if (add->isAlive())
+                if (add->IsAlive())
                     ++livingAdds;
 
             return livingAdds;
@@ -768,7 +768,7 @@ public:
                 GetCreatureListWithEntryInGrid(allAdds, me, addEntries[i], 150.0f);
 
                 for (Creature* add : allAdds)
-                    if (add->isAlive() && add->HasBreakableByDamageCrowdControlAura())
+                    if (add->IsAlive() && add->HasBreakableByDamageCrowdControlAura())
                         ++impaledAdds;
             }
             return impaledAdds;
@@ -833,7 +833,7 @@ public:
                     {
                         // Set respawn to 0 for the other mobs, to avoid infinite loops of Kill/JustDied/Respawn
                         mob->AI()->SetData(TYPE_NO_RESPAWN, 0);
-                        if (mob->isAlive())
+                        if (mob->IsAlive())
                             killer->Kill(mob, false);
                     }
                 }
@@ -992,7 +992,7 @@ public:
                     {
                         // Set respawn to 0 for the other mobs, to avoid infinite loops of Kill/JustDied/Respawn
                         mob->AI()->SetData(TYPE_NO_RESPAWN, 0);
-                        if (mob->isAlive())
+                        if (mob->IsAlive())
                             killer->Kill(mob, false);
                     }
                 }
@@ -1153,7 +1153,7 @@ public:
                     {
                         // Set respawn to 0 for the other mobs, to avoid infinite loops of Kill/JustDied/Respawn
                         mob->AI()->SetData(TYPE_NO_RESPAWN, 0);
-                        if (mob->isAlive())
+                        if (mob->IsAlive())
                             killer->Kill(mob, false);
                     }
                 }
@@ -1531,7 +1531,7 @@ public:
 
             for (auto itr : tmpTargets)
             {
-                if (!itr->isAlive())
+                if (!itr->IsAlive())
                     continue;
 
                 if (itr->GetHealthPct() < percentLife)

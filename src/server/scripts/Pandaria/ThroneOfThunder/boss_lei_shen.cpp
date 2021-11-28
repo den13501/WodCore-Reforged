@@ -660,7 +660,7 @@ class boss_lei_shen : public CreatureScript
 
                 me->SetReactState(REACT_PASSIVE);
 
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
 
                 if (m_Instance->GetBossState(DATA_LEI_SHEN) != IN_PROGRESS)
@@ -1099,7 +1099,7 @@ class boss_lei_shen : public CreatureScript
                     }
                     /// --- Phase 2 ---
                     case EVENT_FUSION_SLASH:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, SPELL_FUSION_SLASH, true);
                         m_Events.ScheduleEvent(EVENT_FUSION_SLASH, 30000);
                         break;
@@ -1296,7 +1296,7 @@ class boss_lei_shen : public CreatureScript
                 }
 
                 /// If current target falls from platform, remove him from threat list to avoid Lei Shen follows him.
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                 {
                     if (!OnPlatform::IsOnPlatform(l_Target))
                     {
@@ -2087,7 +2087,7 @@ class spell_bouncing_bolt : public SpellScriptLoader
                 {
                     if (Unit* l_Caster = GetCaster())
                     {
-                        if (!l_Caster->isInCombat() || !l_Caster->isAlive())
+                        if (!l_Caster->IsInCombat() || !l_Caster->IsAlive())
                             return;
 
                         std::list<WorldObject*> l_TargetList;
@@ -2185,7 +2185,7 @@ class spell_overwhelming_power : public SpellScriptLoader
             {
                 if (Unit* l_Caster = GetCaster())
                 {
-                    if (Unit* l_Victim = l_Caster->getVictim())
+                    if (Unit* l_Victim = l_Caster->GetVictim())
                     {
                         if (l_Victim->IsPlayer())
                             l_Caster->CastSpell(l_Victim, SPELL_OVERWHELMING_POWER_AURA, true);
@@ -2386,7 +2386,7 @@ class areatrigger_violent_gale_winds : public AreaTriggerEntityScript
             {
                 if (Player* l_Player = l_Itr->getSource())
                 {
-                    if (l_Player->isAlive())
+                    if (l_Player->IsAlive())
                     {
                         l_Player->SendApplyMovementForce(p_AreaTrigger->GetGUID(), true, g_WindsPositions[m_Window], -3.0f, 1);
                         l_Player->CastSpell(l_Player, SPELL_VIOLENT_GALE_WINDS_AURA, true);

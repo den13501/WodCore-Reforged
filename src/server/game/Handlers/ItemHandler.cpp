@@ -743,7 +743,7 @@ void WorldSession::HandleListInventoryOpcode(WorldPacket& recvData)
 
     recvData.readPackGUID(l_GUID);
 
-    if (!GetPlayer()->isAlive())
+    if (!GetPlayer()->IsAlive())
         return;
 
     SendListInventory(l_GUID);

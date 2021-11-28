@@ -230,7 +230,7 @@ class boss_sha_of_anger : public CreatureScript
                             if (!targetedDominationPlayerGuids.empty())
                                 for (auto guid : targetedDominationPlayerGuids)
                                     if (Player* target = ObjectAccessor::GetPlayer(*me, guid))
-                                        if (!me->getVictim() || target != me->getVictim())
+                                        if (!me->GetVictim() || target != me->GetVictim())
                                             me->CastSpell(target, SPELL_DOMINATE_MIND, false);
 
                             events.ScheduleEvent(EVENT_GROWING_ANGER_WARNING, 19000);
@@ -279,7 +279,7 @@ class boss_sha_of_anger : public CreatureScript
                     }
                 }
 
-                if (me->getVictim() && !me->IsWithinMeleeRange(me->getVictim()) && !range)
+                if (me->GetVictim() && !me->IsWithinMeleeRange(me->GetVictim()) && !range)
                 {
                     range = true;
                     events.ScheduleEvent(EVENT_RANGE_ATTACK, 2000);

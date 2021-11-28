@@ -247,7 +247,7 @@ class boss_asaad : public CreatureScript
                             me->SetCanFly(false);
                             me->SetDisableGravity(false);
                             me->SetReactState(REACT_AGGRESSIVE);
-                            AttackStart(me->getVictim());
+                            AttackStart(me->GetVictim());
                             events.ScheduleEvent(EVENT_FIELD, 45000);
                             events.ScheduleEvent(EVENT_SUMMON_STAR, urand(10000, 20000));
                             events.ScheduleEvent(EVENT_CHAIN_LIGHTNING, urand(5000, 10000));

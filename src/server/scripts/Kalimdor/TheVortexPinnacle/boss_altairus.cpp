@@ -130,10 +130,10 @@ class boss_altairus : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                if (me->getVictim())
-                    if (me->getVictim()->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) > 55.0f)
+                if (me->GetVictim())
+                    if (me->GetVictim()->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) > 55.0f)
                     {
-                        DoCast(me->getVictim(), SPELL_LIGHTNING_BLAST);
+                        DoCast(me->GetVictim(), SPELL_LIGHTNING_BLAST);
                         return;
                     }
 

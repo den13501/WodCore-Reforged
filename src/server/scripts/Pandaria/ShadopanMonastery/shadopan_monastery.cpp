@@ -382,7 +382,7 @@ class spell_shadopan_apparitions: public SpellScriptLoader
                     caster->GetCreatureListWithEntryInGridAppend(hatredList, NPC_FRAGMENT_OF_HATRED, 20.0f);
 
                     for (auto hatred: hatredList)
-                        if (hatred->isAlive())
+                        if (hatred->IsAlive())
                             hatred->CastSpell(hatred, GetSpellInfo()->Effects[EFFECT_0].TriggerSpell, true);
                 }
             }

@@ -838,7 +838,7 @@ class spell_final_destination : public SpellScriptLoader
                         if (!PlayerList.isEmpty())
                             for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                                 if (Player* player = i->getSource())
-                                    if (player->isAlive())
+                                    if (player->IsAlive())
                                         Garajal->CastSpell(player, SPELL_INSTANTLY_DEATH, true);
                     }
                 }

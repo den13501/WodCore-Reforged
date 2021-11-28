@@ -109,7 +109,7 @@ class boss_operator_thogar : public CreatureScript
                         uint8 l_Count = 0;
                         for (Creature* l_Add : l_AddsList)
                         {
-                            if (!l_Add->isAlive())
+                            if (!l_Add->IsAlive())
                                 continue;
 
                             ++l_Count;
@@ -391,7 +391,7 @@ class boss_operator_thogar : public CreatureScript
                     }
                     case eEvents::EventEnkindle:
                     {
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eSpells::SpellEnkindle, false);
 
                         m_Events.ScheduleEvent(eEvents::EventEnkindle, eTimers::TimerEnkindle);
@@ -1060,7 +1060,7 @@ class npc_foundry_train_controller : public CreatureScript
                         {
                             if (Unit* l_Passenger = Unit::GetUnit(*me, *l_Iter))
                             {
-                                if (!l_Passenger->isAlive())
+                                if (!l_Passenger->IsAlive())
                                 {
                                     l_Iter = m_Passengers.erase(l_Iter);
                                     continue;

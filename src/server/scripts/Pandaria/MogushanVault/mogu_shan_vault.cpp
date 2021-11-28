@@ -104,7 +104,7 @@ void StartNextFight(uint32 p_PreviousAdd, uint32 p_NextAdd, uint32 p_PreviousBos
 
     for (Creature* l_Creature : l_CreatureList)
     {
-        if (l_Creature->isAlive() && l_Creature == me)
+        if (l_Creature->IsAlive() && l_Creature == me)
             return;
     }
 
@@ -366,7 +366,7 @@ class mob_enormous_stone_quilen : public CreatureScript
             {
                 pInstance = creature->GetInstanceScript();
                 prevPosition = 1;
-                if (me->isAlive())
+                if (me->IsAlive())
                 {
                     if (me->GetPositionX() > 3900)
                         prevPosition = 2;
@@ -404,7 +404,7 @@ class mob_enormous_stone_quilen : public CreatureScript
                 if (typeId != POINT_MOTION_TYPE)
                     return;
 
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     return;
 
                 prevPosition = pointId;
@@ -2051,7 +2051,7 @@ class mob_kingsguard : public CreatureScript
 
                 for (Creature* l_Creature : l_CreatureList)
                 {
-                    if (l_Creature->isAlive() && l_Creature == me)
+                    if (l_Creature->IsAlive() && l_Creature == me)
                         return;
                 }
 

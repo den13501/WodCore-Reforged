@@ -1827,7 +1827,7 @@ class mob_jade_cloud_serpent : public CreatureScript
                     {
                         if (Player* player = Player::GetPlayer(*me, playerGuid))
                         {
-                            if (Unit* victim = player->getVictim())
+                            if (Unit* victim = player->GetVictim())
                             {
                                 me->SetInCombatWith(victim);
                                 AttackStart(victim);
@@ -2095,7 +2095,7 @@ class mob_second_big_bao : public CreatureScript
 
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         events.Reset();
@@ -2236,7 +2236,7 @@ class mob_ace_longpaw : public CreatureScript
 
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         events.Reset();
@@ -2377,7 +2377,7 @@ class mob_ningha_darkwheel : public CreatureScript
 
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         events.Reset();
@@ -2518,7 +2518,7 @@ class mob_qua_row_whitebrow : public CreatureScript
 
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         events.Reset();
@@ -2659,7 +2659,7 @@ class mob_suchi_the_sweet : public CreatureScript
 
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         events.Reset();

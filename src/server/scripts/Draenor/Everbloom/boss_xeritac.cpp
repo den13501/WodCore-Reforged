@@ -171,7 +171,7 @@ class boss_xeritac : public CreatureScript
             if (p_Who && p_Who->IsInWorld() && p_Who->GetTypeId() == TypeID::TYPEID_PLAYER && me->IsWithinDistInMap(p_Who, 18.0f) && !m_Intro)
                 m_Intro = true;
 
-            if (p_Who && p_Who->IsInWorld() && p_Who->GetEntry() == eEverbloomCreature::CreatureVenomCrazedPaleOne && p_Who->IsWithinDistInMap(me, 3.0f, true) && !m_Consuming && p_Who->isAlive())
+            if (p_Who && p_Who->IsInWorld() && p_Who->GetEntry() == eEverbloomCreature::CreatureVenomCrazedPaleOne && p_Who->IsWithinDistInMap(me, 3.0f, true) && !m_Consuming && p_Who->IsAlive())
             {
                 if (me->HasUnitState(UnitState::UNIT_STATE_CASTING))
                     return;
@@ -227,7 +227,7 @@ class boss_xeritac : public CreatureScript
 
         void MovementInform(uint32 /*p_Type*/, uint32 p_Id) override
         {
-            if (!me->isInCombat())
+            if (!me->IsInCombat())
                 return;
 
             switch (p_Id)
@@ -395,14 +395,14 @@ class boss_xeritac : public CreatureScript
                 }
                 case eXeritacEvents::EventToxicBolt:
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                         me->CastSpell(l_Victim, eXeritacSpells::SpellToxicBolt);
                     events.ScheduleEvent(eXeritacEvents::EventToxicBolt, urand(6 * TimeConstants::IN_MILLISECONDS, 8 * TimeConstants::IN_MILLISECONDS));
                     break;
                 }
                 case eXeritacEvents::EventVenomousString:
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                         me->CastSpell(l_Victim, eXeritacSpells::SpellVenoumousSting);
                         events.ScheduleEvent(eXeritacEvents::EventVenomousString, 15 * TimeConstants::IN_MILLISECONDS);
                         break;
@@ -812,7 +812,7 @@ public:
             switch (events.ExecuteEvent())
             {
                 case eToxicSpiderlingEvents::EventToxicBolt:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eToxicSpiderlingsSpells::SpellToxicBolt);
                     events.ScheduleEvent(eToxicSpiderlingEvents::EventToxicBolt, 8 * TimeConstants::IN_MILLISECONDS);
                     break;

@@ -45,7 +45,7 @@ public:
         void UpdateAI(const uint32 diff)
         {
             //Out of combat
-            if (!me->getVictim())
+            if (!me->GetVictim())
             {
                 //Timed say
                 if (tSay <= diff)
@@ -181,7 +181,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_RAMPAGING_WORGEN_1, 16.0f, true))
                         me->AI()->AttackStart(enemy);
                 tSeek = urand(1000, 2000); //optimize cpu load, seeking only sometime between 1 and 2 seconds
@@ -266,7 +266,7 @@ public:
                 if (tSeek <= diff)
                 {
                     //Find worgen nearby
-                    if (me->isAlive() && !me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f))
+                    if (me->IsAlive() && !me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f))
                         if (Creature* enemy = me->FindNearestCreature(NPC_RAMPAGING_WORGEN_1, 16.0f, true))
                             me->AI()->AttackStart(enemy);
                     tSeek = urand(1000, 2000);//optimize cpu load
@@ -788,7 +788,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_SERGEANT_CLEESE || NPC_GILNEAN_ROYAL_GUARD, 10.0f, true))
                         me->AI()->AttackStart(enemy);
                 tSeek = urand(1000, 2000); //optimize cpu load, seeking only sometime between 1 and 2 seconds
@@ -860,7 +860,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_BLOODFANG_WORGEN, 10.0f, true))
                         me->AI()->AttackStart(enemy);
                 tSeek = urand(1000, 2000); //optimize cpu load, seeking only sometime between 1 and 2 seconds
@@ -923,7 +923,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_BLOODFANG_WORGEN, 16.0f, true))
                         me->AI()->AttackStart(enemy);
                 tSeek = urand(1000, 2000); //optimize cpu load, seeking only sometime between 1 and 2 seconds
@@ -973,7 +973,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_BLOODFANG_WORGEN, 5.0f, true))
                         me->AI()->AttackStart(enemy); //She should really only grab agro when npc Cleese is not there, so we will keep this range small
                 tSeek = urand(1000, 2000); //optimize cpu load, seeking only sometime between 1 and 2 seconds
@@ -983,7 +983,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (me->getVictim()->GetEntry() == NPC_BLOODFANG_WORGEN)
+            if (me->GetVictim()->GetEntry() == NPC_BLOODFANG_WORGEN)
                 DoSpellAttackIfReady(SPELL_FROSTBOLT_VISUAL_ONLY); //Dummy spell, visual only to prevent getting agro (Blizz-like)
             else
                 DoMeleeAttackIfReady();
@@ -1150,7 +1150,7 @@ public:
 
             if (tAttack <= diff) // If we have a target, and it is time for our attack
             {
-                if (me->IsWithinMeleeRange(me->getVictim()))
+                if (me->IsWithinMeleeRange(me->GetVictim()))
                 {
                     switch (urand(0, 2)) // Perform one of 3 random attacks
                     {
@@ -1159,24 +1159,24 @@ public:
                                 // If Orientation is outside of these ranges, there is a possibility the knockback could knock worgens off the platform
                                 // After which, Crowley would chase
                             {
-                                DoCast(me->getVictim(), SPELL_LEFT_HOOK, true);
+                                DoCast(me->GetVictim(), SPELL_LEFT_HOOK, true);
                             }
                                 tAttack = urand(1700, 2400);
                             break;
 
                         case 1: // Do Demoralizing Shout
-                            DoCast(me->getVictim(), SPELL_DEMORALIZING_SHOUT, true);
+                            DoCast(me->GetVictim(), SPELL_DEMORALIZING_SHOUT, true);
                             tAttack = urand(1700, 2400);
                             break;
 
                         case 2: // Do Snap Kick
-                            DoCast(me->getVictim(), SPELL_SNAP_KICK, true);
+                            DoCast(me->GetVictim(), SPELL_SNAP_KICK, true);
                             tAttack = urand(1700, 2400);
                             break;
                     }
                 }
                 else
-                    me->GetMotionMaster()->MoveChase(me->getVictim());
+                    me->GetMotionMaster()->MoveChase(me->GetVictim());
             }
             else // If we have a target but our attack timer is still not ready, do regular attack
             {
@@ -1967,10 +1967,10 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 2.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 2.0f)))
                     if (Player* player = me->SelectNearestPlayer(2.0f))
                     {
-                        if (!player->isInCombat())
+                        if (!player->IsInCombat())
                         {
                             me->AI()->AttackStart(player);
                             tSeek = urand(5000, 10000);
@@ -2185,7 +2185,7 @@ public:
         {
             if (tSeek <= diff)
             {
-                if ((me->isAlive()) && (!me->isInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
+                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 1.0f)))
                     if (Creature* enemy = me->FindNearestCreature(NPC_GILNEAS_CITY_GUARD_P8, 5.0f, true))
                         me->AI()->AttackStart(enemy);
                 tSeek = urand(1000, 2000);
@@ -2794,17 +2794,17 @@ public:
             }
             else tEnrage -= diff;
 
-            if (me->getVictim()->IsPlayer())
+            if (me->GetVictim()->IsPlayer())
             {
                 Miss = false;
             }
-            else if (me->getVictim()->isPet())
+            else if (me->GetVictim()->isPet())
             {
                 Miss = false;
             }
-            else if (me->getVictim()->GetEntry() == NPC_NORTHGATE_REBEL_1)
+            else if (me->GetVictim()->GetEntry() == NPC_NORTHGATE_REBEL_1)
             {
-                if (me->getVictim()->GetHealthPct() < 90)
+                if (me->GetVictim()->GetHealthPct() < 90)
                 {
                     Miss = true;
                 }
@@ -2832,7 +2832,7 @@ public:
             {
                 Burning = true;
 
-                if(me->getVictim() && me->getVictim()->IsPlayer())//We should ONLY switch our victim if we currently have the player targeted
+                if(me->GetVictim() && me->GetVictim()->IsPlayer())//We should ONLY switch our victim if we currently have the player targeted
                 {
                     me->getThreatManager().resetAllAggro();//We need to aggro on crowley's horse, not the player
                     horse->AddThreat(me, 1.0f);

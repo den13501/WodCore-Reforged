@@ -332,7 +332,7 @@ class boss_beastlord_darmac : public CreatureScript
             {
                 BossAI::JustSummoned(p_Summon);
 
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     p_Summon->DespawnOrUnsummon();
             }
 
@@ -347,7 +347,7 @@ class boss_beastlord_darmac : public CreatureScript
                     case eMoves::MoveIronCrusher:
                     case eMoves::MoveCruelfang:
                     {
-                        if (me->isInCombat())
+                        if (me->IsInCombat())
                             return;
 
                         ++m_CosmeticMove;
@@ -355,7 +355,7 @@ class boss_beastlord_darmac : public CreatureScript
                     }
                     case eMoves::MoveDreadwing:
                     {
-                        if (me->isInCombat())
+                        if (me->IsInCombat())
                             return;
 
                         m_CosmeticMove = eMoves::MoveIronCrusher;
@@ -603,7 +603,7 @@ class boss_beastlord_darmac : public CreatureScript
 
                     me->HandleEmoteCommand(Emote::EMOTE_ONESHOT_ROAR);
 
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                     {
                         me->GetMotionMaster()->Clear();
                         me->GetMotionMaster()->MoveChase(l_Target);
@@ -1088,7 +1088,7 @@ class npc_foundry_cruelfang : public CreatureScript
                     if (m_Instance != nullptr)
                         m_Instance->SendEncounterUnit(EncounterFrameType::ENCOUNTER_FRAME_DISENGAGE, p_Passenger);
 
-                    if (Unit* l_Target = p_Passenger->getVictim())
+                    if (Unit* l_Target = p_Passenger->GetVictim())
                         AttackStart(l_Target);
                 }
                 else
@@ -1279,7 +1279,7 @@ class npc_foundry_dreadwing : public CreatureScript
                     if (m_Instance != nullptr)
                         m_Instance->SendEncounterUnit(EncounterFrameType::ENCOUNTER_FRAME_DISENGAGE, p_Passenger);
 
-                    if (Unit* l_Target = p_Passenger->getVictim())
+                    if (Unit* l_Target = p_Passenger->GetVictim())
                         AttackStart(l_Target);
                 }
                 else
@@ -1503,7 +1503,7 @@ class npc_foundry_ironcrusher : public CreatureScript
                     if (m_Instance != nullptr)
                         m_Instance->SendEncounterUnit(EncounterFrameType::ENCOUNTER_FRAME_DISENGAGE, p_Passenger);
 
-                    if (Unit* l_Target = p_Passenger->getVictim())
+                    if (Unit* l_Target = p_Passenger->GetVictim())
                         AttackStart(l_Target);
                 }
                 else
@@ -1817,7 +1817,7 @@ class npc_foundry_thunderlord_pack_pens : public CreatureScript
 
                 if (Creature* l_Darmac = Creature::GetCreature(*me, m_Instance->GetData64(eFoundryCreatures::BossBeastlordDarmac)))
                 {
-                    if (Unit* l_Target = l_Darmac->getVictim())
+                    if (Unit* l_Target = l_Darmac->GetVictim())
                     {
                         if (p_Summon->IsAIEnabled)
                             p_Summon->AI()->AttackStart(l_Target);
@@ -1998,7 +1998,7 @@ class spell_foundry_target_vehicle : public SpellScriptLoader
                 {
                     if (Creature* l_Ironcrusher = Creature::GetCreature(*l_Caster, l_Instance->GetData64(eFoundryCreatures::BossIroncrusher)))
                     {
-                        if (l_Ironcrusher->isAlive() && l_Caster->GetDistance(l_Ironcrusher) < l_Distance)
+                        if (l_Ironcrusher->IsAlive() && l_Caster->GetDistance(l_Ironcrusher) < l_Distance)
                         {
                             l_Distance      = l_Caster->GetDistance(l_Ironcrusher);
                             l_NearestBeast  = l_Ironcrusher;
@@ -2007,7 +2007,7 @@ class spell_foundry_target_vehicle : public SpellScriptLoader
 
                     if (Creature* l_Dreadwing = Creature::GetCreature(*l_Caster, l_Instance->GetData64(eFoundryCreatures::BossDreadwing)))
                     {
-                        if (l_Dreadwing->isAlive() && l_Caster->GetDistance(l_Dreadwing) < l_Distance)
+                        if (l_Dreadwing->IsAlive() && l_Caster->GetDistance(l_Dreadwing) < l_Distance)
                         {
                             l_Distance      = l_Caster->GetDistance(l_Dreadwing);
                             l_NearestBeast  = l_Dreadwing;
@@ -2016,7 +2016,7 @@ class spell_foundry_target_vehicle : public SpellScriptLoader
 
                     if (Creature* l_Cruelfang = Creature::GetCreature(*l_Caster, l_Instance->GetData64(eFoundryCreatures::BossCruelfang)))
                     {
-                        if (l_Cruelfang->isAlive() && l_Caster->GetDistance(l_Cruelfang) < l_Distance)
+                        if (l_Cruelfang->IsAlive() && l_Caster->GetDistance(l_Cruelfang) < l_Distance)
                         {
                             l_Distance      = l_Caster->GetDistance(l_Cruelfang);
                             l_NearestBeast  = l_Cruelfang;

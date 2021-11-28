@@ -208,7 +208,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     switch (events.ExecuteEvent())
                     {
                         case uint32(Events::LavaBurst):
-                            me->CastSpell(me->getVictim(), uint32(Spells::LavaBurst));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::LavaBurst));
                             events.ScheduleEvent(uint32(Events::LavaBurst), urand(2500, 3500));
                             break;
                         case uint32(Events::BloodRage):
@@ -275,7 +275,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     switch (events.ExecuteEvent())
                     {
                         case uint32(Events::Cleave):
-                            me->CastSpell(me->getVictim(), uint32(Spells::Cleave));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::Cleave));
                             events.ScheduleEvent(uint32(Events::Cleave), urand(7500, 9500));
                             break;
                         case uint32(Events::FrighteningRoar):
@@ -342,7 +342,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     switch (events.ExecuteEvent())
                     {
                         case uint32(Events::StoneBolt):
-                            me->CastSpell(me->getVictim(), uint32(Spells::StoneBolt));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::StoneBolt));
                             events.ScheduleEvent(uint32(Events::StoneBolt), urand(4500, 5500));
                             break;
                         case uint32(Events::StoneBulwark):
@@ -350,7 +350,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                             Unit* l_Target = me;
                             if (Unit* l_Unit = ScriptUtils::SelectNearestFriendExcluededMe(me, 40.0f))
                             {
-                                if (l_Unit->isInCombat())
+                                if (l_Unit->IsInCombat())
                                     l_Target = l_Unit;
                             }
                             
@@ -425,7 +425,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                             break;
                         case uint32(Events::Subjugate):
                             if (ScriptUtils::SelectRandomPlayerIncludedTank(me, 40.0f))
-                                me->CastSpell(me->getVictim(), uint32(Spells::Subjugate));
+                                me->CastSpell(me->GetVictim(), uint32(Spells::Subjugate));
                             events.ScheduleEvent(uint32(Events::Subjugate), urand(21000, 24000));
                             break;
                         default:
@@ -496,7 +496,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                             events.ScheduleEvent(uint32(Events::ChainGrip), urand(16000, 18000));
                             break;
                         case uint32(Events::SlaversRage):
-                            me->CastSpell(me->getVictim(), uint32(Spells::SlaversRage));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::SlaversRage));
                             events.ScheduleEvent(uint32(Events::SlaversRage), urand(21000, 24000));
                             break;
                         case uint32(Events::ShockBola):
@@ -588,11 +588,11 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     switch (events.ExecuteEvent())
                     {
                         case uint32(Events::Beatdown):
-                            me->CastSpell(me->getVictim(), uint32(Spells::Beatdown));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::Beatdown));
                             events.ScheduleEvent(uint32(Events::Beatdown), urand(22000, 26000));
                             break;
                         case uint32(Events::Crush):
-                            me->CastSpell(me->getVictim(), uint32(Spells::Crush));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::Crush));
                             events.ScheduleEvent(uint32(Events::Crush), urand(10000, 11000));
                             break;
                         case uint32(Events::LumberingLeap):
@@ -906,11 +906,11 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     switch ((Events)m_Events.ExecuteEvent())
                     {
                         case Events::EventArmorDent:
-                            me->CastSpell(me->getVictim(), Spells::SpellArmorDent, false);
+                            me->CastSpell(me->GetVictim(), Spells::SpellArmorDent, false);
                             m_Events.ScheduleEvent(m_IsHC ? urand(Events::EventArmorDent, Events::EventCinderSplash) : Events::EventArmorDent, 6000);
                             break;
                         case Events::EventCinderSplash:
-                            me->CastSpell(me->getVictim(), Spells::SpellCinderSplash, false);
+                            me->CastSpell(me->GetVictim(), Spells::SpellCinderSplash, false);
                             m_Events.ScheduleEvent(urand(Events::EventArmorDent, Events::EventCinderSplash), 6000);
                             break;
                         default:
@@ -981,7 +981,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                                 if (!l_Map->IsHeroic() && !l_Map->IsChallengeMode())
                                     break;
 
-                            me->CastSpell(me->getVictim(), Spells::SpellFireball, false);
+                            me->CastSpell(me->GetVictim(), Spells::SpellFireball, false);
                             m_Events.ScheduleEvent(Events::EvenFireball, 8000);
                             break;
                         }
@@ -1394,7 +1394,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                         {
                             m_PickSword = true;
 
-                            if (!me->isInCombat())
+                            if (!me->IsInCombat())
                                 Reset();
 
                             break;
@@ -1471,7 +1471,7 @@ namespace MS { namespace Instances { namespace Bloodmaul
                         /// If the group member who cronan is following died, Cronan despawns.
                         if (Player* l_Player = GetLeaderForFollower())
                         {
-                            if (!l_Player->isAlive())
+                            if (!l_Player->IsAlive())
                                 me->DespawnOrUnsummon();
                         }
 

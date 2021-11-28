@@ -1323,7 +1323,7 @@ public:
                                 if (!PlayerList.isEmpty())
                                 {
                                     for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
-                                        if (i->getSource()->isAlive() && me->IsWithinDistInMap(i->getSource(), 50))
+                                        if (i->getSource()->IsAlive() && me->IsWithinDistInMap(i->getSource(), 50))
                                             i->getSource()->CastSpell(i->getSource(), SPELL_THE_LIGHT_OF_DAWN_Q, false);
                                 }
                             }
@@ -1364,25 +1364,25 @@ public:
 
                 if (uiDeath_strike <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_DEATH_STRIKE);
+                    DoCast(me->GetVictim(), SPELL_DEATH_STRIKE);
                     uiDeath_strike = urand(5000, 10000);
                 } else uiDeath_strike -= diff;
 
                 if (uiDeath_embrace <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_DEATH_EMBRACE);
+                    DoCast(me->GetVictim(), SPELL_DEATH_EMBRACE);
                     uiDeath_embrace = urand(5000, 10000);
                 } else uiDeath_embrace -= diff;
 
                 if (uiIcy_touch <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_ICY_TOUCH1);
+                    DoCast(me->GetVictim(), SPELL_ICY_TOUCH1);
                     uiIcy_touch = urand(5000, 10000);
                 } else uiIcy_touch -= diff;
 
                 if (uiUnholy_blight <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_UNHOLY_BLIGHT);
+                    DoCast(me->GetVictim(), SPELL_UNHOLY_BLIGHT);
                     uiUnholy_blight = urand(5000, 10000);
                 } else uiUnholy_blight -= diff;
 
@@ -1541,9 +1541,9 @@ public:
         void NPCChangeTarget(uint64 ui_GUID)
         {
             if (Creature* temp = Unit::GetCreature(*me, ui_GUID))
-                if (temp->isAlive())
+                if (temp->IsAlive())
                     if (Unit* pTarger = SelectTarget(SELECT_TARGET_RANDOM, 0))
-                        if (pTarger->isAlive())
+                        if (pTarger->IsAlive())
                         {
                             // temp->DeleteThreatList();
                             temp->AddThreat(pTarger, 0.0f);
@@ -1660,7 +1660,7 @@ public:
         void DespawnNPC(uint64 pGUID)
         {
             if (Creature* temp = Unit::GetCreature(*me, pGUID))
-                if (temp->isAlive())
+                if (temp->IsAlive())
                 {
                     temp->SetVisible(false);
                     temp->Kill(temp);

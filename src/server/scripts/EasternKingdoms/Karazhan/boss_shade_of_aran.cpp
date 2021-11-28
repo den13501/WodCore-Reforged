@@ -187,7 +187,7 @@ public:
             {
                 Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid());
                 //only on alive players
-                if (target && target->isAlive() && target->IsPlayer())
+                if (target && target->IsAlive() && target->IsPlayer())
                     targets.push_back(target);
             }
 
@@ -416,7 +416,7 @@ public:
                 {
                     if (Creature* unit = me->SummonCreature(CREATURE_WATER_ELEMENTAL, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_DESPAWN, 90000))
                     {
-                        unit->Attack(me->getVictim(), true);
+                        unit->Attack(me->GetVictim(), true);
                         unit->setFaction(me->getFaction());
                     }
                 }
@@ -430,7 +430,7 @@ public:
                 {
                     if (Creature* unit = me->SummonCreature(CREATURE_SHADOW_OF_ARAN, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000))
                     {
-                        unit->Attack(me->getVictim(), true);
+                        unit->Attack(me->GetVictim(), true);
                         unit->setFaction(me->getFaction());
                     }
                 }
@@ -531,7 +531,7 @@ public:
 
             if (CastTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_WATERBOLT);
+                DoCast(me->GetVictim(), SPELL_WATERBOLT);
                 CastTimer = urand(2000, 5000);
             } else CastTimer -= diff;
         }

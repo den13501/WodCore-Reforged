@@ -161,7 +161,7 @@ class boss_jindo_the_godbreaker : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat() && (summon->GetEntry() != NPC_GURUBASHI_SPIRIT))
+                if (me->IsInCombat() && (summon->GetEntry() != NPC_GURUBASHI_SPIRIT))
                     DoZoneInCombat(summon);
 
                 if (summon->GetEntry() == NPC_GURUBASHI_SPIRIT ||
@@ -522,7 +522,7 @@ class SpiritPortalCheck
         {
             if (!obj->ToCreature())
                 return true;
-            return ((obj->ToCreature()->HasUnitState(UNIT_STATE_CASTING)) || (obj->ToCreature()->GetEntry() != i_entry) || !obj->ToCreature()->isAlive());
+            return ((obj->ToCreature()->HasUnitState(UNIT_STATE_CASTING)) || (obj->ToCreature()->GetEntry() != i_entry) || !obj->ToCreature()->IsAlive());
         }
         uint32 i_entry;
 };

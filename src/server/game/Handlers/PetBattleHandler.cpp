@@ -722,7 +722,7 @@ void WorldSession::HandlePetBattleJoinQueue(WorldPacket& /*p_RecvData*/)
     }
 
     // Player can't be in combat
-    if (m_Player->isInCombat())
+    if (m_Player->IsInCombat())
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_NOT_WHILE_IN_COMBAT);
         return;
@@ -893,7 +893,7 @@ void WorldSession::HandlePetBattleRequestWild(WorldPacket& p_RecvData)
         if (l_WildsPetCount >= MAX_PETBATTLE_SLOTS)
             break;
 
-        if (!l_Current->ToCreature() || !l_Current->isAlive() || l_Current->GetGUID() == l_Wild->GetGUID() || !sWildBattlePetMgr->IsWildPet(l_Current->ToCreature()))
+        if (!l_Current->ToCreature() || !l_Current->IsAlive() || l_Current->GetGUID() == l_Wild->GetGUID() || !sWildBattlePetMgr->IsWildPet(l_Current->ToCreature()))
             continue;
 
         if (sWildBattlePetMgr->GetWildBattlePet(l_Current->ToCreature()) != nullptr && roll_chance_i(80))
@@ -1025,7 +1025,7 @@ void WorldSession::HandlePetBattleRequestPvP(WorldPacket& p_RecvData)
     }
 
     // Player can't be in combat
-    if (m_Player->isInCombat())
+    if (m_Player->IsInCombat())
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_NOT_WHILE_IN_COMBAT);
         sPetBattleSystem->RemoveRequest(l_BattleRequest->RequesterGuid);
@@ -1062,7 +1062,7 @@ void WorldSession::HandlePetBattleRequestPvP(WorldPacket& p_RecvData)
     }
 
     // Player can't be in combat
-    if (l_Opposant->isInCombat())
+    if (l_Opposant->IsInCombat())
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_NOT_WHILE_IN_COMBAT);
         sPetBattleSystem->RemoveRequest(l_BattleRequest->RequesterGuid);

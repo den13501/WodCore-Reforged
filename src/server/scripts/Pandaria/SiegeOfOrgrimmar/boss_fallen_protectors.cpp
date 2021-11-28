@@ -468,7 +468,7 @@ class boss_he_softfoot : public CreatureScript
                         events.ScheduleEvent(EVENT_SHADOWSTEP_GARROTE, 8000);
                         break;
                     case EVENT_GOUGE:
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             me->CastSpell(target, SPELL_GOUGE, false);
 
                         events.ScheduleEvent(EVENT_GOUGE, 9000);
@@ -729,7 +729,7 @@ class mob_embodied_misery : public CreatureScript
                 switch (events.ExecuteEvent())
                 {
                     case EVENT_DEFILED_GROUND:
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             me->CastSpell(target, SPELL_DEFILED_GROUND,false);
 
                         events.ScheduleEvent(EVENT_DEFILED_GROUND, 5000);

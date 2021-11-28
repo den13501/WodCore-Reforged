@@ -271,7 +271,7 @@ class boss_ignis : public CreatureScript
                             break;
                         case EVENT_SCORCH:
                             Talk(SAY_SCORCH);
-                            if (Unit* target = me->getVictim())
+                            if (Unit* target = me->GetVictim())
                                 me->SummonCreature(NPC_GROUND_SCORCH, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 45000);
                             DoCast(SPELL_SCORCH);
                             events.ScheduleEvent(EVENT_SCORCH, 25000);
@@ -287,7 +287,7 @@ class boss_ignis : public CreatureScript
                                     construct->RemoveAurasDueToSpell(SPELL_FREEZE_ANIM);
                                     construct->SetReactState(REACT_AGGRESSIVE);
                                     construct->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_STUNNED | UNIT_FLAG_DISABLE_MOVE);
-                                    construct->AI()->AttackStart(me->getVictim());
+                                    construct->AI()->AttackStart(me->GetVictim());
                                     construct->AI()->DoZoneInCombat();
                                     DoCast(me, SPELL_STRENGHT, true);
                                     _creatureList.erase(itr);
@@ -506,7 +506,7 @@ class spell_ignis_slag_pot: public SpellScriptLoader
 
             void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
-                if (GetTarget()->isAlive())
+                if (GetTarget()->IsAlive())
                     GetTarget()->CastSpell(GetTarget(), SPELL_SLAG_IMBUED, true);
             }
 
@@ -544,7 +544,7 @@ class achievement_ignis_hot_pocket : public AchievementCriteriaScript
 
         bool OnCheck(Player* source, Unit* /*target*/)
         {
-            return (source && source->isAlive());
+            return (source && source->IsAlive());
         }
 };
 

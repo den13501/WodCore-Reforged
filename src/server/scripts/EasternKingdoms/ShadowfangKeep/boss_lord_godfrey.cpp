@@ -135,7 +135,7 @@ class boss_lord_godfrey : public CreatureScript
                     switch(eventId)
                     {
                         case EVENT_MORTAL_WOUND:
-                            DoCast(me->getVictim(), SPELL_MORTAL_WOUND);
+                            DoCast(me->GetVictim(), SPELL_MORTAL_WOUND);
                             events.ScheduleEvent(EVENT_MORTAL_WOUND, 10000);
                             break;
                         case EVENT_CURSED_BULLET:

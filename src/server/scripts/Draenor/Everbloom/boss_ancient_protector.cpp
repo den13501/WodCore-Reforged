@@ -125,7 +125,7 @@ public:
     MostCreatureHPMissingInRange(Unit const* p_Obj, float p_Range, uint32 p_Hp) : m_Obj(p_Obj), m_Range(p_Range), m_Hp(p_Hp) {}
     bool operator()(Unit* p_U)
     {
-        if (p_U->isAlive() && p_U->isInCombat() && !m_Obj->IsHostileTo(p_U) && m_Obj->IsWithinDistInMap(p_U, m_Range) && p_U->GetMaxHealth() - p_U->GetHealth() > m_Hp && p_U->GetTypeId() != TypeID::TYPEID_PLAYER)
+        if (p_U->IsAlive() && p_U->IsInCombat() && !m_Obj->IsHostileTo(p_U) && m_Obj->IsWithinDistInMap(p_U, m_Range) && p_U->GetMaxHealth() - p_U->GetHealth() > m_Hp && p_U->GetTypeId() != TypeID::TYPEID_PLAYER)
         {
             if (p_U->GetEntry() == eEverbloomBosses::BossDulhu || p_U->GetEntry() == eEverbloomBosses::BossEarthshaperTelu || p_U->GetEntry() == eEverbloomBosses::BossLifeWardenGola)
                 m_Hp = p_U->GetMaxHealth() - p_U->GetHealth();

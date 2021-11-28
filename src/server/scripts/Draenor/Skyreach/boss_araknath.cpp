@@ -84,7 +84,7 @@ namespace MS
                         break;
                     case uint32(Events::SOLAR_STORM):
                         m_events.ScheduleEvent(uint32(Events::SOLAR_STORM), urand(12000, 15000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::SOLAR_STORM));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::SOLAR_STORM));
                         break;
                     default:
                         break;
@@ -156,7 +156,7 @@ namespace MS
 
                 void Reset()
                 {
-                    if (!me->isAlive())
+                    if (!me->IsAlive())
                         return;
 
                     me->ResetLootMode();
@@ -233,7 +233,7 @@ namespace MS
                     {
                     case uint32(Events::MELEE):
                         events.ScheduleEvent(uint32(Events::MELEE), 2000);
-                        me->CastSpell(me->getVictim(), uint32(Spells::MELEE));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::MELEE));
                         break;
                     case uint32(Events::SMASH):
                         events.ScheduleEvent(uint32(Events::SMASH), urand(5500, 7000));
@@ -244,7 +244,7 @@ namespace MS
                         break;
                     case uint32(Events::BURST):
                         events.ScheduleEvent(uint32(Events::BURST), urand(21500, 23000));
-                        me->CastSpell(me->getVictim(), uint32(Spells::BURST));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::BURST));
                         break;
                     case uint32(Events::ENERGIZE_START):
                         events.ScheduleEvent(uint32(Events::ENERGIZE_STOP), 12000);

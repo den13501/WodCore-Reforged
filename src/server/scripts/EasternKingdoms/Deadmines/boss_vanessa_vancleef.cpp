@@ -212,7 +212,7 @@ class boss_vanessa_vancleef : public CreatureScript
                             events.ScheduleEvent(EVENT_CONTINUE, 6000);
                             break;
                         case EVENT_CONTINUE:
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                         case EVENT_ADDS_1:
                             me->SummonCreature(NPC_DEFIAS_ENFORCER, addsPos[0]);

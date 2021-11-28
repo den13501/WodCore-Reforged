@@ -201,7 +201,7 @@ class boss_queen_azshara : public CreatureScript
 
             void SummonedCreatureDies(Creature* summon, Unit* /*killer*/)
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 if (summon->GetEntry() == NPC_ENCHANTED_MAGUS_FIRE ||

@@ -1439,7 +1439,7 @@ class npc_generic_tanaan_guardian : public CreatureScript
 
             void UpdateAI(uint32 const /*p_Diff*/) override
             {
-                bool l_HasVictim = me->isInCombat();
+                bool l_HasVictim = me->IsInCombat();
 
                 if ((clock() - m_LastVictimSearch) > 0)
                 {
@@ -1450,7 +1450,7 @@ class npc_generic_tanaan_guardian : public CreatureScript
 
                     std::for_each(l_AllEnemyList.begin(), l_AllEnemyList.end(), [this, &l_EnemyList](const Creature* p_A)
                     {
-                        if (!p_A->isAlive() || !p_A->IsWithinMeleeRange(me))
+                        if (!p_A->IsAlive() || !p_A->IsWithinMeleeRange(me))
                             return;
 
                         l_EnemyList.push_back(const_cast<Creature*>(p_A));
@@ -1472,7 +1472,7 @@ class npc_generic_tanaan_guardian : public CreatureScript
                     }
                 }
 
-                if (me->HasUnitState(UNIT_STATE_CASTING) || !me->isInCombat())
+                if (me->HasUnitState(UNIT_STATE_CASTING) || !me->IsInCombat())
                     return;
 
                 if (me->HasReactState(REACT_PASSIVE) && me->getThreatManager().isThreatListEmpty())
@@ -2296,7 +2296,7 @@ class npc_shattered_hand_brawler : public CreatureScript
                 {
                     if (me->isInFront(l_Player) && l_Player->HasQuest(TanaanQuests::QuestKillYourHundred) && l_Player->GetQuestObjectiveCounter(TanaanQuestObjectives::ObjCombattantSlainAdd) < 99)
                     {
-                        if (!l_Player->isInCombat())
+                        if (!l_Player->IsInCombat())
                         {
                             uint64 l_Guid = l_Player->GetGUID();
                             AddTimedDelayedOperation(50, [this, l_Guid]() -> void
@@ -2816,7 +2816,7 @@ class npc_cordana_felsong_blackrock : public CreatureScript
 
                 if (Player* l_EscortedPlayer = sObjectAccessor->FindPlayer(m_PlayerGuid))
                 {
-                    if (Unit* l_Target = l_EscortedPlayer->getVictim())
+                    if (Unit* l_Target = l_EscortedPlayer->GetVictim())
                     {
                         if (!me->IsWithinMeleeRange(l_Target))
                         {
@@ -2906,7 +2906,7 @@ class npc_lady_liadrin_blackrock : public CreatureScript
 
                 if (Player* l_EscortedPlayer = sObjectAccessor->FindPlayer(m_PlayerGuid))
                 {
-                    if (Unit* l_Target = l_EscortedPlayer->getVictim())
+                    if (Unit* l_Target = l_EscortedPlayer->GetVictim())
                     {
                         if (!me->IsWithinMeleeRange(l_Target))
                         {
@@ -3247,7 +3247,7 @@ class npc_thaelin_darkanvil_tanaan : public CreatureScript
 
                 if (Player* l_EscortedPlayer = sObjectAccessor->FindPlayer(m_PlayerGuid))
                 {
-                    if (Unit* l_Target = l_EscortedPlayer->getVictim())
+                    if (Unit* l_Target = l_EscortedPlayer->GetVictim())
                     {
                         if (!me->IsWithinMeleeRange(l_Target))
                         {
@@ -3986,7 +3986,7 @@ class npc_tanaan_arena_helper : public CreatureScript
                 {
                     if (Creature* l_ShatteredHandBrawler = GetClosestCreatureWithEntry(me, 82057, 80.0f))
                     {
-                        if (!l_ShatteredHandBrawler->isInCombat())
+                        if (!l_ShatteredHandBrawler->IsInCombat())
                             me->GetMotionMaster()->MoveCharge(l_ShatteredHandBrawler->m_positionX, l_ShatteredHandBrawler->m_positionY, l_ShatteredHandBrawler->m_positionZ, 10.0f);
                     }
 

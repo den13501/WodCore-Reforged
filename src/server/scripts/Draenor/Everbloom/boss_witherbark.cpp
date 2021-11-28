@@ -186,7 +186,7 @@ public:
             {
                 case eWitherbarkActions::ActionEnergyPower:
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         return;
 
                     m_Acheivement = false;
@@ -210,7 +210,7 @@ public:
                 }
                 case eWitherbarkActions::ActionBrittleEffect:
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         return;
 
                     events.Reset();
@@ -230,7 +230,7 @@ public:
                 }
                 case eWitherbarkActions::ActionBrittleDeffect:
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         return;
                   
                     events.Reset();
@@ -665,7 +665,7 @@ class the_everbloom_witherbark_mob_aqueous_globule : public CreatureScript
             { 
                 if (Creature* l_Witherbark = m_Instance->instance->GetCreature(m_Instance->GetData64(eEverbloomData::DataWitherbark)))
                 {
-                    if (l_Witherbark->isInCombat() && l_Witherbark->HasAura(eAqueousGlobuleSpells::SpellBrittleBarkAura))
+                    if (l_Witherbark->IsInCombat() && l_Witherbark->HasAura(eAqueousGlobuleSpells::SpellBrittleBarkAura))
                     {
                         if (!me->IsMoving()) /// Automatically forces the aqueous globule to get to Witherbark location.
                             me->GetMotionMaster()->MovePoint(0, *l_Witherbark);
@@ -875,7 +875,7 @@ public:
         { 
             if (Unit* l_Caster = GetCaster())
             {
-                if (l_Caster->IsInWorld() && l_Caster->isInCombat() && l_Caster->IsAIEnabled)
+                if (l_Caster->IsInWorld() && l_Caster->IsInCombat() && l_Caster->IsAIEnabled)
                     GetCaster()->GetAI()->DoAction(eWitherbarkActions::ActionBrittleEffect);
             }
         }
@@ -884,7 +884,7 @@ public:
         {
             if (Unit* l_Caster = GetCaster())
             {
-                if (l_Caster->IsInWorld() && l_Caster->isInCombat() && l_Caster->IsAIEnabled)
+                if (l_Caster->IsInWorld() && l_Caster->IsInCombat() && l_Caster->IsAIEnabled)
                     GetCaster()->GetAI()->DoAction(eWitherbarkActions::ActionBrittleDeffect);
             }
         }
@@ -921,10 +921,10 @@ public:
                 {
                     if (Creature* l_Witherbark = l_Instance->instance->GetCreature(l_Instance->GetData64(eEverbloomData::DataWitherbark)))
                     {
-                        if (!l_Witherbark->isInCombat())
+                        if (!l_Witherbark->IsInCombat())
                             return SpellCastResult::SPELL_FAILED_DONT_REPORT;
 
-                        if (!l_Witherbark->isAlive())
+                        if (!l_Witherbark->IsAlive())
                             return SpellCastResult::SPELL_FAILED_DONT_REPORT;
                     }
                 }

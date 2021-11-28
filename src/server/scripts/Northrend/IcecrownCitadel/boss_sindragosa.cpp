@@ -1139,7 +1139,7 @@ class spell_sindragosa_s_fury: public SpellScriptLoader
             {
                 PreventHitDefaultEffect(effIndex);
 
-                if (!GetHitUnit()->isAlive() || !_targetCount)
+                if (!GetHitUnit()->IsAlive() || !_targetCount)
                     return;
 
                 float resistance = float(GetHitUnit()->GetResistance(SpellSchoolMask(GetSpellInfo()->SchoolMask)));
@@ -1371,9 +1371,9 @@ class spell_sindragosa_icy_grip: public SpellScriptLoader
 
                 if (unit && caster)
                 {
-                    if (caster->GetTypeId() == TYPEID_UNIT && unit->IsPlayer() && caster->getVictim() && !unit->HasAura(SPELL_FROST_BEACON))
+                    if (caster->GetTypeId() == TYPEID_UNIT && unit->IsPlayer() && caster->GetVictim() && !unit->HasAura(SPELL_FROST_BEACON))
                     {
-                        if (caster->getVictim()->GetGUID() != unit->GetGUID())
+                        if (caster->GetVictim()->GetGUID() != unit->GetGUID())
                         {
                             float x, y, z;
                             caster->GetPosition(x, y, z);

@@ -327,7 +327,7 @@ public:
                 }
                 case eArchmageSolEvents::EventFireBall:
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                         me->CastSpell(l_Victim, eArchmageSolSpells::SpellFireBall);
 
                     events.ScheduleEvent(eArchmageSolEvents::EventFireBall, 4 * TimeConstants::IN_MILLISECONDS);
@@ -345,7 +345,7 @@ public:
                 }
                 case eArchmageSolEvents::EventFrostBall:
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                         me->CastSpell(l_Victim, eArchmageSolSpells::SpellFrostbolt);
 
                     events.ScheduleEvent(eArchmageSolEvents::EventFrostBall, 4 * TimeConstants::IN_MILLISECONDS);
@@ -424,7 +424,7 @@ public:
             {
                 case eSporeImageEvents::EventFrostbolt:
                 {
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSporeImageSpells::SpellFrostbolt);
 
                     events.ScheduleEvent(eSporeImageEvents::EventFrostbolt, urand(8 * TimeConstants::IN_MILLISECONDS, 10 * TimeConstants::IN_MILLISECONDS));
@@ -432,7 +432,7 @@ public:
                 }
                 case eSporeImageEvents::EventFireBall:
                 {
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSporeImageSpells::SpellFireBall);
 
                     events.ScheduleEvent(eSporeImageEvents::EventFireBall, urand(10 * TimeConstants::IN_MILLISECONDS, 14 * TimeConstants::IN_MILLISECONDS));

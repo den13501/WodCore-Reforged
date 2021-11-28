@@ -264,7 +264,7 @@ void Object::BuildCreateUpdateBlockForPlayer(UpdateData* data, Player* target) c
         }
     }
 
-    if (ToUnit() && ToUnit()->getVictim())
+    if (ToUnit() && ToUnit()->GetVictim())
         flags |= UPDATEFLAG_HAS_COMBAT_VICTIM;
 
     ByteBuffer buf(10 * 1024);
@@ -342,7 +342,7 @@ void Object::BuildMovementUpdate(ByteBuffer* p_Data, uint32 p_Flags) const
     if (l_Unit)
         const_cast<Unit*>(l_Unit)->m_movementInfo.Normalize();
 
-    if (p_Flags & UPDATEFLAG_HAS_COMBAT_VICTIM && (!l_Unit || !l_Unit->getVictim()))
+    if (p_Flags & UPDATEFLAG_HAS_COMBAT_VICTIM && (!l_Unit || !l_Unit->GetVictim()))
         p_Flags = p_Flags & ~UPDATEFLAG_HAS_COMBAT_VICTIM;
 
     if (p_Flags & UPDATEFLAG_HAS_VEHICLE_CREATE && !l_Unit)
@@ -627,7 +627,7 @@ void Object::BuildMovementUpdate(ByteBuffer* p_Data, uint32 p_Flags) const
     }
 
     if (p_Flags & UPDATEFLAG_HAS_COMBAT_VICTIM)
-        p_Data->appendPackGUID(l_Unit->getVictim()->GetGUID());             ///< Target victim guid
+        p_Data->appendPackGUID(l_Unit->GetVictim()->GetGUID());             ///< Target victim guid
 
     if (p_Flags & UPDATEFLAG_HAS_SERVER_TIME)
     {
@@ -3558,7 +3558,7 @@ namespace JadeCore
 
                 float x, y, z;
 
-                if (!c->isAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
+                if (!c->IsAlive() || c->HasUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED) ||
                     !c->GetMotionMaster()->GetDestination(x, y, z))
                 {
                     x = c->GetPositionX();

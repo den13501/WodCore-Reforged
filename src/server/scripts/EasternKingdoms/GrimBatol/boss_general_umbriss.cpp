@@ -171,7 +171,7 @@ class boss_general_umbriss : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_BLEEDING_WOUND:
-                        DoCast(me->getVictim(), SPELL_BLEEDING_WOUND);
+                        DoCast(me->GetVictim(), SPELL_BLEEDING_WOUND);
                         events.ScheduleEvent(EVENT_BLEEDING_WOUND, 25000);
                         break;
                     case EVENT_GROUND_SIEGE:
@@ -267,7 +267,7 @@ class npc_malignant_trogg : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_CLAW_PUNCTURE:
-                        DoCast(me->getVictim(), SPELL_CLAW_PUNCTURE);
+                        DoCast(me->GetVictim(), SPELL_CLAW_PUNCTURE);
                         events.ScheduleEvent(EVENT_CLAW_PUNCTURE, urand(5000, 10000));
                         break;
                     }
@@ -316,7 +316,7 @@ class npc_umbriss_trogg_dweller : public CreatureScript
                     switch(eventId)
                     {
                     case EVENT_CLAW_PUNCTURE:
-                        DoCast(me->getVictim(), SPELL_CLAW_PUNCTURE);
+                        DoCast(me->GetVictim(), SPELL_CLAW_PUNCTURE);
                         events.ScheduleEvent(EVENT_CLAW_PUNCTURE, urand(5000, 10000));
                         break;
                     }

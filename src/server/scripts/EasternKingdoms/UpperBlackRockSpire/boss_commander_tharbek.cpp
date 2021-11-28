@@ -548,7 +548,7 @@ class boss_commander_tharbek : public CreatureScript
                 {
                     if (Creature* l_Summon = Creature::GetCreature(*me, l_Guid))
                     {
-                        if (l_Summon->isAlive())
+                        if (l_Summon->IsAlive())
                             return false;
                     }
                 }

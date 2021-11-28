@@ -213,7 +213,7 @@ class npc_rylai_crestfall : public CreatureScript
 
                 if (m_FreezingFieldTimer <= p_Diff)
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         me->CastSpell(me, eSpells::FreezingFieldSearcher, true);
                     m_FreezingFieldTimer = 10000;
                 }

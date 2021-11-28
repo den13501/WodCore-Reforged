@@ -1721,7 +1721,7 @@ class spell_mage_alter_time: public SpellScriptLoader
                     for (std::list<Creature*>::const_iterator itr = mirrorList.begin(); itr != mirrorList.end(); ++itr)
                         if (Creature* pMirror = (*itr)->ToCreature())
                             if (TempSummon* pastSelf = pMirror->ToTempSummon())
-                                if (pastSelf->isAlive() && pastSelf->IsInWorld())
+                                if (pastSelf->IsAlive() && pastSelf->IsInWorld())
                                     if (pastSelf->GetSummoner() && pastSelf->GetSummoner()->GetGUID() == _player->GetGUID())
                                         pastSelf->AI()->DoAction(1);
                 }
@@ -2690,7 +2690,7 @@ class spell_mage_incanters_flow : public SpellScriptLoader
                 if (Unit* l_Caster = GetCaster())
                 {
                     /// Break the cycle if caster is out of combat
-                    if (!l_Caster->isInCombat())
+                    if (!l_Caster->IsInCombat())
                         return;
 
                     if (l_Caster->HasAura(SPELL_MAGE_INCANTERS_FLOW))
@@ -2714,7 +2714,7 @@ class spell_mage_incanters_flow : public SpellScriptLoader
                                 l_IncantersFlow->ModStackAmount(m_Up ? 1 : -1);
                         }
                     }
-                    else if (l_Caster->isInCombat())
+                    else if (l_Caster->IsInCombat())
                     {
                         l_Caster->CastSpell(l_Caster, SPELL_MAGE_INCANTERS_FLOW, true);
                         m_Up = true;

@@ -161,7 +161,7 @@ namespace MS
                                 }
                                 else
                                 {
-                                    if (Unit* l_Target = me->getVictim())
+                                    if (Unit* l_Target = me->GetVictim())
                                         p_Target->AddThreat(l_Target, 10000.0f);
                                 }
                             }
@@ -222,7 +222,7 @@ namespace MS
                                 }
                                 case uint32(Events::WildSlam):
                                 {
-                                    me->CastSpell(me->getVictim(), uint32(Spells::WildSlam));
+                                    me->CastSpell(me->GetVictim(), uint32(Spells::WildSlam));
                                     events.ScheduleEvent(uint32(Events::WildSlam), urand(20000, 27000));
                                     break;
                                 }

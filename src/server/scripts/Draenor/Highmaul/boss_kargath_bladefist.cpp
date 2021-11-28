@@ -686,7 +686,7 @@ class boss_kargath_bladefist : public CreatureScript
                     }
                     case eSpells::BerserkerRushDamage:
                     {
-                        if (p_Target->isAlive() || !IsMythic())
+                        if (p_Target->IsAlive() || !IsMythic())
                             break;
 
                         GrantFavorToAllPlayers(me, -25, eSpells::BerserkerRushDamage);
@@ -742,7 +742,7 @@ class boss_kargath_bladefist : public CreatureScript
                 {
                     if (Player* l_Target = Player::GetPlayer(*me, m_BerserkerRushTarget))
                     {
-                        if (!l_Target->isAlive())
+                        if (!l_Target->IsAlive())
                         {
                             EndBerserkerRush(l_Target);
                             return;
@@ -927,7 +927,7 @@ class boss_kargath_bladefist : public CreatureScript
 
             void SpawnIronBombers(uint8 p_Count)
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 std::list<Creature*> l_SpawnerList;
@@ -941,7 +941,7 @@ class boss_kargath_bladefist : public CreatureScript
                     /// Don't spawn two Iron Bombers at the same position
                     if (Creature* l_IronBomber = p_Creature->FindNearestCreature(eHighmaulCreatures::IronBomber, 3.0f))
                     {
-                        if (l_IronBomber->isAlive())
+                        if (l_IronBomber->IsAlive())
                             return true;
                         else
                             l_IronBomber->DespawnOrUnsummon();
@@ -966,7 +966,7 @@ class boss_kargath_bladefist : public CreatureScript
 
             void SpawnDrunkenBileslingers()
             {
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 std::list<Creature*> l_DrunkenList;
@@ -1813,7 +1813,7 @@ class npc_highmaul_ravenous_bloodmaw : public CreatureScript
                 if (p_Type != MovementGeneratorType::CHASE_MOTION_TYPE)
                     return;
 
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                 {
                     me->AddAura(eSpells::InThePitAura, l_Target);
                     me->CastSpell(l_Target, eSpells::SpellMaul, true);
@@ -1860,7 +1860,7 @@ class npc_highmaul_ravenous_bloodmaw : public CreatureScript
 
                     for (Player* l_Player : l_PlrList)
                     {
-                        if (!l_Player->isAlive() || l_Player->GetPositionZ() > 50.0f)
+                        if (!l_Player->IsAlive() || l_Player->GetPositionZ() > 50.0f)
                             continue;
 
                         me->AddAura(eSpells::InThePitAura, l_Player);
@@ -2769,7 +2769,7 @@ class npc_highmaul_areatrigger_for_crowd : public CreatureScript
 
                         if (Creature* l_Vulgor = Creature::GetCreature(*me, m_Instance->GetData64(eHighmaulCreatures::Vulgor)))
                         {
-                            if (l_Vulgor->isAlive())
+                            if (l_Vulgor->IsAlive())
                             {
                                 if (Creature* l_Jhorn = Creature::GetCreature(*me, m_Instance->GetData64(eHighmaulCreatures::JhornTheMad)))
                                     l_Jhorn->AI()->DoAction(eActions::StartIntro);

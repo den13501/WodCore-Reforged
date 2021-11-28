@@ -233,17 +233,17 @@ static void SkullocEnforcersStart(InstanceScript* p_Instance, Creature* p_Me)
 
     if (Creature* l_Skulloc = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataSkulloc)))
     {
-        if (!l_Skulloc->isInCombat())
+        if (!l_Skulloc->IsInCombat())
         l_Skulloc->SetInCombatWithZone();
     }
     if (Creature* l_Koramar = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataKoramar)))
     {
-        if (!l_Koramar->isInCombat())
+        if (!l_Koramar->IsInCombat())
             l_Koramar->SetInCombatWithZone();
     }
     if (Creature* l_Zoggosh = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataZuggosh)))
     {
-        if (!l_Zoggosh->isInCombat())
+        if (!l_Zoggosh->IsInCombat())
             l_Zoggosh->SetInCombatWithZone();
     }
 }

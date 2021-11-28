@@ -620,7 +620,7 @@ void BattlegroundSA::TeleportPlayers()
 
             l_Player->RemoveAurasByType(SPELL_AURA_MOD_FEAR);
 
-            if (!l_Player->isAlive())
+            if (!l_Player->IsAlive())
             {
                 l_Player->ResurrectPlayer(1.0f);
                 l_Player->SpawnCorpseBones();

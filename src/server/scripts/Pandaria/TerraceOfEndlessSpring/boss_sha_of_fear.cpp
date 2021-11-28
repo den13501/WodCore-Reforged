@@ -681,7 +681,7 @@ class boss_sha_of_fear : public CreatureScript
                 if (power != POWER_ENERGY)
                     return;
 
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                 {
                     value = 0;
                     return;
@@ -712,7 +712,7 @@ class boss_sha_of_fear : public CreatureScript
                         if (pInstance && pInstance->GetData(SPELL_RITUAL_OF_PURIFICATION) == false)
                             me->RemoveAura(SPELL_RITUAL_OF_PURIFICATION);
 
-                        if (me->isInCombat())
+                        if (me->IsInCombat())
                             EnterEvadeMode();
                     }
 
@@ -730,7 +730,7 @@ class boss_sha_of_fear : public CreatureScript
                     {
                         case EVENT_CHECK_MELEE:
                         {
-                            if (!me->IsWithinMeleeRange(me->getVictim(), 2.0f))
+                            if (!me->IsWithinMeleeRange(me->GetVictim(), 2.0f))
                             {
                                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 80.0f))
                                     me->CastSpell(target, SPELL_REACHING_ATTACK, false);
@@ -739,7 +739,7 @@ class boss_sha_of_fear : public CreatureScript
                             {
                                 // Always attack champion of light
                                 if (Player* target = GetChampionOfLight(me))
-                                    if (me->getVictim() && me->getVictim()->GetGUID() != target->GetGUID())
+                                    if (me->GetVictim() && me->GetVictim()->GetGUID() != target->GetGUID())
                                         AttackStart(target);
                             }
                             events.ScheduleEvent(EVENT_CHECK_MELEE, 1000);
@@ -810,7 +810,7 @@ class boss_sha_of_fear : public CreatureScript
                             if (!IsHeroic())
                                 break;
 
-                            if (Unit* target = me->getVictim())
+                            if (Unit* target = me->GetVictim())
                                 me->CastSpell(target, SPELL_NAKED_AND_AFRAID, false);
                             events.ScheduleEvent(EVENT_NAKED_AND_AFRAID, 30000);
                             break;

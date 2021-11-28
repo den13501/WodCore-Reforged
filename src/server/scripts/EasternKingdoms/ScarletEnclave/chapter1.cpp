@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -245,17 +256,17 @@ public:
                     switch (eventId)
                     {
                     case EVENT_ICY_TOUCH:
-                        DoCast(me->getVictim(), SPELL_ICY_TOUCH);
+                        DoCast(me->GetVictim(), SPELL_ICY_TOUCH);
                         events.DelayEvents(1000, GCD_CAST);
                         events.ScheduleEvent(EVENT_ICY_TOUCH, 5000, GCD_CAST);
                         break;
                     case EVENT_PLAGUE_STRIKE:
-                        DoCast(me->getVictim(), SPELL_PLAGUE_STRIKE);
+                        DoCast(me->GetVictim(), SPELL_PLAGUE_STRIKE);
                         events.DelayEvents(1000, GCD_CAST);
                         events.ScheduleEvent(SPELL_PLAGUE_STRIKE, 5000, GCD_CAST);
                         break;
                     case EVENT_DEATH_COIL:
-                        DoCast(me->getVictim(), SPELL_DEATH_COIL);
+                        DoCast(me->GetVictim(), SPELL_DEATH_COIL);
                         events.DelayEvents(1000, GCD_CAST);
                         events.ScheduleEvent(EVENT_DEATH_COIL, 5000, GCD_CAST);
                         break;
@@ -343,6 +354,7 @@ enum eDuelEnums
     //SPELL_DUEL_TRIGGERED        = 52990,
     SPELL_DUEL_VICTORY          = 52994,
     SPELL_DUEL_FLAG             = 52991,
+    SPELL_GROVEL                = 7267,
 
     QUEST_DEATH_CHALLENGE       = 12733,
     FACTION_HOSTILE             = 2068
@@ -365,7 +377,7 @@ public:
         {
             player->CLOSE_GOSSIP_MENU();
 
-            if (player->isInCombat() || creature->isInCombat())
+            if (player->IsInCombat() || creature->IsInCombat())
                 return true;
 
             if (npc_death_knight_initiateAI* pInitiateAI = CAST_AI(npc_death_knight_initiate::npc_death_knight_initiateAI, creature->AI()))
@@ -393,7 +405,7 @@ public:
             if (player->HealthBelowPct(10))
                 return true;
 
-            if (player->isInCombat() || creature->isInCombat())
+            if (player->IsInCombat() || creature->IsInCombat())
                 return true;
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ACCEPT_DUEL, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
@@ -457,7 +469,7 @@ public:
                         pDoneBy->AttackStop();
                         me->CastSpell(pDoneBy, SPELL_DUEL_VICTORY, true);
                         lose = true;
-                        me->CastSpell(me, 7267, true);
+                        me->CastSpell(me, SPELL_GROVEL, true);
                         me->RestoreFaction();
                     }
                 }
@@ -487,14 +499,14 @@ public:
             {
                 if (lose)
                 {
-                    if (!me->HasAura(7267))
+                    if (!me->HasAura(SPELL_GROVEL))
                         EnterEvadeMode();
                     return;
                 }
-                else if (me->getVictim() && me->getVictim()->IsPlayer() && me->getVictim()->HealthBelowPct(10))
+                else if (me->GetVictim() && me->EnsureVictim()->GetTypeId() == TYPEID_PLAYER && me->EnsureVictim()->HealthBelowPct(10))
                 {
-                    me->getVictim()->CastSpell(me->getVictim(), 7267, true); // beg
-                    me->getVictim()->RemoveGameObject(SPELL_DUEL_FLAG, true);
+                    me->EnsureVictim()->CastSpell(me->GetVictim(), SPELL_GROVEL, true); // beg
+                    me->EnsureVictim()->RemoveGameObject(SPELL_DUEL_FLAG, true);
                     EnterEvadeMode();
                     return;
                 }
@@ -805,7 +817,7 @@ public:
                 {
                     if ((*itr)->GetOwner()->GetGUID() == me->GetOwner()->GetGUID())
                     {
-                        if ((*itr)->isInCombat() && (*itr)->getAttackerForHelper())
+                        if ((*itr)->IsInCombat() && (*itr)->getAttackerForHelper())
                         {
                             AttackStart((*itr)->getAttackerForHelper());
                         }
@@ -816,12 +828,12 @@ public:
 
         void UpdateAI(const uint32 /*diff*/)
         {
-            if (!me->isInCombat())
+            if (!me->IsInCombat())
             {
                 if (Unit* owner = me->GetOwner())
                 {
                     Player* plrOwner = owner->ToPlayer();
-                    if (plrOwner && plrOwner->isInCombat())
+                    if (plrOwner && plrOwner->IsInCombat())
                     {
                         if (plrOwner->getAttackerForHelper() && plrOwner->getAttackerForHelper()->GetEntry() == GHOSTS)
                             AttackStart(plrOwner->getAttackerForHelper());
@@ -836,14 +848,14 @@ public:
 
             //ScriptedAI::UpdateAI(diff);
             //Check if we have a current target
-            if (me->getVictim()->GetEntry() == GHOSTS)
+            if (me->GetVictim()->GetEntry() == GHOSTS)
             {
                 if (me->isAttackReady())
                 {
                     //If we are within range melee the target
-                    if (me->IsWithinMeleeRange(me->getVictim()))
+                    if (me->IsWithinMeleeRange(me->GetVictim()))
                     {
-                        me->AttackerStateUpdate(me->getVictim());
+                        me->AttackerStateUpdate(me->GetVictim());
                         me->resetAttackTimer();
                     }
                 }

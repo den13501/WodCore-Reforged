@@ -494,7 +494,7 @@ class mob_haunting_sha : public CreatureScript
 
             void UpdateAI(const uint32 diff)
             {
-                if (!me->getVictim())
+                if (!me->GetVictim())
                 {
                     Map::PlayerList const& PlayerList = me->GetInstanceScript()->instance->GetPlayers();
 
@@ -518,9 +518,9 @@ class mob_haunting_sha : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        if (!me->getVictim())
+                        if (!me->GetVictim())
                             return;
-                        me->CastSpell(me->getVictim(), 114646, false);
+                        me->CastSpell(me->GetVictim(), 114646, false);
                         events.ScheduleEvent(1, 2000);
                         break;
                     }
@@ -615,9 +615,9 @@ class mob_strife : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        if (!me->getVictim())
+                        if (!me->GetVictim())
                             return;
-                        me->CastSpell(me->getVictim(), SPELL_AGONY, false);
+                        me->CastSpell(me->GetVictim(), SPELL_AGONY, false);
                         events.ScheduleEvent(1, 2000);
                         break;
                     }
@@ -712,9 +712,9 @@ class mob_peril : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        if (!me->getVictim())
+                        if (!me->GetVictim())
                             return;
-                        me->CastSpell(me->getVictim(), SPELL_AGONY, false);
+                        me->CastSpell(me->GetVictim(), SPELL_AGONY, false);
                         events.ScheduleEvent(1, 2000);
                         break;
                     }
@@ -759,7 +759,7 @@ class mob_nodding_tiger : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 31289, false);
+                        me->CastSpell(me->GetVictim(), 31289, false);
                         events.ScheduleEvent(1, 3000);
                         break;
                     }
@@ -805,15 +805,15 @@ class mob_golden_beetle : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 128051, false);
+                        me->CastSpell(me->GetVictim(), 128051, false);
                         events.ScheduleEvent(1, 10000);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), 88023, false);
+                        me->CastSpell(me->GetVictim(), 88023, false);
                         events.ScheduleEvent(2, 5000);
                         break;
                     case 3:
-                        me->CastSpell(me->getVictim(), 31589, false);
+                        me->CastSpell(me->GetVictim(), 31589, false);
                         events.ScheduleEvent(3, 15000);
                         break;
                     }
@@ -858,11 +858,11 @@ class mob_jiang_xiang : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 114805, false);
+                        me->CastSpell(me->GetVictim(), 114805, false);
                         events.ScheduleEvent(1, 10000);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), 114803, false);
+                        me->CastSpell(me->GetVictim(), 114803, false);
                         events.ScheduleEvent(2, 5000);
                         break;
                     }
@@ -906,7 +906,7 @@ class mob_songbird_queen : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 114826, false);
+                        me->CastSpell(me->GetVictim(), 114826, false);
                         events.ScheduleEvent(1, 10000);
                         break;
                     }
@@ -959,7 +959,7 @@ class mob_talking_fish : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 114811, false);
+                        me->CastSpell(me->GetVictim(), 114811, false);
                         events.ScheduleEvent(1, 10000);
                         break;
                     }

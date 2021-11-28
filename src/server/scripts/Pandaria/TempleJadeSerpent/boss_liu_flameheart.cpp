@@ -202,7 +202,7 @@ class boss_liu_flameheart : public CreatureScript
                     {
                     case EVENT_SERPENT_STRIKE:
                         {
-                            me->CastSpell(me->getVictim(), SPELL_SERPENT_STRIKE, false);
+                            me->CastSpell(me->GetVictim(), SPELL_SERPENT_STRIKE, false);
                             Map::PlayerList const& PlayerList = me->GetInstanceScript()->instance->GetPlayers();
 
                             if (!PlayerList.isEmpty())
@@ -221,7 +221,7 @@ class boss_liu_flameheart : public CreatureScript
                         }
                         break;
                     case EVENT_SERPENT_KICK:
-                        me->CastSpell(me->getVictim(), SPELL_SERPENT_KICK, false);
+                        me->CastSpell(me->GetVictim(), SPELL_SERPENT_KICK, false);
                         events.ScheduleEvent(EVENT_SERPENT_KICK, 10000);
                         break;
                     case EVENT_SERPENT_WAVE:
@@ -267,7 +267,7 @@ class boss_liu_flameheart : public CreatureScript
                         break;
                     case EVENT_JADE_SERPENT_STRIKE:
                         {
-                            me->CastSpell(me->getVictim(), SPELL_JADE_SERPENT_STRIKE, false);
+                            me->CastSpell(me->GetVictim(), SPELL_JADE_SERPENT_STRIKE, false);
 
                             Map::PlayerList const& PlayerList = me->GetInstanceScript()->instance->GetPlayers();
 
@@ -287,7 +287,7 @@ class boss_liu_flameheart : public CreatureScript
                         }
                         break;
                     case EVENT_JADE_SERPENT_KICK:
-                        me->CastSpell(me->getVictim(), SPELL_JADE_SERPENT_KICK, false);
+                        me->CastSpell(me->GetVictim(), SPELL_JADE_SERPENT_KICK, false);
                         events.ScheduleEvent(EVENT_JADE_SERPENT_KICK, 10000);
                         break;
                     case EVENT_JADE_SERPENT_WAVE:
@@ -478,11 +478,11 @@ class mob_minion_of_doubt : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 110099, false);
+                        me->CastSpell(me->GetVictim(), 110099, false);
                         events.ScheduleEvent(1, 5000);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), 110125, false);
+                        me->CastSpell(me->GetVictim(), 110125, false);
                         events.ScheduleEvent(2, 5000);
                         break;
                     }
@@ -526,7 +526,7 @@ class mob_lesser_sha : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), 122527, false);
+                        me->CastSpell(me->GetVictim(), 122527, false);
                         events.ScheduleEvent(1, 5000);
                         break;
                     }

@@ -236,12 +236,12 @@ class DireCallCheck
         DireCallCheck(bool inCombat) : _inCombat(inCombat) { }
         bool operator()(Unit* unit) const
         {
-            return unit->isInCombat() == _inCombat || unit->GetTypeId() != TYPEID_UNIT;
+            return unit->IsInCombat() == _inCombat || unit->GetTypeId() != TYPEID_UNIT;
         }
 
         bool operator()(WorldObject* object) const
         {
-            return object->GetTypeId() != TYPEID_UNIT || object->ToUnit()->isInCombat() == _inCombat;
+            return object->GetTypeId() != TYPEID_UNIT || object->ToUnit()->IsInCombat() == _inCombat;
         }
 
     private:
@@ -1413,7 +1413,7 @@ class mob_zandalari_dinomancer : public CreatureScript
                             Position pos;
                             me->GetPosition(&pos);
                             GameObject* orb = NULL;
-                            Unit* target = me->getVictim() ? me->getVictim() : SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f);
+                            Unit* target = me->GetVictim() ? me->GetVictim() : SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f);
                             if (!target)
                                 break;
 
@@ -2236,7 +2236,7 @@ class spell_headache: public SpellScriptLoader
 
             void AfterRemove(AuraEffect const* /*p_AurEff*/, AuraEffectHandleModes /*mode*/)
             {
-                GetTarget()->GetMotionMaster()->MoveChase(GetTarget()->getVictim());
+                GetTarget()->GetMotionMaster()->MoveChase(GetTarget()->GetVictim());
             }
 
             void Register()

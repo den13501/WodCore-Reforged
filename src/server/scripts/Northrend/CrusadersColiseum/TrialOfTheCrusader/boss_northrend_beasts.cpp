@@ -349,7 +349,7 @@ class mob_snobold_vassal : public CreatureScript
             void JustDied(Unit* /*killer*/)
             {
                 if (Unit* target = Unit::GetPlayer(*me, _targetGUID))
-                    if (target->isAlive())
+                    if (target->IsAlive())
                         target->RemoveAurasDueToSpell(SPELL_SNOBOLLED);
                 if (_instance)
                     _instance->SetData(DATA_SNOBOLD_COUNT, DECREASE);
@@ -377,12 +377,12 @@ class mob_snobold_vassal : public CreatureScript
 
                 if (Unit* target = Unit::GetPlayer(*me, _targetGUID))
                 {
-                    if (!target->isAlive())
+                    if (!target->IsAlive())
                     {
                         if (_instance)
                         {
                             Unit* gormok = ObjectAccessor::GetCreature(*me, _instance->GetData64(NPC_GORMOK));
-                            if (gormok && gormok->isAlive())
+                            if (gormok && gormok->IsAlive())
                             {
                                 SetCombatMovement(false);
                                 _targetDied = true;
@@ -517,7 +517,7 @@ struct boss_jormungarAI : public BossAI
         {
             if (Creature* otherWorm = Unit::GetCreature(*me, instance->GetData64(OtherWormEntry)))
             {
-                if (!otherWorm->isAlive())
+                if (!otherWorm->IsAlive())
                 {
                     instance->SetData(TYPE_NORTHREND_BEASTS, SNAKES_DONE);
 
@@ -659,7 +659,7 @@ struct boss_jormungarAI : public BossAI
         {
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
             SetCombatMovement(true);
-            me->GetMotionMaster()->MoveChase(me->getVictim());
+            me->GetMotionMaster()->MoveChase(me->GetVictim());
             me->SetDisplayId(ModelMobile);
             events.SetPhase(PHASE_MOBILE);
             events.ScheduleEvent(EVENT_SUBMERGE, 45*IN_MILLISECONDS, 0, PHASE_MOBILE);
@@ -1079,7 +1079,7 @@ class boss_icehowl : public CreatureScript
                             {
                                 if (Unit* player = itr->getSource())
                                 {
-                                    if (player->isAlive() && player->IsWithinDistInMap(me, 6.0f))
+                                    if (player->IsAlive() && player->IsWithinDistInMap(me, 6.0f))
                                     {
                                         DoCastAOE(SPELL_TRAMPLE);
                                         events.ScheduleEvent(EVENT_TRAMPLE, 4*IN_MILLISECONDS);
@@ -1103,7 +1103,7 @@ class boss_icehowl : public CreatureScript
                         _movementStarted = false;
                         me->SetReactState(REACT_AGGRESSIVE);
                         me->GetMotionMaster()->MovementExpired();
-                        me->GetMotionMaster()->MoveChase(me->getVictim());
+                        me->GetMotionMaster()->MoveChase(me->GetVictim());
                         SetCombatMovement(true);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                         events.ScheduleEvent(EVENT_MASSIVE_CRASH, 40*IN_MILLISECONDS);

@@ -266,7 +266,7 @@ class npc_little_ooze : public CreatureScript
 
                 if (events.ExecuteEvent() == EVENT_STICKY_OOZE)
                 {
-                    me->CastSpell(me->getVictim(), SPELL_STICKY_OOZE, false, 0, 0, instance->GetData64(DATA_ROTFACE));
+                    me->CastSpell(me->GetVictim(), SPELL_STICKY_OOZE, false, 0, 0, instance->GetData64(DATA_ROTFACE));
                     events.ScheduleEvent(EVENT_STICKY_OOZE, 15000);
                 }
 
@@ -338,7 +338,7 @@ class npc_big_ooze : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_STICKY_OOZE:
-                            me->CastSpell(me->getVictim(), SPELL_STICKY_OOZE, false, 0, 0, instance->GetData64(DATA_ROTFACE));
+                            me->CastSpell(me->GetVictim(), SPELL_STICKY_OOZE, false, 0, 0, instance->GetData64(DATA_ROTFACE));
                             events.ScheduleEvent(EVENT_STICKY_OOZE, 15000);
                             break;
                         case EVENT_ENABLE_ATTACK:
@@ -404,7 +404,7 @@ class npc_precious_icc : public CreatureScript
             {
                 _summons.DespawnAll();
                 if (Creature* rotface = Unit::GetCreature(*me, _instance->GetData64(DATA_ROTFACE)))
-                    if (rotface->isAlive())
+                    if (rotface->IsAlive())
                         rotface->AI()->Talk(SAY_PRECIOUS_DIES);
             }
 
@@ -577,7 +577,7 @@ class spell_rotface_little_ooze_combine: public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitUnit()->isAlive()))
+                if (!(GetHitCreature() && GetHitUnit()->IsAlive()))
                     return;
 
                 GetCaster()->RemoveAurasDueToSpell(SPELL_LITTLE_OOZE_COMBINE);
@@ -609,7 +609,7 @@ class spell_rotface_large_ooze_combine: public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitCreature()->isAlive()))
+                if (!(GetHitCreature() && GetHitCreature()->IsAlive()))
                     return;
 
                 if (Aura* unstable = GetCaster()->GetAura(SPELL_UNSTABLE_OOZE))
@@ -626,7 +626,7 @@ class spell_rotface_large_ooze_combine: public SpellScriptLoader
                         GetCaster()->RemoveAurasDueToSpell(SPELL_LARGE_OOZE_COMBINE);
                         if (InstanceScript* instance = GetCaster()->GetInstanceScript())
                             if (Creature* rotface = Unit::GetCreature(*GetCaster(), instance->GetData64(DATA_ROTFACE)))
-                                if (rotface->isAlive())
+                                if (rotface->IsAlive())
                                 {
                                     rotface->AI()->Talk(EMOTE_UNSTABLE_EXPLOSION);
                                     rotface->AI()->Talk(SAY_UNSTABLE_EXPLOSION);
@@ -669,7 +669,7 @@ class spell_rotface_large_ooze_buff_combine: public SpellScriptLoader
 
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
-                if (!(GetHitCreature() && GetHitCreature()->isAlive()))
+                if (!(GetHitCreature() && GetHitCreature()->IsAlive()))
                     return;
 
                 if (Aura* unstable = GetCaster()->GetAura(SPELL_UNSTABLE_OOZE))
@@ -684,7 +684,7 @@ class spell_rotface_large_ooze_buff_combine: public SpellScriptLoader
                         GetCaster()->RemoveAurasDueToSpell(SPELL_LARGE_OOZE_COMBINE);
                         if (InstanceScript* instance = GetCaster()->GetInstanceScript())
                             if (Creature* rotface = Unit::GetCreature(*GetCaster(), instance->GetData64(DATA_ROTFACE)))
-                                if (rotface->isAlive())
+                                if (rotface->IsAlive())
                                 {
                                     rotface->AI()->Talk(EMOTE_UNSTABLE_EXPLOSION);
                                     rotface->AI()->Talk(SAY_UNSTABLE_EXPLOSION);

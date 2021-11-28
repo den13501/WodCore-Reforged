@@ -127,7 +127,7 @@ public:
             }
 #ifndef CROSS
 
-            if (!me->getVictim() || me->HasUnitState(UNIT_STATE_CASTING))
+            if (!me->GetVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 #endif /* not CROSS */
 
@@ -432,7 +432,7 @@ public:
 
             for (auto player : playerList)
                 if (player->GetQuestStatus(29786) == QUEST_STATUS_INCOMPLETE)
-                    if (player->isAlive())
+                    if (player->IsAlive())
                         return true;
 
             return false;
@@ -477,7 +477,7 @@ public:
 
             for (auto player : playerList)
                 if (player->GetQuestStatus(29786) == QUEST_STATUS_INCOMPLETE)
-                    if (player->isAlive())
+                    if (player->IsAlive())
                         player->KilledMonsterCredit(me->GetEntry());
         }
 
@@ -1030,7 +1030,7 @@ public:
             if (!summoner)
                 return;
 
-            if (Unit* target = summoner->getVictim())
+            if (Unit* target = summoner->GetVictim())
             {
                 me->Attack(target, true);
                 DoMeleeAttackIfReady();

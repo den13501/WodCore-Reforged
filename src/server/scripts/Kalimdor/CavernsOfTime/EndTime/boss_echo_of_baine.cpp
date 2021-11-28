@@ -257,7 +257,7 @@ class spell_echo_of_baine_pulverize_aoe: public SpellScriptLoader
 
             void FilterTargets(std::list<WorldObject*>& targets)
             {
-                if (!GetCaster() || !GetCaster()->getVictim())
+                if (!GetCaster() || !GetCaster()->GetVictim())
                     return;
 
                 std::list<WorldObject*> tempList;
@@ -266,7 +266,7 @@ class spell_echo_of_baine_pulverize_aoe: public SpellScriptLoader
                         tempList.push_back((*itr));
 
                 if (tempList.size() > 1)
-                    tempList.remove(GetCaster()->getVictim());
+                    tempList.remove(GetCaster()->GetVictim());
 
                 targets.clear();
                 if (!tempList.empty())

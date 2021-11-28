@@ -568,7 +568,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& p_RecvData)
         }
         case CHAT_MSG_AFK:
         {
-            if ((l_Text.empty() || !m_Player->isAFK()) && !m_Player->isInCombat())
+            if ((l_Text.empty() || !m_Player->isAFK()) && !m_Player->IsInCombat())
             {
                 if (!m_Player->isAFK())
                 {
@@ -758,7 +758,7 @@ void WorldSession::HandleAddonMessagechatOpcode(WorldPacket& p_RecvData)
 /// - Client send it only for clear emote
 void WorldSession::HandleEmoteOpcode(WorldPacket & p_RecvData)
 {
-    if (!GetPlayer()->isAlive() || GetPlayer()->HasUnitState(UNIT_STATE_DIED))
+    if (!GetPlayer()->IsAlive() || GetPlayer()->HasUnitState(UNIT_STATE_DIED))
         return;
 
     if (!GetPlayer()->CanSpeak())
@@ -808,7 +808,7 @@ namespace JadeCore
 
 void WorldSession::HandleTextEmoteOpcode(WorldPacket & p_RecvData)
 {
-    if (!GetPlayer()->isAlive())
+    if (!GetPlayer()->IsAlive())
         return;
 
     if (!GetPlayer()->CanSpeak())

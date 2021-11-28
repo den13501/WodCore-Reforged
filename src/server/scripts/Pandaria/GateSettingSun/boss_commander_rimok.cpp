@@ -86,8 +86,8 @@ class boss_commander_rimok : public CreatureScript
                 switch(events.ExecuteEvent())
                 {
                     case EVENT_FRENZIED_ASSAULT:
-                        if (me->getVictim())
-                            me->CastSpell(me->getVictim(), SPELL_FRENZIED_ASSAULT, false);
+                        if (me->GetVictim())
+                            me->CastSpell(me->GetVictim(), SPELL_FRENZIED_ASSAULT, false);
 
                         events.ScheduleEvent(EVENT_FRENZIED_ASSAULT, urand(10000, 15000));
                         break;

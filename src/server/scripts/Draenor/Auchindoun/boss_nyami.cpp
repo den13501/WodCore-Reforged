@@ -314,7 +314,7 @@ class boss_nyami : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eNyamiEvents::EventMindSpikeNyami:
-                    if (Unit * l_Target = me->getVictim())
+                    if (Unit * l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eAuchindounSpells::SpellMindSpike);
                     events.ScheduleEvent(eNyamiEvents::EventMindSpikeNyami, urand(6 * TimeConstants::IN_MILLISECONDS, 8 * TimeConstants::IN_MILLISECONDS));
                     break;
@@ -562,7 +562,7 @@ class auchindoun_nyami_mob_malefic_defender : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eMaleficDefenderEvents::EventCrusaderStirke:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eMaleficDefenderSpells::SpellCrusaderStirke);
                     events.ScheduleEvent(eMaleficDefenderEvents::EventCrusaderStirke, urand(7 * TimeConstants::IN_MILLISECONDS, 12 * TimeConstants::IN_MILLISECONDS));
                     break;

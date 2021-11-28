@@ -376,10 +376,10 @@ class boss_warlord_zaela : public CreatureScript
                 }
 
                 ///< Update target movements here to avoid some movements problems
-                if (me->getVictim() && !me->IsWithinMeleeRange(me->getVictim()))
+                if (me->GetVictim() && !me->IsWithinMeleeRange(me->GetVictim()))
                 {
                     Position l_Pos;
-                    me->getVictim()->GetPosition(&l_Pos);
+                    me->GetVictim()->GetPosition(&l_Pos);
                     me->GetMotionMaster()->MovePoint(0, l_Pos);
                 }
 
@@ -427,7 +427,7 @@ class boss_warlord_zaela : public CreatureScript
                         break;
                     }
                     case eEvents::EndBlackIronCyclone:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             AttackStart(l_Target);
                         break;
                     case eEvents::BackOnTheGround:
@@ -460,8 +460,8 @@ class boss_warlord_zaela : public CreatureScript
                             {
                                 l_Rider->SetReactState(ReactStates::REACT_AGGRESSIVE);
 
-                                if (me->getVictim())
-                                    l_Rider->AI()->AttackStart(me->getVictim());
+                                if (me->GetVictim())
+                                    l_Rider->AI()->AttackStart(me->GetVictim());
                                 l_Rider->AI()->DoAction(eActions::ActionFightRiders);
                             }
                         }

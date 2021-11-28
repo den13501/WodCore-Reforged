@@ -328,7 +328,7 @@ class spell_pri_shadow_word_death: public SpellScriptLoader
 
                         /// Gain an additional Shadow Orb if the cooldown of Shadow Word: Death had not been reset in the last 6 seconds
                         /// If the target dies
-                        if (!l_Target->isAlive())
+                        if (!l_Target->IsAlive())
                         {
                             int32 l_Duration = 0;
 
@@ -339,7 +339,7 @@ class spell_pri_shadow_word_death: public SpellScriptLoader
                                 l_Player->CastSpell(l_Player, ShadowWordDeath::ShadowWordDeathOrbEnergize, true); ///< Shadow Orb energize
                         }
                     }
-                    if (l_Target->isAlive())
+                    if (l_Target->IsAlive())
                     {
                         /// If the target not dies, you take damage
                         l_Player->CastCustomSpell(l_Player, PRIEST_SHADOW_WORD_DEATH, &l_Damage, NULL, NULL, true);
@@ -347,14 +347,14 @@ class spell_pri_shadow_word_death: public SpellScriptLoader
                 }
                 else
                 {
-                    if (!l_Target->isAlive() || l_Player->HasAura(ShadowWordDeath::EnhancedShadowWordDeath))
+                    if (!l_Target->IsAlive() || l_Player->HasAura(ShadowWordDeath::EnhancedShadowWordDeath))
                         l_Player->CastSpell(l_Player, ShadowWordDeath::ShadowWordDeathOrbEnergize, true); ///< Shadow Orb energize
                 }
 
                 /// The cooldown is reset if the target does not die.
                 /// This reset cannot happen more often than once every 9 sec.
                 /// If the target is below 20% health
-                if (l_Target->isAlive() && !l_Player->HasAura(ShadowWordDeath::ShadowWordDeathCooldownMarker))
+                if (l_Target->IsAlive() && !l_Player->HasAura(ShadowWordDeath::ShadowWordDeathCooldownMarker))
                 {
                     l_Player->CastSpell(l_Player, ShadowWordDeath::ShadowWordDeathCooldownMarker, true);
                     l_Player->ToPlayer()->RemoveSpellCooldown(GetSpellInfo()->Id, true);
@@ -2634,7 +2634,7 @@ class spell_pri_penance: public SpellScriptLoader
                 {
                     if (Unit* l_UnitTarget = GetHitUnit())
                     {
-                        if (!l_UnitTarget->isAlive())
+                        if (!l_UnitTarget->IsAlive())
                             return;
 
                         if (l_Player->HasAura(eSpell::T17Discipline2P))

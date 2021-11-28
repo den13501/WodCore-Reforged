@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -165,7 +176,7 @@ class FreezeTrapSearcher
 
         bool operator()(Unit* unit)
         {
-            if (!unit->isAlive() || (unit->GetEntry() != NPC_ICE_BLOCK && unit->GetEntry() != NPC_FLASH_FREEZE) || !unit->IsWithinDist(_source, _range, false))
+            if (!unit->IsAlive() || (unit->GetEntry() != NPC_ICE_BLOCK && unit->GetEntry() != NPC_FLASH_FREEZE) || !unit->IsWithinDist(_source, _range, false))
                 return false;
 
             return true;
@@ -197,16 +208,16 @@ class npc_flash_freeze : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if ((me->getVictim() && me->getVictim()->GetGUID() != targetGUID) || (instance && instance->GetBossState(BOSS_HODIR) != IN_PROGRESS))
+                if ((me->GetVictim() && me->GetVictim()->GetGUID() != targetGUID) || (instance && instance->GetBossState(BOSS_HODIR) != IN_PROGRESS))
                     me->DespawnOrUnsummon();
 
-                if (!UpdateVictim() || me->getVictim()->HasAura(SPELL_BLOCK_OF_ICE) || me->getVictim()->HasAura(SPELL_FLASH_FREEZE_HELPER))
+                if (!UpdateVictim() || me->EnsureVictim()->HasAura(SPELL_BLOCK_OF_ICE) || me->EnsureVictim()->HasAura(SPELL_FLASH_FREEZE_HELPER))
                     return;
 
                 if (checkDespawnTimer <= diff)
                 {
                     if (Unit* target = ObjectAccessor::GetUnit(*me, targetGUID))
-                        if (!target->isAlive())
+                        if (!target->IsAlive())
                             me->DisappearAndDie();
                     checkDespawnTimer = 2.5*IN_MILLISECONDS;
                 }
@@ -294,7 +305,7 @@ class npc_ice_block : public CreatureScript
 
                     if (Creature* Hodir = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(BOSS_HODIR) : 0))
                     {
-                        if (!Hodir->isInCombat())
+                        if (!Hodir->IsInCombat())
                         {
                             Hodir->SetReactState(REACT_AGGRESSIVE);
                             Hodir->AI()->DoZoneInCombat();
@@ -559,7 +570,7 @@ class boss_hodir : public CreatureScript
                 for (std::list<Unit*>::iterator itr = TargetList.begin(); itr != TargetList.end(); ++itr)
                 {
                     Unit* target = *itr;
-                    if (!target || !target->isAlive() || GetClosestCreatureWithEntry(target, NPC_SNOWPACKED_ICICLE, 5.0f))
+                    if (!target || !target->IsAlive() || GetClosestCreatureWithEntry(target, NPC_SNOWPACKED_ICICLE, 5.0f))
                         continue;
 
                     if (!me->IsWithinLOSInMap(target))

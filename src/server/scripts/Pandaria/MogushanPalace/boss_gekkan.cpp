@@ -71,7 +71,7 @@ class boss_gekkan : public CreatureScript
                     Creature* c = me->GetMap()->GetCreature(guid);
                     if (!c)
                         continue;
-                    if (c->isAlive())
+                    if (c->IsAlive())
                         me->CastSpell(c, SPELL_RECKLESS_INSPIRATION, false);
                 }
                 Talk(TALK_DEATH);
@@ -188,7 +188,7 @@ class mob_glintrok_skulker : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), SPELL_SHANK, false);
+                        me->CastSpell(me->GetVictim(), SPELL_SHANK, false);
                         events.ScheduleEvent(1, 7000);
                         break;
                     }
@@ -300,7 +300,7 @@ class mob_glintrok_oracle : public CreatureScript
                         events.ScheduleEvent(1, 25000);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), SPELL_FIRE_BOLT, false);
+                        me->CastSpell(me->GetVictim(), SPELL_FIRE_BOLT, false);
                         events.ScheduleEvent(2, 7000);
                         break;
                     }
@@ -355,11 +355,11 @@ class mob_glintrok_hexxer : public CreatureScript
                     switch (eventId)
                     {
                     case 1:
-                        me->CastSpell(me->getVictim(), SPELL_HEX_OF_LETHARGY, false);
+                        me->CastSpell(me->GetVictim(), SPELL_HEX_OF_LETHARGY, false);
                         events.ScheduleEvent(1, 20000);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), SPELL_DARK_BOLT, false);
+                        me->CastSpell(me->GetVictim(), SPELL_DARK_BOLT, false);
                         events.ScheduleEvent(2, 5000);
                         break;
                     }

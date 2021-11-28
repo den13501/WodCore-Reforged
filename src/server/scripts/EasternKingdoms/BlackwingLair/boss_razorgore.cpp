@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Boss_Razorgore
@@ -79,38 +90,38 @@ public:
             //Cleave_Timer
             if (Cleave_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_CLEAVE);
+                DoCast(me->GetVictim(), SPELL_CLEAVE);
                 Cleave_Timer = urand(7000, 10000);
             } else Cleave_Timer -= diff;
 
             //WarStomp_Timer
             if (WarStomp_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_WARSTOMP);
+                DoCast(me->GetVictim(), SPELL_WARSTOMP);
                 WarStomp_Timer = urand(15000, 25000);
             } else WarStomp_Timer -= diff;
 
             //FireballVolley_Timer
             if (FireballVolley_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_FIREBALLVOLLEY);
+                DoCast(me->GetVictim(), SPELL_FIREBALLVOLLEY);
                 FireballVolley_Timer = urand(12000, 15000);
             } else FireballVolley_Timer -= diff;
 
             //Conflagration_Timer
             if (Conflagration_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_CONFLAGRATION);
+                DoCast(me->GetVictim(), SPELL_CONFLAGRATION);
                 //We will remove this threat reduction and add an aura check.
 
-                //if (DoGetThreat(me->getVictim()))
-                //DoModifyThreatPercent(me->getVictim(), -50);
+                //if (DoGetThreat(me->GetVictim()))
+                //DoModifyThreatPercent(me->GetVictim(), -50);
 
                 Conflagration_Timer = 12000;
             } else Conflagration_Timer -= diff;
 
             // Aura Check. If the gamer is affected by confliguration we attack a random gamer.
-            if (me->getVictim() && me->getVictim()->HasAura(SPELL_CONFLAGRATION))
+            if (me->GetVictim() && me->EnsureVictim()->HasAura(SPELL_CONFLAGRATION))
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 100, true))
                     me->TauntApply(target);
 

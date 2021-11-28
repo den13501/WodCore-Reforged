@@ -890,7 +890,7 @@ class boss_zorlok : public CreatureScript
                 }
 
                 // Song of empress
-                Unit* target = me->getVictim();
+                Unit* target = me->GetVictim();
 
                 if (!isFlying && (!target || me->GetDistance(target) > 5.0f) && !me->HasUnitState(UNIT_STATE_CASTING))
                     me->CastSpell(me, SPELL_SONG_OF_THE_EMPRESS, true);
@@ -1432,7 +1432,7 @@ class spell_zorlok_exhale : public SpellScriptLoader
                 Player* target = ObjectAccessor::FindPlayer(MAKE_NEW_GUID(caster->GetAI()->GetData(TYPE_EXHALE_TARGET), 0, HIGHGUID_PLAYER));
 
                 // No target? Then we pick a random one
-                if (!target || !target->isAlive())
+                if (!target || !target->IsAlive())
                 {
                     std::list<Player*> playerList;
                     GetPlayerListInGrid(playerList, caster, 60.0f);
@@ -1589,7 +1589,7 @@ class spell_convert : public SpellScriptLoader
                         next = itr;
                         ++next;
 
-                        if (!(*itr)->isAlive() || (*itr)->HasAura(SPELL_CONVERT))
+                        if (!(*itr)->IsAlive() || (*itr)->HasAura(SPELL_CONVERT))
                             playerList.remove(*itr);
                     }
 

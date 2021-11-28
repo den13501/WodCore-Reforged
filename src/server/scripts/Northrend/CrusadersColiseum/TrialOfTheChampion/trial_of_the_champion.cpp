@@ -863,7 +863,7 @@ public:
                         {
                             for (uint8 i=0; i<3; i++)
                                 if (Creature* boss = me->GetCreature(*me, bossGUID[i]))
-                                    if (!boss->isInCombat())
+                                    if (!boss->IsInCombat())
                                         AggroAllPlayers(boss);
                         }
 
@@ -1363,7 +1363,7 @@ and teleporting and unmounting them after defeating the mounted waves.
                     if (player->isGameMaster())
                         continue;
 
-                    if (player->isAlive())
+                    if (player->IsAlive())
                     {
                         if (Creature* mount = player->GetVehicleCreatureBase())
                         {

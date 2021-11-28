@@ -167,7 +167,7 @@ class boss_anub_arak : public CreatureScript
                     case NPC_VENOMANCER:
                         ++_addsAlive;
                         DoZoneInCombat(summon, 100.0f);
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             summon->AI()->AttackStart(target);
                         break;
                     case NPC_DARTER:
@@ -197,7 +197,7 @@ class boss_anub_arak : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (me->HasReactState(REACT_PASSIVE) && !me->getVictim())
+                if (me->HasReactState(REACT_PASSIVE) && !me->GetVictim())
                     me->SetReactState(REACT_AGGRESSIVE);
 
                 _events.Update(diff);

@@ -1828,7 +1828,7 @@ class spell_warr_glyph_of_executor : public SpellScriptLoader
                 if (!l_Caster->HasAura(GlyphOfExecutor::SpellWarrGlyphOfExecutor))
                     return;
 
-                if (!l_Target->isAlive()) ///< Killing an enemy with Execute grants you 30 rage.
+                if (!l_Target->IsAlive()) ///< Killing an enemy with Execute grants you 30 rage.
                     l_Caster->CastSpell(l_Caster, GlyphOfExecutor::SpellWarrGlyphOfExecutorEffect, true);
             }
 
@@ -3341,7 +3341,7 @@ class spell_warr_stances : public SpellScriptLoader
             {
                 Unit* l_Caster = GetCaster();
 
-                if (l_Caster->HasAura(eSpells::GladiatorStance) && l_Caster->isInCombat())
+                if (l_Caster->HasAura(eSpells::GladiatorStance) && l_Caster->IsInCombat())
                     return SPELL_FAILED_AFFECTING_COMBAT;
 
                 return SPELL_CAST_OK;

@@ -452,7 +452,7 @@ public:
                 WiningConditionRocketsparkAndBurka(m_Instance, me, p_Killer);
                 if (Creature* l_Borka = m_Instance->instance->GetCreature(m_Instance->GetData64(GrimrailDepotData::DataBorka)))
                 {
-                    if (l_Borka->isAlive())
+                    if (l_Borka->IsAlive())
                     {
                         if (l_Borka->IsAIEnabled)
                             l_Borka->GetAI()->DoAction(eRocksparkAndBorkaActions::ActionBorkaUnmanagedAggression);

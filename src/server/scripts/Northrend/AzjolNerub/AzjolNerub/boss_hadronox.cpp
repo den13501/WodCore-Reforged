@@ -203,7 +203,7 @@ class boss_hadronox : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if (me->IsVisible() && !_movementStarted && me->isInCombat())
+                if (me->IsVisible() && !_movementStarted && me->IsInCombat())
                 {
                     _movementStarted = true;
                     _wpReached = true;
@@ -217,7 +217,7 @@ class boss_hadronox : public CreatureScript
                 {
                     _wpReached = false;
 
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                     {
                         me->SetReactState(REACT_AGGRESSIVE);
                         _events.ScheduleEvent(EVENT_FORCEMOVE, urand(7, 10) *IN_MILLISECONDS);
@@ -268,8 +268,8 @@ class boss_hadronox : public CreatureScript
                             me->GetMotionMaster()->MovePoint(_wpCount, HadronoxWaypoints[_wpCount]);
                             break;
                         case EVENT_UNSTUCK:
-                            if (me->getVictim())
-                                if (me->IsWithinCombatRange(me->getVictim(), 10.0f) && !me->IsWithinLOSInMap(me->getVictim()))
+                            if (me->GetVictim())
+                                if (me->IsWithinCombatRange(me->GetVictim(), 10.0f) && !me->IsWithinLOSInMap(me->GetVictim()))
                                     me->GetMotionMaster()->MoveJump(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ() + 10.0f, 1.0f, 1.0f);
                             if (_engaged)
                             {
@@ -420,7 +420,7 @@ class npc_hadronox_nerubian : public CreatureScript
 
             void UpdateAI(uint32 const /*p_Diff*/)
             {
-                if (_wpReached && !me->isInCombat())
+                if (_wpReached && !me->IsInCombat())
                 {
                     _wpReached = false;
                     me->GetMotionMaster()->MovePoint(_wpCount, AddWaypoints[_wpCount]);
@@ -469,7 +469,7 @@ class spell_hadronox_leech_poison: public SpellScriptLoader
             void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 Unit* caster = GetCaster();
-                if (caster && caster->isAlive() && GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_DEATH)
+                if (caster && caster->IsAlive() && GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_DEATH)
                     caster->CastSpell(caster, SPELL_LEECH_POISON_PCT, true);
             }
 

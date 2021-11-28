@@ -236,7 +236,7 @@ class boss_hansgar : public CreatureScript
                 {
                     if (Creature* l_Brother = GetBrother(me, m_Instance))
                     {
-                        if (l_Brother->isAlive())
+                        if (l_Brother->IsAlive())
                             p_Killer->Kill(l_Brother);
                     }
 
@@ -526,7 +526,7 @@ class boss_hansgar : public CreatureScript
                         {
                             AddTimedDelayedOperation(50, [this]() -> void
                             {
-                                if (Unit* l_Target = me->getVictim())
+                                if (Unit* l_Target = me->GetVictim())
                                     me->GetMotionMaster()->MoveChase(l_Target);
                             });
                         }
@@ -1214,7 +1214,7 @@ class boss_franzok : public CreatureScript
                 {
                     if (Creature* l_Brother = GetBrother(me, m_Instance))
                     {
-                        if (l_Brother->isAlive())
+                        if (l_Brother->IsAlive())
                             p_Killer->Kill(l_Brother);
                     }
 
@@ -1464,7 +1464,7 @@ class boss_franzok : public CreatureScript
                         {
                             AddTimedDelayedOperation(50, [this]() -> void
                             {
-                                if (Unit* l_Target = me->getVictim())
+                                if (Unit* l_Target = me->GetVictim())
                                     me->GetMotionMaster()->MoveChase(l_Target);
                             });
                         }

@@ -242,7 +242,7 @@ class boss_tortos : public CreatureScript
                 if (power != POWER_ENERGY)
                     return;
 
-                if (me->HasAura(SPELL_FURIOUS_STONE_BREATH) || !me->isInCombat())
+                if (me->HasAura(SPELL_FURIOUS_STONE_BREATH) || !me->IsInCombat())
                 {
                     value = 0;
                     return;

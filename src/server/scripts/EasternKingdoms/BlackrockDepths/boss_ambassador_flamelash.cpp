@@ -54,7 +54,7 @@ public:
             //FireBlast_Timer
             if (FireBlast_Timer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_FIREBLAST);
+                DoCast(me->GetVictim(), SPELL_FIREBLAST);
                 FireBlast_Timer = 7000;
             }
             else
@@ -63,10 +63,10 @@ public:
             //Spirit_Timer
             if (Spirit_Timer <= diff)
             {
-                SummonSpirits(me->getVictim());
-                SummonSpirits(me->getVictim());
-                SummonSpirits(me->getVictim());
-                SummonSpirits(me->getVictim());
+                SummonSpirits(me->GetVictim());
+                SummonSpirits(me->GetVictim());
+                SummonSpirits(me->GetVictim());
+                SummonSpirits(me->GetVictim());
 
                 Spirit_Timer = 30000;
             }

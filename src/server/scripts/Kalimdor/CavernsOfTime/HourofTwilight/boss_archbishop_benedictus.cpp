@@ -377,7 +377,7 @@ class spell_archbishop_benedictus_righteous_snear_aoe: public SpellScriptLoader
                     return;
 
                 if (Creature* pBenedictus = GetCaster()->ToCreature())
-                    if (Unit* pTank = pBenedictus->getVictim())
+                    if (Unit* pTank = pBenedictus->GetVictim())
                         targets.remove(pTank);
 
                 if (targets.size() > 1)

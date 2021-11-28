@@ -259,7 +259,7 @@ class npc_azure_serpent : public CreatureScript
                         DoZoneInCombat();
                         break;
                     case ACTION_AZURE_SERPENT_RESET:
-                        if (!me->isAlive())
+                        if (!me->IsAlive())
                             me->Respawn();
 
                         me->CombatStop();

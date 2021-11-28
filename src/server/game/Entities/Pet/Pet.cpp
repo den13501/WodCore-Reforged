@@ -681,7 +681,7 @@ void Pet::Update(uint32 diff)
                 }
             }
 
-            if (Unit* l_Victim = getVictim())
+            if (Unit* l_Victim = GetVictim())
             {
                 if (!HasUnitState(UNIT_STATE_CASTING))
                 {
@@ -789,7 +789,7 @@ void Pet::GivePetXP(uint32 xp)
     if (xp < 1)
         return;
 
-    if (!isAlive())
+    if (!IsAlive())
         return;
 
     uint8 maxlevel = std::min((uint8)sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL), GetOwner()->getLevel());

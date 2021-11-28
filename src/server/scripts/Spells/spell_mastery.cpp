@@ -510,7 +510,7 @@ class spell_mastery_icicles_trigger : public SpellScriptLoader
                 {
                     if (Unit* l_HitUnit = GetHitUnit())
                     {
-                        if (l_HitUnit->isAlive())
+                        if (l_HitUnit->IsAlive())
                         {
                             l_Caster->SetIciclesTarget(l_HitUnit->GetGUID());
                             l_Caster->CastSpell(l_Caster, SPELL_MAGE_ICICLE_PERIODIC_TRIGGER, true);
@@ -566,7 +566,7 @@ class spell_mastery_icicles_periodic : public SpellScriptLoader
                         // Maybe not the good target selection ...
                         if (Unit* l_Target = ObjectAccessor::FindUnit(l_Caster->GetIciclesTarget()))
                         {
-                            if (l_Target->isAlive())
+                            if (l_Target->IsAlive())
                             {
                                 int32 l_Amount = l_Aura->GetAmount();
                                 if (Aura* l_CurrentIcicleAura = l_Caster->GetAura(m_Icicles[l_Amount]))

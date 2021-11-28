@@ -228,7 +228,7 @@ class boss_lord_marrowgar : public CreatureScript
                                 me->GetMotionMaster()->MovementExpired();
                             me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, false);
                             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_ATTACK_ME, false);
-                            DoStartMovement(me->getVictim());
+                            DoStartMovement(me->GetVictim());
                             me->SetSpeed(MOVE_RUN, _baseSpeed, true);
                             events.CancelEvent(EVENT_BONE_STORM_MOVE);
                             events.ScheduleEvent(EVENT_ENABLE_BONE_SLICE, 10000);
@@ -262,7 +262,7 @@ class boss_lord_marrowgar : public CreatureScript
                     return;
 
                 // lock movement
-                DoStartNoMovement(me->getVictim());
+                DoStartNoMovement(me->GetVictim());
             }
 
             Position const* GetLastColdflamePosition() const

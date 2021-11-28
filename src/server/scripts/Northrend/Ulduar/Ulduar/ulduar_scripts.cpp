@@ -61,7 +61,7 @@ class npc_ironwork_cannon : public CreatureScript
 
             void MoveInLineOfSight(Unit* who)
             {
-                if (me->IsWithinDistInMap(who, 100.0f) && !me->isInCombat())
+                if (me->IsWithinDistInMap(who, 100.0f) && !me->IsInCombat())
                     me->AI()->AttackStart(who);
             }
 

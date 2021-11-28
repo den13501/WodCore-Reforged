@@ -415,7 +415,7 @@ class boss_lei_shi : public CreatureScript
                         {
                             if (Creature* elemental = me->GetMap()->GetCreature(itr))
                             {
-                                if (!elemental->isAlive())
+                                if (!elemental->IsAlive())
                                     protector = elemental;
 
                                 elemental->RemoveAura(SPELL_PROTECT_VISUAL);
@@ -1037,10 +1037,10 @@ class at_get_away : public AreaTriggerEntityScript
             {
                 if (l_Player->IsWithinDist(p_AreaTrigger, 40.0f, false))
                 {
-                    if (!l_Player->isAlive() && l_Player->HasMovementForce(l_AreatTriggerGuid))
+                    if (!l_Player->IsAlive() && l_Player->HasMovementForce(l_AreatTriggerGuid))
                         l_Player->SendApplyMovementForce(l_AreatTriggerGuid, false, l_Pos);
 
-                    if (l_Player->isAlive() && !l_Player->HasMovementForce(l_AreatTriggerGuid))
+                    if (l_Player->IsAlive() && !l_Player->HasMovementForce(l_AreatTriggerGuid))
                         l_Player->SendApplyMovementForce(l_AreatTriggerGuid, true, l_Pos, -3.0f, 1);
                 }
                 /// Remove movement force if we're outside of the range

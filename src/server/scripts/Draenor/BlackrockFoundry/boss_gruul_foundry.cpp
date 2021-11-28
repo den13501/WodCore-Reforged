@@ -325,7 +325,7 @@ class boss_gruul_foundry : public CreatureScript
 
                             AddTimedDelayedOperation(50, [this]() -> void
                             {
-                                if (Unit* l_Target = me->getVictim())
+                                if (Unit* l_Target = me->GetVictim())
                                     me->SetFacingTo(me->GetAngle(l_Target));
                             });
                         }
@@ -878,7 +878,7 @@ class spell_foundry_petrifying_slam_aoe : public SpellScriptLoader
                         if (l_Unit->GetTypeId() != TypeID::TYPEID_PLAYER)
                             return false;
 
-                        if (!l_Unit->isAlive())
+                        if (!l_Unit->IsAlive())
                             return false;
 
                         return true;

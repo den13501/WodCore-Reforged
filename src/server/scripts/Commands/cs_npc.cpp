@@ -395,7 +395,7 @@ public:
         {
             creature->SetDefaultMovementType(WAYPOINT_MOTION_TYPE);
             creature->GetMotionMaster()->Initialize();
-            if (creature->isAlive())                            // dead creature will reset movement generator at respawn
+            if (creature->IsAlive())                            // dead creature will reset movement generator at respawn
             {
                 creature->setDeathState(JUST_DIED);
                 creature->Respawn(true);
@@ -855,7 +855,7 @@ public:
             creature->GetPosition(&l_NewPosition);
             creature->SendTeleportPacket(l_NewPosition);
 
-            if (creature->isAlive())                            // dead creature will reset movement generator at respawn
+            if (creature->IsAlive())                            // dead creature will reset movement generator at respawn
             {
                 creature->setDeathState(JUST_DIED);
                 creature->Respawn();
@@ -1048,7 +1048,7 @@ public:
 
             creature->SetDefaultMovementType(move_type);
             creature->GetMotionMaster()->Initialize();
-            if (creature->isAlive())                            // dead creature will reset movement generator at respawn
+            if (creature->IsAlive())                            // dead creature will reset movement generator at respawn
             {
                 creature->setDeathState(JUST_DIED);
                 creature->Respawn();
@@ -1126,7 +1126,7 @@ public:
         creature->SetRespawnRadius((float)option);
         creature->SetDefaultMovementType(mtype);
         creature->GetMotionMaster()->Initialize();
-        if (creature->isAlive())                                // dead creature will reset movement generator at respawn
+        if (creature->IsAlive())                                // dead creature will reset movement generator at respawn
         {
             creature->setDeathState(JUST_DIED);
             creature->Respawn();

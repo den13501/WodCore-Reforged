@@ -140,7 +140,7 @@ class boss_romogg_bonecrusher : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_WOUNDING_STRIKE:
-                            DoCast(me->getVictim(), DUNGEON_MODE(SPELL_WOUNDING_STRIKE, SPELL_WOUNDING_STRIKE_H));
+                            DoCast(me->GetVictim(), DUNGEON_MODE(SPELL_WOUNDING_STRIKE, SPELL_WOUNDING_STRIKE_H));
                             events.ScheduleEvent(EVENT_WOUNDING_STRIKE, urand(6000, 7000));
                             break;
                         case EVENT_QUAKE:

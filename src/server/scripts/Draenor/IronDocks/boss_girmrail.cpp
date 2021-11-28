@@ -57,17 +57,17 @@ static void GrimailEnforcersStart(InstanceScript* p_Instance, Creature* p_Me)
 
     if (Creature* l_Makogg = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataGrimrailMakogg)))
     {
-        if (!l_Makogg->isInCombat())
+        if (!l_Makogg->IsInCombat())
             l_Makogg->SetInCombatWithZone();
     }
     if (Creature* l_Duguru = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataGrimrailDuguru)))
     {
-        if (!l_Duguru->isInCombat())
+        if (!l_Duguru->IsInCombat())
             l_Duguru->SetInCombatWithZone();
     }
     if (Creature* l_Noxx = p_Instance->instance->GetCreature(p_Instance->GetData64(eIronDocksDatas::DataGrimrailNoxx)))
     {
-        if (!l_Noxx->isInCombat())
+        if (!l_Noxx->IsInCombat())
             l_Noxx->SetInCombatWithZone();
     }
 }
@@ -414,7 +414,7 @@ class boss_grimrail_duguru : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eDuguruEvents::EventBloodBolt:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eDuguruSpells::SpellBloodBolt);
                     events.ScheduleEvent(eDuguruEvents::EventBloodBolt, 6 * TimeConstants::IN_MILLISECONDS);
                     break;
@@ -800,7 +800,7 @@ class boss_grimrail_noxx : public CreatureScript
                 {
                     case eNoxxEvents::EventGutShot:
                         {
-                            if (Unit* l_Target = me->getVictim())
+                            if (Unit* l_Target = me->GetVictim())
                                 me->CastSpell(l_Target, eNoxxSpells::SpellGutShot);
                             events.ScheduleEvent(eNoxxEvents::EventGutShot, urand(6 * TimeConstants::IN_MILLISECONDS, 8 * TimeConstants::IN_MILLISECONDS));
                             break;

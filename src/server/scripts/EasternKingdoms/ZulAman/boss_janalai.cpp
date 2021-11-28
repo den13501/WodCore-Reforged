@@ -243,7 +243,7 @@ class boss_janalai : public CreatureScript
                             break;
                         case EVENT_CONTINUE:
                             me->SetReactState(REACT_AGGRESSIVE);
-                            AttackStart(me->getVictim());
+                            AttackStart(me->GetVictim());
                             break;
                         case EVENT_SUMMON_HATCHERS:
                             Talk(SAY_HATCHER);

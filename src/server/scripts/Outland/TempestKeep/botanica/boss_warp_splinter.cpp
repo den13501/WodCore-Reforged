@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Boss_Warp_Splinter
@@ -105,7 +116,7 @@ class mob_warp_splinter_treant : public CreatureScript
                     return;
                 }
 
-                if (me->getVictim()->GetGUID() !=  WarpGuid)
+                if (me->EnsureVictim()->GetGUID() !=  WarpGuid)
                     DoMeleeAttackIfReady();
             }
         };
@@ -189,7 +200,7 @@ class boss_warp_splinter : public CreatureScript
                 //Check for War Stomp
                 if (War_Stomp_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), WAR_STOMP);
+                    DoCast(me->GetVictim(), WAR_STOMP);
                     War_Stomp_Timer = urand(25000, 40000);
                 }
                 else
@@ -198,7 +209,7 @@ class boss_warp_splinter : public CreatureScript
                 //Check for Arcane Volley
                 if (Arcane_Volley_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), DUNGEON_MODE(ARCANE_VOLLEY, ARCANE_VOLLEY_H));
+                    DoCast(me->GetVictim(), DUNGEON_MODE(ARCANE_VOLLEY, ARCANE_VOLLEY_H));
                     Arcane_Volley_Timer = urand(20000, 35000);
                 }
                 else

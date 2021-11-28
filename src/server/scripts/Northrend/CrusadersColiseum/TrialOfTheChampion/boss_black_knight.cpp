@@ -169,7 +169,7 @@ public:
             if (summon->GetEntry() == NPC_RISEN_JAEREN || summon->GetEntry() == NPC_RISEN_ARELAS || summon->GetEntry() == NPC_RISEN_CHAMPION)
             {
                 summons.Summon(summon);
-                summon->AI()->AttackStart(me->getVictim());
+                summon->AI()->AttackStart(me->GetVictim());
             }
         }
 
@@ -200,7 +200,7 @@ public:
                             Talk(SAY_GHOST);
                             me->SetDisplayId(MODEL_GHOST);
                             SetEquipmentSlots(false, EQUIP_UNEQUIP);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             break;
                     }
                     DoCast(me, SPELL_BLACK_KNIGHT_RES, true);
@@ -249,7 +249,7 @@ public:
                             {
                                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 200.0f, true))
                                 {
-                                    if (target && target->isAlive())
+                                    if (target && target->IsAlive())
                                         DoCast(target, SPELL_DEATH_RESPITE);
                                 }
                                 uiDeathRespiteTimer = urand(10000, 12000);
@@ -270,7 +270,7 @@ public:
                             {
                                 if (uiDeathArmyCheckTimer <= diff)
                                 {
-                                    me->GetMotionMaster()->MoveChase(me->getVictim());
+                                    me->GetMotionMaster()->MoveChase(me->GetVictim());
                                     me->ClearUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED);
                                     uiDeathArmyCheckTimer = 0;
                                     uiGhoulExplodeTimer = urand(3000, 5000);
@@ -283,7 +283,7 @@ public:
                             {
                                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f, true))
                                 {
-                                    if (target && target->isAlive())
+                                    if (target && target->IsAlive())
                                         DoCast(target, SPELL_DESECRATION);
                                 }
                                 uiDesecration = urand(15000, 16000);
@@ -318,7 +318,7 @@ public:
                     {
                         if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 200.0f, true))
                         {
-                            if (target && target->isAlive())
+                            if (target && target->IsAlive())
                                 DoCast(target, SPELL_MARKED_DEATH);
                         }
                         uiMarkedDeathTimer = 10000;

@@ -160,7 +160,7 @@ class boss_heart_of_the_mountain : public CreatureScript
 
                     if (Creature* l_Foreman = Creature::GetCreature(*me, m_Instance->GetData64(eFoundryCreatures::ForemanFeldspar)))
                     {
-                        if (l_Foreman->IsAIEnabled && !l_Foreman->isAlive())
+                        if (l_Foreman->IsAIEnabled && !l_Foreman->IsAlive())
                         {
                             l_Foreman->Respawn();
                             l_Foreman->AI()->EnterEvadeMode();
@@ -1090,7 +1090,7 @@ class boss_foreman_feldspar : public CreatureScript
                 {
                     if (Creature* l_Iter = Creature::GetCreature(*me, l_Guid))
                     {
-                        if (l_Iter->IsAIEnabled && !l_Iter->isInCombat())
+                        if (l_Iter->IsAIEnabled && !l_Iter->IsInCombat())
                         {
                             if (l_Iter->GetEntry() != eCreatures::BellowsOperator && l_Iter->GetEntry() != eCreatures::HeatRegulator)
                                 l_Iter->AI()->AttackStart(p_Attacker);
@@ -1806,7 +1806,7 @@ class npc_foundry_security_guard : public CreatureScript
                 {
                     if (Creature* l_Foreman = Creature::GetCreature(*me, l_Instance->GetData64(eFoundryCreatures::ForemanFeldspar)))
                     {
-                        if (!l_Foreman->isInCombat())
+                        if (!l_Foreman->IsInCombat())
                             l_Foreman->SetInCombatWithZone();
                     }
                 }
@@ -1909,7 +1909,7 @@ class npc_foundry_furnace_engineer : public CreatureScript
                 {
                     if (Creature* l_Foreman = Creature::GetCreature(*me, l_Instance->GetData64(eFoundryCreatures::ForemanFeldspar)))
                     {
-                        if (!l_Foreman->isInCombat())
+                        if (!l_Foreman->IsInCombat())
                             l_Foreman->SetInCombatWithZone();
                     }
                 }
@@ -2287,7 +2287,7 @@ class npc_foundry_slag_elemental : public CreatureScript
 
                 if (Player* l_Target = Player::GetPlayer(*me, m_Target))
                 {
-                    if (!l_Target->isAlive() || me->GetCurrentSpell(CurrentSpellTypes::CURRENT_CHANNELED_SPELL) == nullptr)
+                    if (!l_Target->IsAlive() || me->GetCurrentSpell(CurrentSpellTypes::CURRENT_CHANNELED_SPELL) == nullptr)
                     {
                         m_Target = 0;
                         me->CastSpell(me, eSpells::Fixate, true);

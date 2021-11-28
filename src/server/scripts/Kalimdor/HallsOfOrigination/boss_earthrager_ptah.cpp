@@ -180,7 +180,7 @@ class boss_earthrager_ptah : public CreatureScript
                             me->RemoveAllAuras();
                             me->RemoveFlag(UNIT_FIELD_FLAGS,UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NOT_SELECTABLE);
                             me->SetReactState(REACT_AGGRESSIVE);
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                             events.ScheduleEvent(EVENT_FLAME_BOLT, urand(5000, 8000));
                             events.ScheduleEvent(EVENT_RAGING_SMASH, urand(7000, 10000));
                             events.ScheduleEvent(EVENT_EARTH_POINT, urand(12000, 15000));
@@ -246,7 +246,7 @@ class npc_ptah_dustbone_horror : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_SMASH:
-                            DoCast(me->getVictim(), SPELL_SMASH);
+                            DoCast(me->GetVictim(), SPELL_SMASH);
                             events.ScheduleEvent(EVENT_SMASH, urand(5000, 10000));
                             break;
                     }

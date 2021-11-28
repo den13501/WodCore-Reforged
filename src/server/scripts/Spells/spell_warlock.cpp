@@ -2914,7 +2914,7 @@ class spell_warl_burning_embers_regen : public PlayerScript
             if (l_BuringEmbersData.m_RegenTimer <= p_Diff)
             {
                 /// After 25s out of combat...
-                if (p_Player->isInCombat() || (l_BuringEmbersData.m_LastCombat != 0 && GetMSTimeDiffToNow(l_BuringEmbersData.m_LastCombat) < (25 * IN_MILLISECONDS)))
+                if (p_Player->IsInCombat() || (l_BuringEmbersData.m_LastCombat != 0 && GetMSTimeDiffToNow(l_BuringEmbersData.m_LastCombat) < (25 * IN_MILLISECONDS)))
                     return;
 
                 int32 l_CurrentPower = p_Player->GetPower(POWER_BURNING_EMBERS);
@@ -3080,7 +3080,7 @@ class spell_warl_soul_harverst: public SpellScriptLoader
                 {
                     if (Player* _player = GetCaster()->ToPlayer())
                     {
-                        if (!_player->isInCombat() && !_player->InArena() && _player->isAlive())
+                        if (!_player->IsInCombat() && !_player->InArena() && _player->IsAlive())
                         {
                             _player->SetHealth(_player->GetHealth() + CalculatePct(_player->GetMaxHealth(), GetSpellInfo()->Effects[EFFECT_0].BasePoints / 1000));
 

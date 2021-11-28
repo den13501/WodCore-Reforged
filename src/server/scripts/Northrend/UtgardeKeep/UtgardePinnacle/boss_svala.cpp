@@ -327,7 +327,7 @@ public:
                                 GetCreatureListWithEntryInGrid(lspectatorList, me, CREATURE_SPECTATOR, 100.0f);
                                 for (std::list<Creature*>::iterator itr = lspectatorList.begin(); itr != lspectatorList.end(); ++itr)
                                 {
-                                    if ((*itr)->isAlive())
+                                    if ((*itr)->IsAlive())
                                     {
                                         (*itr)->SetStandState(UNIT_STAND_STATE_STAND);
                                         (*itr)->RemoveUnitMovementFlag(MOVEMENTFLAG_WALKING);
@@ -402,7 +402,7 @@ public:
                 if (!UpdateVictim())
                     return;
 
-                if (me->IsWithinMeleeRange(me->getVictim()))
+                if (me->IsWithinMeleeRange(me->GetVictim()))
                 {
                     me->SetCanFly(false);
                     me->SetDisableGravity(false);
@@ -410,7 +410,7 @@ public:
 
                 if (sinsterStrikeTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_SINSTER_STRIKE);
+                    DoCast(me->GetVictim(), SPELL_SINSTER_STRIKE);
                     sinsterStrikeTimer = urand(5 * IN_MILLISECONDS, 9 * IN_MILLISECONDS);
                 } else sinsterStrikeTimer -= diff;
 
@@ -656,7 +656,7 @@ class npc_scourge_hulk : public CreatureScript
 
                 if (mightyBlow <= diff)
                 {
-                    if (Unit* victim = me->getVictim())
+                    if (Unit* victim = me->GetVictim())
                         if (!victim->HasUnitState(UNIT_STATE_STUNNED))    // Prevent knocking back a ritual player
                             DoCast(victim, SPELL_MIGHTY_BLOW);
                     mightyBlow = urand(12000, 17000);

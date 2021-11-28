@@ -273,7 +273,7 @@ class boss_razorscale_controller : public CreatureScript
 
             void UpdateAI(uint32 const Diff)
             {
-                if (me->isInCombat() && instance->GetBossState(BOSS_RAZORSCALE) != IN_PROGRESS)
+                if (me->IsInCombat() && instance->GetBossState(BOSS_RAZORSCALE) != IN_PROGRESS)
                     EnterEvadeMode();
 
                 events.Update(Diff);

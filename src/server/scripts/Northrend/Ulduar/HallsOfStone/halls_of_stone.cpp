@@ -198,7 +198,7 @@ public:
                         {
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                                 if (Creature* kaddrak = Unit::GetCreature(*me, *itr))
-                                    if (kaddrak->isAlive())
+                                    if (kaddrak->IsAlive())
                                         kaddrak->CastSpell(target, DUNGEON_MODE(SPELL_GLARE_OF_THE_TRIBUNAL, H_SPELL_GLARE_OF_THE_TRIBUNAL), true);
                         }
 
@@ -222,7 +222,7 @@ public:
                             for (std::list<uint64>::const_iterator itr = MarnakGUIDList.begin(); itr != MarnakGUIDList.end(); ++itr)
                             {
                                 if (Creature* marnak = Unit::GetCreature(*me, *itr))
-                                    if (marnak->isAlive())
+                                    if (marnak->IsAlive())
                                         marnak->CastSpell(matter, SPELL_DARK_MATTER_DUMMY, true);
                             }
                         }
@@ -265,7 +265,7 @@ public:
                                 for (std::list<uint64>::const_iterator itr = AbedneumGUIDList.begin(); itr != AbedneumGUIDList.end(); ++itr)
                                 {
                                     if (Creature* abedneum = Unit::GetCreature(*me, *itr))
-                                        if (abedneum->isAlive())
+                                        if (abedneum->IsAlive())
                                             abedneum->CastSpell(gaze, SPELL_SEARING_GAZE_DUMMY, true);
                                 }
                             }
@@ -334,7 +334,7 @@ public:
             for (std::list<uint64>::const_iterator itr = lSummonGUIDList.begin(); itr != lSummonGUIDList.end(); ++itr)
             {
                 Creature* summon = Unit::GetCreature(*me, *itr);
-                if (summon && summon->isAlive())
+                if (summon && summon->IsAlive())
                 {
                     if (instance->GetData(DATA_BRANN_EVENT) == DONE && (summon->GetEntry() == CREATURE_KADDRAK || summon->GetEntry() == CREATURE_MARNAK
                         || summon->GetEntry() == CREATURE_ABEDNEUM))

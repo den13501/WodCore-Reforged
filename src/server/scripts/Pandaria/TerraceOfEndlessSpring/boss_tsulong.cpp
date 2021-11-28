@@ -528,7 +528,7 @@ class boss_tsulong : public CreatureScript
                     Map::PlayerList const& playerList = me->GetMap()->GetPlayers();
                     for (Map::PlayerList::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                         if (Player* player = itr->getSource())
-                            if (!player->HasAura(SPELL_NIGHT_PHASE_EFFECT) && player->isAlive())
+                            if (!player->HasAura(SPELL_NIGHT_PHASE_EFFECT) && player->IsAlive())
                                 me->AddAura(SPELL_NIGHT_PHASE_EFFECT, player);
 
                     switch (events.ExecuteEvent())
@@ -917,7 +917,7 @@ class npc_embodied_terror : public CreatureScript
 
                 m_Events.Update(diff);
 
-                if (Unit* victim = me->getVictim())
+                if (Unit* victim = me->GetVictim())
                 {
                     if (victim->GetDisplayId() == DISPLAY_TSULON_NIGHT)
                         me->AttackStop();
@@ -974,7 +974,7 @@ class npc_tiny_terror : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                if (Unit* victim = me->getVictim())
+                if (Unit* victim = me->GetVictim())
                 {
                     if (victim->GetDisplayId() == DISPLAY_TSULON_NIGHT)
                         me->AttackStop();
@@ -1032,7 +1032,7 @@ class npc_unstable_sha : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 if (!pInstance)

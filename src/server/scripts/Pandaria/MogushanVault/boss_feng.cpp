@@ -609,7 +609,7 @@ class boss_feng : public CreatureScript
                     case EVENT_DOT_ATTACK:
                     {
                         // if (dotSpellId == SPELL_SHADOWBURN)
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             me->CastSpell(target, dotSpellId, false);
 
                         /*else if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO))
@@ -708,7 +708,7 @@ class boss_feng : public CreatureScript
             private:
                 void CheckPlatform()
                 {
-                    if (!me->isInCombat())
+                    if (!me->IsInCombat())
                         return;
 
                     if ((me->GetPositionX() - centerPos.GetPositionX()) > 37.0f ||

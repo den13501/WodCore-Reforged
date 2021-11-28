@@ -551,7 +551,7 @@ class mob_durumu_second_phase_add : public CreatureScript
                 m_Events.Update(p_Diff);
 
                 // When AMBER FOG is in combat, every 10% of life reached, is scheduled some event which makes him casting a spell (AMBER RETAILIATION).
-                if (me->isInCombat())
+                if (me->IsInCombat())
                 {
                     if (me->HasAura(SPELL_AMBER_ARMOR))
                     {

@@ -692,7 +692,7 @@ class npc_foundry_aknor_steelbringer : public CreatureScript
                 {
                     if (Creature* l_Kagraz = Creature::GetCreature(*me, m_Instance->GetData64(eFoundryCreatures::BossFlamebenderKagraz)))
                     {
-                        if (l_Kagraz->IsAIEnabled && !l_Kagraz->isInCombat())
+                        if (l_Kagraz->IsAIEnabled && !l_Kagraz->IsInCombat())
                             l_Kagraz->AI()->AttackStart(p_Attacker);
                     }
 
@@ -1063,7 +1063,7 @@ class npc_foundry_lava_stalker : public CreatureScript
             {
                 if (p_SpellInfo->Id == eSpells::SummonCinderWolves && p_Attacker != nullptr)
                 {
-                    uint64 l_TargetGUID = p_Attacker->getVictim() != nullptr ? p_Attacker->getVictim()->GetGUID() : 0;
+                    uint64 l_TargetGUID = p_Attacker->GetVictim() != nullptr ? p_Attacker->GetVictim()->GetGUID() : 0;
                     AddTimedDelayedOperation(2 * TimeConstants::IN_MILLISECONDS, [this, l_TargetGUID]() -> void
                     {
                         Creature* l_Frist   = nullptr;
@@ -1657,7 +1657,7 @@ class npc_foundry_cinder_wolf : public CreatureScript
 
                 if (Player* l_Target = Player::GetPlayer(*me, m_Target))
                 {
-                    if (!l_Target->isAlive())
+                    if (!l_Target->IsAlive())
                     {
                         m_Target = 0;
                         me->CastSpell(me, eSpells::Fixate, true);

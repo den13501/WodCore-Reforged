@@ -248,7 +248,7 @@ class spell_npc_mage_frozen_orb : public CreatureScript
 
                         for (Unit* l_Target : l_Targets)
                         {
-                            if (l_Target->isAlive() && me->GetExactDistSq(l_Target) < l_MaxRadius * l_MaxRadius && me->IsWithinLOSInMap(l_Target) && me->IsValidAttackTarget(l_Target))
+                            if (l_Target->IsAlive() && me->GetExactDistSq(l_Target) < l_MaxRadius * l_MaxRadius && me->IsWithinLOSInMap(l_Target) && me->IsValidAttackTarget(l_Target))
                             {
                                 me->AddAura(Spells::SelfSnare90Pct, me);
 
@@ -335,8 +335,8 @@ class spell_npc_rogue_shadow_reflection : public CreatureScript
                     {
                         if (l_Player->GetSelectedUnit())
                             m_TargetGUID = l_Player->GetSelectedUnit()->GetGUID();
-                        else if (l_Owner->getVictim())
-                            m_TargetGUID = l_Owner->getVictim()->GetGUID();
+                        else if (l_Owner->GetVictim())
+                            m_TargetGUID = l_Owner->GetVictim()->GetGUID();
                     }
                 }
 
@@ -411,7 +411,7 @@ class spell_npc_rogue_shadow_reflection : public CreatureScript
                     if (l_SpellData->Time <= p_Diff)
                     {
                         me->SetPower(Powers::POWER_COMBO_POINT, l_SpellData->ComboPoints);
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, l_SpellData->ID, true);
 
                         m_SpellQueue.pop();
@@ -582,29 +582,29 @@ class spell_npc_sha_storm_elemental : public CreatureScript
 
                 Player* l_Player = l_Owner->ToPlayer();
 
-                if (!l_Player->isInCombat())
+                if (!l_Player->IsInCombat())
                 {
                     me->CombatStop();
                     return;
                 }
 
-                if (!UpdateVictim() || (l_Player->GetSelectedUnit() && me->getVictim() && l_Player->GetSelectedUnit() != me->getVictim()))
+                if (!UpdateVictim() || (l_Player->GetSelectedUnit() && me->GetVictim() && l_Player->GetSelectedUnit() != me->GetVictim()))
                 {
                     Unit* l_OwnerTarget = NULL;
                     if (Player* l_Plr = l_Owner->ToPlayer())
                         l_OwnerTarget = l_Plr->GetSelectedUnit();
                     else
-                        l_OwnerTarget = l_Owner->getVictim();
+                        l_OwnerTarget = l_Owner->GetVictim();
 
                     if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && !l_Owner->IsFriendlyTo(l_OwnerTarget) && me->IsValidAttackTarget(l_OwnerTarget))
                         AttackStart(l_OwnerTarget);
                     return;
                 }
 
-                if (me->getVictim() && !me->IsValidAttackTarget(me->getVictim()))
+                if (me->GetVictim() && !me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
-                if (Unit* l_Target = me->getVictim())
+                if (Unit* l_Target = me->GetVictim())
                 {
                     if (!l_Target->HasAura(eSpells::SpellCallLightning, me->GetGUID()))
                         me->CastSpell(l_Target, eSpells::SpellCallLightning, false);
@@ -613,7 +613,7 @@ class spell_npc_sha_storm_elemental : public CreatureScript
                 switch (m_Events.ExecuteEvent())
                 {
                     case eEvents::EventWindGust:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eSpells::SpellWindGust, false);
                         m_Events.ScheduleEvent(eEvents::EventWindGust, 500);
                         break;
@@ -675,7 +675,7 @@ class spell_npc_sha_fire_elemental : public CreatureScript
                         if (Player* l_Plr = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Plr->GetSelectedUnit();
                         else
-                            l_OwnerTarget = l_Owner->getVictim();
+                            l_OwnerTarget = l_Owner->GetVictim();
 
                         if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && !l_Owner->IsFriendlyTo(l_OwnerTarget) && me->IsValidAttackTarget(l_OwnerTarget))
                             AttackStart(l_OwnerTarget);
@@ -684,7 +684,7 @@ class spell_npc_sha_fire_elemental : public CreatureScript
                     return;
                 }
 
-                if (me->getVictim() && !me->IsValidAttackTarget(me->getVictim()))
+                if (me->GetVictim() && !me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
                 if (me->HasUnitState(UNIT_STATE_CASTING))
@@ -756,7 +756,7 @@ class spell_npc_sha_earth_elemental : public CreatureScript
                         if (Player* l_Plr = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Plr->GetSelectedUnit();
                         else
-                            l_OwnerTarget = l_Owner->getVictim();
+                            l_OwnerTarget = l_Owner->GetVictim();
 
                         if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && !l_Owner->IsFriendlyTo(l_OwnerTarget) && me->IsValidAttackTarget(l_OwnerTarget))
                             AttackStart(l_OwnerTarget);
@@ -766,12 +766,12 @@ class spell_npc_sha_earth_elemental : public CreatureScript
                 }
 
 
-                if (me->getVictim() && !me->IsValidAttackTarget(me->getVictim()))
+                if (me->GetVictim() && !me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
                 if (AngeredEarth_Timer <= diff)
                 {
-                    DoCast(me->getVictim(), eSpells::AngeredEarth);
+                    DoCast(me->GetVictim(), eSpells::AngeredEarth);
                     AngeredEarth_Timer = 5000 + rand() % 15000; // 5-20 sec cd
                 }
                 else
@@ -837,7 +837,7 @@ class spell_npc_sha_feral_spirit : public CreatureScript
             {
                 if (p_Action == eAction::ActionWindfury && !m_WindFuryCooldown)
                 {
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                     {
                         m_WindFuryCooldown = 5 * TimeConstants::IN_MILLISECONDS;
 
@@ -864,16 +864,16 @@ class spell_npc_sha_feral_spirit : public CreatureScript
                 if (l_Player == nullptr)
                     return;
 
-                if (!l_Player->isInCombat())
+                if (!l_Player->IsInCombat())
                 {
                     me->CombatStop();
                     return;
                 }
 
-                if (!UpdateVictim() || (l_Player->GetSelectedUnit() && me->getVictim() && l_Player->GetSelectedUnit() != me->getVictim()))
+                if (!UpdateVictim() || (l_Player->GetSelectedUnit() && me->GetVictim() && l_Player->GetSelectedUnit() != me->GetVictim()))
                 {
                     Unit* l_OwnerTarget = nullptr;
-                    l_OwnerTarget = l_Player->getVictim();
+                    l_OwnerTarget = l_Player->GetVictim();
 
                     if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && !l_Owner->IsFriendlyTo(l_OwnerTarget) && me->IsValidAttackTarget(l_OwnerTarget))
                         AttackStart(l_OwnerTarget);
@@ -1053,26 +1053,26 @@ class spell_npc_warl_wild_imp : public CreatureScript
             {
                 if (Unit* l_Owner = me->GetOwner())
                 {
-                    Unit* l_OwnerTarget = l_Owner->getVictim();
+                    Unit* l_OwnerTarget = l_Owner->GetVictim();
 
                     if (l_OwnerTarget == nullptr)
                         if (Player* l_Player = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Player->GetSelectedUnit();
 
-                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->getVictim() || me->getVictim() != l_OwnerTarget))
+                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->GetVictim() || me->GetVictim() != l_OwnerTarget))
                         AttackStart(l_OwnerTarget);
                 }
 
-                if (!me->getVictim())
+                if (!me->GetVictim())
                     return;
 
                 if (me->HasUnitState(UnitState::UNIT_STATE_CASTING))
                     return;
 
-                if (!me->IsValidAttackTarget(me->getVictim()))
+                if (!me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
-                me->CastSpell(me->getVictim(), eSpells::Firebolt, false);
+                me->CastSpell(me->GetVictim(), eSpells::Firebolt, false);
             }
         };
 
@@ -1117,7 +1117,7 @@ class spell_npc_warl_imp : public CreatureScript
             {
                 if (Unit* l_Owner = me->GetOwner())
                 {
-                    Unit* l_OwnerTarget = l_Owner->getVictim();
+                    Unit* l_OwnerTarget = l_Owner->GetVictim();
 
                     if (l_OwnerTarget == nullptr)
                     {
@@ -1125,20 +1125,20 @@ class spell_npc_warl_imp : public CreatureScript
                             l_OwnerTarget = l_Player->GetSelectedUnit();
                     }
 
-                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->getVictim() || me->getVictim() != l_OwnerTarget))
+                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->GetVictim() || me->GetVictim() != l_OwnerTarget))
                         AttackStart(l_OwnerTarget);
                 }
 
-                if (!me->getVictim())
+                if (!me->GetVictim())
                     return;
 
                 if (me->HasUnitState(UnitState::UNIT_STATE_CASTING))
                     return;
 
-                if (!me->IsValidAttackTarget(me->getVictim()))
+                if (!me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
-                me->CastSpell(me->getVictim(), eSpells::Firebolt, false);
+                me->CastSpell(me->GetVictim(), eSpells::Firebolt, false);
             }
         };
 
@@ -1174,23 +1174,23 @@ class spell_npc_warl_doomguard: public CreatureScript
             {
                 if (Unit* l_Owner = me->GetOwner())
                 {
-                    Unit* l_OwnerTarget = l_Owner->getVictim();
+                    Unit* l_OwnerTarget = l_Owner->GetVictim();
 
                     if (l_OwnerTarget == nullptr)
                         if (Player* l_Player = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Player->GetSelectedUnit();
 
-                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->getVictim() || me->getVictim() != l_OwnerTarget))
+                    if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && (!me->GetVictim() || me->GetVictim() != l_OwnerTarget))
                         AttackStart(l_OwnerTarget);
                 }
 
-                if (!me->getVictim())
+                if (!me->GetVictim())
                     return;
 
                 if (me->HasUnitState(UnitState::UNIT_STATE_CASTING))
                     return;
 
-                me->CastSpell(me->getVictim(), eSpells::DoomBolt, false);
+                me->CastSpell(me->GetVictim(), eSpells::DoomBolt, false);
             }
         };
 
@@ -1423,7 +1423,7 @@ class spell_npc_warl_inner_demon : public CreatureScript
                         if (Player* l_Player = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Player->GetSelectedUnit();
                         else
-                            l_OwnerTarget = l_Owner->getVictim();
+                            l_OwnerTarget = l_Owner->GetVictim();
 
                         if (l_OwnerTarget)
                             AttackStart(l_OwnerTarget);
@@ -1439,7 +1439,7 @@ class spell_npc_warl_inner_demon : public CreatureScript
 
                 if (m_Events.ExecuteEvent() == eEvent::EventSoulFire)
                 {
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSpells::SoulFire, false);
 
                     m_Events.ScheduleEvent(eEvent::EventSoulFire, 50);
@@ -1477,7 +1477,7 @@ class spell_npc_dru_force_of_nature_resto : public CreatureScript
                 me->SetReactState(REACT_HELPER);
 
                 Unit* l_Owner = me->ToTempSummon() ? me->ToTempSummon()->GetSummoner() : NULL;
-                Unit* l_Target = l_Owner ? (l_Owner->getVictim() ? l_Owner->getVictim() : (l_Owner->ToPlayer() ? l_Owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
+                Unit* l_Target = l_Owner ? (l_Owner->GetVictim() ? l_Owner->GetVictim() : (l_Owner->ToPlayer() ? l_Owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
 
                 if (!l_Owner || !l_Target)
                     return;
@@ -1497,7 +1497,7 @@ class spell_npc_dru_force_of_nature_resto : public CreatureScript
                 {
                     if (Unit* l_Owner = me->GetOwner())
                     {
-                        l_Target = l_Owner->getVictim();
+                        l_Target = l_Owner->GetVictim();
 
                         if (l_Target == nullptr)
                         {
@@ -1655,7 +1655,7 @@ class spell_npc_treant_balance : public CreatureScript
 
             void UpdateAI(uint32 const /*p_Diff*/)
             {
-                if (!UpdateVictim() && me->getVictim() == nullptr)
+                if (!UpdateVictim() && me->GetVictim() == nullptr)
                 {
                     if (Unit* l_Owner = me->GetOwner())
                     {
@@ -1663,7 +1663,7 @@ class spell_npc_treant_balance : public CreatureScript
                         if (Player* l_Plr = l_Owner->ToPlayer())
                             l_OwnerTarget = l_Plr->GetSelectedUnit();
                         else
-                            l_OwnerTarget = l_Owner->getVictim();
+                            l_OwnerTarget = l_Owner->GetVictim();
 
                         if (l_OwnerTarget && me->isTargetableForAttack(l_OwnerTarget) && !l_Owner->IsFriendlyTo(l_OwnerTarget) && me->IsValidAttackTarget(l_OwnerTarget))
                         {
@@ -1674,22 +1674,22 @@ class spell_npc_treant_balance : public CreatureScript
                     return;
                 }
 
-                if (me->getVictim() && !me->IsValidAttackTarget(me->getVictim()))
+                if (me->GetVictim() && !me->IsValidAttackTarget(me->GetVictim()))
                     return;
 
-                if (me->getVictim() == nullptr)
+                if (me->GetVictim() == nullptr)
                     return;
 
                 if (!m_Rooted)
                 {
                     m_Rooted = true;
-                    me->CastSpell(me->getVictim(), eSpells::EntanglingRoots, false);
+                    me->CastSpell(me->GetVictim(), eSpells::EntanglingRoots, false);
                 }
 
                 if (me->HasUnitState(UnitState::UNIT_STATE_CASTING))
                     return;
 
-                me->CastSpell(me->getVictim(), eSpells::Wrath, false);
+                me->CastSpell(me->GetVictim(), eSpells::Wrath, false);
             }
         };
 
@@ -1725,7 +1725,7 @@ class spell_npc_inge_exeplosive_sheep : public CreatureScript
             {
                 const float l_MaxRadius = 15.0f; ///< Spell radius
 
-                Unit* l_Target = me->getVictim();
+                Unit* l_Target = me->GetVictim();
                 if (l_Target == nullptr)
                 {
                     std::list<Unit*> l_Targets;
@@ -1736,7 +1736,7 @@ class spell_npc_inge_exeplosive_sheep : public CreatureScript
 
                     for (Unit* l_Target : l_Targets)
                     {
-                        if (l_Target->isAlive() && me->GetExactDistSq(l_Target) < l_MaxRadius * l_MaxRadius && me->IsWithinLOSInMap(l_Target) && me->IsValidAttackTarget(l_Target))
+                        if (l_Target->IsAlive() && me->GetExactDistSq(l_Target) < l_MaxRadius * l_MaxRadius && me->IsWithinLOSInMap(l_Target) && me->IsValidAttackTarget(l_Target))
                         {
                             AttackStart(l_Target);
                             return;

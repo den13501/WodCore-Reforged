@@ -183,7 +183,7 @@ class npc_air_force_bots : public CreatureScript
             {
                 Creature* creature = Unit::GetCreature(*me, SpawnedGUID);
 
-                if (creature && creature->isAlive())
+                if (creature && creature->IsAlive())
                     return creature;
 
                 return NULL;
@@ -202,7 +202,7 @@ class npc_air_force_bots : public CreatureScript
                     if (!playerTarget)
                         return;
 
-                    if (!playerTarget->isAlive())
+                    if (!playerTarget->IsAlive())
                         return;
 
                     Creature* lastSpawnedGuard = SpawnedGUID == 0 ? NULL : GetSummonedGuard();
@@ -231,7 +231,7 @@ class npc_air_force_bots : public CreatureScript
                                 }
 
                                 if (markAura->GetDuration() < AURA_DURATION_TIME_LEFT)
-                                    if (!lastSpawnedGuard->getVictim())
+                                    if (!lastSpawnedGuard->GetVictim())
                                         lastSpawnedGuard->AI()->AttackStart(who);
                             }
                             else
@@ -258,7 +258,7 @@ class npc_air_force_bots : public CreatureScript
                                 return;
 
                             // ROOFTOP only triggers if the player is on the ground
-                            if (!playerTarget->IsFlying() && !lastSpawnedGuard->getVictim())
+                            if (!playerTarget->IsFlying() && !lastSpawnedGuard->GetVictim())
                                 lastSpawnedGuard->AI()->AttackStart(who);
 
                             break;
@@ -764,7 +764,7 @@ class npc_injured_patient : public CreatureScript
 
             void SpellHit(Unit* caster, SpellInfo const* spell)
             {
-                if (caster->IsPlayer() && me->isAlive() && spell->Id == 20804)
+                if (caster->IsPlayer() && me->IsAlive() && spell->Id == 20804)
                 {
                     if ((CAST_PLR(caster)->GetQuestStatus(6624) == QUEST_STATUS_INCOMPLETE) || (CAST_PLR(caster)->GetQuestStatus(6622) == QUEST_STATUS_INCOMPLETE))
                         if (DoctorGUID)
@@ -804,10 +804,10 @@ class npc_injured_patient : public CreatureScript
             void UpdateAI(uint32 const /*diff*/)
             {
                 //lower HP on every world tick makes it a useful counter, not officlone though
-                if (me->isAlive() && me->GetHealth() > 6)
+                if (me->IsAlive() && me->GetHealth() > 6)
                     me->ModifyHealth(-5);
 
-                if (me->isAlive() && me->GetHealth() <= 6)
+                if (me->IsAlive() && me->GetHealth() <= 6)
                 {
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
                     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -954,7 +954,7 @@ class npc_garments_of_quests : public CreatureScript
                 if (Spell->Id == SPELL_LESSER_HEAL_R2 || Spell->Id == SPELL_FORTITUDE_R1)
                 {
                     //not while in combat
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         return;
 
                     //nothing to be done now
@@ -1066,7 +1066,7 @@ class npc_garments_of_quests : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if (CanRun && !me->isInCombat())
+                if (CanRun && !me->IsInCombat())
                 {
                     if (RunAwayTimer <= diff)
                     {
@@ -1143,7 +1143,7 @@ class npc_guardian : public CreatureScript
 
                 if (me->isAttackReady())
                 {
-                    DoCast(me->getVictim(), SPELL_DEATHTOUCH, true);
+                    DoCast(me->GetVictim(), SPELL_DEATHTOUCH, true);
                     me->resetAttackTimer();
                 }
             }
@@ -1665,7 +1665,7 @@ class npc_snake_trap : public CreatureScript
                 me->SetStatFloatValue(UNIT_FIELD_ATTACK_ROUND_BASE_TIME, float(Info->baseattacktime + delta));
 
                 // Start attacking attacker of owner on first ai update after spawn - move in line of sight may choose better target
-                if (!me->getVictim() && me->isSummon())
+                if (!me->GetVictim() && me->isSummon())
                     if (Unit* Owner = me->ToTempSummon()->GetSummoner())
                         if (Owner->getAttackerForHelper())
                             AttackStart(Owner->getAttackerForHelper());
@@ -1674,7 +1674,7 @@ class npc_snake_trap : public CreatureScript
             //Redefined for random target selection:
             void MoveInLineOfSight(Unit* who)
             {
-                if (!me->getVictim() && me->canCreatureAttack(who))
+                if (!me->GetVictim() && me->canCreatureAttack(who))
                 {
                     if (me->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
                         return;
@@ -1697,13 +1697,13 @@ class npc_snake_trap : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (me->getVictim()->HasBreakableByDamageCrowdControlAura(me))
+                if (me->GetVictim()->HasBreakableByDamageCrowdControlAura(me))
                 {
                     me->InterruptNonMeleeSpells(false);
                     return;
                 }
 
-                if (me->getVictim()->isInStun() && me->getVictim()->HasAura(3355))
+                if (me->GetVictim()->isInStun() && me->GetVictim()->HasAura(3355))
                     return;
 
                 if (SpellTimer <= diff)
@@ -1715,8 +1715,8 @@ class npc_snake_trap : public CreatureScript
                             uint32 spell;
                             spell = SPELL_CRIPPLING_POISON;
 
-                            if (!me->getVictim()->HasAura(spell))
-                                DoCast(me->getVictim(), spell);
+                            if (!me->GetVictim()->HasAura(spell))
+                                DoCast(me->GetVictim(), spell);
                         }
 
                         SpellTimer = VIPER_TIMER;
@@ -1725,8 +1725,8 @@ class npc_snake_trap : public CreatureScript
                     {
                         if (urand(0, 2) == 0) //33% chance to cast
                         {
-                            if (!me->getVictim()->HasAura(SPELL_CRIPPLING_POISON))
-                                DoCast(me->getVictim(), SPELL_CRIPPLING_POISON);
+                            if (!me->GetVictim()->HasAura(SPELL_CRIPPLING_POISON))
+                                DoCast(me->GetVictim(), SPELL_CRIPPLING_POISON);
                         }
                         SpellTimer = VENOMOUS_SNAKE_TIMER + (rand() % 5) * 100;
                     }
@@ -1929,7 +1929,7 @@ class npc_mirror_image : public CreatureScript
 
             void EnterEvadeMode() override
             {
-                if (me->IsInEvadeMode() || !me->isAlive())
+                if (me->IsInEvadeMode() || !me->IsAlive())
                     return;
 
                 Unit* l_Owner = me->GetOwner();
@@ -1961,7 +1961,7 @@ class npc_mirror_image : public CreatureScript
             {
                 events.Update(p_Diff);
 
-                Unit* l_Victim = me->getVictim();
+                Unit* l_Victim = me->GetVictim();
                 Player* l_Owner = me->GetOwner()->ToPlayer();
                 if (!l_Owner)
                     return;
@@ -2003,7 +2003,7 @@ class npc_mirror_image : public CreatureScript
                             if (Player* l_Player = l_Owner->ToPlayer())
                                 l_OwnerVictim = l_Player->GetSelectedUnit();
                             else
-                                l_OwnerVictim = l_Owner->getVictim();
+                                l_OwnerVictim = l_Owner->GetVictim();
 
                             if (l_OwnerVictim && me->canCreatureAttack(l_OwnerVictim))
                                 l_Target = l_OwnerVictim;
@@ -2090,7 +2090,7 @@ class npc_ebon_gargoyle : public CreatureScript
             // Fly away when dismissed
             void SpellHit(Unit* source, SpellInfo const* spell)
             {
-                if (spell->Id != 50515 || !me->isAlive())
+                if (spell->Id != 50515 || !me->IsAlive())
                     return;
 
                 Unit* owner = me->GetOwner();
@@ -2190,7 +2190,7 @@ class npc_lightwell : public CreatureScript
 
             void EnterEvadeMode()
             {
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 me->DeleteThreatList();
@@ -2288,7 +2288,7 @@ struct npc_training_dummyAI : Scripted_NoMovementAI
 
     void MoveInLineOfSight(Unit* p_Who)
     {
-        if (!me->IsWithinDistInMap(p_Who, 25.0f) && p_Who->isInCombat())
+        if (!me->IsWithinDistInMap(p_Who, 25.0f) && p_Who->IsInCombat())
         {
             me->RemoveAllAurasByCaster(p_Who->GetGUID());
             me->getHostileRefManager().deleteReference(p_Who);
@@ -3295,8 +3295,8 @@ class npc_guardian_of_ancient_kings : public CreatureScript
                 {
                     if (me->GetOwner())
                     {
-                        if (me->GetOwner()->getVictim())
-                            AttackStart(me->GetOwner()->getVictim());
+                        if (me->GetOwner()->GetVictim())
+                            AttackStart(me->GetOwner()->GetVictim());
 
                         DoCast(me, 86703, true);
                     }
@@ -3323,8 +3323,8 @@ class npc_guardian_of_ancient_kings : public CreatureScript
                     return;
 
                 if (me->GetOwner())
-                    if (Unit* newVictim = me->GetOwner()->getVictim())
-                        if (me->getVictim() != newVictim)
+                    if (Unit* newVictim = me->GetOwner()->GetVictim())
+                        if (me->GetVictim() != newVictim)
                             AttackStart(newVictim);
 
                 if (me->HasUnitState(UNIT_STATE_CASTING))
@@ -3358,8 +3358,8 @@ class npc_dire_beast : public CreatureScript
                 me->SetReactState(REACT_DEFENSIVE);
 
                 if (me->GetOwner())
-                    if (me->GetOwner()->getVictim() || me->GetOwner()->getAttackerForHelper())
-                        AttackStart(me->GetOwner()->getVictim() ? me->GetOwner()->getVictim() : me->GetOwner()->getAttackerForHelper());
+                    if (me->GetOwner()->GetVictim() || me->GetOwner()->getAttackerForHelper())
+                        AttackStart(me->GetOwner()->GetVictim() ? me->GetOwner()->GetVictim() : me->GetOwner()->getAttackerForHelper());
             }
 
             void UpdateAI(const uint32 /*diff*/)
@@ -3376,10 +3376,10 @@ class npc_dire_beast : public CreatureScript
                     return;
                 }
 
-                if (me->getVictim())
+                if (me->GetVictim())
                     if (Unit* owner = me->GetOwner())
                         if (Unit* ownerVictim = owner->getAttackerForHelper())
-                            if (me->getVictim()->GetGUID() != ownerVictim->GetGUID())
+                            if (me->GetVictim()->GetGUID() != ownerVictim->GetGUID())
                                 AttackStart(ownerVictim);
 
                 if (me->HasUnitState(UNIT_STATE_CASTING))
@@ -3447,7 +3447,7 @@ class npc_ring_of_frost : public CreatureScript
 
             void CheckIfMoveInRing(Unit* p_Who)
             {
-                if (p_Who->isAlive() && me->IsInRange(p_Who, 2.0f, 5.0f) && me->IsWithinLOSInMap(p_Who))
+                if (p_Who->IsAlive() && me->IsInRange(p_Who, 2.0f, 5.0f) && me->IsWithinLOSInMap(p_Who))
                 {
                     if (p_Who->HasAura(Constants::RingOfFrostImmune) || p_Who->HasAura(Constants::RingOfFrostFreeze))
                         return;
@@ -3737,7 +3737,7 @@ class npc_past_self : public CreatureScript
                         {
                             if (l_Owner->ToPlayer())
                             {
-                                if (!l_Owner->isAlive())
+                                if (!l_Owner->IsAlive())
                                     return;
 
                                 l_Owner->SetPower(POWER_MANA, m_Mana);
@@ -4017,7 +4017,7 @@ class npc_force_of_nature : public CreatureScript
             void Reset()
             {
                 Unit* owner = me->ToTempSummon() ? me->ToTempSummon()->GetSummoner() : NULL;
-                Unit* target = owner ? (owner->getVictim() ? owner->getVictim() : (owner->ToPlayer() ? owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
+                Unit* target = owner ? (owner->GetVictim() ? owner->GetVictim() : (owner->ToPlayer() ? owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
 
                 if (!owner || !target)
                     return;
@@ -4065,7 +4065,7 @@ class npc_force_of_nature : public CreatureScript
                         if (me->HasUnitState(UNIT_STATE_CASTING))
                             return;
 
-                        if (Unit* target = me->getVictim())
+                        if (Unit* target = me->GetVictim())
                             me->CastSpell(target, SPELL_TREANT_WRATH, false);
                         return;
                     }
@@ -4294,9 +4294,9 @@ class npc_monk_spirit : public CreatureScript
             {
                 if (targetGuid)
                 {
-                    if (me->getVictim() && me->getVictim()->GetGUID() != targetGuid)
+                    if (me->GetVictim() && me->GetVictim()->GetGUID() != targetGuid)
                         DoAction(0);
-                    else if (!me->getVictim())
+                    else if (!me->GetVictim())
                         DoAction(0);
                 }
 
@@ -4422,7 +4422,7 @@ class npc_training_dummy_healing : public CreatureScript
             {
                 m_ResetTimer = 0;
 
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     me->Respawn(true);
 
                 me->SetHealth(1);
@@ -4479,7 +4479,7 @@ class npc_training_dummy_damage : public CreatureScript
             {
                 m_ResetTimer = 0;
 
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     me->Respawn(true);
 
                 me->SetFullHealth();
@@ -4551,7 +4551,7 @@ class npc_training_dummy_tanking : public CreatureScript
             {
                 m_ResetTimer = 0;
 
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     me->Respawn(true);
 
                 me->AddUnitState(UnitState::UNIT_STATE_ROOT);
@@ -4628,7 +4628,7 @@ class npc_consecration : public CreatureScript
 
             void EnterEvadeMode() override
             {
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 me->DeleteThreatList();
@@ -4693,7 +4693,7 @@ class npc_xuen_the_white_tiger : public CreatureScript
                 me->SetReactState(ReactStates::REACT_HELPER);
 
                 Unit* l_Owner = me->ToTempSummon() ? me->ToTempSummon()->GetSummoner() : NULL;
-                Unit* l_Target = l_Owner ? (l_Owner->getVictim() ? l_Owner->getVictim() : (l_Owner->ToPlayer() ? l_Owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
+                Unit* l_Target = l_Owner ? (l_Owner->GetVictim() ? l_Owner->GetVictim() : (l_Owner->ToPlayer() ? l_Owner->ToPlayer()->GetSelectedUnit() : NULL)) : NULL;
 
                 if (!l_Owner || !l_Target)
                     return;

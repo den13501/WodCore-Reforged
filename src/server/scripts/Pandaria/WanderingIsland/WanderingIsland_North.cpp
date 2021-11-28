@@ -431,7 +431,7 @@ public:
         {
             if (p_Summoned->GetEntry() == 57750) // Script of the falcon attack
             {
-                p_Summoned->CastSpell(me->getVictim(), 108935, true);
+                p_Summoned->CastSpell(me->GetVictim(), 108935, true);
                 p_Summoned->DespawnOrUnsummon();
             }
         }
@@ -648,7 +648,7 @@ public:
                 {
                     if (Unit* unit = sObjectAccessor->FindUnit(guidMob[i]))
                     {
-                        if(unit->isAlive())
+                        if(unit->IsAlive())
                             HasRemainingAttacker = true;
                     }
                     else
@@ -1108,10 +1108,10 @@ public:
                 switch(eventId)
                 {
                     case 1:
-                        me->CastSpell(me->getVictim(), 108693);
+                        me->CastSpell(me->GetVictim(), 108693);
                         break;
                     case 2:
-                        me->CastSpell(me->getVictim(), 73212);
+                        me->CastSpell(me->GetVictim(), 73212);
                         events.ScheduleEvent(2, 5000);
                         break;
                 }
@@ -1272,7 +1272,7 @@ public:
                         GetPlayerListInGrid(playerList, me, 30.0f);
                         for (auto player: playerList)
                         {
-                            if (!player->isAlive())
+                            if (!player->IsAlive())
                             {
                                 me->DespawnOrUnsummon(1000);
                                 playerGuid = 0;
@@ -1291,21 +1291,21 @@ public:
                         break;
                     }
                     case EVENT_FEET_OF_FURY:
-                        if(me->getVictim())
-                            me->CastSpell(me->getVictim(), 108958);
+                        if(me->GetVictim())
+                            me->CastSpell(me->GetVictim(), 108958);
 
                         events.ScheduleEvent(EVENT_FEET_OF_FURY, 5000);
                         break;
                     case EVENT_SHADOW_KICK:
-                        if(me->getVictim())
-                            me->CastSpell(me->getVictim(), 108936);
+                        if(me->GetVictim())
+                            me->CastSpell(me->GetVictim(), 108936);
 
                         events.ScheduleEvent(EVENT_SHADOW_KICK_STUN, 2500);
                         events.ScheduleEvent(EVENT_SHADOW_KICK, 30000);
                         break;
                     case EVENT_SHADOW_KICK_STUN:
-                        if(me->getVictim())
-                            me->CastSpell(me->getVictim(), 108944);
+                        if(me->GetVictim())
+                            me->CastSpell(me->GetVictim(), 108944);
                         break;
                 }
             }

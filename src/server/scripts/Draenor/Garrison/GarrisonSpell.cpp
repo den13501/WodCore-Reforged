@@ -47,7 +47,7 @@ namespace MS { namespace Garrison
     {
         Player* l_Player = GetCaster()->ToPlayer();
 
-        if (GetCaster()->isInCombat() && l_Player)
+        if (GetCaster()->IsInCombat() && l_Player)
         {
             l_Player->SendEquipError(EQUIP_ERR_NOT_IN_COMBAT, GetSpell()->m_CastItem, NULL);
             return SPELL_FAILED_CUSTOM_ERROR;
@@ -152,7 +152,7 @@ namespace MS { namespace Garrison
     {
         Player * l_Player = GetCaster()->ToPlayer();
 
-        if (!l_Player || l_Player->isInCombat())
+        if (!l_Player || l_Player->IsInCombat())
         {
             l_Player->SendEquipError(EQUIP_ERR_NOT_IN_COMBAT, GetSpell()->m_CastItem, NULL);
             return SPELL_FAILED_CUSTOM_ERROR;

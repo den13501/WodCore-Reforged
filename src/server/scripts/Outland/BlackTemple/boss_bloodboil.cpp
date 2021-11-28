@@ -144,7 +144,7 @@ public:
             {
                 Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid());
                                                                 //only on alive players
-                if (target && target->isAlive() && target->IsPlayer())
+                if (target && target->IsAlive() && target->IsPlayer())
                     targets.push_back(target);
             }
 
@@ -194,7 +194,7 @@ public:
 
             if (ArcingSmashTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_ARCING_SMASH);
+                DoCast(me->GetVictim(), SPELL_ARCING_SMASH);
                 ArcingSmashTimer = 10000;
             }
             else
@@ -202,7 +202,7 @@ public:
 
             if (FelAcidTimer <= diff)
             {
-                DoCast(me->getVictim(), SPELL_FEL_ACID);
+                DoCast(me->GetVictim(), SPELL_FEL_ACID);
                 FelAcidTimer = 25000;
             }
             else
@@ -223,8 +223,8 @@ public:
             {
                 if (BewilderingStrikeTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_BEWILDERING_STRIKE);
-                    float mt_threat = DoGetThreat(me->getVictim());
+                    DoCast(me->GetVictim(), SPELL_BEWILDERING_STRIKE);
+                    float mt_threat = DoGetThreat(me->GetVictim());
                     if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO, 1))
                         me->AddThreat(target, mt_threat);
                     BewilderingStrikeTimer = 20000;
@@ -234,8 +234,8 @@ public:
 
                 if (EjectTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_EJECT1);
-                    DoModifyThreatPercent(me->getVictim(), -40);
+                    DoCast(me->GetVictim(), SPELL_EJECT1);
+                    DoModifyThreatPercent(me->GetVictim(), -40);
                     EjectTimer = 15000;
                 }
                 else
@@ -243,7 +243,7 @@ public:
 
                 if (AcidicWoundTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_ACIDIC_WOUND);
+                    DoCast(me->GetVictim(), SPELL_ACIDIC_WOUND);
                     AcidicWoundTimer = 10000;
                 }
                 else
@@ -254,7 +254,7 @@ public:
                     if (BloodboilCount < 5)                      // Only cast it five times.
                     {
                         //CastBloodboil(); // Causes issues on windows, so is commented out.
-                        DoCast(me->getVictim(), SPELL_BLOODBOIL);
+                        DoCast(me->GetVictim(), SPELL_BLOODBOIL);
                         ++BloodboilCount;
                         BloodboilTimer = 10000*BloodboilCount;
                     }
@@ -267,7 +267,7 @@ public:
             {
                 if (AcidGeyserTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_ACID_GEYSER);
+                    DoCast(me->GetVictim(), SPELL_ACID_GEYSER);
                     AcidGeyserTimer = 30000;
                 }
                 else
@@ -275,7 +275,7 @@ public:
 
                 if (EjectTimer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_EJECT2);
+                    DoCast(me->GetVictim(), SPELL_EJECT2);
                     EjectTimer = 15000;
                 }
                 else
@@ -287,7 +287,7 @@ public:
                 if (Phase1)
                 {
                     Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
-                    if (target && target->isAlive())
+                    if (target && target->IsAlive())
                     {
                         Phase1 = false;
 

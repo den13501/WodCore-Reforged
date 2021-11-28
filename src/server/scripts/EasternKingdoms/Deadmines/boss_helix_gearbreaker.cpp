@@ -313,8 +313,8 @@ class npc_lumbering_oaf : public CreatureScript
                         case EVENT_CHARGE_OAF3:
                             DoCastAOE(SPELL_OAF_SMASH);
                             me->SetReactState(REACT_AGGRESSIVE);
-                            if (me->getVictim())
-                                me->GetMotionMaster()->MoveChase(me->getVictim());
+                            if (me->GetVictim())
+                                me->GetMotionMaster()->MoveChase(me->GetVictim());
                             me->RemoveAurasDueToSpell(SPELL_RIDE_OAF);
                             events.ScheduleEvent(EVENT_CHARGE_OAF0, 30000);
                             break;

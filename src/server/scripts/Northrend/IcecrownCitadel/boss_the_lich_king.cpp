@@ -439,7 +439,7 @@ class ShadowTrapSearcher
 
         bool operator()(Unit* unit)
         {
-            if (!unit->isAlive() || unit->GetEntry() != NPC_SHADOW_TRAP || !unit->IsWithinDist(_source, _range, false))
+            if (!unit->IsAlive() || unit->GetEntry() != NPC_SHADOW_TRAP || !unit->IsWithinDist(_source, _range, false))
                 return false;
 
             return true;
@@ -572,7 +572,7 @@ class boss_the_lich_king : public CreatureScript
                     return;
 
                 // Always teleport victim to center if not in line of sight, on whole platform
-                Unit* victim = me->getVictim();
+                Unit* victim = me->GetVictim();
                 if (!victim)
                     return;
 
@@ -586,7 +586,7 @@ class boss_the_lich_king : public CreatureScript
                     if (!player)
                         continue;
 
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                         continue;
 
                     if (!player->GetVehicle() && !player->HasUnitMovementFlag(MOVEMENTFLAG_FALLING) && player->GetPositionZ() >= 835.0f && player->GetPositionZ() <= 870.0f && !me->IsWithinLOS(player->GetPositionX(), player->GetPositionY(), player->GetPositionZ()))
@@ -834,7 +834,7 @@ class boss_the_lich_king : public CreatureScript
 
             void SpellHit(Unit* /*caster*/, SpellInfo const* spell)
             {
-                if (spell->Id == SPELL_HARVESTED_SOUL && me->isInCombat() && !IsHeroic())
+                if (spell->Id == SPELL_HARVESTED_SOUL && me->IsInCombat() && !IsHeroic())
                     Talk(SAY_LK_FROSTMOURNE_KILL);
             }
 
@@ -1931,7 +1931,7 @@ class npc_strangulate_vehicle : public CreatureScript
                             summoner->RemoveAurasDueToSpell(SPELL_HARVEST_SOUL_DAMAGE_AURA);
 
                             // Teleport to main tank location, otherwise we might land under the map or inside defile
-                            if (Unit* victim = lichKing->getVictim())
+                            if (Unit* victim = lichKing->GetVictim())
                                 summoner->NearTeleportTo(victim->GetPositionX(), victim->GetPositionY(), victim->GetPositionZ() + 20.0f, victim->GetOrientation());
                             else
                                 DoCast(summoner, SPELL_HARVEST_SOUL_TELEPORT_BACK);
@@ -2055,7 +2055,7 @@ class npc_terenas_menethil : public CreatureScript
             void EnterEvadeMode()
             {
                 // no running back home
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 me->DeleteThreatList();
@@ -2147,7 +2147,7 @@ class npc_terenas_menethil : public CreatureScript
                 }
 
                 // fighting Spirit Warden
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     DoMeleeAttackIfReady();
             }
 

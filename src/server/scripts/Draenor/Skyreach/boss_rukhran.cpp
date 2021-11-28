@@ -415,7 +415,7 @@ namespace MS
 
                 void UpdateAI(const uint32 diff)
                 {
-                    if (!UpdateVictim() || (me->getVictim() && me->getVictim()->GetDistance(me) > 50.0f))
+                    if (!UpdateVictim() || (me->GetVictim() && me->GetVictim()->GetDistance(me) > 50.0f))
                     {
                         if (m_CombatStarted)
                         {
@@ -444,7 +444,7 @@ namespace MS
                     }
 
                     // We check if someone is in melee range.
-                    if (me->getVictim() && !me->IsWithinMeleeRange(me->getVictim()))
+                    if (me->GetVictim() && !me->IsWithinMeleeRange(me->GetVictim()))
                     {
                         Player* l_Plr = ScriptUtils::SelectNearestPlayer(me, 15.0f);
                         if (!l_Plr || !l_Plr->IsWithinMeleeRange(me))
@@ -470,10 +470,10 @@ namespace MS
                     case uint32(Events::PIERCE_ARMOR):
                         events.ScheduleEvent(uint32(Events::PIERCE_ARMOR), urand(10500, 13000));
                         // We want to cast PierceArmor on the closest ennemy.
-                        if (me->getVictim() && me->getVictim()->IsWithinMeleeRange(me))
-                            me->CastSpell(me->getVictim(), uint32(Spells::PIERCE_ARMOR));
+                        if (me->GetVictim() && me->GetVictim()->IsWithinMeleeRange(me))
+                            me->CastSpell(me->GetVictim(), uint32(Spells::PIERCE_ARMOR));
                         else if (ScriptUtils::SelectNearestPlayer(me, 15.0f))
-                            me->CastSpell(me->getVictim(), uint32(Spells::PIERCE_ARMOR));
+                            me->CastSpell(me->GetVictim(), uint32(Spells::PIERCE_ARMOR));
                         break;
                     case uint32(Events::QUILLS):
                         events.ScheduleEvent(uint32(Events::QUILLS), 60000);

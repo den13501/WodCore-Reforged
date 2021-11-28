@@ -155,7 +155,7 @@ class boss_alizabal : public CreatureScript
                             break;
                         case EVENT_SKEWER:
                             Talk(SAY_SKEWER);
-                            DoCast(me->getVictim(), SPELL_SKEWER);
+                            DoCast(me->GetVictim(), SPELL_SKEWER);
                             events.ScheduleEvent(EVENT_SKEWER, 20500);
                             break;
                         case EVENT_SEETHING_HATE:
@@ -190,7 +190,7 @@ class boss_alizabal : public CreatureScript
                                 uiCharges = 0;
                                 me->InterruptNonMeleeSpells(false);
                                 me->SetReactState(REACT_AGGRESSIVE);
-                                me->GetMotionMaster()->MoveChase(me->getVictim());
+                                me->GetMotionMaster()->MoveChase(me->GetVictim());
                             }
                             else
                             {

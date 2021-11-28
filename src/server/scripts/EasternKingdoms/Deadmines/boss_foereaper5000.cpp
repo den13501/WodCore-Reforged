@@ -127,7 +127,7 @@ class boss_foereaper5000 : public CreatureScript
                             events.ScheduleEvent(EVENT_OVERDRIVE, urand(25000, 30000));
                             break;
                         case EVENT_REAPER_STRIKE:
-                            DoCast(me->getVictim(), SPELL_REAPER_STRIKE);
+                            DoCast(me->GetVictim(), SPELL_REAPER_STRIKE);
                             events.ScheduleEvent(EVENT_REAPER_STRIKE, urand(7000, 10000));
                             break;
                         case EVENT_HARVEST:

@@ -231,7 +231,7 @@ class boss_admiral_ripsnarl : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_SWIPE:
-                            DoCast(me->getVictim(), SPELL_SWIPE);
+                            DoCast(me->GetVictim(), SPELL_SWIPE);
                             events.ScheduleEvent(EVENT_SWIPE, urand(8000, 10000));
                             break;
                         case EVENT_CONTINUE:

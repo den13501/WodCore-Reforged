@@ -160,7 +160,7 @@ public:
             case NPC_ANGERREL: TombBossGUIDs[6] = creature->GetGUID(); break;
             case NPC_MAGMUS:
                 MagmusGUID = creature->GetGUID();
-                if (!creature->isAlive())
+                if (!creature->IsAlive())
                     HandleGameObject(GetData64(DATA_THRONE_DOOR), true); // if Magmus is dead open door to last boss
                 break;
             }
@@ -382,7 +382,7 @@ public:
             {
                 if (Creature* boss = instance->GetCreature(TombBossGUIDs[i]))
                 {
-                    if (!boss->isAlive())
+                    if (!boss->IsAlive())
                     {//do not call EnterEvadeMode(), it will create infinit loops
                         boss->Respawn();
                         boss->RemoveAllAuras();
@@ -433,7 +433,7 @@ public:
                     {
                         if (Creature* boss = instance->GetCreature(TombBossGUIDs[i]))
                         {
-                            if (!boss->isAlive())
+                            if (!boss->IsAlive())
                             {
                                 GhostKillCount = i+1;
                              }

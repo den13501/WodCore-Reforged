@@ -295,7 +295,7 @@ class IsSuenVictim
 
             if (Creature* l_Suen = l_Instance->instance->GetCreature(l_Instance->GetData64(NPC_SUEN)))
             {
-                if (Unit* l_Victim = l_Suen->getVictim())
+                if (Unit* l_Victim = l_Suen->GetVictim())
                     return l_Victim == p_Player;
             }
 
@@ -655,7 +655,7 @@ class boss_lulin : public CreatureScript
                         if (Creature* l_Suen = GetOtherBoss(me))
                         {
                             // if Suen is dead, encounter is done, if Lu'lin is alive, it's a wipe
-                            if (!l_Suen->isAlive() || me->isAlive())
+                            if (!l_Suen->IsAlive() || me->IsAlive())
                                 summons.DespawnAll();
                         }
                         break;
@@ -822,7 +822,7 @@ class boss_lulin : public CreatureScript
                     {
                         // Assuming current victim of Lu'lin has a Tank role
                         uint64 l_TargetGuid = 0;
-                        if (Unit* l_Victim = me->getVictim())
+                        if (Unit* l_Victim = me->GetVictim())
                             l_TargetGuid = l_Victim->GetGUID();
 
                         // Retreiving player list
@@ -1005,7 +1005,7 @@ class boss_suen : public CreatureScript
                         if (Creature* l_Lulin = GetOtherBoss(me))
                         {
                             // if Lu'lin is dead, encounter is done, if Suen is alive, it's a wipe
-                            if (!l_Lulin->isAlive() || me->isAlive())
+                            if (!l_Lulin->IsAlive() || me->IsAlive())
                                 summons.DespawnAll();
                         }
                         break;
@@ -1063,7 +1063,7 @@ class boss_suen : public CreatureScript
 
                                 if (Creature* l_Lulin = GetOtherBoss(me))
                                 {
-                                    if (Unit* l_Victim = l_Lulin->getVictim())
+                                    if (Unit* l_Victim = l_Lulin->GetVictim())
                                     {
                                         me->SetInCombatWith(l_Victim);
                                         AttackStart(l_Victim);
@@ -1186,7 +1186,7 @@ class boss_suen : public CreatureScript
                     }
                     case EVENT_FAN_OF_FLAMES:
                     {
-                        if (Unit* l_Victim = me->getVictim())
+                        if (Unit* l_Victim = me->GetVictim())
                             me->CastSpell(l_Victim, SPELL_FAN_OF_FLAMES, true);
                         m_Events.ScheduleEvent(EVENT_FAN_OF_FLAMES, 12000);
                         break;
@@ -1200,7 +1200,7 @@ class boss_suen : public CreatureScript
                         if (!l_PlayerList.empty())
                         {
                             // Removing the current target from the list
-                            if (Unit* l_CurrentVictim = me->getVictim())
+                            if (Unit* l_CurrentVictim = me->GetVictim())
                             {
                                 // Remove it only if there're other players to target
                                 if (l_PlayerList.size() > 1)

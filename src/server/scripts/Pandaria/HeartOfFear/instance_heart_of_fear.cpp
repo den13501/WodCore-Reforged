@@ -264,7 +264,7 @@ class instance_heart_of_fear : public InstanceMapScript
                     if (!player)
                         continue;
 
-                    if (player->isAlive() && !player->isGameMaster() && !player->HasAura(SPELL_CONVERT_SERVANT))
+                    if (player->IsAlive() && !player->isGameMaster() && !player->HasAura(SPELL_CONVERT_SERVANT))
                         return false;
                     else if (player->HasAura(SPELL_CONVERT_SERVANT))
                         servantList.push_back(player);

@@ -3120,7 +3120,7 @@ class spell_gen_two_forms: public SpellScriptLoader
 
             SpellCastResult CheckCast()
             {
-                if (GetCaster()->isInCombat())
+                if (GetCaster()->IsInCombat())
                 {
                     SetCustomCastResultMessage(SPELL_CUSTOM_ERROR_CANT_TRANSFORM);
                     return SPELL_FAILED_CUSTOM_ERROR;
@@ -3674,7 +3674,7 @@ namespace Resolve
 
                 auto& l_DamagesHistory = m_HistoryDamagesPlayers[p_Player->GetGUID()];
 
-                if (!p_Player->isInCombat() && l_DamagesHistory.empty())
+                if (!p_Player->IsInCombat() && l_DamagesHistory.empty())
                 {
                     p_Player->RemoveAurasDueToSpell(Resolve::InCombatAura);
                     return;
@@ -4169,7 +4169,7 @@ class spell_taunt_flag_targeting : public SpellScriptLoader
                             if (l_Player->GetGUID() == l_Caster->GetGUID())
                                 continue;
 
-                            if (l_Player->isAlive()) ///< Only corpses
+                            if (l_Player->IsAlive()) ///< Only corpses
                                 continue;
 
                             l_FoundCorpse = true;
@@ -4900,7 +4900,7 @@ class spell_gen_power_handler : public PlayerScript
             if (p_After)
                 return;
 
-            if (p_Player->isInCombat())
+            if (p_Player->IsInCombat())
                 return;
 
             // Get the power earn (if > 0 ) or consum (if < 0)

@@ -193,15 +193,15 @@ bool IsEncounterComplete(InstanceScript* instance, Creature* me)
         return false;
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_STEELBREAKER)))
-        if (boss->isAlive())
+        if (boss->IsAlive())
             return false;
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRUNDIR)))
-        if (boss->isAlive())
+        if (boss->IsAlive())
             return false;
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_MOLGEIM)))
-        if (boss->isAlive())
+        if (boss->IsAlive())
             return false;
 
     return true;
@@ -213,21 +213,21 @@ void RespawnEncounter(InstanceScript* instance, Creature* me)
         return;
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_STEELBREAKER)))
-        if (!boss->isAlive())
+        if (!boss->IsAlive())
         {
             boss->Respawn();
             boss->GetMotionMaster()->MoveTargetedHome();
         }
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRUNDIR)))
-        if (!boss->isAlive())
+        if (!boss->IsAlive())
         {
             boss->Respawn();
             boss->GetMotionMaster()->MoveTargetedHome();
         }
 
     if (Creature* boss = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_MOLGEIM)))
-        if (!boss->isAlive())
+        if (!boss->IsAlive())
         {
             boss->Respawn();
             boss->GetMotionMaster()->MoveTargetedHome();
@@ -244,7 +244,7 @@ void ResetEncounter(InstanceScript* instance, Creature* me)
 
     if (me->GetGUID() != steelbreaker)
         if (Creature* boss = ObjectAccessor::GetCreature(*me, steelbreaker))
-            if (boss->isAlive() && boss->AI() && boss->isInCombat())
+            if (boss->IsAlive() && boss->AI() && boss->IsInCombat())
                 boss->AI()->EnterEvadeMode();
             else
             {
@@ -254,7 +254,7 @@ void ResetEncounter(InstanceScript* instance, Creature* me)
 
     if (me->GetGUID() != brundir)
         if (Creature* boss = ObjectAccessor::GetCreature(*me, brundir))
-            if (boss->isAlive() && boss->AI() && boss->isInCombat())
+            if (boss->IsAlive() && boss->AI() && boss->IsInCombat())
                 boss->AI()->EnterEvadeMode();
             else
             {
@@ -264,7 +264,7 @@ void ResetEncounter(InstanceScript* instance, Creature* me)
 
     if (me->GetGUID() != molgeim)
         if (Creature* boss = ObjectAccessor::GetCreature(*me, molgeim))
-            if (boss->isAlive() && boss->AI() && boss->isInCombat())
+            if (boss->IsAlive() && boss->AI() && boss->IsInCombat())
                 boss->AI()->EnterEvadeMode();
             else
             {
@@ -281,24 +281,24 @@ void StartEncounter(InstanceScript* instance, Creature* caller)
     instance->SetBossState(BOSS_ASSEMBLY_OF_IRON, IN_PROGRESS);
 
     if (Creature* boss = ObjectAccessor::GetCreature(*caller, instance->GetData64(BOSS_STEELBREAKER)))
-        if (boss->isAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
+        if (boss->IsAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
         {
             boss->SetInCombatWithZone();
-            //boss->AI()->EnterCombat(caller->getVictim());
+            //boss->AI()->EnterCombat(caller->GetVictim());
         }
 
     if (Creature* boss = ObjectAccessor::GetCreature(*caller, instance->GetData64(BOSS_BRUNDIR)))
-        if (boss->isAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
+        if (boss->IsAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
         {
             boss->SetInCombatWithZone();
-            //boss->AI()->EnterCombat(caller->getVictim());
+            //boss->AI()->EnterCombat(caller->GetVictim());
         }
 
     if (Creature* boss = ObjectAccessor::GetCreature(*caller, instance->GetData64(BOSS_MOLGEIM)))
-        if (boss->isAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
+        if (boss->IsAlive() && caller->GetGUID() != boss->GetGUID()) // Avoid redundant calls
         {
             boss->SetInCombatWithZone();
-            //boss->AI()->EnterCombat(caller->getVictim());
+            //boss->AI()->EnterCombat(caller->GetVictim());
         }
 }
 
@@ -424,7 +424,7 @@ class boss_steelbreaker : public CreatureScript
                             charge->SetStackAmount(std::min<uint8>(2, superChargedCnt));
                         break;
                     case SPELL_ELECTRICAL_CHARGE_TRIGGERED:
-                        if (!me->isInCombat())
+                        if (!me->IsInCombat())
                             me->RemoveAurasDueToSpell(SPELL_ELECTRICAL_CHARGE_TRIGGERED);
                         break;
                 }
@@ -496,7 +496,7 @@ class boss_steelbreaker : public CreatureScript
                             DoCast(SPELL_BERSERK);
                             break;
                         case EVENT_FUSION_PUNCH:
-                            if (me->IsWithinMeleeRange(me->getVictim()))
+                            if (me->IsWithinMeleeRange(me->GetVictim()))
                                 DoCastVictim(SPELL_FUSION_PUNCH);
                             events.ScheduleEvent(EVENT_FUSION_PUNCH, urand(13000, 22000));
                             break;
@@ -506,7 +506,7 @@ class boss_steelbreaker : public CreatureScript
                             events.ScheduleEvent(EVENT_STATIC_DISRUPTION, urand(20000, 25000));
                             break;
                         case EVENT_OVERWHELMING_POWER:
-                            if (me->getVictim() && !me->getVictim()->HasAura(SPELL_OVERWHELMING_POWER))
+                            if (me->GetVictim() && !me->GetVictim()->HasAura(SPELL_OVERWHELMING_POWER))
                             {
                                 Talk(SAY_STEELBREAKER_POWER);
                                 DoCastVictim(SPELL_OVERWHELMING_POWER);
@@ -830,7 +830,7 @@ class mob_lightning_elemental : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (me->IsWithinMeleeRange(me->getVictim()) && !castDone)
+                if (me->IsWithinMeleeRange(me->GetVictim()) && !castDone)
                 {
                     me->CastSpell(me, SPELL_LIGHTNING_BLAST, true);
                     me->DespawnOrUnsummon(500);
@@ -1165,12 +1165,12 @@ class boss_stormcaller_brundir : public CreatureScript
                             me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, false);
                             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_ATTACK_ME, false);
                             me->SetDisableGravity(false);
-                            DoStartMovement(me->getVictim());
+                            DoStartMovement(me->GetVictim());
                             me->getThreatManager().resetAllAggro();
                             events.ScheduleEvent(EVENT_LIGHTNING_TENDRILS_START, urand(40000, 80000));
                             break;
                         case EVENT_MOVE_POSITION:
-                            if (me->IsWithinMeleeRange(me->getVictim()))
+                            if (me->IsWithinMeleeRange(me->GetVictim()))
                             {
                                 float x = frand(-25.0f, 25.0f);
                                 float y = frand(-25.0f, 25.0f);

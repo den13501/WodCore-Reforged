@@ -374,7 +374,7 @@ class boss_freya : public CreatureScript
 
                     if (Creature* elder = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRIGHTLEAF + n)))
                     {
-                        if (elder->isAlive())
+                        if (elder->IsAlive())
                         {
                             elder->ResetLootMode();
                             elder->AI()->EnterEvadeMode();
@@ -451,7 +451,7 @@ class boss_freya : public CreatureScript
                 for (uint8 n = 0; n < 3; ++n)
                 {
                     Elder[n] = ObjectAccessor::GetCreature(*me, instance->GetData64(BOSS_BRIGHTLEAF + n));
-                    if (Elder[n] && Elder[n]->isAlive())
+                    if (Elder[n] && Elder[n]->IsAlive())
                     {
                         Elder[n]->RemoveAllAuras();
                         Elder[n]->AttackStop();
@@ -478,7 +478,7 @@ class boss_freya : public CreatureScript
 
                 _elderCount = 0;
                 if (Creature* Brightleaf = me->GetCreature(*me, instance->GetData64(BOSS_BRIGHTLEAF)))
-                    if (Brightleaf->isAlive())
+                    if (Brightleaf->IsAlive())
                     {
                         _elderCount++;
                         Brightleaf->AI()->AttackStart(who);
@@ -491,7 +491,7 @@ class boss_freya : public CreatureScript
                     }
 
                 if (Creature* Ironbranch = me->GetCreature(*me, instance->GetData64(BOSS_IRONBRANCH)))
-                    if (Ironbranch->isAlive())
+                    if (Ironbranch->IsAlive())
                     {
                         _elderCount++;
                         Ironbranch->AI()->AttackStart(who);
@@ -504,7 +504,7 @@ class boss_freya : public CreatureScript
                     }
 
                 if (Creature* Stonebark = me->GetCreature(*me, instance->GetData64(BOSS_STONEBARK)))
-                    if (Stonebark->isAlive())
+                    if (Stonebark->IsAlive())
                     {
                         _elderCount++;
                         Stonebark->AI()->AttackStart(who);
@@ -649,7 +649,7 @@ class boss_freya : public CreatureScript
                                 {
                                     for (uint8 n = 0; n < 3; ++n)
                                     {
-                                        if (Elemental[n][i]->isAlive())
+                                        if (Elemental[n][i]->IsAlive())
                                             Elemental[n][i]->SetHealth(Elemental[n][i]->GetMaxHealth());
                                         else
                                             Elemental[n][i]->Respawn();
@@ -978,7 +978,7 @@ class boss_elder_brightleaf : public CreatureScript
                     {
                         case EVENT_UNSTABLE_SUN_BEAM:
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
-                                if (target->isAlive())
+                                if (target->IsAlive())
                                     me->SummonCreature(NPC_UNSTABLE_SUN_BEAM, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 10000);
                             events.ScheduleEvent(EVENT_UNSTABLE_SUN_BEAM, 8000);
                             break;
@@ -1358,7 +1358,7 @@ class npc_detonating_lasher : public CreatureScript
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 60.0f, true))
                             {
                                 // Switching to other target - modify aggro of new target by 20% from current target's aggro
-                                me->AddThreat(target, me->getThreatManager().getThreat(me->getVictim(), false) * 1.2f);
+                                me->AddThreat(target, me->getThreatManager().getThreat(me->GetVictim(), false) * 1.2f);
                                 me->AI()->AttackStart(target);
                             }
                             _events.ScheduleEvent(EVENT_CHANGE_TARGET, urand(5*IN_MILLISECONDS, 10*IN_MILLISECONDS));

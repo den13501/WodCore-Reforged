@@ -598,7 +598,7 @@ class boss_twin_ogron_phemos : public CreatureScript
                                 if (p_Creature->GetEntry() == eCreature::InvisibleStalker)
                                     return true;
 
-                                if (!p_Creature->isAlive())
+                                if (!p_Creature->IsAlive())
                                     return true;
 
                                 return false;

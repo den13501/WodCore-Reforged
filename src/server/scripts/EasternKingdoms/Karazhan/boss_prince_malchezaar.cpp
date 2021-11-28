@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* ScriptData
 SDName: Boss_Prince_Malchezzar
@@ -141,7 +152,7 @@ public:
                 return;
 
             Creature* pMalchezaar = Unit::GetCreature(*me, malchezaar);
-            if (pMalchezaar && pMalchezaar->isAlive())
+            if (pMalchezaar && pMalchezaar->IsAlive())
                 pMalchezaar->AI()->KilledUnit(who);
         }
 
@@ -274,7 +285,7 @@ public:
             //Infernal Cleanup
             for (std::vector<uint64>::const_iterator itr = infernals.begin(); itr != infernals.end(); ++itr)
                 if (Unit* pInfernal = Unit::GetUnit(*me, *itr))
-                    if (pInfernal->isAlive())
+                    if (pInfernal->IsAlive())
                     {
                         pInfernal->SetVisible(false);
                         pInfernal->setDeathState(JUST_DIED);
@@ -288,7 +299,7 @@ public:
             for (uint8 i = 0; i < 2; ++i)
             {
                 Unit* axe = Unit::GetUnit(*me, axes[i]);
-                if (axe && axe->isAlive())
+                if (axe && axe->IsAlive())
                     axe->Kill(axe);
                 axes[i] = 0;
             }
@@ -317,7 +328,7 @@ public:
             std::advance(itr, 1);
             for (; itr != t_list.end(); ++itr) //store the threat list in a different container
                 if (Unit* target = Unit::GetUnit(*me, (*itr)->getUnitGuid()))
-                    if (target->isAlive() && target->IsPlayer())
+                    if (target->IsAlive() && target->IsPlayer())
                         targets.push_back(target);
 
             //cut down to size if we have more than 5 targets
@@ -341,7 +352,7 @@ public:
             for (uint8 i = 0; i < 5; ++i)
             {
                 Unit* target = Unit::GetUnit(*me, enfeeble_targets[i]);
-                if (target && target->isAlive())
+                if (target && target->IsAlive())
                     target->SetHealth(enfeeble_health[i]);
                 enfeeble_targets[i] = 0;
                 enfeeble_health[i] = 0;
@@ -393,8 +404,8 @@ public:
             if (me->HasUnitState(UNIT_STATE_STUNNED))      // While shifting to phase 2 malchezaar stuns himself
                 return;
 
-            if (me->GetGuidValue(UNIT_FIELD_TARGET) != me->getVictim()->GetGUID())
-                me->SetTarget(me->getVictim()->GetGUID());
+            if (me->GetGuidValue(UNIT_FIELD_TARGET) != me->EnsureVictim()->GetGUID())
+                me->SetTarget(me->EnsureVictim()->GetGUID());
 
             if (phase == 1)
             {
@@ -489,11 +500,11 @@ public:
                         {
                             if (Unit* axe = Unit::GetUnit(*me, axes[i]))
                             {
-                                if (axe->getVictim())
-                                    DoModifyThreatPercent(axe->getVictim(), -100);
+                                if (axe->GetVictim())
+                                    DoModifyThreatPercent(axe->GetVictim(), -100);
                                 if (target)
                                     axe->AddThreat(target, 1000000.0f);
-                                //axe->getThreatManager().tauntFadeOut(axe->getVictim());
+                                //axe->getThreatManager().tauntFadeOut(axe->GetVictim());
                                 //axe->getThreatManager().tauntApply(target);
                             }
                         }
@@ -535,7 +546,7 @@ public:
                 {
                     Unit* target = NULL;
                     if (phase == 1)
-                        target = me->getVictim();        // the tank
+                        target = me->GetVictim();        // the tank
                     else                                          // anyone but the tank
                         target = SelectTarget(SELECT_TARGET_RANDOM, 1, 100, true);
 
@@ -569,18 +580,18 @@ public:
 
         void DoMeleeAttacksIfReady()
         {
-            if (me->IsWithinMeleeRange(me->getVictim()) && !me->IsNonMeleeSpellCasted(false))
+            if (me->IsWithinMeleeRange(me->GetVictim()) && !me->IsNonMeleeSpellCasted(false))
             {
                 //Check for base attack
-                if (me->isAttackReady() && me->getVictim())
+                if (me->isAttackReady() && me->GetVictim())
                 {
-                    me->AttackerStateUpdate(me->getVictim());
+                    me->AttackerStateUpdate(me->GetVictim());
                     me->resetAttackTimer();
                 }
                 //Check for offhand attack
-                if (me->isAttackReady(WeaponAttackType::OffAttack) && me->getVictim())
+                if (me->isAttackReady(WeaponAttackType::OffAttack) && me->GetVictim())
                 {
-                    me->AttackerStateUpdate(me->getVictim(), WeaponAttackType::OffAttack);
+                    me->AttackerStateUpdate(me->GetVictim(), WeaponAttackType::OffAttack);
                     me->resetAttackTimer(WeaponAttackType::OffAttack);
                 }
             }
@@ -608,7 +619,7 @@ void netherspite_infernal::netherspite_infernalAI::Cleanup()
 {
     Creature* pMalchezaar = Unit::GetCreature(*me, malchezaar);
 
-    if (pMalchezaar && pMalchezaar->isAlive())
+    if (pMalchezaar && pMalchezaar->IsAlive())
         CAST_AI(boss_malchezaar::boss_malchezaarAI, pMalchezaar->AI())->Cleanup(me, point);
 }
 

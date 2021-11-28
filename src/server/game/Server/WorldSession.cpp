@@ -863,7 +863,7 @@ void WorldSession::LogoutPlayer(bool p_Save, bool p_AfterInterRealm)
             m_Player->SetPendingBind(0, 0);
         }
 #endif
-        else if (m_Player->GetVehicleBase() && m_Player->isInCombat())
+        else if (m_Player->GetVehicleBase() && m_Player->IsInCombat())
         {
             m_Player->KillPlayer();
             m_Player->BuildPlayerRepop();

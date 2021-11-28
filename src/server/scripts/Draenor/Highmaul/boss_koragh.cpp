@@ -179,7 +179,7 @@ class boss_koragh : public CreatureScript
 
                         for (Creature* l_Breaker : l_BreakerList)
                         {
-                            if (l_Breaker->isAlive())
+                            if (l_Breaker->IsAlive())
                                 m_RitualistGuids.insert(l_Breaker->GetGUID());
                         }
 
@@ -188,7 +188,7 @@ class boss_koragh : public CreatureScript
 
                         for (Creature* l_Breaker : l_BreakerList)
                         {
-                            if (l_Breaker->isAlive())
+                            if (l_Breaker->IsAlive())
                                 m_RitualistGuids.insert(l_Breaker->GetGUID());
                         }
 
@@ -197,7 +197,7 @@ class boss_koragh : public CreatureScript
 
                         for (Creature* l_Breaker : l_BreakerList)
                         {
-                            if (l_Breaker->isAlive())
+                            if (l_Breaker->IsAlive())
                                 m_RitualistGuids.insert(l_Breaker->GetGUID());
                         }
 

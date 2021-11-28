@@ -663,8 +663,8 @@ class mob_ragewing_whelp : public CreatureScript
                 {
                     if (Creature* l_Ragewing = Creature::GetCreature(*me, m_Instance->GetData64(NPC_RAGEWING_THE_UNTAMED)))
                     {
-                        if (l_Ragewing->getVictim() != nullptr)
-                            AttackStart(l_Ragewing->getVictim());
+                        if (l_Ragewing->GetVictim() != nullptr)
+                            AttackStart(l_Ragewing->GetVictim());
                     }
                 }
             }

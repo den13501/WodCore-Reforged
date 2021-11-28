@@ -234,7 +234,7 @@ public:
 
             if (RendTimer < diff)
             {
-                DoCast(me->getVictim(), SPELL_REND_VC, true);
+                DoCast(me->GetVictim(), SPELL_REND_VC, true);
                 RendTimer = 15000;
             }
             else
@@ -242,7 +242,7 @@ public:
 
             if (SunderArmorTimer < diff)
             {
-                DoCast(me->getVictim(), SPELL_SUNDER_ARMOR, true);
+                DoCast(me->GetVictim(), SPELL_SUNDER_ARMOR, true);
                 SunderArmorTimer = 10000;
             }
             else

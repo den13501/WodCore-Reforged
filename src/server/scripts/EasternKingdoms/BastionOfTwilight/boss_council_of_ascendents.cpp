@@ -347,13 +347,13 @@ class boss_feludius : public CreatureScript
             void EnterCombat(Unit* /*who*/)
             {
                 if (Creature* _ignacious = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_IGNACIOUS) : 0))
-                    if (!_ignacious->isInCombat())
+                    if (!_ignacious->IsInCombat())
                         _ignacious->SetInCombatWithZone();
                     if (Creature* _arion = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_ARION) : 0))
-                        if (!_arion->isInCombat())
+                        if (!_arion->IsInCombat())
                             _arion->SetInCombatWithZone();
                     if (Creature* _terrastra = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_TERRASTRA) : 0))
-                        if (!_terrastra->isInCombat())
+                        if (!_terrastra->IsInCombat())
                             _terrastra->SetInCombatWithZone();
 
                 DoCast(me, SPELL_WATER_BOMB_AURA, true);
@@ -371,7 +371,7 @@ class boss_feludius : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -568,13 +568,13 @@ class boss_ignacious : public CreatureScript
             void EnterCombat(Unit* /*who*/)
             {
                 if (Creature* _feludius = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_FELUDIUS) : 0))
-                    if (!_feludius->isInCombat())
+                    if (!_feludius->IsInCombat())
                         _feludius->SetInCombatWithZone();
                 if (Creature* _arion = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_ARION) : 0))
-                    if (!_arion->isInCombat())
+                    if (!_arion->IsInCombat())
                         _arion->SetInCombatWithZone();
                 if (Creature* _terrastra = ObjectAccessor::GetCreature(*me, instance ? instance->GetData64(DATA_TERRASTRA) : 0))
-                    if (!_terrastra->isInCombat())
+                    if (!_terrastra->IsInCombat())
                         _terrastra->SetInCombatWithZone();
 
                 events.ScheduleEvent(EVENT_BURNING_BLOOD, urand(10000, 22000));
@@ -589,7 +589,7 @@ class boss_ignacious : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -752,13 +752,13 @@ class boss_ignacious : public CreatureScript
                     {
                         me->SetReactState(REACT_AGGRESSIVE);
 
-                        if (!me->getVictim())
+                        if (!me->GetVictim())
                             break;
 
                         if (Creature* pInfernoLeap = me->SummonCreature(NPC_INFERNO_LEAP, jumppos))
-                            pInfernoLeap->GetMotionMaster()->MovePoint(1001, me->getVictim()->GetPositionX(), me->getVictim()->GetPositionY(), me->getVictim()->GetPositionZ());
+                            pInfernoLeap->GetMotionMaster()->MovePoint(1001, me->GetVictim()->GetPositionX(), me->GetVictim()->GetPositionY(), me->GetVictim()->GetPositionZ());
                         
-                        DoCast(me->getVictim(), SPELL_INFERNO_RUSH);
+                        DoCast(me->GetVictim(), SPELL_INFERNO_RUSH);
                         break;
                     }
                     case EVENT_FLAME_TORRENT:
@@ -850,7 +850,7 @@ class boss_arion : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -954,11 +954,11 @@ class boss_arion : public CreatureScript
                     case EVENT_DISPERSE:
                         //DoCast(me, SPELL_DISPERSE);
                         //events.ScheduleEvent(EVENT_LIGHTNING_BLAST, 2000);
-                        DoCast(me->getVictim(), SPELL_LIGHTNING_BLAST);
+                        DoCast(me->GetVictim(), SPELL_LIGHTNING_BLAST);
                         events.ScheduleEvent(EVENT_DISPERSE, urand(30000, 40000));
                         break;
                     case EVENT_LIGHTNING_BLAST:
-                        DoCast(me->getVictim(), SPELL_LIGHTNING_BLAST);
+                        DoCast(me->GetVictim(), SPELL_LIGHTNING_BLAST);
                         break;
                     case EVENT_LIGHTNING_ROD:
                         me->CastCustomSpell(SPELL_LIGHTNING_ROD, SPELLVALUE_MAX_TARGETS, RAID_MODE(1, 3, 1, 3), 0, false);
@@ -1043,7 +1043,7 @@ class boss_terrastra : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 
@@ -1206,7 +1206,7 @@ class boss_elementium_monstrosity : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 summons.Summon(summon);
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     summon->SetInCombatWithZone();
             }
 

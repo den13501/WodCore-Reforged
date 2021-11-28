@@ -228,8 +228,8 @@ class boss_kologarn : public CreatureScript
                     int32 damagedHealth = Is25ManRaid() ? 2300925 : 543855;
                     uint32 currHealth = me->GetHealth();
 
-                    if (me && me->getVictim() && damagedHealth >= int32(currHealth))
-                        me->getVictim()->Kill(me);
+                    if (me && me->GetVictim() && damagedHealth >= int32(currHealth))
+                        me->GetVictim()->Kill(me);
                     else
                     {
                         me->ModifyHealth(-(damagedHealth));
@@ -359,8 +359,8 @@ class boss_kologarn : public CreatureScript
                             if (player->isDead() || player->HasAura(SPELL_STONE_GRIP_DOT) || player->isGameMaster())
                                 continue;
 
-                            if (me->getVictim())
-                                if (me->getVictim()->GetGUID() == player->GetGUID())
+                            if (me->GetVictim())
+                                if (me->GetVictim()->GetGUID() == player->GetGUID())
                                     continue;
 
                             float Distance = player->GetDistance(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
@@ -404,7 +404,7 @@ class boss_kologarn : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_MELEE_CHECK:
-                            if (!me->IsWithinMeleeRange(me->getVictim()))
+                            if (!me->IsWithinMeleeRange(me->GetVictim()))
                                 DoCast(SPELL_PETRIFY_BREATH);
                             events.ScheduleEvent(EVENT_MELEE_CHECK, 1 * IN_MILLISECONDS);
                             break;
@@ -616,7 +616,7 @@ class spell_ulduar_stone_grip_cast_target: public SpellScriptLoader
             void FilterTargetsInitial(std::list<WorldObject*>& unitList)
             {
                 // Remove "main tank" and non-player targets
-                unitList.remove_if(StoneGripTargetSelector(GetCaster()->ToCreature(), GetCaster()->getVictim()));
+                unitList.remove_if(StoneGripTargetSelector(GetCaster()->ToCreature(), GetCaster()->GetVictim()));
                 // Maximum affected targets per difficulty mode
                 uint32 maxTargets = GetSpellInfo()->Id == 63981 ? 3 : 1;
 

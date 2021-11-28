@@ -63,7 +63,7 @@ void WorldSession::HandleRepopRequestOpcode(WorldPacket& p_RecvData)
 {
     bool l_CheckInstance = p_RecvData.ReadBit(); ///< l_checkInstance is never read 01/18/16
 
-    if (m_Player->isAlive() || m_Player->HasFlag(EPlayerFields::PLAYER_FIELD_PLAYER_FLAGS, PlayerFlags::PLAYER_FLAGS_GHOST))
+    if (m_Player->IsAlive() || m_Player->HasFlag(EPlayerFields::PLAYER_FIELD_PLAYER_FLAGS, PlayerFlags::PLAYER_FLAGS_GHOST))
         return;
 
     /// Silently return, client should display the error by itself
@@ -483,7 +483,7 @@ void WorldSession::HandleLogoutRequestOpcode(WorldPacket& /*recvData*/)
 
     uint32 reason = 0;
 
-    if (GetPlayer()->isInCombat())
+    if (GetPlayer()->IsInCombat())
         reason = 1;
     else if (GetPlayer()->m_movementInfo.HasMovementFlag(MOVEMENTFLAG_FALLING | MOVEMENTFLAG_FALLING_FAR))
         reason = 3;                                         // is jumping or falling
@@ -617,7 +617,7 @@ void WorldSession::HandleZoneUpdateOpcode(WorldPacket& recvData)
 
 void WorldSession::HandleReturnToGraveyard(WorldPacket& /*recvPacket*/)
 {
-    if (GetPlayer()->isAlive() || !GetPlayer()->HasFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
+    if (GetPlayer()->IsAlive() || !GetPlayer()->HasFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
         return;
     //TODO: unk32, unk32
     GetPlayer()->RepopAtGraveyard();
@@ -921,7 +921,7 @@ void WorldSession::HandleReclaimCorpseOpcode(WorldPacket& p_Packet)
 
     p_Packet.readPackGUID(l_CorpseGUID);
     
-    if (GetPlayer()->isAlive())
+    if (GetPlayer()->IsAlive())
         return;
 
     /// Do not allow corpse reclaim in arena
@@ -957,7 +957,7 @@ void WorldSession::HandleResurrectResponseOpcode(WorldPacket& p_RecvData)
     p_RecvData.readPackGUID(l_Guid);
     uint32 l_Status = p_RecvData.read<uint32>();
 
-    if (m_Player->isAlive())
+    if (m_Player->IsAlive())
     {
         /// Resurrecting - 60s aura preventing client from new res spells
         m_Player->RemoveAura(160029);
@@ -1073,7 +1073,7 @@ void WorldSession::HandleAreaTriggerOpcode(WorldPacket& p_RecvData)
     else
         sScriptMgr->OnExitAreaTrigger(l_Player, l_ATEntry);
 
-    if (l_Player->isAlive())
+    if (l_Player->IsAlive())
         l_Player->QuestObjectiveSatisfy(l_ID, 1, QUEST_OBJECTIVE_TYPE_AREATRIGGER, l_Player->GetGUID());
 
     if (sObjectMgr->IsTavernAreaTrigger(l_ID))

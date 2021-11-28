@@ -996,7 +996,7 @@ class mob_tourmented_spirit : public CreatureScript
 
             void MoveInLineOfSight(Unit* who)
             {
-                if (me->isInCombat())
+                if (me->IsInCombat())
                     return;
 
                 if (who->GetTypeId() != TYPEID_PLAYER)
@@ -3014,7 +3014,7 @@ class mob_untrained_quilen : public CreatureScript
 
             void DamageTaken(Unit* p_Attacker, uint32& /*p_Damage*/, SpellInfo const*  /*p_SpellInfo*/)
             {
-                if (me->getVictim())
+                if (me->GetVictim())
                     return;
 
                 EnterCombat(p_Attacker);
@@ -3040,7 +3040,7 @@ class mob_untrained_quilen : public CreatureScript
                     {
                         case EVENT_CARNIVOROUS_BITE:
                         {
-                            Unit* l_Victim = (me->getVictim() ? me->getVictim() : SelectTarget(SELECT_TARGET_TOPAGGRO));
+                            Unit* l_Victim = (me->GetVictim() ? me->GetVictim() : SelectTarget(SELECT_TARGET_TOPAGGRO));
                             if (l_Victim)
                                 me->CastSpell(l_Victim, SPELL_CARNIVOROUS_BITE, true);
 
@@ -3837,7 +3837,7 @@ class spell_storm_weapon : public SpellScriptLoader
                 if (caster->ToCreature()->HasSpellCooldown(SPELL_STORM_WEAPON_DAMAGE))
                     return;
 
-                if (Unit* target = caster->getVictim())
+                if (Unit* target = caster->GetVictim())
                 {
                     caster->CastSpell(target, SPELL_STORM_WEAPON_DAMAGE, true);
                     caster->ToCreature()->_AddCreatureSpellCooldown(SPELL_STORM_WEAPON_DAMAGE, time(NULL) + 4);
@@ -4109,7 +4109,7 @@ class spell_drain_the_weak : public SpellScriptLoader
                 if (caster->ToCreature()->HasSpellCooldown(SPELL_DRAIN_THE_WEAK_TRIGGERED))
                     return;
 
-                if (Unit* target = caster->getVictim())
+                if (Unit* target = caster->GetVictim())
                 {
                     if (target->GetHealth() >= 350000)
                         return;
@@ -4198,11 +4198,11 @@ class spell_sonic_call : public SpellScriptLoader
             {
                 if (Unit* caster = GetCaster())
                 {
-                    if (!GetHitUnit() || !caster->getVictim())
+                    if (!GetHitUnit() || !caster->GetVictim())
                         return;
 
                     if (Creature* borrower = GetHitUnit()->ToCreature())
-                        borrower->AI()->AttackStart(caster->getVictim());
+                        borrower->AI()->AttackStart(caster->GetVictim());
                 }
             }
 

@@ -242,7 +242,7 @@ class npc_faction_boss : public CreatureScript
             {
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         EnterEvadeMode();
                     return;
                 }

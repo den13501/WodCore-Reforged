@@ -396,7 +396,7 @@ namespace MS
                         events.ScheduleEvent(uint32(Events::LensFlare), 27000);
                         break;
                     case uint32(Events::SolarBurst):
-                        me->CastSpell(me->getVictim(), uint32(Spells::SolarBurst));
+                        me->CastSpell(me->GetVictim(), uint32(Spells::SolarBurst));
                         events.ScheduleEvent(uint32(Events::SolarBurst), 21000);
                         break;
                     case uint32(Events::CallAdds):

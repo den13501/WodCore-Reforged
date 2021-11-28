@@ -311,8 +311,8 @@ class boss_striker_gadok : public CreatureScript
                         strafingTimer = 50;
                         break;
                     case 12: // POINT_END, End Strafing Event, go back to fight
-                        if (me->getVictim())
-                            me->GetMotionMaster()->MoveChase(me->getVictim());
+                        if (me->GetVictim())
+                            me->GetMotionMaster()->MoveChase(me->GetVictim());
                         else if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 0.0f, true))
                             me->AI()->AttackStart(target);
 

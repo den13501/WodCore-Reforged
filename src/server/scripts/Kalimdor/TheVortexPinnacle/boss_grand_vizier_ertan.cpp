@@ -135,7 +135,7 @@ class boss_grand_vizier_ertan : public CreatureScript
                         case EVENT_LIGHTNING_BOLT:
                             if (me->HasUnitState(UNIT_STATE_CASTING))
                                 return;
-                            DoCast(me->getVictim(), SPELL_LIGHTNING_BOLT);
+                            DoCast(me->GetVictim(), SPELL_LIGHTNING_BOLT);
                             events.ScheduleEvent(EVENT_LIGHTNING_BOLT, 2000);
                             break;
                         case EVENT_CALL_VORTEX:

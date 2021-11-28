@@ -88,7 +88,7 @@ void WorldSession::HandleLootItemOpcode(WorldPacket & p_RecvData)
         {
             Creature* l_Creature = GetPlayer()->GetMap()->GetCreature(l_LootGuid);
 
-            bool l_IsLootAllowed = l_Creature && l_Creature->isAlive() == (m_Player->getClass() == CLASS_ROGUE && l_Creature->lootForPickPocketed);
+            bool l_IsLootAllowed = l_Creature && l_Creature->IsAlive() == (m_Player->getClass() == CLASS_ROGUE && l_Creature->lootForPickPocketed);
 
             /// Check for Glyph of Fetch too
             if (!l_IsLootAllowed || (!l_Creature->IsWithinDistInMap(m_Player, 40.0f) && !m_Player->HasSpell(125050)))
@@ -171,13 +171,13 @@ void WorldSession::HandleLootMoneyOpcode(WorldPacket& /*recvData*/)
         case HIGHGUID_VEHICLE:
         {
             Creature* creature = player->GetMap()->GetCreature(guid);
-            bool lootAllowed = creature && creature->isAlive() == (player->getClass() == CLASS_ROGUE && creature->lootForPickPocketed);
+            bool lootAllowed = creature && creature->IsAlive() == (player->getClass() == CLASS_ROGUE && creature->lootForPickPocketed);
 
             /// Check for Glyph of Fetch too
             if (lootAllowed && (creature->IsWithinDistInMap(player, INTERACTION_DISTANCE) || m_Player->HasSpell(125050)))
             {
                 masterLoot = &creature->loot;
-                if (creature->isAlive())
+                if (creature->IsAlive())
                     shareMoney = false;
                 // Check creature around for radius loot
                 else
@@ -318,7 +318,7 @@ void WorldSession::HandleLootOpcode(WorldPacket& p_RecvData)
     p_RecvData.readPackGUID(l_UnitGuid);
 
     /// Check possible cheat
-    if (!m_Player->isAlive())
+    if (!m_Player->IsAlive())
         return;
 
     m_Player->SendLoot(l_UnitGuid, LOOT_CORPSE);
@@ -449,7 +449,7 @@ void WorldSession::DoLootRelease(uint64 lguid)
     {
         Creature* creature = GetPlayer()->GetMap()->GetCreature(lguid);
 
-        bool lootAllowed = creature && creature->isAlive() == (player->getClass() == CLASS_ROGUE && creature->lootForPickPocketed);
+        bool lootAllowed = creature && creature->IsAlive() == (player->getClass() == CLASS_ROGUE && creature->lootForPickPocketed);
 
         /// Check for Glyph of Fetch too
         if (!lootAllowed || (!creature->IsWithinDistInMap(m_Player, INTERACTION_DISTANCE) && !m_Player->HasSpell(125050)))
@@ -459,7 +459,7 @@ void WorldSession::DoLootRelease(uint64 lguid)
         if (loot->isLooted())
         {
             // skip pickpocketing loot for speed, skinning timer reduction is no-op in fact
-            if (!creature->isAlive())
+            if (!creature->IsAlive())
                 creature->AllLootRemovedFromCorpse();
 
             creature->RemoveFlag(OBJECT_FIELD_DYNAMIC_FLAGS, UNIT_DYNFLAG_LOOTABLE);
@@ -478,7 +478,7 @@ void WorldSession::DoLootRelease(uint64 lguid)
                             continue;
 
                         // skip pickpocketing loot for speed, skinning timer reduction is no-op in fact
-                        if (!c->isAlive())
+                        if (!c->IsAlive())
                             c->AllLootRemovedFromCorpse();
 
                         c->RemoveFlag(OBJECT_FIELD_DYNAMIC_FLAGS, UNIT_DYNFLAG_LOOTABLE);

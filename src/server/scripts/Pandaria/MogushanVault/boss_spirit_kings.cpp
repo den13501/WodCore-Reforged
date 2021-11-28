@@ -791,7 +791,7 @@ class boss_spirit_kings : public CreatureScript
                 {
                     case ACTION_ENTER_COMBAT:
                     {
-                        if (!me->isInCombat())
+                        if (!me->IsInCombat())
                             if (Player* victim = me->SelectNearestPlayerNotGM(50.0f))
                                 AttackStart(victim);
                     }
@@ -1142,7 +1142,7 @@ class boss_spirit_kings : public CreatureScript
                                     next = itr;
                                     ++next;
 
-                                    if (!(*itr)->isAlive() || (*itr)->HasAura(SPELL_FIXATE))
+                                    if (!(*itr)->IsAlive() || (*itr)->HasAura(SPELL_FIXATE))
                                         playerList.remove(*itr);
                                 }
 

@@ -427,7 +427,7 @@ public:
             summons.Summon(summon);
             summon->setActive(true);
 
-            if (me->isInCombat())
+            if (me->IsInCombat())
                 summon->AI()->DoZoneInCombat();
         }
 
@@ -469,7 +469,7 @@ public:
                     std::list<Creature*> l_LegList;
                     GetCreatureListWithEntryInGrid(l_LegList, me, NPC_GARALON_LEG, 200.0f);
 
-                    if (me->isAlive())
+                    if (me->IsAlive())
                     {
                         if (instance)
                         {

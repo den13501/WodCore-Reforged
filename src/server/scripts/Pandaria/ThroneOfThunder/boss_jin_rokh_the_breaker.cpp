@@ -336,7 +336,7 @@ class boss_jin_rokh_the_breaker : public CreatureScript
             {
                 if (!UpdateVictim())
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                     {
                         me->CombatStop();
                         EnterEvadeMode();

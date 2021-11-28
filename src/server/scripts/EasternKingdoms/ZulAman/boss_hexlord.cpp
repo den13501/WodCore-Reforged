@@ -325,7 +325,7 @@ class boss_hex_lord_malacrass : public CreatureScript
                         target = me;
                         break;
                     case ABILITY_TARGET_VICTIM:
-                        target = me->getVictim();
+                        target = me->GetVictim();
                         break;
                     case ABILITY_TARGET_ENEMY:
                     default:
@@ -438,7 +438,7 @@ class npc_gazakroth : public CreatureScript
 
                 if (firebolt_timer <= diff)
                 {
-                    if (Unit* l_Victim = me->getVictim())
+                    if (Unit* l_Victim = me->GetVictim())
                         DoCast(l_Victim, SPELL_FIREBOLT, false);
                     firebolt_timer = 700;
                 }
@@ -480,7 +480,7 @@ class npc_darkheart : public CreatureScript
 
                 if (psychicwail_timer <= diff)
                 {
-                    DoCast(me->getVictim(), SPELL_PSYCHIC_WAIL, false);
+                    DoCast(me->GetVictim(), SPELL_PSYCHIC_WAIL, false);
                     psychicwail_timer = 12000;
                 }
                 else

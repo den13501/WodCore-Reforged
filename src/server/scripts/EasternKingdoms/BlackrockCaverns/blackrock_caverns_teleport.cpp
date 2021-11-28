@@ -34,7 +34,7 @@ class bc_teleport : public GameObjectScript
             player->PlayerTalkClass->ClearMenus();
             player->CLOSE_GOSSIP_MENU();
 
-            if (player->isInCombat())
+            if (player->IsInCombat())
             {
                 return true;
             }

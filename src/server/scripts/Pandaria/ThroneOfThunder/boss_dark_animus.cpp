@@ -1064,7 +1064,7 @@ class mob_anima_golem : public CreatureScript
                 if (p_Power != POWER_ENERGY || p_Value < 0)
                     return;
 
-                if (me->isAlive())
+                if (me->IsAlive())
                     m_Anima = me->GetPower(POWER_ENERGY);
             }
 
@@ -1215,7 +1215,7 @@ class mob_large_anima_golem : public CreatureScript
                 if (me->GetPower(POWER_ENERGY) >= me->GetMaxPower(POWER_ENERGY) && me->HasAura(SPELL_TURNED_OFF))
                     DoAction(ACTION_ACTIVATE_GOLEM);
 
-                if (me->isAlive())
+                if (me->IsAlive())
                     m_Anima = me->GetPower(POWER_ENERGY);
             }
 
@@ -1421,7 +1421,7 @@ class mob_massive_anima_golem : public CreatureScript
                         EnterCombat(l_Target);
                 }
 
-                if (me->isAlive())
+                if (me->IsAlive())
                     m_Anima = me->GetPower(POWER_ENERGY);
             }
 
@@ -1686,7 +1686,7 @@ class spell_transfusion_searcher : public SpellScriptLoader
 
                         for (Creature* l_Golem : l_GolemList)
                         {
-                            if (!l_Golem->isAlive() || l_Golem->HasAura(SPELL_CRITICALLY_DAMAGED_1) || l_Golem->HasAura(SPELL_CRITICALLY_DAMAGED_2))
+                            if (!l_Golem->IsAlive() || l_Golem->HasAura(SPELL_CRITICALLY_DAMAGED_1) || l_Golem->HasAura(SPELL_CRITICALLY_DAMAGED_2))
                                 continue;
 
                             /// Anima already sent to the golem but not received yet; prevent golem to receive more anima he can handle
@@ -2197,7 +2197,7 @@ class spell_siphon_anima : public SpellScriptLoader
                     if (!p_Object || !p_Object->ToCreature())
                         return true;
 
-                    if (!p_Object->ToCreature()->isAlive())
+                    if (!p_Object->ToCreature()->IsAlive())
                         return true;
 
                     if (p_Object->ToUnit()->GetPower(POWER_ENERGY) <= 0)
@@ -2386,7 +2386,7 @@ class spell_empower_golem : public SpellScriptLoader
                     if (!p_Object || !p_Object->ToCreature())
                         return true;
 
-                    if (!p_Object->ToCreature()->isAlive())
+                    if (!p_Object->ToCreature()->IsAlive())
                         return true;
 
                     if (p_Object->GetEntry() == NPC_ANIMA_GOLEM ||

@@ -447,7 +447,7 @@ void WorldSession::HandleBinderActivateOpcode(WorldPacket& p_RecvData)
 
     p_RecvData.readPackGUID(l_NpcGUID);
 
-    if (!GetPlayer()->IsInWorld() || !GetPlayer()->isAlive())
+    if (!GetPlayer()->IsInWorld() || !GetPlayer()->IsAlive())
         return;
 
     Creature* l_Unit = GetPlayer()->GetNPCIfCanInteractWith(l_NpcGUID, UNIT_NPC_FLAG_INNKEEPER);

@@ -139,7 +139,7 @@ public:
                 switch (eventId)
                 {
                 case EVENT_SHADOW_BOLT:
-                    DoCast(me->getVictim(), SPELL_SHADOW_BOLT);
+                    DoCast(me->GetVictim(), SPELL_SHADOW_BOLT);
                     events.ScheduleEvent(EVENT_SHADOW_BOLT, 2000);
                     break;
                 case EVENT_SHAPE_PORTAL:

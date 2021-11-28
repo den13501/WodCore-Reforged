@@ -121,7 +121,7 @@ public:
                 //MindBlast
                 if (m_uiMindBlast_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_MINDBLAST);
+                    DoCast(me->GetVictim(), SPELL_MINDBLAST);
                     m_uiMindBlast_Timer = urand(15000, 20000);
                 }
                 else
@@ -130,7 +130,7 @@ public:
                 //CrusadersHammer
                 if (m_uiCrusadersHammer_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_CRUSADERSHAMMER);
+                    DoCast(me->GetVictim(), SPELL_CRUSADERSHAMMER);
                     m_uiCrusadersHammer_Timer = 12000;
                 }
                 else
@@ -139,7 +139,7 @@ public:
                 //CrusaderStrike
                 if (m_uiCrusaderStrike_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_CRUSADERSTRIKE);
+                    DoCast(me->GetVictim(), SPELL_CRUSADERSTRIKE);
                     m_uiCrusaderStrike_Timer = 15000;
                 }
                 else
@@ -148,7 +148,7 @@ public:
                 //HolyStrike
                 if (m_uiHolyStrike_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_HOLYSTRIKE);
+                    DoCast(me->GetVictim(), SPELL_HOLYSTRIKE);
                     m_uiHolyStrike_Timer = 15000;
                 }
                 else
@@ -171,7 +171,7 @@ public:
                 //MindBlast
                 if (m_uiMindBlast_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_MINDBLAST);
+                    DoCast(me->GetVictim(), SPELL_MINDBLAST);
                     m_uiMindBlast_Timer = urand(15000, 20000);
                 }
                 else
@@ -180,7 +180,7 @@ public:
                 //ShadowShock
                 if (m_uiShadowShock_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_SHADOWSHOCK);
+                    DoCast(me->GetVictim(), SPELL_SHADOWSHOCK);
                     m_uiShadowShock_Timer = 11000;
                 }
                 else
@@ -211,7 +211,7 @@ public:
                 //MindControl
                 if (m_uiMindControl_Timer <= uiDiff)
                 {
-                    DoCast(me->getVictim(), SPELL_MINDCONTROL);
+                    DoCast(me->GetVictim(), SPELL_MINDCONTROL);
                     m_uiMindControl_Timer = 15000;
                 }
                 else

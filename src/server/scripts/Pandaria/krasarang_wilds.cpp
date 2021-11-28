@@ -491,7 +491,7 @@ class spell_chi_torpedo_periodic: public SpellScriptLoader
             {
                 if (Unit* caster = GetCaster())
                 {
-                    if (Unit* target = caster->getVictim())
+                    if (Unit* target = caster->GetVictim())
                     {
                         caster->CastSpell(target, 119520, true);
                     }
@@ -568,7 +568,7 @@ class mob_anduin_wrynn_escort : public CreatureScript
                 {
                     if (Player* l_Summoner = sObjectAccessor->FindPlayer(m_PlayerGuid))
                     {
-                        if (Unit* l_Target = l_Summoner->getVictim())
+                        if (Unit* l_Target = l_Summoner->GetVictim())
                         {
                             if (Creature* l_Creature = l_Target->ToCreature())
                             {
@@ -905,7 +905,7 @@ class mob_ellia_ravenmane : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1155,7 +1155,7 @@ class mob_fat_long_fat : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1339,7 +1339,7 @@ class mob_huck_wheelbarrow : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1500,7 +1500,7 @@ class mob_dextrous_izissha : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1660,7 +1660,7 @@ class mob_julia_bates : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1816,7 +1816,7 @@ class mob_kuo_na : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -1976,7 +1976,7 @@ class mob_mindel_sunspeaker : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2131,7 +2131,7 @@ class mob_minh_do_tan : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2288,7 +2288,7 @@ class mob_thelonius : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2454,7 +2454,7 @@ class mob_tukka_tuk : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;
@@ -2615,7 +2615,7 @@ class mob_yan_quillpaw : public CreatureScript
             {
                 if (Player* player = ObjectAccessor::FindPlayer(playerGuid))
                 {
-                    if (!player->isAlive())
+                    if (!player->IsAlive())
                     {
                         DoAction(ACTION_REINITIALIZE);
                         return;

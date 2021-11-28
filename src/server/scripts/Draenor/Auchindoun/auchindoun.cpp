@@ -389,7 +389,7 @@ class auchindoun_mob_sargerei_soulbinder : public CreatureScript
             {
                 if (Creature* l_Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (l_Kaathar->isAlive() && l_Kaathar->IsAIEnabled)
+                    if (l_Kaathar->IsAlive() && l_Kaathar->IsAIEnabled)
                         l_Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -473,7 +473,7 @@ class auchindoun_mob_sargerei_cleric : public CreatureScript
             {
                 if (Creature* l_Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (l_Kaathar->isAlive() && l_Kaathar->IsAIEnabled)
+                    if (l_Kaathar->IsAlive() && l_Kaathar->IsAIEnabled)
                         l_Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -560,7 +560,7 @@ class auchindoun_mob_sargerei_ritualist : public CreatureScript
             {
                 if (Creature* l_Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (l_Kaathar->isAlive() && l_Kaathar->IsAIEnabled)
+                    if (l_Kaathar->IsAlive() && l_Kaathar->IsAIEnabled)
                         l_Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -637,7 +637,7 @@ class auchindoun_mob_sargerei_zealot : public CreatureScript
             {
                 if (Creature* Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (Kaathar->isAlive() && Kaathar->IsAIEnabled)
+                    if (Kaathar->IsAlive() && Kaathar->IsAIEnabled)
                         Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -719,7 +719,7 @@ class auchindoun_mob_sargerei_spirit_tender : public CreatureScript
             {
                 if (Creature* l_Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (l_Kaathar->isAlive() && l_Kaathar->IsAIEnabled)
+                    if (l_Kaathar->IsAlive() && l_Kaathar->IsAIEnabled)
                         l_Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -805,7 +805,7 @@ class auchindoun_mob_sargerei_hopilite : public CreatureScript
             {
                 if (Creature* l_Kaathar = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossKathaar)))
                 {
-                    if (l_Kaathar->isAlive() && l_Kaathar->IsAIEnabled)
+                    if (l_Kaathar->IsAlive() && l_Kaathar->IsAIEnabled)
                         l_Kaathar->AI()->DoAction(eAuchindounActions::ActionCountPre1StBossKill);
                 }
             }
@@ -824,12 +824,12 @@ class auchindoun_mob_sargerei_hopilite : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eSargereiHopiliteEvents::EventShieldBash:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSargereiHopiliteSpells::SpellShieldBash);
                     events.ScheduleEvent(eSargereiHopiliteEvents::EventShieldBash, urand(8 * TimeConstants::IN_MILLISECONDS, 12 * TimeConstants::IN_MILLISECONDS));
                     break;
                 case eSargereiHopiliteEvents::EventVoidStrikes:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eSargereiHopiliteSpells::SpellVoidStrikes);
                     events.ScheduleEvent(eSargereiHopiliteEvents::EventVoidStrikes, 18 * TimeConstants::IN_MILLISECONDS);
                     break;
@@ -911,7 +911,7 @@ class auchindoun_mob_sargerei_defender : public CreatureScript
                         events.ScheduleEvent(eSargereiDefenderEvents::EventAvengersShield, urand(10 * TimeConstants::IN_MILLISECONDS, 16 * TimeConstants::IN_MILLISECONDS));
                         break;
                 case eSargereiDefenderEvents::EventCrusaderStirke:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eSargereiDefenderSpells::SpellCrusaderStirke);
                         events.ScheduleEvent(eSargereiDefenderEvents::EventCrusaderStirke, urand(5 * TimeConstants::IN_MILLISECONDS, 9 * TimeConstants::IN_MILLISECONDS));
                         break;
@@ -1365,7 +1365,7 @@ class auchindoun_mob_cackling_pyromaniac : public CreatureScript
             if (m_Instance != nullptr)
             {
                 if (Creature* l_Azzakel = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossAzzakael)))
-                    if (l_Azzakel->isInCombat() && l_Azzakel->isAlive() && l_Azzakel->IsAIEnabled)
+                    if (l_Azzakel->IsInCombat() && l_Azzakel->IsAlive() && l_Azzakel->IsAIEnabled)
                         l_Azzakel->GetAI()->DoAction(eAuchindounActions::ActionDemonSoulsAchievement);
 
                 if (Creature* l_Trigger = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataTriggerAzzakelController)))
@@ -1387,7 +1387,7 @@ class auchindoun_mob_cackling_pyromaniac : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eCacklingPyromaniacEvents::EventFelBlast:
-                    if (Unit* l_Target = me->getVictim())
+                    if (Unit* l_Target = me->GetVictim())
                         me->CastSpell(l_Target, eCacklingPyromaniacSpells::SpellFelBlast);
                     events.ScheduleEvent(eCacklingPyromaniacEvents::EventFelBlast, 6 * TimeConstants::IN_MILLISECONDS);
                     break;
@@ -1444,7 +1444,7 @@ class auchindoun_mob_blazing_trickster : public CreatureScript
             if (m_Instance != nullptr)
             {
                 if (Creature* l_Azzakel = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossAzzakael)))
-                    if (l_Azzakel->isInCombat() && l_Azzakel->isAlive() && l_Azzakel->IsAIEnabled)
+                    if (l_Azzakel->IsInCombat() && l_Azzakel->IsAlive() && l_Azzakel->IsAIEnabled)
                         l_Azzakel->GetAI()->DoAction(eAuchindounActions::ActionDemonSoulsAchievement);
             }
         }
@@ -1521,7 +1521,7 @@ class auchindoun_mob_felguard : public CreatureScript
             if (m_Instance != nullptr)
             {
                 if (Creature* l_Azzakel = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataBossAzzakael)))
-                    if (l_Azzakel->isInCombat() && l_Azzakel->isAlive() && l_Azzakel->IsAIEnabled)
+                    if (l_Azzakel->IsInCombat() && l_Azzakel->IsAlive() && l_Azzakel->IsAIEnabled)
                         l_Azzakel->GetAI()->DoAction(eAuchindounActions::ActionDemonSoulsAchievement);
 
                 if (Creature* l_Trigger = m_Instance->instance->GetCreature(m_Instance->GetData64(eAuchindounDatas::DataTriggerAzzakelController)))

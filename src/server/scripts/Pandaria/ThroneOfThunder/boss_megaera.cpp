@@ -890,7 +890,7 @@ class boss_megaera_head : public CreatureScript
 
                 if (pInstance)
                 {
-                    if (me->isInCombat())
+                    if (me->IsInCombat())
                         pInstance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
                     else
                     {

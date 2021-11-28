@@ -461,9 +461,9 @@ namespace MS { namespace Instances { namespace Bloodmaul
                     {
                         if (l_Player->IsWithinDist(p_AreaTrigger, 60.0f, true))
                         {
-                            if (l_Player->isAlive() && !l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
+                            if (l_Player->IsAlive() && !l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
                                 l_Player->SendApplyMovementForce(p_AreaTrigger->GetGUID(), true, s_HeatWavePos, -7.0f, 1);
-                            else if (!l_Player->isAlive() && l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
+                            else if (!l_Player->IsAlive() && l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))
                                 l_Player->SendApplyMovementForce(p_AreaTrigger->GetGUID(), false, s_HeatWavePos);
                         }
                         else if (l_Player->HasMovementForce(p_AreaTrigger->GetGUID()))

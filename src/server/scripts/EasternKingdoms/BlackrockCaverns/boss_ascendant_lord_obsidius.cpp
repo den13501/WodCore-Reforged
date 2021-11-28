@@ -122,7 +122,7 @@ class boss_ascendant_lord_obsidius : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_STONEBLOW:
-                            DoCast(me->getVictim(), SPELL_STONEBLOW);
+                            DoCast(me->GetVictim(), SPELL_STONEBLOW);
                             events.ScheduleEvent(EVENT_STONEBLOW, 6000);
                             break;
                         case EVENT_TWILIGHT_CORRUPTION:
@@ -190,7 +190,7 @@ class npc_shadow_of_obsidius : public CreatureScript
 
             void DamageTaken(Unit* attacker, uint32 & /*damage*/, SpellInfo const*  /*p_SpellInfo*/)
             {
-                if (me->getVictim() != attacker)
+                if (me->GetVictim() != attacker)
                 {
                     DoResetThreat();
                     me->AddThreat(attacker, 1000000.0f);
@@ -214,7 +214,7 @@ class npc_shadow_of_obsidius : public CreatureScript
                     switch (eventId)
                     {
                     case EVENT_CREPUSCULAR_VEIL:
-                        DoCast(me->getVictim(), SPELL_CREPUSCULAR_VEIL);
+                        DoCast(me->GetVictim(), SPELL_CREPUSCULAR_VEIL);
                         events.ScheduleEvent(EVENT_CREPUSCULAR_VEIL, 3900);
                         break;
                     }

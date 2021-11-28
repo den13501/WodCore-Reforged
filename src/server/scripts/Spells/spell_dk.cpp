@@ -1865,7 +1865,7 @@ class spell_dk_corpse_explosion: public SpellScriptLoader
                     else if (target->GetGUID() == caster->GetGUID())
                         return SPELL_FAILED_BAD_TARGETS;
 
-                    if (target->isAlive())
+                    if (target->IsAlive())
                         return SPELL_FAILED_BAD_TARGETS;
                 }
 
@@ -1934,7 +1934,7 @@ class spell_dk_glyph_of_horn_of_winter: public SpellScriptLoader
             void HandleAfterCast()
             {
                 if (Player* _player = GetCaster()->ToPlayer())
-                    if (!_player->isInCombat() && _player->HasAura(DK_SPELL_GLYPH_OF_HORN_OF_WINTER))
+                    if (!_player->IsInCombat() && _player->HasAura(DK_SPELL_GLYPH_OF_HORN_OF_WINTER))
                         _player->CastSpell(_player, DK_SPELL_GLYPH_OF_HORN_OF_WINTER_EFFECT, true);
             }
 
@@ -2693,7 +2693,7 @@ class spell_dk_enhanced_death_coil : public SpellScriptLoader
                     float l_Percent = l_Caster->GetHealthPct();
                     l_Caster->HandleStatModifier(UNIT_MOD_HEALTH, TOTAL_PCT, (float)p_AurEff->GetAmount(), false);
                     l_Caster->HandleStatModifier(UNIT_MOD_HEALTH, TOTAL_PCT, (float)l_Stack->GetTotalAmount(), true);
-                    if (l_Caster->isAlive())
+                    if (l_Caster->IsAlive())
                         l_Caster->SetHealth(l_Caster->CountPctFromMaxHealth(int32(l_Percent)));
                 }
 
@@ -3281,7 +3281,7 @@ class spell_dk_item_t17_frost_4p_driver_periodic : public SpellScriptLoader
                 if (l_Caster == nullptr)
                     return;
 
-                Unit* l_Target = l_Caster->getVictim();
+                Unit* l_Target = l_Caster->GetVictim();
                 if (l_Target == nullptr)
                     return;
 

@@ -225,7 +225,7 @@ class iron_docks_mob_gromkar_deadeye : public CreatureScript
                             events.ScheduleEvent(eDeadeyeEvents::EventLegShot, urand(20 * TimeConstants::IN_MILLISECONDS, 25 * TimeConstants::IN_MILLISECONDS));
                             break;
                     case eDeadeyeEvents::EventIronShot:
-                            if (Unit* l_Target = me->getVictim())
+                            if (Unit* l_Target = me->GetVictim())
                                 me->CastSpell(l_Target, eDeadeyeSpells::SpellIronShot);
                             events.ScheduleEvent(eDeadeyeEvents::EventIronShot, urand(5 * TimeConstants::IN_MILLISECONDS, 8 * TimeConstants::IN_MILLISECONDS));
                             break;
@@ -312,7 +312,7 @@ class iron_docks_mob_gromkar_footsoldier : public CreatureScript
                                 events.ScheduleEvent(eFootSoldierEvents::EventDemoralizingShout, 25 * TimeConstants::IN_MILLISECONDS);
                                 break;
                     case eFootSoldierEvents::EventTacticalKick:
-                             if (Unit* l_Target = me->getVictim())
+                             if (Unit* l_Target = me->GetVictim())
                                  me->CastSpell(l_Target, eFootSoldierSpells::SpellTacticalKick);
                                 events.ScheduleEvent(eFootSoldierEvents::EventTacticalKick, urand(10 * TimeConstants::IN_MILLISECONDS, 15 * TimeConstants::IN_MILLISECONDS));
                                 break;
@@ -403,7 +403,7 @@ class iron_docks_mob_gromkar_incinerator : public CreatureScript
                 switch (events.ExecuteEvent())
                 {
                     case eIncineratorEvents::EventIncendinarySlug:
-                            if (Unit* l_Target = me->getVictim())
+                            if (Unit* l_Target = me->GetVictim())
                                 me->CastSpell(l_Target, eIncienratorSpells::SpellIncenarySlugs);
                             events.ScheduleEvent(eIncineratorEvents::EventIncendinarySlug, urand(15 * TimeConstants::IN_MILLISECONDS, 18 * TimeConstants::IN_MILLISECONDS));
                             break;
@@ -521,7 +521,7 @@ class iron_docks_mob_gromkar_technician : public CreatureScript
                             events.ScheduleEvent(eTechnicianEvents::EventGreaseVial, urand(40 * TimeConstants::IN_MILLISECONDS, 70 * TimeConstants::IN_MILLISECONDS));
                             break;
                         case eTechnicianEvents::EventFlyingHammer:
-                            if (Unit* l_Victim = me->getVictim())
+                            if (Unit* l_Victim = me->GetVictim())
                                 me->CastSpell(l_Victim, eTechnicianSpells::SpellFlyingHammer);
                             events.ScheduleEvent(eTechnicianEvents::EventFlyingHammer, urand(8 * TimeConstants::IN_MILLISECONDS, 14 * TimeConstants::IN_MILLISECONDS));
                             break;
@@ -625,7 +625,7 @@ class iron_docks_mob_siege_master_olugar : public CreatureScript
                 {
                     case eOlugarEvents::EventShatteringStrike:
                         {
-                            if (Unit* l_Target = me->getVictim())
+                            if (Unit* l_Target = me->GetVictim())
                                 me->CastSpell(l_Target, eOlugarSpells::SpellShatteringStrike);
                             events.ScheduleEvent(eOlugarEvents::EventShatteringStrike, urand(6 * TimeConstants::IN_MILLISECONDS, 9 * TimeConstants::IN_MILLISECONDS));
                             break;
@@ -1126,7 +1126,7 @@ class iron_docks_mob_laborer_ogron : public CreatureScript
                         events.ScheduleEvent(eOrgonEvents::EventThunderingStomp, 20 * TimeConstants::IN_MILLISECONDS);
                         break;
                     case eOrgonEvents::EventFlurry:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eOrgonSpells::SpellFlurry);
                         events.ScheduleEvent(eOrgonEvents::EventFlurry, urand(8 * TimeConstants::IN_MILLISECONDS, 13 * TimeConstants::IN_MILLISECONDS));
                         break;

@@ -489,7 +489,7 @@ class boss_shekzeer : public CreatureScript
 
             void DoAction(const int32 action)
             {
-                if (!me->isAlive())
+                if (!me->IsAlive())
                     return;
 
                 switch (action)
@@ -734,7 +734,7 @@ class boss_shekzeer : public CreatureScript
                         }
                         case EVENT_EYES_OF_THE_EMPRESS:
                         {
-                            if (Unit* target = me->getVictim())
+                            if (Unit* target = me->GetVictim())
                                 me->CastSpell(target, SPELL_EYES_OF_THE_EMPRESS, true);
                             events.ScheduleEvent(EVENT_EYES_OF_THE_EMPRESS, urand(10000, 15000));
                             break;
@@ -895,7 +895,7 @@ void ShekzeerBuffAdds(Creature* me)
         // Retaining only alive mobs who aren't me
         for (Creature* mob : addList)
         {
-            if (mob->isAlive() && mob != me)
+            if (mob->IsAlive() && mob != me)
             {
                 if (!buff)
                     buff = true;
@@ -1000,7 +1000,7 @@ class mob_add_setthik_windblade : public CreatureScript
                         }
                         case EVENT_SONIC_BLADE:
                         {
-                            if (Unit* target = me->getVictim())
+                            if (Unit* target = me->GetVictim())
                                 me->CastSpell(target, SPELL_ADD_SONIC_BLADE, true);
                             events.ScheduleEvent(EVENT_SONIC_BLADE, urand(20000, 25000));
                             break;
@@ -1094,7 +1094,7 @@ class mob_korthik_reaver : public CreatureScript
                         }
                         case EVENT_POISON_DRENCHED_ARMOR:
                         {
-                            if (Unit* target = me->getVictim())
+                            if (Unit* target = me->GetVictim())
                                 me->CastSpell(target, SPELL_POISON_DRENCHED_ARMOR, true);
                             events.ScheduleEvent(EVENT_POISON_DRENCHED_ARMOR, 21000);
                             break;
@@ -1302,9 +1302,9 @@ class mob_amber_trap : public CreatureScript
                     {
                         for (Creature* setthik : addList)
                         {
-                            if (setthik->isAlive())
+                            if (setthik->IsAlive())
                             {
-                                if (!setthik->getVictim() || setthik->getVictim()->GetEntry() != me->GetEntry())
+                                if (!setthik->GetVictim() || setthik->GetVictim()->GetEntry() != me->GetEntry())
                                 {
                                     setthik->SetInCombatWith(me);
                                     setthik->AI()->AttackStart(me);

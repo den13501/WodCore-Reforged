@@ -302,7 +302,7 @@ class boss_oregorger : public CreatureScript
                 if (p_Power != Powers::POWER_MANA)
                     return;
 
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                     return;
 
                 /// Phase One lasts until Oregorger runs out of Mana, at which point he enters Phase Two.
@@ -586,7 +586,7 @@ class boss_oregorger : public CreatureScript
                     return;
                 }
 
-                if (!me->isInCombat())
+                if (!me->IsInCombat())
                 {
                     switch (p_Type)
                     {
@@ -734,7 +734,7 @@ class boss_oregorger : public CreatureScript
                         {
                             l_CreatureList.remove_if([this](Creature* p_Creature) -> bool
                             {
-                                if (p_Creature == nullptr || !p_Creature->isAlive())
+                                if (p_Creature == nullptr || !p_Creature->IsAlive())
                                     return true;
     
                                 return false;
@@ -1304,7 +1304,7 @@ class spell_foundry_acid_torrent_searcher : public SpellScriptLoader
                 if (l_Caster == nullptr)
                     return;
 
-                WorldObject* l_Object = l_Caster->getVictim();
+                WorldObject* l_Object = l_Caster->GetVictim();
 
                 p_Targets.clear();
                 p_Targets.push_back(l_Object);

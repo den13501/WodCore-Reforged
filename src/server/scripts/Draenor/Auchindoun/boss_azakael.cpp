@@ -519,7 +519,7 @@ class boss_azzakel : public CreatureScript
             switch (events.ExecuteEvent())
             {
                 case eAzzakelEvents::EventFelLash:
-                        if (Unit* l_Target = me->getVictim())
+                        if (Unit* l_Target = me->GetVictim())
                             me->CastSpell(l_Target, eAzzakelSpells::SpellFelLashVisual);
                         events.ScheduleEvent(eAzzakelEvents::EventFelLash, urand(8 * TimeConstants::IN_MILLISECONDS, 12 * TimeConstants::IN_MILLISECONDS));
                         break;

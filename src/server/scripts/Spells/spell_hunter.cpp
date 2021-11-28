@@ -402,7 +402,7 @@ class spell_hun_fetch_glyph : public SpellScriptLoader
                 {
                     if (Unit* l_Target = GetHitUnit())
                     {
-                        if (l_Target->isAlive())
+                        if (l_Target->IsAlive())
                             return;
 
                         if (Pet* l_Pet = l_Player->GetPet())
@@ -877,7 +877,7 @@ class spell_hun_kill_shot : public SpellScriptLoader
                 {
                     if (Unit* l_Target = GetHitUnit())
                     {
-                        if (l_Target->isAlive())
+                        if (l_Target->IsAlive())
                         {
                             if (l_Caster->HasAura(KillShotSpells::CooldownMarker))
                                 return;
@@ -1195,7 +1195,7 @@ class spell_hun_bestial_wrath_dispel: public SpellScriptLoader
                         {
                             Unit* l_Victim = l_Caster->ToPlayer()->GetSelectedUnit();
                             if (!l_Victim || !l_Caster->IsValidAttackTarget(l_Victim))
-                                l_Victim = l_Caster->getVictim();
+                                l_Victim = l_Caster->GetVictim();
                             if (!l_Victim || !l_Caster->IsValidAttackTarget(l_Victim))
                                 l_Victim = l_Caster;
 
@@ -2704,7 +2704,7 @@ class spell_hun_kill_command: public SpellScriptLoader
 
                         l_Pet->CastSpell(GetExplTargetUnit(), HUNTER_SPELL_KILL_COMMAND_TRIGGER, true);
 
-                        if (l_Pet->getVictim())
+                        if (l_Pet->GetVictim())
                         {
                             l_Pet->AttackStop();
                             l_Pet->ToCreature()->AI()->AttackStart(GetExplTargetUnit());
@@ -3333,7 +3333,7 @@ class spell_hun_claw_bite : public SpellScriptLoader
                         if (l_Caster->ToCreature()->IsAIEnabled && l_Caster->ToPet())
                         {
                             l_Caster->ToPet()->ClearUnitState(UNIT_STATE_FOLLOW);
-                            if (l_Caster->ToPet()->getVictim())
+                            if (l_Caster->ToPet()->GetVictim())
                                 l_Caster->ToPet()->AttackStop();
                             l_Caster->GetMotionMaster()->Clear();
                             l_Caster->ToPet()->GetCharmInfo()->SetIsCommandAttack(true);
@@ -4169,7 +4169,7 @@ class spell_hun_camouflage : public SpellScriptLoader
 
                 l_Player->CastSpell(l_Player, eSpells::CamouflageBuff, true);
 
-                if (l_Player->isInCombat())
+                if (l_Player->IsInCombat())
                 {
                     /// Should have 6s duration in Pvp
                     Aura* l_Aura = l_Player->GetAura(GetSpellInfo()->Id);
