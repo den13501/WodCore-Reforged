@@ -224,52 +224,58 @@ class instance_stratholme : public InstanceMapScript
             {
                 switch (type)
                 {
-                    case TYPE_BARON_RUN:
-                        switch (data)
-                        {
-                            case IN_PROGRESS:
-                                if (EncounterState[0] == IN_PROGRESS || EncounterState[0] == FAIL)
-                                    break;
-                                EncounterState[0] = data;
-                                events.ScheduleEvent(EVENT_BARON_RUN, 2700000);
-                                sLog->outDebug(LOG_FILTER_TSCR, "Instance Stratholme: Baron run in progress.");
-                                break;
-                            case FAIL:
-                                DoRemoveAurasDueToSpellOnPlayers(SPELL_BARON_ULTIMATUM);
-                                EncounterState[0] = data;
-                                break;
-                            case DONE:
-                                EncounterState[0] = data;
-                                if (Creature* ysidaTrigger = instance->GetCreature(ysidaTriggerGUID))
-                                {
-                                    Position ysidaPos;
-                                    ysidaTrigger->GetPosition(&ysidaPos);
-                                    ysidaTrigger->SummonCreature(C_YSIDA, ysidaPos, TEMPSUMMON_TIMED_DESPAWN, 1800000);
-                                }
-                                events.CancelEvent(EVENT_BARON_RUN);
-                                break;
-                        }
+                case TYPE_BARON_RUN:
+                    switch (data)
+                    {
+                    case IN_PROGRESS:
+                        if (EncounterState[0] == IN_PROGRESS || EncounterState[0] == FAIL)
+                            break;
+                        EncounterState[0] = data;
+                        events.ScheduleEvent(EVENT_BARON_RUN, 2700000);
+                        sLog->outDebug(LOG_FILTER_TSCR, "Instance Stratholme: Baron run in progress.");
                         break;
+                    case FAIL:
+                        DoRemoveAurasDueToSpellOnPlayers(SPELL_BARON_ULTIMATUM);
+                        EncounterState[0] = data;
+                        break;
+                    case DONE:
+                        EncounterState[0] = data;
+                        if (Creature* ysidaTrigger = instance->GetCreature(ysidaTriggerGUID))
+                        {
+                            Position ysidaPos;
+                            ysidaTrigger->GetPosition(&ysidaPos);
+                            ysidaTrigger->SummonCreature(C_YSIDA, ysidaPos, TEMPSUMMON_TIMED_DESPAWN, 1800000);
+                        }
+                        events.CancelEvent(EVENT_BARON_RUN);
+                        break;
+                    }
+                    break;
                     case TYPE_BARONESS:
                         EncounterState[1] = data;
                         if (data == IN_PROGRESS)
+                        {
                             HandleGameObject(ziggurat1GUID, true);
-                        if (data == IN_PROGRESS)                    //change to DONE when crystals implemented
+                            //change to DONE when crystals implemented
                             StartSlaugtherSquare();
+                        }
                         break;
                     case TYPE_NERUB:
                         EncounterState[2] = data;
                         if (data == IN_PROGRESS)
+                        {
                             HandleGameObject(ziggurat2GUID, true);
-                        if (data == IN_PROGRESS)                    //change to DONE when crystals implemented
+                            //change to DONE when crystals implemented
                             StartSlaugtherSquare();
+                        }
                         break;
                     case TYPE_PALLID:
                         EncounterState[3] = data;
                         if (data == IN_PROGRESS)
+                        {
                             HandleGameObject(ziggurat3GUID, true);
-                        if (data == IN_PROGRESS)                    //change to DONE when crystals implemented
+                            //change to DONE when crystals implemented
                             StartSlaugtherSquare();
+                        }
                         break;
                     case TYPE_RAMSTEIN:
                         if (data == IN_PROGRESS)
