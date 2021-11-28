@@ -171,9 +171,6 @@ _hitMask(hitMask), _spell(spell), _damageInfo(damageInfo), _healInfo(healInfo)
 
 // we can disable this warning for this since it only
 // causes undefined behavior when passed to the base class constructor
-#ifdef _MSC_VER
-#pragma warning(disable:4355)
-#endif
 Unit::Unit(bool isWorldObject): WorldObject(isWorldObject)
     , m_movedPlayer(NULL)
     , m_lastSanctuaryTime(0)
@@ -197,9 +194,6 @@ Unit::Unit(bool isWorldObject): WorldObject(isWorldObject)
     , m_HostileRefManager(this)
     , _lastDamagedTime(0)
 {
-#ifdef _MSC_VER
-#pragma warning(default:4355)
-#endif
     m_objectType |= TYPEMASK_UNIT;
     m_objectTypeId = TYPEID_UNIT;
 
