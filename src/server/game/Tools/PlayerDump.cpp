@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef CROSS
 #include "gamePCH.h"
@@ -1152,7 +1163,7 @@ void PlayerDump::LoadColumnsName()
 
         if (g_DumpTables[l_I].type == DTT_ACC_SPELL)
         {
-            MySQLConnectionInfo l_Info = MySQLConnectionInfo(ConfigMgr::GetStringDefault("LoginDatabaseInfo", ""));
+            MySQLConnectionInfo l_Info = MySQLConnectionInfo(sConfigMgr->GetStringDefault("LoginDatabaseInfo", ""));
             std::string l_DatabaseName = l_Info.database;
 
             QueryResult l_TableInfoResult = LoginDatabase.PQuery("SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='%s' AND `TABLE_NAME`='%s'", l_DatabaseName.c_str(), l_TableName.c_str());
@@ -1169,7 +1180,7 @@ void PlayerDump::LoadColumnsName()
             continue;
         }
 
-        MySQLConnectionInfo l_Info = MySQLConnectionInfo(ConfigMgr::GetStringDefault("CharacterDatabaseInfo", ""));
+        MySQLConnectionInfo l_Info = MySQLConnectionInfo(sConfigMgr->GetStringDefault("CharacterDatabaseInfo", ""));
         std::string l_DatabaseName = l_Info.database;
 
         QueryResult l_TableInfoResult = CharacterDatabase.PQuery("SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='%s' AND `TABLE_NAME`='%s'", l_DatabaseName.c_str(), l_TableName.c_str());

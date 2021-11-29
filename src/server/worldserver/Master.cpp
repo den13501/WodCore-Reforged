@@ -430,17 +430,17 @@ int Master::Run()
 
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon)", GitRevision::GetFullVersion());
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "<Ctrl-C> to stop.\n");
-    
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "               _                      _____                      ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "     /\\       | |                    / ____|                    ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "    /  \\   ___| |__  _ __ __ _ _ __ | |     ___  _ __ ___       ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "   / /\\ \\ / __| '_ \\| '__/ _` | '_ \\| |    / _ \\| '__/ _ \\ ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "  / ____ \\\\__ | | | | | | (_| | | | | |___| (_) | | |  __/     ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, " /_/    \\_|___|_| |_|_|  \\__,_|_| |_|\\_____\\___/|_|  \\___|  ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, " MILLENIUM STUDIO SARL\n");
-
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "################################################### ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "#  _       ______  ____  __________  ____  ______ # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | |     / / __ \\/ __ \\/ ____/ __ \\/ __ \\/ ____/ # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | | /| / / / / / / / / /   / / / / /_/ / __/    # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | |/ |/ / /_/ / /_/ / /___/ /_/ / _, _/ /___    # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# |__/|__/\\____/_____/\\____/\\____/_/ |_/_____/    # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# Reforged                                        # ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, "################################################### ");
+    sLog->outInfo(LOG_FILTER_WORLDSERVER, " \n");
     /// worldserver PID file creation
-    std::string pidfile = ConfigMgr::GetStringDefault("PidFile", "");
+    std::string pidfile = sConfigMgr->GetStringDefault("PidFile", "");
     if (!pidfile.empty())
     {
         uint32 pid = CreatePIDFile(pidfile);
@@ -486,7 +486,7 @@ int Master::Run()
     ACE_Based::Thread* cliThread = NULL;
 
 #ifdef _WIN32
-    if (ConfigMgr::GetBoolDefault("Console.Enable", true) && (m_ServiceStatus == -1)/* need disable console in service mode*/)
+    if (sConfigMgr->GetBoolDefault("Console.Enable", true) && (m_ServiceStatus == -1)/* need disable console in service mode*/)
 #else
     if (ConfigMgr::GetBoolDefault("Console.Enable", true))
 #endif
@@ -507,7 +507,7 @@ int Master::Run()
     {
         HANDLE hProcess = GetCurrentProcess();
 
-        uint32 Aff = ConfigMgr::GetIntDefault("UseProcessors", 0);
+        uint32 Aff = sConfigMgr->GetIntDefault("UseProcessors", 0);
         if (Aff > 0)
         {
             ULONG_PTR appAff;
@@ -531,7 +531,7 @@ int Master::Run()
             }
         }
 
-        bool Prio = ConfigMgr::GetBoolDefault("ProcessPriority", false);
+        bool Prio = sConfigMgr->GetBoolDefault("ProcessPriority", false);
 
         //if (Prio && (m_ServiceStatus == -1)  /* need set to default process priority class in service mode*/)
         if (Prio)
@@ -546,17 +546,17 @@ int Master::Run()
     //Start soap serving thread
     ACE_Based::Thread* soap_thread = NULL;
 
-    if (ConfigMgr::GetBoolDefault("SOAP.Enabled", false))
+    if (sConfigMgr->GetBoolDefault("SOAP.Enabled", false))
     {
         TCSoapRunnable* runnable = new TCSoapRunnable();
-        runnable->setListenArguments(ConfigMgr::GetStringDefault("SOAP.IP", "127.0.0.1"), uint16(ConfigMgr::GetIntDefault("SOAP.Port", 7878)));
+        runnable->setListenArguments(sConfigMgr->GetStringDefault("SOAP.IP", "127.0.0.1"), uint16(sConfigMgr->GetIntDefault("SOAP.Port", 7878)));
         soap_thread = new ACE_Based::Thread(runnable, "SoapRunnable");
     }
 
     FreezeDetectorRunnable* fdr = nullptr;
 
     ///- Start up freeze catcher thread
-    if (uint32 freeze_delay = ConfigMgr::GetIntDefault("MaxCoreStuckTime", 0))
+    if (uint32 freeze_delay = sConfigMgr->GetIntDefault("MaxCoreStuckTime", 0))
     {
         fdr = new FreezeDetectorRunnable();
         fdr->SetDelayTime(freeze_delay * 1000);
@@ -567,7 +567,7 @@ int Master::Run()
 #ifndef CROSS
     ///- Launch the world listener socket
     uint16 wsport = uint16(sWorld->getIntConfig(CONFIG_PORT_WORLD));
-    std::string bind_ip = ConfigMgr::GetStringDefault("BindIP", "0.0.0.0");
+    std::string bind_ip = sConfigMgr->GetStringDefault("BindIP", "0.0.0.0");
 #else /* CROSS */
     uint16 wsport = ConfigMgr::GetIntDefault("InterRealmServer.Port", 12345);
 #endif /* CROSS */
@@ -690,14 +690,14 @@ bool Master::_StartDB()
     std::string dbstring;
     uint8 async_threads, synch_threads;
 
-    dbstring = ConfigMgr::GetStringDefault("WorldDatabaseInfo", "");
+    dbstring = sConfigMgr->GetStringDefault("WorldDatabaseInfo", "");
     if (dbstring.empty())
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "World database not specified in configuration file");
         return false;
     }
 
-    async_threads = uint8(ConfigMgr::GetIntDefault("WorldDatabase.WorkerThreads", 1));
+    async_threads = uint8(sConfigMgr->GetIntDefault("WorldDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "World database: invalid number of worker threads specified. "
@@ -705,7 +705,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = uint8(ConfigMgr::GetIntDefault("WorldDatabase.SynchThreads", 1));
+    synch_threads = uint8(sConfigMgr->GetIntDefault("WorldDatabase.SynchThreads", 1));
     ///- Initialize the world database
     if (!WorldDatabase.Open(dbstring, async_threads, synch_threads))
     {
@@ -717,14 +717,14 @@ bool Master::_StartDB()
     //////////////////////////////////////////////////////////////////////////
 
     ///- Get character database info from configuration file
-    dbstring = ConfigMgr::GetStringDefault("CharacterDatabaseInfo", "");
+    dbstring = sConfigMgr->GetStringDefault("CharacterDatabaseInfo", "");
     if (dbstring.empty())
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Character database not specified in configuration file");
         return false;
     }
 
-    async_threads = uint8(ConfigMgr::GetIntDefault("CharacterDatabase.WorkerThreads", 1));
+    async_threads = uint8(sConfigMgr->GetIntDefault("CharacterDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Character database: invalid number of worker threads specified. "
@@ -732,7 +732,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = uint8(ConfigMgr::GetIntDefault("CharacterDatabase.SynchThreads", 2));
+    synch_threads = uint8(sConfigMgr->GetIntDefault("CharacterDatabase.SynchThreads", 2));
 
     ///- Initialize the Character database
     if (!CharacterDatabase.Open(dbstring, async_threads, synch_threads))
@@ -745,14 +745,14 @@ bool Master::_StartDB()
     //////////////////////////////////////////////////////////////////////////
 
     ///- Get login database info from configuration file
-    dbstring = ConfigMgr::GetStringDefault("LoginDatabaseInfo", "");
+    dbstring = sConfigMgr->GetStringDefault("LoginDatabaseInfo", "");
     if (dbstring.empty())
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Login database not specified in configuration file");
         return false;
     }
 
-    async_threads = uint8(ConfigMgr::GetIntDefault("LoginDatabase.WorkerThreads", 1));
+    async_threads = uint8(sConfigMgr->GetIntDefault("LoginDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Login database: invalid number of worker threads specified. "
@@ -760,7 +760,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = uint8(ConfigMgr::GetIntDefault("LoginDatabase.SynchThreads", 1));
+    synch_threads = uint8(sConfigMgr->GetIntDefault("LoginDatabase.SynchThreads", 1));
     ///- Initialize the login database
     if (!LoginDatabase.Open(dbstring, async_threads, synch_threads))
     {
@@ -771,17 +771,17 @@ bool Master::_StartDB()
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
-    if (ConfigMgr::GetBoolDefault("MopTransfer.enable", false))
+    if (sConfigMgr->GetBoolDefault("MopTransfer.enable", false))
     {
         ///- Get MoP login database info from configuration file
-        dbstring = ConfigMgr::GetStringDefault("LoginMoPDatabaseInfo", "");
+        dbstring = sConfigMgr->GetStringDefault("LoginMoPDatabaseInfo", "");
         if (dbstring.empty())
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Login mop database not specified in configuration file");
             return false;
         }
 
-        async_threads = uint8(ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
+        async_threads = uint8(sConfigMgr->GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Login mop database: invalid number of worker threads specified. "
@@ -789,7 +789,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        async_threads = uint8(ConfigMgr::GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
+        async_threads = uint8(sConfigMgr->GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
         ///- Initialize the login database
         if (!LoginMopDatabase.Open(dbstring, async_threads, synch_threads))
         {
@@ -798,16 +798,16 @@ bool Master::_StartDB()
         }
     }
 
-    if (ConfigMgr::GetBoolDefault("WebDatabase.enable", false))
+    if (sConfigMgr->GetBoolDefault("WebDatabase.enable", false))
     {
-        dbstring = ConfigMgr::GetStringDefault("WebDatabaseInfo", "");
+        dbstring = sConfigMgr->GetStringDefault("WebDatabaseInfo", "");
         if (dbstring.empty())
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Web database not specified in configuration file");
             return false;
         }
 
-        async_threads = uint8(ConfigMgr::GetIntDefault("WebDatabaseInfo.WorkerThreads", 1));
+        async_threads = uint8(sConfigMgr->GetIntDefault("WebDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
             sLog->outError(LOG_FILTER_WORLDSERVER, "Web database: invalid number of worker threads specified. "
@@ -815,7 +815,7 @@ bool Master::_StartDB()
             return false;
         }
 
-        synch_threads = uint8(ConfigMgr::GetIntDefault("WebDatabaseInfo.SynchThreads", 1));
+        synch_threads = uint8(sConfigMgr->GetIntDefault("WebDatabaseInfo.SynchThreads", 1));
         ///- Initialize the login database
         if (!WebDatabase.Open(dbstring, async_threads, synch_threads))
         {
@@ -827,14 +827,14 @@ bool Master::_StartDB()
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
-    dbstring = ConfigMgr::GetStringDefault("HotfixDatabaseInfo", "");
+    dbstring = sConfigMgr->GetStringDefault("HotfixDatabaseInfo", "");
     if (dbstring.empty())
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Hotfix database not specified in configuration file");
         return false;
     }
 
-    async_threads = uint8(ConfigMgr::GetIntDefault("HotfixDatabase.WorkerThreads", 1));
+    async_threads = uint8(sConfigMgr->GetIntDefault("HotfixDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Hotfix database: invalid number of worker threads specified. "
@@ -842,7 +842,7 @@ bool Master::_StartDB()
         return false;
     }
 
-    synch_threads = uint8(ConfigMgr::GetIntDefault("HotfixDatabase.SynchThreads", 1));
+    synch_threads = uint8(sConfigMgr->GetIntDefault("HotfixDatabase.SynchThreads", 1));
 
     ///- Initialize the hotfix database
     if (!HotfixDatabase.Open(dbstring, async_threads, synch_threads))
@@ -855,7 +855,7 @@ bool Master::_StartDB()
     //////////////////////////////////////////////////////////////////////////
 
     /// Get the realm Id from the configuration file
-    g_RealmID = ConfigMgr::GetIntDefault("RealmID", 0);
+    g_RealmID = sConfigMgr->GetIntDefault("RealmID", 0);
     if (!g_RealmID)
     {
         sLog->outError(LOG_FILTER_WORLDSERVER, "Realm ID not defined in configuration file");

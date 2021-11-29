@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /** \file WorldSocketMgr.cpp
 *  \ingroup u2w
@@ -219,9 +230,9 @@ WorldSocketMgr::~WorldSocketMgr()
 int
 WorldSocketMgr::StartReactiveIO (ACE_UINT16 port, const char* address)
 {
-    m_UseNoDelay = ConfigMgr::GetBoolDefault ("Network.TcpNodelay", true);
+    m_UseNoDelay = sConfigMgr->GetBoolDefault ("Network.TcpNodelay", true);
 
-    int num_threads = ConfigMgr::GetIntDefault ("Network.Threads", 1);
+    int num_threads = sConfigMgr->GetIntDefault ("Network.Threads", 1);
 
     if (num_threads <= 0)
     {
@@ -236,9 +247,9 @@ WorldSocketMgr::StartReactiveIO (ACE_UINT16 port, const char* address)
     sLog->outDebug(LOG_FILTER_GENERAL, "Max allowed socket connections %d", ACE::max_handles());
 
     // -1 means use default
-    m_SockOutKBuff = ConfigMgr::GetIntDefault ("Network.OutKBuff", -1);
+    m_SockOutKBuff = sConfigMgr->GetIntDefault ("Network.OutKBuff", -1);
 
-    m_SockOutUBuff = ConfigMgr::GetIntDefault ("Network.OutUBuff", 65536);
+    m_SockOutUBuff = sConfigMgr->GetIntDefault ("Network.OutUBuff", 65536);
 
     if (m_SockOutUBuff <= 0)
     {
