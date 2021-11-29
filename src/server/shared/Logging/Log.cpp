@@ -35,7 +35,6 @@ Log::Log() : worker(NULL)
     memset(m_LogLevelTypeByFilterCache, LOG_LEVEL_DISABLED, MAX_LOG_FILTER);
     memset(m_LogTypePresentCache, 0, MAX_LOG_FILTER);
 
-    SetRealmID(0);
     m_logsTimestamp = "_" + GetTimestampStr();
     LoadFromConfig();
 
@@ -154,7 +153,7 @@ void Log::CreateAppenderFromConfig(const char* name)
         case APPENDER_DB:
         {
             uint8 id = NextAppenderId();
-            appenders[id] = new AppenderDB(id, name, level, realm);
+            appenders[id] = new AppenderDB(id, name, level);
             break;
         }
         default:
@@ -276,13 +275,6 @@ void Log::ReadLoggersFromConfig()
         loggers[0].Create("root", LOG_FILTER_GENERAL, LOG_LEVEL_DISABLED);
 }
 
-void Log::EnableDBAppenders()
-{
-    for (AppenderMap::iterator it = appenders.begin(); it != appenders.end(); ++it)
-        if (it->second && it->second->getType() == APPENDER_DB)
-            ((AppenderDB *)it->second)->setEnable(true);
-}
-
 void Log::vlog(LogFilterType filter, LogLevel level, char const* str, va_list argptr)
 {
     char text[MAX_QUERY_LEN];
@@ -375,9 +367,11 @@ void Log::outCommand(uint32 gm_account_id  , std::string gm_account_name,
     GmLogQueue.add(new_command);
 }
 
-void Log::SetRealmID(uint32 id)
+void Log::SetRealmId(uint32 id)
 {
-    realm = id;
+    for (AppenderMap::iterator it = appenders.begin(); it != appenders.end(); ++it)
+        if (it->second && it->second->getType() == APPENDER_DB)
+            ((AppenderDB*)it->second)->setRealmId(id);
 }
 
 void Log::Close()

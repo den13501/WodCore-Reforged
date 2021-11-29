@@ -2339,7 +2339,9 @@ void World::SetInitialWorldSettings()
         m_LastAccountLogId = l_Result->Fetch()[0].GetUInt64();
 
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "World initialized in %u minutes %u seconds", (startupDuration / 60000), ((startupDuration % 60000) / 1000));
-    sLog->EnableDBAppenders();
+
+    if (uint32 realmId = sConfigMgr->GetIntDefault("RealmID", 0)) // 0 reserved for auth
+        sLog->SetRealmId(realmId);
 
     sWildBattlePetMgr->PopulateAll();
 }
@@ -4379,7 +4381,6 @@ void World::_updateTransfers()
         {
             PreparedStatement* l_Stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_TRANSFERS_DUMP);
             l_Stmt->setUInt32(0, sLog->GetRealmID());
-
             m_transfersDumpCallbacks = LoginDatabase.AsyncQuery(l_Stmt);
         }
 

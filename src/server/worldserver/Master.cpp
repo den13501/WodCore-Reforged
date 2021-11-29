@@ -863,8 +863,6 @@ bool Master::_StartDB()
     }
     sLog->outInfo(LOG_FILTER_WORLDSERVER, "Realm running as realm ID %d", g_RealmID);
 
-    sLog->SetRealmID(g_RealmID);
-
     /// Clean the database before starting
     ClearOnlineAccounts();
 

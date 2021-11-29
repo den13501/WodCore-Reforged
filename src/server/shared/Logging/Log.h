@@ -151,11 +151,10 @@ class Log
                        const char * str);
         void outAshran(const char* str, ...);
         
-        void EnableDBAppenders();
         static std::string GetTimestampStr();
         
-        void SetRealmID(uint32 id);
-        uint32 GetRealmID() const { return realm; }
+        void SetRealmId(uint32 id);
+        uint32 GetRealmID() const { return 1; } //hackfix set realm as ID 1, need more work on howto identifi player's realm id
 
     private:
         void vlog(LogFilterType f, LogLevel level, char const* str, va_list argptr);
@@ -177,7 +176,6 @@ class Log
         std::string m_logsDir;
         std::string m_logsTimestamp;
 
-        uint32 realm;
         LogWorker* worker;
 
         FILE* ashranLog;
