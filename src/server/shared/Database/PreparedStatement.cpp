@@ -94,7 +94,7 @@ void PreparedStatement::BindParameters()
     }
     #ifdef _DEBUG
     if (i < m_stmt->m_paramCount)
-        sLog->outWarn(LOG_FILTER_SQL, "[WARNING]: BindParameters() for statement %u did not bind all allocated parameters", m_index);
+        TC_LOG_WARN(LOG_FILTER_SQL, "[WARNING]: BindParameters() for statement %u did not bind all allocated parameters", m_index);
     #endif
 }
 
@@ -302,13 +302,13 @@ bool MySQLPreparedStatement::CheckValidIndex(uint8 index)
 {
     if (index >= m_paramCount)
     {
-        sLog->outError(LogFilterType::LOG_FILTER_SQL, "Invalid index %u for prepared statement %u", index, m_stmt->m_index);
+        TC_LOG_ERROR(LogFilterType::LOG_FILTER_SQL, "Invalid index %u for prepared statement %u", index, m_stmt->m_index);
         ASSERT(false);
     }
 
     if (m_paramsSet[index])
     {
-        sLog->outWarn(LOG_FILTER_SQL, "[WARNING] Prepared Statement (id: %u) trying to bind value on already bound index (%u).", m_stmt->m_index, index);
+        TC_LOG_WARN(LOG_FILTER_SQL, "[WARNING] Prepared Statement (id: %u) trying to bind value on already bound index (%u).", m_stmt->m_index, index);
         ASSERT(false);
     }
     return true;

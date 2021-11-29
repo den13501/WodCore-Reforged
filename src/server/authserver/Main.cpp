@@ -71,7 +71,7 @@ public:
 /// Print out the usage string for this program on the console.
 void usage(const char *prog)
 {
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "Usage: \n %s [<options>]\n"
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Usage: \n %s [<options>]\n"
         "    -c config_file           use config_file as configuration file\n\r",
         prog);
 }
@@ -146,11 +146,11 @@ extern int main(int argc, char **argv)
         return 1;
     }
 
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "%s (authserver)", GitRevision::GetFullVersion());
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "<Ctrl-C> to stop.\n");
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "Using configuration file %s.", cfg_file);
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "%s (authserver)", GitRevision::GetFullVersion());
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "<Ctrl-C> to stop.\n");
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Using configuration file %s.", cfg_file);
 
-    sLog->outWarn(LOG_FILTER_AUTHSERVER, "%s (Library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
+    TC_LOG_WARN(LOG_FILTER_AUTHSERVER, "%s (Library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
 
 #if defined (ACE_HAS_EVENT_POLL) || defined (ACE_HAS_DEV_POLL)
     ACE_Reactor::instance(new ACE_Reactor(new ACE_Dev_Poll_Reactor(ACE::max_handles(), 1), 1), true);
@@ -158,7 +158,7 @@ extern int main(int argc, char **argv)
     ACE_Reactor::instance(new ACE_Reactor(new ACE_TP_Reactor(), true), true);
 #endif
 
-    sLog->outDebug(LOG_FILTER_AUTHSERVER, "Max allowed open files is %d", ACE::max_handles());
+    TC_LOG_DEBUG(LOG_FILTER_AUTHSERVER, "Max allowed open files is %d", ACE::max_handles());
 
     // authserver PID file creation
     std::string pidfile = sConfigMgr->GetStringDefault("PidFile", "");
@@ -167,10 +167,10 @@ extern int main(int argc, char **argv)
         uint32 pid = CreatePIDFile(pidfile);
         if (!pid)
         {
-            sLog->outError(LOG_FILTER_AUTHSERVER, "Cannot create PID file %s.\n", pidfile.c_str());
+            TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Cannot create PID file %s.\n", pidfile.c_str());
             return 1;
         }
-        sLog->outInfo(LOG_FILTER_AUTHSERVER, "Daemon PID: %u\n", pid);
+        TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Daemon PID: %u\n", pid);
     }
 
     // Initialize the database connection
@@ -185,7 +185,7 @@ extern int main(int argc, char **argv)
     sRealmList->Initialize(sConfigMgr->GetIntDefault("RealmsStateUpdateDelay", 20));
     if (sRealmList->size() == 0)
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "No valid realms specified.");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "No valid realms specified.");
         return 1;
     }
 
@@ -195,7 +195,7 @@ extern int main(int argc, char **argv)
     int32 rmport = sConfigMgr->GetIntDefault("RealmServerPort", 3724);
     if (rmport < 0 || rmport > 0xFFFF)
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Specified port out of allowed range (1-65535)");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Specified port out of allowed range (1-65535)");
         return 1;
     }
 
@@ -205,12 +205,12 @@ extern int main(int argc, char **argv)
 
     if (acceptor.open(bind_addr, ACE_Reactor::instance(), ACE_NONBLOCK) == -1)
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Auth server can not bind to %s:%d", bind_ip.c_str(), rmport);
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Auth server can not bind to %s:%d", bind_ip.c_str(), rmport);
         return 1;
     }
 
     ///- Initializing the Reporter.
-    //sLog->outInfo(LOG_FILTER_WORLDSERVER, "REPORTER: Creating instance.");
+    //TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "REPORTER: Creating instance.");
     //sReporter->SetAddresses({ ConfigMgr::GetStringDefault("ReporterAddress", "localhost:3000") });
 
     // Initialise the signal handlers
@@ -237,11 +237,11 @@ extern int main(int argc, char **argv)
                 ULONG_PTR curAff = Aff & appAff;            // remove non accessible processors
 
                 if (!curAff)
-                    sLog->outError(LOG_FILTER_AUTHSERVER, "Processors marked in UseProcessors bitmask (hex) %x not accessible for authserver. Accessible processors bitmask (hex): %x", Aff, appAff);
+                    TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Processors marked in UseProcessors bitmask (hex) %x not accessible for authserver. Accessible processors bitmask (hex): %x", Aff, appAff);
                 else if (SetProcessAffinityMask(hProcess, curAff))
-                    sLog->outInfo(LOG_FILTER_AUTHSERVER, "Using processors (bitmask, hex): %x", curAff);
+                    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Using processors (bitmask, hex): %x", curAff);
                 else
-                    sLog->outError(LOG_FILTER_AUTHSERVER, "Can't set used processors (hex): %x", curAff);
+                    TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Can't set used processors (hex): %x", curAff);
             }
 
         }
@@ -251,9 +251,9 @@ extern int main(int argc, char **argv)
         if (Prio)
         {
             if (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS))
-                sLog->outInfo(LOG_FILTER_AUTHSERVER, "The auth server process priority class has been set to HIGH");
+                TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "The auth server process priority class has been set to HIGH");
             else
-                sLog->outError(LOG_FILTER_AUTHSERVER, "Can't set auth server process priority class.");
+                TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Can't set auth server process priority class.");
 
         }
     }
@@ -275,7 +275,7 @@ extern int main(int argc, char **argv)
         if ((++loopCounter) == numLoops)
         {
             loopCounter = 0;
-            sLog->outInfo(LOG_FILTER_AUTHSERVER, "Ping MySQL to keep connection alive");
+            TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Ping MySQL to keep connection alive");
             LoginDatabase.KeepAlive();
         }
     }
@@ -283,7 +283,7 @@ extern int main(int argc, char **argv)
     // Close the Database Pool and library
     StopDB();
 
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "Halting process...");
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Halting process...");
     return 0;
 }
 
@@ -295,32 +295,32 @@ bool StartDB()
     std::string dbstring = sConfigMgr->GetStringDefault("LoginDatabaseInfo", "");
     if (dbstring.empty())
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Database not specified");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Database not specified");
         return false;
     }
 
     int32 worker_threads = sConfigMgr->GetIntDefault("LoginDatabase.WorkerThreads", 1);
     if (worker_threads < 1 || worker_threads > 32)
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Improper value specified for LoginDatabase.WorkerThreads, defaulting to 1.");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Improper value specified for LoginDatabase.WorkerThreads, defaulting to 1.");
         worker_threads = 1;
     }
 
     int32 synch_threads = sConfigMgr->GetIntDefault("LoginDatabase.SynchThreads", 1);
     if (synch_threads < 1 || synch_threads > 32)
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Improper value specified for LoginDatabase.SynchThreads, defaulting to 1.");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Improper value specified for LoginDatabase.SynchThreads, defaulting to 1.");
         synch_threads = 1;
     }
 
     // NOTE: While authserver is singlethreaded you should keep synch_threads == 1. Increasing it is just silly since only 1 will be used ever.
     if (!LoginDatabase.Open(dbstring.c_str(), uint8(worker_threads), uint8(synch_threads)))
     {
-        sLog->outError(LOG_FILTER_AUTHSERVER, "Cannot connect to database");
+        TC_LOG_ERROR(LOG_FILTER_AUTHSERVER, "Cannot connect to database");
         return false;
     }
 
-    sLog->outInfo(LOG_FILTER_AUTHSERVER, "Started auth database connection pool.");
+    TC_LOG_INFO(LOG_FILTER_AUTHSERVER, "Started auth database connection pool.");
     sLog->SetRealmId(0); // Enables DB appenders when realm is set.
     return true;
 }

@@ -115,7 +115,7 @@ public:
         if (!m_Delaytime)
             return;
 
-        sLog->outInfo(LOG_FILTER_WORLDSERVER, "Starting up anti-freeze thread (%u seconds max stuck time)...", m_Delaytime/1000);
+        TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Starting up anti-freeze thread (%u seconds max stuck time)...", m_Delaytime/1000);
 
         m_loops = 0;
         w_loops = 0;
@@ -137,7 +137,7 @@ public:
             // possible freeze
             else if (getMSTimeDiff(w_lastchange, curtime) > m_Delaytime)
             {
-                sLog->outError(LOG_FILTER_WORLDSERVER, "World Thread hangs, kicking out server!");
+                TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "World Thread hangs, kicking out server!");
                 assert(false);
                 abort();
             }
@@ -152,13 +152,13 @@ public:
 
             if ((time(nullptr) - l_WorldStopTime) > 60)
             {
-                sLog->outError(LOG_FILTER_WORLDSERVER, "Freeze on shutdown, kill the server!");
+                TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Freeze on shutdown, kill the server!");
                 assert(false);
                 abort();
             }
         }
 
-        sLog->outInfo(LOG_FILTER_WORLDSERVER, "Anti-freeze thread exiting without problems.");
+        TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Anti-freeze thread exiting without problems.");
     }
 };
 
@@ -428,17 +428,17 @@ int Master::Run()
     BigNumber seed1;
     seed1.SetRand(16 * 8);
 
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon)", GitRevision::GetFullVersion());
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "<Ctrl-C> to stop.\n");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "################################################### ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "#  _       ______  ____  __________  ____  ______ # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | |     / / __ \\/ __ \\/ ____/ __ \\/ __ \\/ ____/ # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | | /| / / / / / / / / /   / / / / /_/ / __/    # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# | |/ |/ / /_/ / /_/ / /___/ /_/ / _, _/ /___    # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# |__/|__/\\____/_____/\\____/\\____/_/ |_/_____/    # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "# Reforged                                        # ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "################################################### ");
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, " \n");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon)", GitRevision::GetFullVersion());
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "<Ctrl-C> to stop.\n");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "################################################### ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "#  _       ______  ____  __________  ____  ______ # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "# | |     / / __ \\/ __ \\/ ____/ __ \\/ __ \\/ ____/ # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "# | | /| / / / / / / / / /   / / / / /_/ / __/    # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "# | |/ |/ / /_/ / /_/ / /___/ /_/ / _, _/ /___    # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "# |__/|__/\\____/_____/\\____/\\____/_/ |_/_____/    # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "# Reforged                                        # ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "################################################### ");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, " \n");
     /// worldserver PID file creation
     std::string pidfile = sConfigMgr->GetStringDefault("PidFile", "");
     if (!pidfile.empty())
@@ -446,11 +446,11 @@ int Master::Run()
         uint32 pid = CreatePIDFile(pidfile);
         if (!pid)
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot create PID file %s.\n", pidfile.c_str());
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot create PID file %s.\n", pidfile.c_str());
             return 1;
         }
 
-        sLog->outInfo(LOG_FILTER_WORLDSERVER, "Daemon PID: %u\n", pid);
+        TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Daemon PID: %u\n", pid);
     }
 
     ///- Start the databases
@@ -519,14 +519,14 @@ int Master::Run()
 
                 if (!curAff)
                 {
-                    sLog->outError(LOG_FILTER_WORLDSERVER, "Processors marked in UseProcessors bitmask (hex) %x are not accessible for the worldserver. Accessible processors bitmask (hex): %x", Aff, appAff);
+                    TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Processors marked in UseProcessors bitmask (hex) %x are not accessible for the worldserver. Accessible processors bitmask (hex): %x", Aff, appAff);
                 }
                 else
                 {
                     if (SetProcessAffinityMask(hProcess, curAff))
-                        sLog->outInfo(LOG_FILTER_WORLDSERVER, "Using processors (bitmask, hex): %x", curAff);
+                        TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Using processors (bitmask, hex): %x", curAff);
                     else
-                        sLog->outError(LOG_FILTER_WORLDSERVER, "Can't set used processors (hex): %x", curAff);
+                        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Can't set used processors (hex): %x", curAff);
                 }
             }
         }
@@ -537,9 +537,9 @@ int Master::Run()
         if (Prio)
         {
             if (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS))
-                sLog->outInfo(LOG_FILTER_WORLDSERVER, "worldserver process priority class set to HIGH");
+                TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "worldserver process priority class set to HIGH");
             else
-                sLog->outError(LOG_FILTER_WORLDSERVER, "Can't set worldserver process priority class.");
+                TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Can't set worldserver process priority class.");
         }
     }
     #endif
@@ -579,9 +579,9 @@ int Master::Run()
 #endif /* CROSS */
     {
 #ifndef CROSS
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Failed to start network");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Failed to start network");
 #else /* CROSS */
-        sLog->outError(LOG_FILTER_INTERREALM, "Failed to start network");
+        TC_LOG_ERROR(LOG_FILTER_INTERREALM, "Failed to start network");
 #endif /* CROSS */
         World::StopNow(ERROR_EXIT_CODE);
         // go down and shutdown the server
@@ -597,7 +597,7 @@ int Master::Run()
     sWorld->SetInterRealmSession(irt);
 #endif /* not CROSS */
 
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon) ready...", GitRevision::GetFullVersion());
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon) ready...", GitRevision::GetFullVersion());
 
     // when the main thread closes the singletons get unloaded
     // since worldrunnable uses them, it will crash if unloaded after master
@@ -619,7 +619,7 @@ int Master::Run()
 
     _StopDB();
 
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Halting process...");
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Halting process...");
 
     if (cliThread)
     {
@@ -693,14 +693,14 @@ bool Master::_StartDB()
     dbstring = sConfigMgr->GetStringDefault("WorldDatabaseInfo", "");
     if (dbstring.empty())
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "World database not specified in configuration file");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "World database not specified in configuration file");
         return false;
     }
 
     async_threads = uint8(sConfigMgr->GetIntDefault("WorldDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "World database: invalid number of worker threads specified. "
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "World database: invalid number of worker threads specified. "
             "Please pick a value between 1 and 32.");
         return false;
     }
@@ -709,7 +709,7 @@ bool Master::_StartDB()
     ///- Initialize the world database
     if (!WorldDatabase.Open(dbstring, async_threads, synch_threads))
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to world database %s", dbstring.c_str());
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to world database %s", dbstring.c_str());
         return false;
     }
 
@@ -720,14 +720,14 @@ bool Master::_StartDB()
     dbstring = sConfigMgr->GetStringDefault("CharacterDatabaseInfo", "");
     if (dbstring.empty())
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Character database not specified in configuration file");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Character database not specified in configuration file");
         return false;
     }
 
     async_threads = uint8(sConfigMgr->GetIntDefault("CharacterDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Character database: invalid number of worker threads specified. "
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Character database: invalid number of worker threads specified. "
             "Please pick a value between 1 and 32.");
         return false;
     }
@@ -737,7 +737,7 @@ bool Master::_StartDB()
     ///- Initialize the Character database
     if (!CharacterDatabase.Open(dbstring, async_threads, synch_threads))
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to Character database %s", dbstring.c_str());
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to Character database %s", dbstring.c_str());
         return false;
     }
 
@@ -748,14 +748,14 @@ bool Master::_StartDB()
     dbstring = sConfigMgr->GetStringDefault("LoginDatabaseInfo", "");
     if (dbstring.empty())
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Login database not specified in configuration file");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Login database not specified in configuration file");
         return false;
     }
 
     async_threads = uint8(sConfigMgr->GetIntDefault("LoginDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Login database: invalid number of worker threads specified. "
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Login database: invalid number of worker threads specified. "
             "Please pick a value between 1 and 32.");
         return false;
     }
@@ -764,7 +764,7 @@ bool Master::_StartDB()
     ///- Initialize the login database
     if (!LoginDatabase.Open(dbstring, async_threads, synch_threads))
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to login database %s", dbstring.c_str());
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to login database %s", dbstring.c_str());
         return false;
     }
 
@@ -777,14 +777,14 @@ bool Master::_StartDB()
         dbstring = sConfigMgr->GetStringDefault("LoginMoPDatabaseInfo", "");
         if (dbstring.empty())
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Login mop database not specified in configuration file");
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Login mop database not specified in configuration file");
             return false;
         }
 
         async_threads = uint8(sConfigMgr->GetIntDefault("LoginMoPDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Login mop database: invalid number of worker threads specified. "
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Login mop database: invalid number of worker threads specified. "
                 "Please pick a value between 1 and 32.");
             return false;
         }
@@ -793,7 +793,7 @@ bool Master::_StartDB()
         ///- Initialize the login database
         if (!LoginMopDatabase.Open(dbstring, async_threads, synch_threads))
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to login mop database %s", dbstring.c_str());
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to login mop database %s", dbstring.c_str());
             return false;
         }
     }
@@ -803,14 +803,14 @@ bool Master::_StartDB()
         dbstring = sConfigMgr->GetStringDefault("WebDatabaseInfo", "");
         if (dbstring.empty())
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Web database not specified in configuration file");
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Web database not specified in configuration file");
             return false;
         }
 
         async_threads = uint8(sConfigMgr->GetIntDefault("WebDatabaseInfo.WorkerThreads", 1));
         if (async_threads < 1 || async_threads > 32)
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Web database: invalid number of worker threads specified. "
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Web database: invalid number of worker threads specified. "
                 "Please pick a value between 1 and 32.");
             return false;
         }
@@ -819,7 +819,7 @@ bool Master::_StartDB()
         ///- Initialize the login database
         if (!WebDatabase.Open(dbstring, async_threads, synch_threads))
         {
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to web database %s", dbstring.c_str());
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to web database %s", dbstring.c_str());
             return false;
         }
     }
@@ -830,14 +830,14 @@ bool Master::_StartDB()
     dbstring = sConfigMgr->GetStringDefault("HotfixDatabaseInfo", "");
     if (dbstring.empty())
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Hotfix database not specified in configuration file");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Hotfix database not specified in configuration file");
         return false;
     }
 
     async_threads = uint8(sConfigMgr->GetIntDefault("HotfixDatabase.WorkerThreads", 1));
     if (async_threads < 1 || async_threads > 32)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Hotfix database: invalid number of worker threads specified. "
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Hotfix database: invalid number of worker threads specified. "
                        "Please pick a value between 1 and 32.");
         return false;
     }
@@ -847,7 +847,7 @@ bool Master::_StartDB()
     ///- Initialize the hotfix database
     if (!HotfixDatabase.Open(dbstring, async_threads, synch_threads))
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Cannot connect to Hotfix database %s", dbstring.c_str());
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Cannot connect to Hotfix database %s", dbstring.c_str());
         return false;
     }
 
@@ -858,10 +858,10 @@ bool Master::_StartDB()
     g_RealmID = sConfigMgr->GetIntDefault("RealmID", 0);
     if (!g_RealmID)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "Realm ID not defined in configuration file");
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Realm ID not defined in configuration file");
         return false;
     }
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Realm running as realm ID %d", g_RealmID);
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Realm running as realm ID %d", g_RealmID);
 
     /// Clean the database before starting
     ClearOnlineAccounts();
@@ -871,7 +871,7 @@ bool Master::_StartDB()
 
     sWorld->LoadDBVersion();
 
-    sLog->outInfo(LOG_FILTER_WORLDSERVER, "Using World DB: %s", sWorld->GetDBVersion());
+    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Using World DB: %s", sWorld->GetDBVersion());
     return true;
 }
 
@@ -915,10 +915,10 @@ void Master::ExecutePendingRequests()
             l_Content[l_Size] = 0;
 
             CharacterDatabase.DirectExecute(l_Content.data());
-            sLog->outInfo(LOG_FILTER_WORLDSERVER, PENDING_SQL_FILENAME " has been executed with success"); ///< Because if the above failed, the core would crash
+            TC_LOG_INFO(LOG_FILTER_WORLDSERVER, PENDING_SQL_FILENAME " has been executed with success"); ///< Because if the above failed, the core would crash
         }
         else
-            sLog->outInfo(LOG_FILTER_WORLDSERVER, PENDING_SQL_FILENAME " is empty, ignoring.");
+            TC_LOG_INFO(LOG_FILTER_WORLDSERVER, PENDING_SQL_FILENAME " is empty, ignoring.");
 
         fclose(l_PendingRequestsFile);
 
@@ -927,5 +927,5 @@ void Master::ExecutePendingRequests()
             fclose(l_PendingRequestsFile);
     }
     else
-        sLog->outInfo(LOG_FILTER_WORLDSERVER, "Unable to open " PENDING_SQL_FILENAME ", ignoring.");
+        TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Unable to open " PENDING_SQL_FILENAME ", ignoring.");
 }

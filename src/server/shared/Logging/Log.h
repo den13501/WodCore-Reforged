@@ -16,7 +16,7 @@
 * You should have received a copy of the GNU General Public License along
 * with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS 1
 #ifndef TRINITYCORE_LOG_H
 #define TRINITYCORE_LOG_H
 
@@ -26,6 +26,10 @@
 #include "LogWorker.h"
 #include "Logger.h"
 #include "LogOperation.h"
+#include "Dynamic/UnorderedMap.h"
+
+#include <string>
+#include <ace/Singleton.h>
 
 #include <cstdarg>
 #include <cstdio>
@@ -34,7 +38,7 @@ class Log
 {
     friend class ACE_Singleton<Log, ACE_Thread_Mutex>;
 
-    typedef std::map<uint8, Logger> LoggerMap;
+    typedef UNORDERED_MAP<uint8, Logger> LoggerMap;
 
     private:
         Log();
@@ -43,7 +47,7 @@ class Log
     public:
         void LoadFromConfig();
         void Close();
-        inline bool ShouldLog(LogFilterType type, LogLevel level);
+        bool ShouldLog(LogFilterType type, LogLevel level) const;
         bool SetLogLevel(std::string const& name, char const* level, bool isLogger = true);
 
         inline void outTrace(LogFilterType f, char const* str, ...) ATTR_PRINTF(3, 4)
@@ -154,7 +158,7 @@ class Log
         static std::string GetTimestampStr();
         
         void SetRealmId(uint32 id);
-        uint32 GetRealmID() const { return 1; } //hackfix set realm as ID 1, need more work on howto identifi player's realm id
+        uint32 GetRealmID() const { return 1; } //hackfix, set realm as ID 1, need more work on howto identifi player's realm id
 
     private:
         void vlog(LogFilterType f, LogLevel level, char const* str, va_list argptr);
@@ -189,8 +193,59 @@ class Log
         uint8 m_LogTypePresentCache[MAX_LOG_FILTER];
 };
 
+inline bool Log::ShouldLog(LogFilterType type, LogLevel level) const
+{
+    LoggerMap::const_iterator it = loggers.find(uint8(type));
+    if (it != loggers.end())
+    {
+        LogLevel logLevel = it->second.getLogLevel();
+        return logLevel != LOG_LEVEL_DISABLED && logLevel <= level;
+    }
+
+    if (type != LOG_FILTER_GENERAL)
+        return ShouldLog(LOG_FILTER_GENERAL, level);
+    else
+        return false;
+}
+
 #define sLog ACE_Singleton<Log, ACE_Thread_Mutex>::instance()
 
+#if COMPILER != COMPILER_MICROSOFT
+#define TC_LOG_MESSAGE_BODY(level__, call__, filterType__, ...)     \
+        do {                                                        \
+            if (sLog->ShouldLog(filterType__, level__))             \
+                sLog->call__(filterType__, __VA_ARGS__);            \
+        } while (0)
+#else
+#define TC_LOG_MESSAGE_BODY(level__, call__, filterType__, ...)     \
+        __pragma(warning(push))                                     \
+        __pragma(warning(disable:4127))                             \
+        do {                                                        \
+            if (sLog->ShouldLog(filterType__, level__))             \
+                sLog->call__(filterType__, __VA_ARGS__);            \
+        } while (0)                                                 \
+        __pragma(warning(pop))
+#endif
+
+#define TC_LOG_TRACE(filterType__, ...) \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_TRACE, outTrace, filterType__, __VA_ARGS__)
+
+#define TC_LOG_DEBUG(filterType__, ...) \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_DEBUG, outDebug, filterType__, __VA_ARGS__)
+
+#define TC_LOG_INFO(filterType__, ...)  \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_INFO, outInfo, filterType__, __VA_ARGS__)
+
+#define TC_LOG_WARN(filterType__, ...)  \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_WARN, outWarn, filterType__, __VA_ARGS__)
+
+#define TC_LOG_ERROR(filterType__, ...) \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_ERROR, outError, filterType__, __VA_ARGS__)
+
+#define TC_LOG_FATAL(filterType__, ...) \
+    TC_LOG_MESSAGE_BODY(LOG_LEVEL_FATAL, outFatal, filterType__, __VA_ARGS__)
+
+/*
 // Returns default logger if the requested logger is not found
 inline Logger* Log::GetLoggerByType(LogFilterType filter)
 {
@@ -214,5 +269,6 @@ inline bool Log::ShouldLog(LogFilterType type, LogLevel level)
 
     return false;
 }
+*/
 
 #endif

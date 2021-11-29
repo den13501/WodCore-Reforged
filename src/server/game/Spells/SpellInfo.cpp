@@ -1814,7 +1814,7 @@ SpellCastResult SpellInfo::CheckShapeshift(uint32 p_Shapeshift) const
         shapeInfo = sSpellShapeshiftFormStore.LookupEntry(p_Shapeshift);
         if (!shapeInfo)
         {
-            sLog->outError(LOG_FILTER_SPELLS_AURAS, "GetErrorAtShapeshiftedCast: unknown shapeshift %u", p_Shapeshift);
+            TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "GetErrorAtShapeshiftedCast: unknown shapeshift %u", p_Shapeshift);
             return SPELL_CAST_OK;
         }
         actAsShifted = !(shapeInfo->m_Flags & 1);            // shapeshift acts as normal form for spells
@@ -2956,7 +2956,7 @@ void SpellInfo::CalcPowerCost(Unit const* caster, SpellSchoolMask schoolMask, in
                     break;
                 case POWER_RUNES:
                 case POWER_RUNIC_POWER:
-                    sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "CalculateManaCost: Not implemented yet!");
+                    TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "CalculateManaCost: Not implemented yet!");
                     break;
                 default:
                     sLog->outAshran("SpellInfo::CalcPowerCost: Unknown power type [%u] with spell [%u]", PowerType, Id);
@@ -2982,7 +2982,7 @@ void SpellInfo::CalcPowerCost(Unit const* caster, SpellSchoolMask schoolMask, in
                     break;
                 case POWER_RUNES:
                 case POWER_RUNIC_POWER:
-                    sLog->outDebug(LOG_FILTER_SPELLS_AURAS, "CalculateManaCost: Not implemented yet!");
+                    TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "CalculateManaCost: Not implemented yet!");
                     break;
                 default:
                     sLog->outAshran("SpellInfo::CalcPowerCost: Unknown power type [%u] with spell [%u]", PowerType, Id);

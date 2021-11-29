@@ -67,6 +67,13 @@ std::string GetConfigStringDefault(std::string base, const char* name, const cha
     return sConfigMgr->GetStringDefault(base.c_str(), value);
 }
 
+// Returns default logger if the requested logger is not found
+Logger* Log::GetLoggerByType(LogFilterType filterType)
+{
+    LoggerMap::iterator it = loggers.find(static_cast<uint8>(filterType));
+    return it == loggers.end() ? &loggers[0] : &it->second;
+}
+
 Appender* Log::GetAppenderByName(std::string const& name)
 {
     AppenderMap::iterator it = appenders.begin();

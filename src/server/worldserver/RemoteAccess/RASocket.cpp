@@ -46,18 +46,18 @@ int RASocket::open(void *)
 
     if (peer().get_remote_addr(remote_addr) == -1)
     {
-        sLog->outError(LOG_FILTER_WORLDSERVER, "RASocket::open: peer().get_remote_addr error is %s", ACE_OS::strerror(errno));
+        TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "RASocket::open: peer().get_remote_addr error is %s", ACE_OS::strerror(errno));
         return -1;
     }
 
-    sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Incoming connection from %s", remote_addr.get_host_addr());
+    TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Incoming connection from %s", remote_addr.get_host_addr());
 
     return activate();
 }
 
 int RASocket::handle_close(ACE_HANDLE, ACE_Reactor_Mask)
 {
-    sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Closing connection");
+    TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Closing connection");
     peer().close_reader();
     wait();
     destroy();
@@ -123,7 +123,7 @@ int RASocket::recv_line(std::string& out_line)
 
     if (recv_line(message_block) == -1)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Recv error %s", ACE_OS::strerror(errno));
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Recv error %s", ACE_OS::strerror(errno));
         return -1;
     }
 
@@ -137,7 +137,7 @@ int RASocket::process_command(const std::string& command)
     if (command.length() == 0)
         return 0;
 
-    sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Got command: %s", command.c_str());
+    TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Got command: %s", command.c_str());
 
     // handle quit, exit and logout commands to terminate connection
     if (command == "quit" || command == "exit" || command == "logout") {
@@ -187,7 +187,7 @@ int RASocket::check_access_level(const std::string& user)
 
     if (!result)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "User %s does not exist in database", user.c_str());
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "User %s does not exist in database", user.c_str());
         return -1;
     }
 
@@ -195,12 +195,12 @@ int RASocket::check_access_level(const std::string& user)
 
     if (fields[1].GetUInt8() < _minLevel)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "User %s has no privilege to login", user.c_str());
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "User %s has no privilege to login", user.c_str());
         return -1;
     }
     else if (fields[2].GetInt32() != -1)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "User %s has to be assigned on all realms (with RealmID = '-1')", user.c_str());
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "User %s has to be assigned on all realms (with RealmID = '-1')", user.c_str());
         return -1;
     }
 
@@ -226,7 +226,7 @@ int RASocket::check_password(const std::string& user, const std::string& pass)
 
     if (!result)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Wrong password for user: %s", user.c_str());
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Wrong password for user: %s", user.c_str());
         return -1;
     }
 
@@ -249,7 +249,7 @@ int RASocket::authenticate()
     if (recv_line(pass) == -1)
         return -1;
 
-    sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Login attempt for user: %s", user.c_str());
+    TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Login attempt for user: %s", user.c_str());
 
     if (check_access_level(user) == -1)
         return -1;
@@ -257,7 +257,7 @@ int RASocket::authenticate()
     if (check_password(user, pass) == -1)
         return -1;
 
-    sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "User login: %s", user.c_str());
+    TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "User login: %s", user.c_str());
 
     return 0;
 }
@@ -291,7 +291,7 @@ int RASocket::subnegotiate()
 
     if (n >= 1024)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "RASocket::subnegotiate: allocated buffer 1024 bytes was too small for negotiation packet, size: %u", uint32(n));
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "RASocket::subnegotiate: allocated buffer 1024 bytes was too small for negotiation packet, size: %u", uint32(n));
         return -1;
     }
 
@@ -325,7 +325,7 @@ int RASocket::subnegotiate()
 
             uint8 param = buf[++i];
             ss << uint32(param);
-            sLog->outDebug(LOG_FILTER_REMOTECOMMAND, ss.str().c_str());
+            TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, ss.str().c_str());
         }
         ++i;
     }
@@ -386,7 +386,7 @@ void RASocket::zprint(void* callbackArg, const char * szText)
 
     if (socket->putq(mb, const_cast<ACE_Time_Value*>(&ACE_Time_Value::zero)) == -1)
     {
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Failed to enqueue message, queue is full or closed. Error is %s", ACE_OS::strerror(errno));
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Failed to enqueue message, queue is full or closed. Error is %s", ACE_OS::strerror(errno));
         mb->release();
     }
 }
@@ -407,7 +407,7 @@ void RASocket::commandFinished(void* callbackArg, bool /*success*/)
     if (socket->putq(mb) == -1)
     {
         // getting here is bad, command can't be marked as complete
-        sLog->outDebug(LOG_FILTER_REMOTECOMMAND, "Failed to enqueue command end message. Error is %s", ACE_OS::strerror(errno));
+        TC_LOG_DEBUG(LOG_FILTER_REMOTECOMMAND, "Failed to enqueue command end message. Error is %s", ACE_OS::strerror(errno));
         mb->release();
     }
 }

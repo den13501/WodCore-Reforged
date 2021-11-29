@@ -112,7 +112,7 @@ class ByteBufferPositionException : public ByteBufferException
 #ifdef DEBUG
             ACE_Stack_Trace trace;
 
-            sLog->outError(LOG_FILTER_GENERAL, "Attempted to %s value with size: %zu in ByteBuffer (pos: %zu size: %zu)\n[Stack trace: %s]" ,
+            TC_LOG_ERROR(LOG_FILTER_GENERAL, "Attempted to %s value with size: %zu in ByteBuffer (pos: %zu size: %zu)\n[Stack trace: %s]" ,
                 (_add ? "put" : "get"), ValueSize, Pos, Size, trace.c_str());
 #endif
         }
@@ -136,7 +136,7 @@ class ByteBufferSourceException : public ByteBufferException
 #ifdef DEBUG
             ACE_Stack_Trace trace;
 
-            sLog->outError(LOG_FILTER_GENERAL, "Attempted to put a %s in ByteBuffer (pos: %zu size: %zu)\n[Stack trace: %s]",
+            TC_LOG_ERROR(LOG_FILTER_GENERAL, "Attempted to put a %s in ByteBuffer (pos: %zu size: %zu)\n[Stack trace: %s]",
                 (ValueSize > 0 ? "NULL-pointer" : "zero-sized value"), Pos, Size, trace.c_str());
 #endif
         }
@@ -861,7 +861,7 @@ class ByteBuffer
                 o << read<uint8>(i) << " - ";
             o << " ";
 
-            sLog->outTrace(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
+            TC_LOG_TRACE(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
         }
 
         void textlike() const
@@ -878,7 +878,7 @@ class ByteBuffer
                 o << buf;
             }
             o << " ";
-            sLog->outTrace(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
+            TC_LOG_TRACE(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
         }
 
         void hexlike() const
@@ -910,7 +910,7 @@ class ByteBuffer
                 o << buf;
             }
             o << " ";
-            sLog->outTrace(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
+            TC_LOG_TRACE(LOG_FILTER_NETWORKIO, "%s", o.str().c_str());
         }
 
         size_t GetBitPos() const

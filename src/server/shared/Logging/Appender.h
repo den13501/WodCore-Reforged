@@ -21,7 +21,13 @@
 #define APPENDER_H
 
 #include "Define.h"
+#include <time.h>
+#include "Dynamic/UnorderedMap.h"
+
+#include <string>
+
 #include "Common.h"
+
 
 enum LogFilterType
 {
@@ -156,6 +162,6 @@ class Appender
         AppenderFlags flags;
 };
 
-typedef std::map<uint8, Appender*> AppenderMap;
+typedef UNORDERED_MAP<uint8, Appender*> AppenderMap;
 
 #endif

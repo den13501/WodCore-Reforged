@@ -355,7 +355,7 @@ bool ChatHandler::ExecuteCommandInTable(ChatCommand* table, const char* text, co
             // Disable the command
             table[i].SecurityLevel = (uint32)SpecificSecurityLevel::DisableByFailure;
 
-            sLog->outError(LOG_FILTER_WORLDSERVER, "Crash intercepted => ChatHandler::ExecuteCommandInTable(%p, %s, %s)", table, text, fullcmd.c_str());
+            TC_LOG_ERROR(LOG_FILTER_WORLDSERVER, "Crash intercepted => ChatHandler::ExecuteCommandInTable(%p, %s, %s)", table, text, fullcmd.c_str());
         }
         //MS::SignalHandler::DisableThrowExceptionAtFailure();
 
@@ -438,12 +438,12 @@ bool ChatHandler::SetDataForCommandInTable(ChatCommand* table, const char* text,
         // expected subcommand by full name DB content
         else if (*text)
         {
-            sLog->outError(LOG_FILTER_SQL, "Table `command` have unexpected subcommand '%s' in command '%s', skip.", text, fullcommand.c_str());
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have unexpected subcommand '%s' in command '%s', skip.", text, fullcommand.c_str());
             return false;
         }
 
         if (table[i].SecurityLevel != security)
-            sLog->outInfo(LOG_FILTER_GENERAL, "Table `command` overwrite for command '%s' default security (%u) by %u", fullcommand.c_str(), table[i].SecurityLevel, security);
+            TC_LOG_INFO(LOG_FILTER_GENERAL, "Table `command` overwrite for command '%s' default security (%u) by %u", fullcommand.c_str(), table[i].SecurityLevel, security);
 
         table[i].SecurityLevel = security;
 
@@ -460,9 +460,9 @@ bool ChatHandler::SetDataForCommandInTable(ChatCommand* table, const char* text,
     if (!cmd.empty())
     {
         if (table == getCommandTable())
-            sLog->outError(LOG_FILTER_SQL, "Table `command` have not existed command '%s', skip.", cmd.c_str());
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have not existed command '%s', skip.", cmd.c_str());
         else
-            sLog->outError(LOG_FILTER_SQL, "Table `command` have not existed subcommand '%s' in command '%s', skip.", cmd.c_str(), fullcommand.c_str());
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have not existed subcommand '%s' in command '%s', skip.", cmd.c_str(), fullcommand.c_str());
     }
 
     return false;
