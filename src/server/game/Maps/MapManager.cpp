@@ -442,7 +442,7 @@ uint32 MapManager::GenerateInstanceId()
 
     if (l_NewInstanceID == m_NextInstanceID)
     {
-        TC_LOG_ERROR(LogFilterType::LOG_FILTER_MAPS, "Instance ID overflow!! Can't continue, shutting down server. ");
+        TC_LOG_ERROR(LOG_FILTER_MAPS, "Instance ID overflow!! Can't continue, shutting down server. ");
         World::StopNow(ShutdownExitCode::ERROR_EXIT_CODE);
     }
 

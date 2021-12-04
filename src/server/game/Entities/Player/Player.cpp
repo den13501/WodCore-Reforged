@@ -2388,14 +2388,14 @@ bool Player::TeleportTo(uint32 p_MapID, float p_X, float p_Y, float p_Z, float p
 {
     if (!MapManager::IsValidMapCoord(p_MapID, p_X, p_Y, p_Z, p_O))
     {
-        TC_LOG_ERROR(LogFilterType::LOG_FILTER_MAPS, "TeleportTo: invalid map (%d) or invalid coordinates (X: %f, Y: %f, Z: %f, O: %f) given when teleporting player (GUID: %u, name: %s, map: %d, X: %f, Y: %f, Z: %f, O: %f).",
+        TC_LOG_ERROR(LOG_FILTER_MAPS, "TeleportTo: invalid map (%d) or invalid coordinates (X: %f, Y: %f, Z: %f, O: %f) given when teleporting player (GUID: %u, name: %s, map: %d, X: %f, Y: %f, Z: %f, O: %f).",
             p_MapID, p_X, p_Y, p_Z, p_O, GetGUIDLow(), GetName(), GetMapId(), GetPositionX(), GetPositionY(), GetPositionZ(), GetOrientation());
         return false;
     }
 
     if (AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()) && DisableMgr::IsDisabledFor(DisableType::DISABLE_TYPE_MAP, p_MapID, this))
     {
-        TC_LOG_ERROR(LogFilterType::LOG_FILTER_MAPS, "Player (GUID: %u, name: %s) tried to enter a forbidden map %u", GetGUIDLow(), GetName(), p_MapID);
+        TC_LOG_ERROR(LOG_FILTER_MAPS, "Player (GUID: %u, name: %s) tried to enter a forbidden map %u", GetGUIDLow(), GetName(), p_MapID);
         SendTransferAborted(p_MapID, TRANSFER_ABORT_MAP_NOT_ALLOWED);
         return false;
     }
@@ -2413,7 +2413,7 @@ bool Player::TeleportTo(uint32 p_MapID, float p_X, float p_Y, float p_Z, float p
     /// Client without expansion support
     if (GetSession()->Expansion() < l_MapEntry->Expansion())
     {
-        TC_LOG_DEBUG(LogFilterType::LOG_FILTER_MAPS, "Player %s using client without required expansion tried teleport to non accessible map %u", GetName(), p_MapID);
+        TC_LOG_DEBUG(LOG_FILTER_MAPS, "Player %s using client without required expansion tried teleport to non accessible map %u", GetName(), p_MapID);
 
         if (GetTransport())
         {
@@ -2432,7 +2432,7 @@ bool Player::TeleportTo(uint32 p_MapID, float p_X, float p_Y, float p_Z, float p
         return false;
     }
     else
-        TC_LOG_DEBUG(LogFilterType::LOG_FILTER_MAPS, "Player %s is being teleported to map %u", GetName(), p_MapID);
+        TC_LOG_DEBUG(LOG_FILTER_MAPS, "Player %s is being teleported to map %u", GetName(), p_MapID);
 
     if (m_vehicle)
         ExitVehicle();
@@ -11594,7 +11594,7 @@ void Player::CastItemUseSpell(Item* p_Item, SpellCastTargets const& p_Targets, u
         SpellInfo const* l_SpellInfo = sSpellMgr->GetSpellInfo(l_LearnedSpell);
         if (!l_SpellInfo)
         {
-            TC_LOG_ERROR(LogFilterType::LOG_FILTER_PLAYER, "Player::CastItemUseSpell: Item (Entry: %u) in have wrong spell id %u, ignoring ", l_ItemTemplate->ItemId, l_LearnedSpell);
+            TC_LOG_ERROR(LOG_FILTER_PLAYER, "Player::CastItemUseSpell: Item (Entry: %u) in have wrong spell id %u, ignoring ", l_ItemTemplate->ItemId, l_LearnedSpell);
             SendEquipError(InventoryResult::EQUIP_ERR_INTERNAL_BAG_ERROR, p_Item, nullptr);
             return;
         }
@@ -11631,7 +11631,7 @@ void Player::CastItemUseSpell(Item* p_Item, SpellCastTargets const& p_Targets, u
             SpellInfo const* l_SpellInfo = sSpellMgr->GetSpellInfo(l_ItemEnchantEntry->spellid[l_I]);
             if (!l_SpellInfo)
             {
-                TC_LOG_ERROR(LogFilterType::LOG_FILTER_PLAYER, "Player::CastItemUseSpell Enchant %i, cast unknown spell %i", l_ItemEnchantEntry->ID, l_ItemEnchantEntry->spellid[l_I]);
+                TC_LOG_ERROR(LOG_FILTER_PLAYER, "Player::CastItemUseSpell Enchant %i, cast unknown spell %i", l_ItemEnchantEntry->ID, l_ItemEnchantEntry->spellid[l_I]);
                 continue;
             }
 
@@ -11662,7 +11662,7 @@ void Player::CastItemUseSpell(Item* p_Item, SpellCastTargets const& p_Targets, u
         SpellInfo const* l_SpellInfo = sSpellMgr->GetSpellInfo(l_SpellData.SpellId);
         if (!l_SpellInfo)
         {
-            TC_LOG_ERROR(LogFilterType::LOG_FILTER_PLAYER, "Player::CastItemUseSpell: Item (Entry: %u) in have wrong spell id %u, ignoring", l_ItemTemplate->ItemId, l_SpellData.SpellId);
+            TC_LOG_ERROR(LOG_FILTER_PLAYER, "Player::CastItemUseSpell: Item (Entry: %u) in have wrong spell id %u, ignoring", l_ItemTemplate->ItemId, l_SpellData.SpellId);
             continue;
         }
 
@@ -18704,7 +18704,7 @@ bool Player::CanRewardQuest(Quest const* quest, uint32 p_Reward, bool msg)
                     break;
                 // Not implemented PackageItemRewardType
                 default:
-                    TC_LOG_ERROR(LogFilterType::LOG_FILTER_PLAYER_ITEMS, "Not implemented PackageItemRewardType %u for quest %u", l_DynamicReward->Type, quest->GetQuestId());
+                    TC_LOG_ERROR(LOG_FILTER_PLAYER_ITEMS, "Not implemented PackageItemRewardType %u for quest %u", l_DynamicReward->Type, quest->GetQuestId());
                     continue;
             }
 
