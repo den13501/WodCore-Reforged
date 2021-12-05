@@ -21,6 +21,8 @@
 #include "DatabaseEnv.h"
 #include "Map.h"
 #include "Player.h"
+#include "WorldSession.h"
+#include "Opcodes.h"
 #include "Group.h"
 #include "GameObject.h"
 #include "Creature.h"
