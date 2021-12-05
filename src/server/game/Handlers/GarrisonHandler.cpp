@@ -185,13 +185,13 @@ void WorldSession::HandleUpgradeGarrisonOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleUpgradeGarrisonOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleUpgradeGarrisonOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
     if (!l_Garrison->CanUpgrade())
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleUpgradeGarrisonOpcode - Can't upgrade");
+        TC_LOG_DEBUG("network", "WORLD: HandleUpgradeGarrisonOpcode - Can't upgrade");
         return;
     }
 
@@ -255,7 +255,7 @@ void WorldSession::HandleGarrisonMissionNPCHelloOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -280,7 +280,7 @@ void WorldSession::HandleGarrisonRequestSetMissionNPC(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonRequestSetMissionNPC - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonRequestSetMissionNPC - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -364,7 +364,7 @@ void WorldSession::HandleGarrisonPurchaseBuildingOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonPurchaseBuildingOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonPurchaseBuildingOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -469,7 +469,7 @@ void WorldSession::HandleGarrisonCancelConstructionOpcode(WorldPacket& p_RecvDat
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonCancelConstructionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonCancelConstructionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -508,7 +508,7 @@ void WorldSession::HandleGarrisonStartMissionOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonStartMissionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonStartMissionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -535,7 +535,7 @@ void WorldSession::HandleGarrisonCompleteMissionOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonCompleteMissionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonCompleteMissionOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
     
@@ -562,7 +562,7 @@ void WorldSession::HandleGarrisonMissionBonusRollOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -591,7 +591,7 @@ void WorldSession::HandleGarrisonGenerateRecruitsOpcode(WorldPacket& p_RecvData)
 
     if (l_Unit == nullptr)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_GUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_GUID)));
         return;
     }
 
@@ -640,7 +640,7 @@ void WorldSession::HandleGarrisonRecruitFollower(WorldPacket& p_RecvData)
 
     if (l_Unit == nullptr)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_GUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionBonusRollOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_GUID)));
         return;
     }
 
@@ -719,7 +719,7 @@ void WorldSession::HandleGarrisonAssignFollowerToBuilding(WorldPacket& p_RecvDat
 
     if (!l_Creature)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonAssignFollowerToBuilding - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonAssignFollowerToBuilding - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -759,7 +759,7 @@ void WorldSession::HandleGarrisonRemoveFollowerFromBuilding(WorldPacket& p_RecvD
 
     if (!l_Creature)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonRemoveFollowerFromBuilding - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonRemoveFollowerFromBuilding - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -793,7 +793,7 @@ void WorldSession::HandleGarrisonGetShipmentInfoOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 
@@ -901,7 +901,7 @@ void WorldSession::HandleGarrisonCreateShipmentOpcode(WorldPacket& p_RecvData)
 
     if (!l_Unit)
     {
-        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
+        TC_LOG_DEBUG("network", "WORLD: HandleGarrisonMissionNPCHelloOpcode - Unit (GUID: %u) not found or you can not interact with him.", uint32(GUID_LOPART(l_NpcGUID)));
         return;
     }
 

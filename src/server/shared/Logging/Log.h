@@ -30,56 +30,56 @@
 
 #include <string>
 #include <ace/Singleton.h>
-
+/*
 // TODO: Replace all defines in core
-#define LOG_FILTER_ACHIEVEMENTSYS "achievement"
-#define LOG_FILTER_AUCTIONHOUSE   "auctionHouse"
-#define LOG_FILTER_ARENAS         "bg.arena"
-#define LOG_FILTER_BATTLEFIELD    "bg.battlefield"
-#define LOG_FILTER_BATTLEGROUND   "bg.battleground"
-#define LOG_FILTER_PLAYER_CHATLOG "chat.log"
+#define "achievement" "achievement"
+#define "auctionHouse"   "auctionHouse"
+#define "bg.arena"         "bg.arena"
+#define "bg.battlefield"    "bg.battlefield"
+#define "bg.battleground"   "bg.battleground"
+#define "chat.log" "chat.log"
 #define LOG_FILTER_CALENDAR       "calendar"
-#define LOG_FILTER_CHATSYS        "chat.system"
+#define "chat.system"        "chat.system"
 #define LOG_FILTER_CHEAT          "cheat"
-#define LOG_FILTER_REMOTECOMMAND  "commands.ra"
-#define LOG_FILTER_GMCOMMAND      "commands.gm"
-#define LOG_FILTER_CONDITIONSYS   "condition"
-#define LOG_FILTER_PETS           "entities.pet"
-#define LOG_FILTER_CHARACTER      "entities.player.character"
-#define LOG_FILTER_PLAYER_DUMP    "entities.player.dump"
-#define LOG_FILTER_PLAYER         "entities.player"
-#define LOG_FILTER_PLAYER_ITEMS   "entities.player.items"
-#define LOG_FILTER_PLAYER_LOADING "entities.player.loading"
-#define LOG_FILTER_PLAYER_SKILLS  "entities.player.skills"
-#define LOG_FILTER_TRANSPORTS     "entities.transport"
-#define LOG_FILTER_UNITS          "entities.unit"
-#define LOG_FILTER_VEHICLES       "entities.vehicle"
-#define LOG_FILTER_GAMEEVENTS     "gameevent"
-#define LOG_FILTER_GUILD          "guild"
-#define LOG_FILTER_LFG            "lfg"
-#define LOG_FILTER_LOOT           "loot"
-#define LOG_FILTER_MAPSCRIPTS     "maps.script"
-#define LOG_FILTER_MAPS           "maps"
-#define LOG_FILTER_GENERAL        "misc"
-#define LOG_FILTER_NETWORKIO      "network"
-#define LOG_FILTER_OPCODES        "network.opcode"
-#define LOG_FILTER_SOAP           "network.soap"
-#define LOG_FILTER_OUTDOORPVP     "outdoorpvp"
-#define LOG_FILTER_POOLSYS        "pool"
+#define "commands.ra"  "commands.ra"
+#define "commands.gm"      "commands.gm"
+#define "condition"   "condition"
+#define "entities.pet"           "entities.pet"
+#define "entities.player.character"      "entities.player.character"
+#define "entities.player.dump"    "entities.player.dump"
+#define "entities.player"         "entities.player"
+#define "entities.player.items"   "entities.player.items"
+#define "entities.player.loading" "entities.player.loading"
+#define "entities.player.skills"  "entities.player.skills"
+#define "entities.transport"     "entities.transport"
+#define "entities.unit"          "entities.unit"
+#define "entities.vehicle"       "entities.vehicle"
+#define "gameevent"     "gameevent"
+#define "guild"          "guild"
+#define "lfg"            "lfg"
+#define "loot"           "loot"
+#define "maps.script"     "maps.script"
+#define "maps"           "maps"
+#define "misc"        "misc"
+#define "network"      "network"
+#define "network.opcode"        "network.opcode"
+#define "network.soap"           "network.soap"
+#define "outdoorpvp"     "outdoorpvp"
+#define "pool"        "pool"
 #define LOG_FILTER_RBAC           "rbac"
-#define LOG_FILTER_TSCR           "scripts"
-#define LOG_FILTER_DATABASE_AI    "scripts.ai"
-#define LOG_FILTER_SERVER_LOADING "server.loading"
-#define LOG_FILTER_AUTHSERVER     "server.authserver"
-#define LOG_FILTER_WORLDSERVER    "server.worldserver"
-#define LOG_FILTER_SPELLS_AURAS   "spells"
-#define LOG_FILTER_SQL_DEV        "sql.dev"
-#define LOG_FILTER_SQL_DRIVER     "sql.driver"
-#define LOG_FILTER_SQL            "sql.sql"
-#define LOG_FILTER_WARDEN         "warden"
-#define LOG_FILTER_INTERREALM     "interrealm"
-#define LOG_FILTER_PROFILING      "entities.profiling"
-
+#define "scripts"           "scripts"
+#define "scripts.ai"    "scripts.ai"
+#define "server.loading" "server.loading"
+#define "server.authserver"     "server.authserver"
+#define "server.worldserver"    "server.worldserver"
+#define "spells"   "spells"
+#define "sql.dev"        "sql.dev"
+#define "sql.driver"     "sql.driver"
+#define "sql.sql"            "sql.sql"
+#define "warden"         "warden"
+#define "interrealm"     "interrealm"
+#define "entities.profiling"      "entities.profiling"
+*/
 #define LOGGER_ROOT "root"
 
 #include <cstdarg>
@@ -249,8 +249,8 @@ inline bool Log::ShouldLog(std::string const& type, LogLevel level)
         return  loggerLevel != LOG_LEVEL_DISABLED && loggerLevel <= level;
     }
 
-    if (type != LOG_FILTER_GENERAL)
-        return ShouldLog(LOG_FILTER_GENERAL, level);
+    if (type != "misc")
+        return ShouldLog("misc", level);
 
     return false;
 }

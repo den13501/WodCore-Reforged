@@ -71,7 +71,7 @@ void WorldSession::HandleSetSheathedOpcode(WorldPacket& recvData)
 
     if (sheathed >= MAX_SHEATH_STATE)
     {
-        TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Unknown sheath state %u ??", sheathed);
+        TC_LOG_ERROR("network", "Unknown sheath state %u ??", sheathed);
         return;
     }
 

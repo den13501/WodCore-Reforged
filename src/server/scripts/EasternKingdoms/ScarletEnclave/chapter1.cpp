@@ -191,7 +191,7 @@ public:
                         anchorGUID = anchor->GetGUID();
                     }
                     else
-                        TC_LOG_ERROR(LOG_FILTER_TSCR, "npc_unworthy_initiateAI: unable to find anchor!");
+                        TC_LOG_ERROR("scripts", "npc_unworthy_initiateAI: unable to find anchor!");
 
                     float dist = 99.0f;
                     GameObject* prison = NULL;
@@ -211,7 +211,7 @@ public:
                     if (prison)
                         prison->ResetDoorOrButton();
                     else
-                        TC_LOG_ERROR(LOG_FILTER_TSCR, "npc_unworthy_initiateAI: unable to find prison!");
+                        TC_LOG_ERROR("scripts", "npc_unworthy_initiateAI: unable to find prison!");
                 }
                 break;
             case PHASE_TO_EQUIP:
@@ -222,7 +222,7 @@ public:
                     else
                     {
                         me->GetMotionMaster()->MovePoint(1, anchorX, anchorY, me->GetPositionZ());
-                        //TC_LOG_DEBUG(LOG_FILTER_TSCR, "npc_unworthy_initiateAI: move to %f %f %f", anchorX, anchorY, me->GetPositionZ());
+                        //TC_LOG_DEBUG("scripts", "npc_unworthy_initiateAI: move to %f %f %f", anchorX, anchorY, me->GetPositionZ());
                         phase = PHASE_EQUIPING;
                         wait_timer = 0;
                     }
@@ -1086,9 +1086,9 @@ public:
                         car->GetPlayer(*car, car->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
                         car->GetPlayer(*car, car->GetCreatorGUID())->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC);
                         CAST_AI(npc_scarlet_miner::npc_scarlet_minerAI, miner->AI())->InitCartQuest(player);
-                    } else TC_LOG_ERROR(LOG_FILTER_TSCR, "OnGossipHello vehicle entry is not correct.");
-                } else TC_LOG_ERROR(LOG_FILTER_TSCR, "OnGossipHello player is not on the vehicle.");
-            } else TC_LOG_ERROR(LOG_FILTER_TSCR, "OnGossipHello Scarlet Miner cant be found by script.");
+                    } else TC_LOG_ERROR("scripts", "OnGossipHello vehicle entry is not correct.");
+                } else TC_LOG_ERROR("scripts", "OnGossipHello player is not on the vehicle.");
+            } else TC_LOG_ERROR("scripts", "OnGossipHello Scarlet Miner cant be found by script.");
         }
         return true;
     }

@@ -373,21 +373,21 @@ bool Guild::BankTab::LoadItemFromDB(Field* fields)
     uint32 itemEntry = fields[20].GetUInt32();
     if (slotId >= GUILD_BANK_MAX_SLOTS)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Invalid slot for item (GUID: %u, id: %u) in guild bank, skipped.", itemGuid, itemEntry);
+        TC_LOG_ERROR("guild", "Invalid slot for item (GUID: %u, id: %u) in guild bank, skipped.", itemGuid, itemEntry);
         return false;
     }
 
     ItemTemplate const* proto = sObjectMgr->GetItemTemplate(itemEntry);
     if (!proto)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Unknown item (GUID: %u, id: %u) in guild bank, skipped.", itemGuid, itemEntry);
+        TC_LOG_ERROR("guild", "Unknown item (GUID: %u, id: %u) in guild bank, skipped.", itemGuid, itemEntry);
         return false;
     }
 
     Item* pItem = NewItemOrBag(proto);
     if (!pItem->LoadFromDB(itemGuid, 0, fields, itemEntry))
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Item (GUID %u, id: %u) not found in item_instance, deleting from guild bank!", itemGuid, itemEntry);
+        TC_LOG_ERROR("guild", "Item (GUID %u, id: %u) not found in item_instance, deleting from guild bank!", itemGuid, itemEntry);
 
         PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_NONEXISTENT_GUILD_BANK_ITEM);
         stmt->setUInt32(0, m_guildId);
@@ -596,7 +596,7 @@ bool Guild::Member::LoadFromDB(Field* fields)
 
     if (!m_zoneId)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Player (GUID: %u) has broken zone-data", GUID_LOPART(m_guid));
+        TC_LOG_ERROR("guild", "Player (GUID: %u) has broken zone-data", GUID_LOPART(m_guid));
         m_zoneId = Player::GetZoneIdFromDB(m_guid);
     }
     return true;
@@ -607,12 +607,12 @@ bool Guild::Member::CheckStats() const
 {
     if (m_level < 1)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Player (GUID: %u) has a broken data in field `characters`.`level`, deleting him from guild!", GUID_LOPART(m_guid));
+        TC_LOG_ERROR("guild", "Player (GUID: %u) has a broken data in field `characters`.`level`, deleting him from guild!", GUID_LOPART(m_guid));
         return false;
     }
     if (m_class < CLASS_WARRIOR || m_class >= MAX_CLASSES)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Player (GUID: %u) has a broken data in field `characters`.`class`, deleting him from guild!", GUID_LOPART(m_guid));
+        TC_LOG_ERROR("guild", "Player (GUID: %u) has a broken data in field `characters`.`class`, deleting him from guild!", GUID_LOPART(m_guid));
         return false;
     }
     return true;
@@ -882,7 +882,7 @@ Item* Guild::BankMoveItemData::StoreItem(SQLTransaction& trans, Item* pItem)
         ItemPosCount pos(*itr);
         ++itr;
 
-        TC_LOG_DEBUG(LOG_FILTER_GUILD, "GUILD STORAGE: StoreItem tab = %u, slot = %u, item = %u, count = %u",
+        TC_LOG_DEBUG("guild", "GUILD STORAGE: StoreItem tab = %u, slot = %u, item = %u, count = %u",
             m_container, m_slotId, pItem->GetEntry(), pItem->GetCount());
         pLastItem = _StoreItem(trans, pTab, pItem, pos, itr != m_vec.end());
     }
@@ -989,7 +989,7 @@ void Guild::BankMoveItemData::CanStoreItemInTab(Item* pItem, uint8 skipSlotId, b
 
 InventoryResult Guild::BankMoveItemData::CanStore(Item* pItem, bool swap)
 {
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "GUILD STORAGE: CanStore() tab = %u, slot = %u, item = %u, count = %u",
+    TC_LOG_DEBUG("guild", "GUILD STORAGE: CanStore() tab = %u, slot = %u, item = %u, count = %u",
         m_container, m_slotId, pItem->GetEntry(), pItem->GetCount());
 
     uint32 count = pItem->GetCount();
@@ -1081,7 +1081,7 @@ bool Guild::Create(Player * p_Leader, const std::string & p_Name)
 
     _CreateLogHolders();
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "GUILD: creating guild [%s] for leader %s (%u)", p_Name.c_str(), p_Leader->GetName(), GUID_LOPART(m_leaderGuid));
+    TC_LOG_DEBUG("guild", "GUILD: creating guild [%s] for leader %s (%u)", p_Name.c_str(), p_Leader->GetName(), GUID_LOPART(m_leaderGuid));
 
     PreparedStatement* l_Stmt = NULL;
     SQLTransaction l_Transaction = CharacterDatabase.BeginTransaction();
@@ -1327,7 +1327,7 @@ void Guild::HandleRoster(WorldSession* p_Session /*= NULL*/)
     else
         BroadcastPacket(&l_Data);
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_ROSTER)");
+    TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_ROSTER)");
 }
 
 void Guild::HandleQuery(WorldSession* session)
@@ -1365,7 +1365,7 @@ void Guild::HandleQuery(WorldSession* session)
 
     session->SendPacket(&l_Data);
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_QUERY_RESPONSE)");
+    TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_QUERY_RESPONSE)");
 }
 
 void Guild::HandleGuildRanks(WorldSession* p_Session) const
@@ -1593,7 +1593,7 @@ void Guild::HandleSetRankInfo(WorldSession * p_Session, uint32 p_RankID, const s
 
     else if (RankInfo * l_RankInfo = GetRankInfo(p_RankID))
     {
-        TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Changed RankName to '%s', rights to 0x%08X", p_Name.c_str(), p_Rights);
+        TC_LOG_DEBUG("guild", "WORLD: Changed RankName to '%s', rights to 0x%08X", p_Name.c_str(), p_Rights);
 
         l_RankInfo->SetName(p_Name);
         l_RankInfo->SetRights(p_Rights);
@@ -1696,7 +1696,7 @@ void Guild::HandleInviteMember(WorldSession* p_Session, const std::string& p_Nam
         return;
     }
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "Player %s invited %s to join his Guild", l_Player->GetName(), p_Name.c_str());
+    TC_LOG_DEBUG("guild", "Player %s invited %s to join his Guild", l_Player->GetName(), p_Name.c_str());
 
     p_Invitee->SetGuildIdInvited(m_id);
 
@@ -1729,7 +1729,7 @@ void Guild::HandleInviteMember(WorldSession* p_Session, const std::string& p_Nam
 
     p_Invitee->GetSession()->SendPacket(&l_Data);
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_INVITE)");
+    TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_INVITE)");
 }
 
 void Guild::HandleAcceptMember(WorldSession* p_Session)
@@ -2073,7 +2073,7 @@ void Guild::HandleDisband(WorldSession* session)
     else
     {
         Disband();
-        TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Guild Successfully Disbanded");
+        TC_LOG_DEBUG("guild", "WORLD: Guild Successfully Disbanded");
         delete this;
     }
 }
@@ -2106,7 +2106,7 @@ void Guild::SendEventLog(WorldSession* p_Session) const
     WorldPacket l_Data(SMSG_GUILD_EVENT_LOG_QUERY_RESULTS, 2 * 1024);
     m_eventLog->WritePacket(l_Data);
     p_Session->SendPacket(&l_Data);
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_EVENT_LOG_QUERY_RESULTS)");
+    TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_EVENT_LOG_QUERY_RESULTS)");
 }
 
 void Guild::SendBankLog(WorldSession * p_Session, uint8 p_TabID) const
@@ -2295,7 +2295,7 @@ void Guild::SendPermissions(WorldSession* p_Session) const
 
     p_Session->SendPacket(&l_Data);
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_PERMISSIONS_QUERY_RESULTS)");
+    TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_PERMISSIONS_QUERY_RESULTS)");
 }
 
 void Guild::SendMoneyInfo(WorldSession * p_Session) const
@@ -2515,13 +2515,13 @@ bool Guild::LoadBankEventLogFromDB(Field* fields)
             {
                 if (!isMoneyTab)
                 {
-                    TC_LOG_ERROR(LOG_FILTER_GUILD, "GuildBankEventLog ERROR: MoneyEvent(LogGuid: %u, Guild: %u) does not belong to money tab (%u), ignoring...", guid, m_id, dbTabId);
+                    TC_LOG_ERROR("guild", "GuildBankEventLog ERROR: MoneyEvent(LogGuid: %u, Guild: %u) does not belong to money tab (%u), ignoring...", guid, m_id, dbTabId);
                     return false;
                 }
             }
             else if (isMoneyTab)
             {
-                TC_LOG_ERROR(LOG_FILTER_GUILD, "GuildBankEventLog ERROR: non-money event (LogGuid: %u, Guild: %u) belongs to money tab, ignoring...", guid, m_id);
+                TC_LOG_ERROR("guild", "GuildBankEventLog ERROR: non-money event (LogGuid: %u, Guild: %u) belongs to money tab, ignoring...", guid, m_id);
                 return false;
             }
             pLog->LoadEvent(new BankEventLogEntry(
@@ -2544,7 +2544,7 @@ bool Guild::LoadBankTabFromDB(Field* fields)
     uint8 tabId = fields[1].GetUInt8();
     if (tabId >= GetPurchasedTabsSize())
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Invalid tab (tabId: %u) in guild bank, skipped.", tabId);
+        TC_LOG_ERROR("guild", "Invalid tab (tabId: %u) in guild bank, skipped.", tabId);
         return false;
     }
     return m_bankTabs[tabId]->LoadFromDB(fields);
@@ -2555,7 +2555,7 @@ bool Guild::LoadBankItemFromDB(Field* fields)
     uint8 tabId = fields[17].GetUInt8();
     if (tabId >= GetPurchasedTabsSize())
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Invalid tab for item (GUID: %u, id: #%u) in guild bank, skipped.",
+        TC_LOG_ERROR("guild", "Invalid tab for item (GUID: %u, id: #%u) in guild bank, skipped.",
             fields[19].GetUInt32(), fields[20].GetUInt32());
         return false;
     }
@@ -2585,7 +2585,7 @@ bool Guild::Validate()
     bool broken_ranks = false;
     if (_GetRanksSize() < GUILD_RANKS_MIN_COUNT || _GetRanksSize() > GUILD_RANKS_MAX_COUNT)
     {
-        TC_LOG_ERROR(LOG_FILTER_GUILD, "Guild %u has invalid number of ranks, creating new...", m_id);
+        TC_LOG_ERROR("guild", "Guild %u has invalid number of ranks, creating new...", m_id);
         broken_ranks = true;
     }
     else
@@ -2595,7 +2595,7 @@ bool Guild::Validate()
             RankInfo* rankInfo = GetRankInfo(rankId);
             if (rankInfo->GetId() != rankId)
             {
-                TC_LOG_ERROR(LOG_FILTER_GUILD, "Guild %u has broken rank id %u, creating default set of ranks...", m_id, rankId);
+                TC_LOG_ERROR("guild", "Guild %u has broken rank id %u, creating default set of ranks...", m_id, rankId);
                 broken_ranks = true;
             }
         }
@@ -3354,7 +3354,7 @@ void Guild::_MoveItems(MoveItemData* pSrc, MoveItemData* pDest, uint32 splitedAm
     /*
     if (pItemSrc->GetCount() == 0)
     {
-        TC_LOG_FATAL(LOG_FILTER_GENERAL, "Guild::SwapItems: Player %s(GUIDLow: %u) tried to move item %u from tab %u slot %u to tab %u slot %u, but item %u has a stack of zero!",
+        TC_LOG_FATAL("misc", "Guild::SwapItems: Player %s(GUIDLow: %u) tried to move item %u from tab %u slot %u to tab %u slot %u, but item %u has a stack of zero!",
             player->GetName(), player->GetGUIDLow(), pItemSrc->GetEntry(), tabId, slotId, destTabId, destSlotId, pItemSrc->GetEntry());
         //return; // Commented out for now, uncomment when it's verified that this causes a crash!!
     }
@@ -3548,7 +3548,7 @@ void Guild::_SendBankContentUpdate(uint8 tabId, SlotIds slots) const
                     player->GetSession()->SendPacket(&data);
                 }
                 */
-        TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent (SMSG_GUILD_BANK_LIST)");
+        TC_LOG_DEBUG("guild", "WORLD: Sent (SMSG_GUILD_BANK_LIST)");
     }
 }
 
@@ -3572,7 +3572,7 @@ void Guild::_BroadcastEvent(GuildEvents guildEvent, uint64 guid, const char* par
 
     BroadcastPacket(&data);
 
-    TC_LOG_DEBUG(LOG_FILTER_GUILD, "WORLD: Sent SMSG_GUILD_EVENT");
+    TC_LOG_DEBUG("guild", "WORLD: Sent SMSG_GUILD_EVENT");
 }
 
 void Guild::SendGuildRanksUpdate(uint64 p_OfficierGUID, uint64 p_OtherGUID, uint32 p_RankID)

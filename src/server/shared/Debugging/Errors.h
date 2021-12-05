@@ -41,9 +41,9 @@ namespace Trinity
 } // namespace Trinity
 
 #define WPAssert(assertion) { if (!(assertion)) { sLog->outAshran("\n%s:%i in %s ASSERTION FAILED:\n  %s\n%", __FILE__, __LINE__, __FUNCTION__, #assertion); } }
-#define WPError(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR(LOG_FILTER_GENERAL, "%\n%s:%i in %s ERROR:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); } }
-#define WPWarning(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR(LOG_FILTER_GENERAL, "\n%s:%i in %s WARNING:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); } }
-#define WPFatal(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR(LOG_FILTER_GENERAL, "\n%s:%i in %s FATAL ERROR:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); ACE_OS::sleep(10); } }
+#define WPError(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR("misc", "%\n%s:%i in %s ERROR:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); } }
+#define WPWarning(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR("misc", "\n%s:%i in %s WARNING:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); } }
+#define WPFatal(assertion, errmsg) { if (!(assertion)) { TC_LOG_ERROR("misc", "\n%s:%i in %s FATAL ERROR:\n  %s\n", __FILE__, __LINE__, __FUNCTION__, (char *)errmsg); ACE_OS::sleep(10); } }
 
 #define ASSERT WPAssert
 #endif

@@ -1557,7 +1557,7 @@ class misc_commandscript: public CommandScript
             if (!l_PlayerTarget)
                 l_PlayerTarget = l_Player;
 
-            TC_LOG_DEBUG(LOG_FILTER_GENERAL, p_Handler->GetTrinityString(LANG_ADDITEM), l_ItemID, l_Count);
+            TC_LOG_DEBUG("misc", p_Handler->GetTrinityString(LANG_ADDITEM), l_ItemID, l_Count);
 
             ItemTemplate const* l_ItemTemplate = sObjectMgr->GetItemTemplate(l_ItemID);
             if (!l_ItemTemplate)
@@ -1647,7 +1647,7 @@ class misc_commandscript: public CommandScript
             if (!playerTarget)
                 playerTarget = player;
 
-            TC_LOG_DEBUG(LOG_FILTER_GENERAL, handler->GetTrinityString(LANG_ADDITEMSET), itemSetId);
+            TC_LOG_DEBUG("misc", handler->GetTrinityString(LANG_ADDITEMSET), itemSetId);
 
             bool found = false;
             ItemTemplateContainer const* its = sObjectMgr->GetItemTemplateStore();

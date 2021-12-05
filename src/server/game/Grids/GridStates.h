@@ -22,7 +22,7 @@ class GridState
         {
             if (i_Magic != MAGIC_TESTVAL)
             {
-                TC_LOG_ERROR(LOG_FILTER_GENERAL, "!!! GridState: Magic value gone !!!");
+                TC_LOG_ERROR("misc", "!!! GridState: Magic value gone !!!");
                 return false;
             }
             return true;

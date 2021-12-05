@@ -17,22 +17,22 @@ namespace Battlepay
 {
     void Manager::LoadFromDatabase()
     {
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay display info ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay display info ...");
         LoadDisplayInfos();
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay products ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay products ...");
         LoadProduct();
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay product groups ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay product groups ...");
         LoadProductGroups();
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay shop entries ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay shop entries ...");
         LoadShopEntires();
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay product group locales ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay product group locales ...");
         LoadProductGroupLocales();
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Battlepay display info locales ...");
+        TC_LOG_INFO("server.loading", "Loading Battlepay display info locales ...");
         LoadDisplayInfoLocales();
     }
 
@@ -62,7 +62,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay display info in %u ms.", (unsigned long)m_DisplayInfos.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay display info in %u ms.", (unsigned long)m_DisplayInfos.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     void Manager::LoadProductGroups()
@@ -90,7 +90,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay product groups in %u ms", (unsigned long)m_ProductGroups.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay product groups in %u ms", (unsigned long)m_ProductGroups.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     void Manager::LoadProduct()
@@ -154,7 +154,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay products in %u ms", (unsigned long)m_Products.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay products in %u ms", (unsigned long)m_Products.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     void Manager::LoadShopEntires()
@@ -186,7 +186,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay shop entries in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay shop entries in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     void Manager::LoadProductGroupLocales()
@@ -211,7 +211,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay product group locales strings in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay product group locales strings in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     void Manager::LoadDisplayInfoLocales()
@@ -243,7 +243,7 @@ namespace Battlepay
         }
         while (l_Result->NextRow());
 
-        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %lu Battlepay display info locales strings in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
+        TC_LOG_INFO("server.loading", ">> Loaded %lu Battlepay display info locales strings in %u ms", (unsigned long)m_ProductGroupLocales.size(), GetMSTimeDiffToNow(l_OldMSTime));
     }
 
     /// @TODO

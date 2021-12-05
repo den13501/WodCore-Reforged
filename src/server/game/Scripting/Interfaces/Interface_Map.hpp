@@ -21,7 +21,7 @@ template<class TMap> class MapScript : public UpdatableScript<TMap>
             : m_MapEntry(sMapStore.LookupEntry(p_MapID))
         {
             if (!m_MapEntry)
-                TC_LOG_ERROR(LOG_FILTER_TSCR, "Invalid MapScript for %u; no such map ID.", p_MapID);
+                TC_LOG_ERROR("scripts", "Invalid MapScript for %u; no such map ID.", p_MapID);
         }
 
     public:
