@@ -23,11 +23,14 @@
 # include <Windows.h>
 #endif
 
-AppenderFile::AppenderFile(uint8 id, std::string const& name, LogLevel level, const char* _filename, const char* _logDir, const char* _mode, AppenderFlags _flags)
-    : Appender(id, name, APPENDER_FILE, level, _flags)
-    , filename(_filename)
-    , logDir(_logDir)
-    , mode(_mode)
+AppenderFile::AppenderFile(uint8 id, std::string const& name, LogLevel level, const char* _filename, const char* _logDir, const char* _mode, AppenderFlags _flags, uint64 fileSize):
+    Appender(id, name, APPENDER_FILE, level, _flags),
+    logfile(NULL),
+    filename(_filename),
+    logDir(_logDir),
+    mode(_mode),
+    maxFileSize(fileSize),
+    fileSize(0)
 {
     dynamicName = std::string::npos != filename.find("%s");
     backup = (_flags & APPENDER_FLAGS_MAKE_FILE_BACKUP) != 0;
@@ -46,11 +49,14 @@ AppenderFile::~AppenderFile()
 
 void AppenderFile::_write(LogMessage const& message)
 {
+    bool exceedMaxSize = maxFileSize > 0 && (fileSize.value() + message.Size()) > maxFileSize;
+
     if (dynamicName)
     {
         char namebuf[TRINITY_PATH_MAX];
         snprintf(namebuf, TRINITY_PATH_MAX, filename.c_str(), message.param1.c_str());
-        logfile = OpenFile(namebuf, mode, backup);
+        // always use "a" with dynamic name otherwise it could delete the log we wrote in last _write() call
+        logfile = OpenFile(namebuf, "a", backup || exceedMaxSize);
     }
 
     if (logfile)
