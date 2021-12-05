@@ -35,16 +35,13 @@ AppenderFile::AppenderFile(uint8 id, std::string const& name, LogLevel level, co
     dynamicName = std::string::npos != filename.find("%s");
     backup = (_flags & APPENDER_FLAGS_MAKE_FILE_BACKUP) != 0;
 
-    logfile = !dynamicName ? OpenFile(_filename, _mode, backup) : NULL;
+    if (!dynamicName)
+        logfile = !dynamicName ? OpenFile(_filename, _mode, mode == "w" && backup) : NULL;
 }
 
 AppenderFile::~AppenderFile()
 {
-    if (logfile)
-    {
-        fclose(logfile);
-        logfile = NULL;
-    }
+    CloseFile();
 }
 
 void AppenderFile::_write(LogMessage const& message)
@@ -56,31 +53,51 @@ void AppenderFile::_write(LogMessage const& message)
         char namebuf[TRINITY_PATH_MAX];
         snprintf(namebuf, TRINITY_PATH_MAX, filename.c_str(), message.param1.c_str());
         // always use "a" with dynamic name otherwise it could delete the log we wrote in last _write() call
-        logfile = OpenFile(namebuf, "a", backup || exceedMaxSize);
+        FILE* file = OpenFile(namebuf, "a", backup || exceedMaxSize);
+        if (!file)
+            return;
+        fprintf(file, "%s%s", message.prefix.c_str(), message.text.c_str());
+        fflush(file);
+        fileSize += uint64(message.Size());
+        fclose(file);
+        return;
     }
+    else if (exceedMaxSize)
+        logfile = OpenFile(filename, "w", true);
 
     if (logfile)
-    {
-        fprintf(logfile, "%s%s", message.prefix.c_str(), message.text.c_str());
-        fflush(logfile);
-
-        if (dynamicName)
-        {
-            fclose(logfile);
-            logfile = NULL;
-        }
-    }
+        return;
+    
+    fprintf(logfile, "%s%s", message.prefix.c_str(), message.text.c_str());
+    fflush(logfile);
+    fileSize += uint64(message.Size());
 }
 
 FILE* AppenderFile::OpenFile(std::string const &filename, std::string const &mode, bool backup)
 {
+    std::string fullName(logDir + filename);
     if (mode == "w" && backup)
     {
+        CloseFile();
         std::string newName(filename);
         newName.push_back('.');
         newName.append(LogMessage::getTimeStr(time(NULL)));
         rename(filename.c_str(), newName.c_str()); // no error handling... if we couldn't make a backup, just ignore
     }
 
-    return fopen((logDir + filename).c_str(), mode.c_str());
+    if (FILE* ret = fopen(fullName.c_str(), mode.c_str()))
+    {
+        fileSize = ftell(ret);
+        return ret;
+    }
+    return NULL;
+}
+
+void AppenderFile::CloseFile()
+{
+    if (logfile)
+    {
+        fclose(logfile);
+        logfile = NULL;
+    }
 }
