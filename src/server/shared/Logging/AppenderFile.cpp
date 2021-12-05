@@ -82,6 +82,7 @@ FILE* AppenderFile::OpenFile(std::string const &filename, std::string const &mod
         std::string newName(filename);
         newName.push_back('.');
         newName.append(LogMessage::getTimeStr(time(NULL)));
+        std::replace(newName.begin(), newName.end(), ':', '-');
         rename(filename.c_str(), newName.c_str()); // no error handling... if we couldn't make a backup, just ignore
     }
 
