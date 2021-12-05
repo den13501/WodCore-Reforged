@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef TRINITY_DB2SFRM_H
 #define TRINITY_DB2SFRM_H
@@ -84,7 +95,7 @@ const char MountEntryfmt[] = "niiiisssii";
 const char PlayerConditionEntryfmt[] = "niiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiisiii";
 const char VignetteEntryfmt[] = "nsiiff";
 const char SpecializationSpellsfmt[] = "nixiix";
-const char MailTemplateEntryfmt[]= "ns";
+const char MailTemplateEntryfmt[] = "ns";
 const char WbAccessControlListfmt[] = "nsiiii";
 const char WbCertWhitelistfmt[] =
 {
@@ -270,52 +281,52 @@ const char BattlePetSpeciesfmt[] = "niiiiiiss";
 const char BattlePetSpeciesStatefmt[] = "niii";
 const char BattlePetSpeciesXAbilityfmt[] = "niiii";
 
-const char AuctionHouseEntryfmt[]             = "niiix";
-const char BarberShopStyleEntryfmt[]          = "nixxxiii";
-const char CharStartOutfitEntryfmt[]          = "dbbbbiiiiiiiiiiiiiiiiiiiiiiiixx";
-const char ChrClassesXPowerTypesfmt[]         = "nii";
-const char CinematicSequencesEntryfmt[]       = "nxixxxxxxx";
-const char CreatureDisplayInfofmt[]           = "nixifxxxxxxxxxxxxxxxxx";
-const char CreatureTypefmt[]                  = "nxx";
-const char DestructibleModelDatafmt[]         = "nixxxixxxxixxxxixxxxxxxx";
-const char DurabilityQualityfmt[]             = "nf";
-const char GlyphSlotfmt[]                     = "nii";
-const char GuildPerkSpellsfmt[]               = "dii";
-const char ImportPriceArmorfmt[]              = "nffff";
-const char ImportPriceQualityfmt[]            = "nf";
-const char ImportPriceShieldfmt[]             = "nf";
-const char ImportPriceWeaponfmt[]             = "nf";
-const char ItemPriceBasefmt[]                 = "diff";
-const char ItemClassfmt[]                     = "difx";
-const char ItemDisenchantLootfmt[]            = "niiiiii";
-const char ItemLimitCategoryEntryfmt[]        = "nxii";
-const char ItemRandomPropertiesfmt[]          = "nxiiiiis";
-const char ItemRandomSuffixfmt[]              = "nsxiiiiiiiiii";
-const char ItemSpecEntryfmt[]                 = "iiiiiii";
-const char ItemSpecOverrideEntryfmt[]         = "nii";
-const char MountCapabilityfmt[]               = "niiiiiii";
-const char MountTypefmt[]                     = "n";
-const char MountTypeXCapabilityfmt[]          = "niii";
-const char NameGenfmt[]                       = "dsii";
-const char QuestSortEntryfmt[]                = "nx";
-char const QuestV2fmt[]                       = "ni";
-const char QuestXPfmt[]                       = "niiiiiiiiii";
-const char ResearchBranchfmt[]                = "ixxixi";
-const char ResearchProjectfmt[]               = "nxxiiixxi";
-const char ResearchSitefmt[]                  = "niixx";
-const char ScalingStatDistributionfmt[]       = "niii";
-const char ScenarioEntryfmt[]                 = "nsi";
-const char SpellCastTimefmt[]                 = "nixx";
-const char SpellDurationfmt[]                 = "niii";
+const char AuctionHouseEntryfmt[] = "niiix";
+const char BarberShopStyleEntryfmt[] = "nixxxiii";
+const char CharStartOutfitEntryfmt[] = "dbbbbiiiiiiiiiiiiiiiiiiiiiiiixx";
+const char ChrClassesXPowerTypesfmt[] = "nii";
+const char CinematicSequencesEntryfmt[] = "nxixxxxxxx";
+const char CreatureDisplayInfofmt[] = "nixifxxxxxxxxxxxxxxxxx";
+const char CreatureTypefmt[] = "nxx";
+const char DestructibleModelDatafmt[] = "nixxxixxxxixxxxixxxxxxxx";
+const char DurabilityQualityfmt[] = "nf";
+const char GlyphSlotfmt[] = "nii";
+const char GuildPerkSpellsfmt[] = "dii";
+const char ImportPriceArmorfmt[] = "nffff";
+const char ImportPriceQualityfmt[] = "nf";
+const char ImportPriceShieldfmt[] = "nf";
+const char ImportPriceWeaponfmt[] = "nf";
+const char ItemPriceBasefmt[] = "diff";
+const char ItemClassfmt[] = "difx";
+const char ItemDisenchantLootfmt[] = "niiiiii";
+const char ItemLimitCategoryEntryfmt[] = "nxii";
+const char ItemRandomPropertiesfmt[] = "nxiiiiis";
+const char ItemRandomSuffixfmt[] = "nsxiiiiiiiiii";
+const char ItemSpecEntryfmt[] = "iiiiiii";
+const char ItemSpecOverrideEntryfmt[] = "nii";
+const char MountCapabilityfmt[] = "niiiiiii";
+const char MountTypefmt[] = "n";
+const char MountTypeXCapabilityfmt[] = "niii";
+const char NameGenfmt[] = "dsii";
+const char QuestSortEntryfmt[] = "nx";
+char const QuestV2fmt[] = "ni";
+const char QuestXPfmt[] = "niiiiiiiiii";
+const char ResearchBranchfmt[] = "ixxixi";
+const char ResearchProjectfmt[] = "nxxiiixxi";
+const char ResearchSitefmt[] = "niixx";
+const char ScalingStatDistributionfmt[] = "niii";
+const char ScenarioEntryfmt[] = "nsi";
+const char SpellCastTimefmt[] = "nixx";
+const char SpellDurationfmt[] = "niii";
 const char SpellItemEnchantmentConditionfmt[] = "nbbbbbxxxxxbbbbbbbbbbiiiiixxxxx";
-const char SpellRadiusfmt[]                   = "nfxxf";
-const char SpellRangefmt[]                    = "nffffixx";
-const char TotemCategoryEntryfmt[]            = "nxii";
-char const TransportAnimationfmt[]            = "diifffx";
-char const TransportRotationfmt[]             = "diiffff";
-const char WorldMapOverlayEntryfmt[]          = "nxiiiixxxxxxxxxx";
-const char SpellProcsPerMinuteEntryfmt[]      = "nfi";
-char const SpellProcsPerMinuteModfmt[]        = "niifi";
-const char QuestPOIPointfmt[]                 = "niii";
+const char SpellRadiusfmt[] = "nfxxf";
+const char SpellRangefmt[] = "nffffixx";
+const char TotemCategoryEntryfmt[] = "nxii";
+char const TransportAnimationfmt[] = "diifffx";
+char const TransportRotationfmt[] = "diiffff";
+const char WorldMapOverlayEntryfmt[] = "nxiiiixxxxxxxxxx";
+const char SpellProcsPerMinuteEntryfmt[] = "nfi";
+char const SpellProcsPerMinuteModfmt[] = "niifi";
+const char QuestPOIPointfmt[] = "niii";
 
 #endif

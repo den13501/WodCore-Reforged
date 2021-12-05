@@ -32,7 +32,6 @@
 #include <iostream>
 #include <fstream>
 #include "WowTime.hpp"
-#include <ace/OS_NS_time.h>
 
 typedef std::map<uint16, uint32> AreaFlagByAreaID;
 typedef std::map<uint32, uint32> AreaFlagByMapID;
@@ -1208,7 +1207,7 @@ static std::function<int32(Player const*, int32, int32)> g_WorldStateExpressionF
         struct tm l_LocalTime;
         l_LocalTime.tm_isdst = -1;
 
-        ACE_OS::localtime_r(&l_CurrentTime, &l_LocalTime);
+        localtime_r(&l_CurrentTime, &l_LocalTime);
 
         MS::Utilities::WowTime l_GameTime;
         l_GameTime.SetUTCTimeFromPosixTime(l_CurrentTime);
@@ -1310,7 +1309,7 @@ static std::function<int32(Player const*, int32, int32)> g_WorldStateExpressionF
         struct tm l_LocalTime;
         l_LocalTime.tm_isdst = -1;
 
-        ACE_OS::localtime_r(&l_CurrentTime, &l_LocalTime);
+        localtime_r(&l_CurrentTime, &l_LocalTime);
 
         MS::Utilities::WowTime l_GameTime;
         l_GameTime.SetUTCTimeFromPosixTime(l_CurrentTime);

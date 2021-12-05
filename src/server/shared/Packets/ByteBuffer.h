@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef _BYTEBUFFER_H
 #define _BYTEBUFFER_H
@@ -12,7 +23,8 @@
 #include "Common.h"
 #include "Debugging/Errors.h"
 #include "Log.h"
-#include "Utilities/ByteConverter.h"
+#include "ByteConverter.h"
+#include "Util.h"
 #include "Guid.h"
 #include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
@@ -842,7 +854,7 @@ class ByteBuffer
         void AppendPackedTime(time_t time)
         {
             tm lt;
-            ACE_OS::localtime_r(&time, &lt);
+            localtime_r(&time, &lt);
             append<uint32>((lt.tm_year - 100) << 24 | lt.tm_mon << 20 | (lt.tm_mday - 1) << 14 | lt.tm_wday << 11 | lt.tm_hour << 6 | lt.tm_min);
         }
 
