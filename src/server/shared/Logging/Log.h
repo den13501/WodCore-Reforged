@@ -29,7 +29,7 @@
 
 #include <unordered_map>
 #include <string>
-#include <ace/Singleton.h>
+
 /*
 // TODO: Replace all defines in core
 #define "achievement" "achievement"
@@ -87,8 +87,6 @@
 
 class Log
 {
-    friend class ACE_Singleton<Log, ACE_Thread_Mutex>;
-
     typedef std::unordered_map<std::string, Logger> LoggerMap;
 
     private:
@@ -96,6 +94,12 @@ class Log
         ~Log();
 
     public:
+        static Log* instance()
+        {
+            static Log* instance = new Log();
+            return instance;
+        }
+
         void LoadFromConfig();
         void Close();
         bool ShouldLog(std::string const& type, LogLevel level) const;
@@ -206,7 +210,7 @@ inline void Log::outMessage(std::string const& filter, LogLevel level, const cha
     va_end(ap);
 }
 
-#define sLog ACE_Singleton<Log, ACE_Thread_Mutex>::instance()
+#define sLog Log::instance()
 
 #if PLATFORM != PLATFORM_WINDOWS
 #define TC_LOG_MESSAGE_BODY(filterType__, level__, ...)                 \
