@@ -18,7 +18,10 @@
 */
 
 #include "AppenderFile.h"
-#include "Common.h"
+//#include "Common.h"
+#if PLATFORM == PLATFORM_WINDOWS
+# include <Windows.h>
+#endif
 
 AppenderFile::AppenderFile(uint8 id, std::string const& name, LogLevel level, const char* _filename, const char* _logDir, const char* _mode, AppenderFlags _flags)
     : Appender(id, name, APPENDER_FILE, level, _flags)
@@ -27,7 +30,7 @@ AppenderFile::AppenderFile(uint8 id, std::string const& name, LogLevel level, co
     , mode(_mode)
 {
     dynamicName = std::string::npos != filename.find("%s");
-    backup = _flags & APPENDER_FLAGS_MAKE_FILE_BACKUP;
+    backup = (_flags & APPENDER_FLAGS_MAKE_FILE_BACKUP) != 0;
 
     logfile = !dynamicName ? OpenFile(_filename, _mode, backup) : NULL;
 }

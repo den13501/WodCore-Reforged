@@ -9,6 +9,9 @@
 #ifndef QUERYRESULT_H
 #define QUERYRESULT_H
 
+#include "AutoPtr.h"
+#include <ace/Thread_Mutex.h>
+
 #include <memory>
 #include "Field.h"
 #include "Errors.h"

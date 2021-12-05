@@ -60,7 +60,7 @@ void AppenderConsole::InitColors(std::string const& str)
 
 void AppenderConsole::SetColor(bool stdout_stream, ColorTypes color)
 {
-    #if PLATFORM == PLATFORM_WINDOWS
+#if PLATFORM == PLATFORM_WINDOWS
     static WORD WinColorFG[MaxColors] =
     {
         0,                                                  // BLACK
@@ -88,7 +88,7 @@ void AppenderConsole::SetColor(bool stdout_stream, ColorTypes color)
 
     HANDLE hConsole = GetStdHandle(stdout_stream ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
     SetConsoleTextAttribute(hConsole, WinColorFG[color]);
-    #else
+#else
     enum ANSITextAttr
     {
         TA_NORMAL                                = 0,
