@@ -17,6 +17,11 @@
 * with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <sstream>
+#if PLATFORM == PLATFORM_WINDOWS
+#include <windows.h>
+#endif
+
 #include "AppenderConsole.h"
 #include "Config.h"
 #include "Util.h"
