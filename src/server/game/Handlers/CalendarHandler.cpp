@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef CROSS
 #include "InstanceSaveMgr.h"
@@ -188,20 +199,20 @@ void WorldSession::HandleCalendarAddEvent(WorldPacket& p_RecvData)
 
     p_RecvData >> l_MaxInvites;
 
-    CalendarEvent* l_CalendarEvent = new CalendarEvent(sCalendarMgr->GetFreeEventId(), l_Guid, 0, CalendarEventType(l_Type), l_DungeonID,
+    CalendarEvent l_CalendarEvent(sCalendarMgr->GetFreeEventId(), l_Guid, 0, CalendarEventType(l_Type), l_DungeonID,
         l_EventTime, l_Flags, 0, l_Title, l_Desc);
 
-    if (l_CalendarEvent->IsGuildEvent() || l_CalendarEvent->IsGuildAnnouncement())
+    if (l_CalendarEvent.IsGuildEvent() || l_CalendarEvent.IsGuildAnnouncement())
     {
         if (Player* l_Creator = ObjectAccessor::FindPlayer(l_Guid))
-            l_CalendarEvent->SetGuildId(l_Creator->GetGuildId());
+            l_CalendarEvent.SetGuildId(l_Creator->GetGuildId());
     }
 
-    if (l_CalendarEvent->IsGuildAnnouncement())
+    if (l_CalendarEvent.IsGuildAnnouncement())
     {
         // 946684800 is 01/01/2000 00:00:00 - default response time
-        CalendarInvite* l_Invite = new CalendarInvite(0, l_CalendarEvent->GetEventId(), 0, l_Guid, 946684800, CALENDAR_STATUS_NOT_SIGNED_UP, CALENDAR_RANK_PLAYER, "");
-        sCalendarMgr->AddInvite(l_CalendarEvent, l_Invite);
+        CalendarInvite* l_Invite = new CalendarInvite(0, l_CalendarEvent.GetEventId(), 0, l_Guid, 946684800, CALENDAR_STATUS_NOT_SIGNED_UP, CALENDAR_RANK_PLAYER, "");
+        sCalendarMgr->AddInvite(&l_CalendarEvent, l_Invite);
     }
     else
     {
@@ -212,15 +223,15 @@ void WorldSession::HandleCalendarAddEvent(WorldPacket& p_RecvData)
         for (uint32 l_Iter = 0; l_Iter < l_Invites && l_Iter < l_MaxInvites; ++l_Iter)
         {
             // 946684800 is 01/01/2000 00:00:00 - default response time
-            CalendarInvite* l_Invite = new CalendarInvite(sCalendarMgr->GetFreeInviteId(), l_CalendarEvent->GetEventId(), l_InvitedGuids[l_Iter], l_Guid, 946684800, CalendarInviteStatus(l_InvitedStatus[l_Iter]), CalendarModerationRank(l_InvitedRanks[l_Iter]), "");
-            sCalendarMgr->AddInvite(l_CalendarEvent, l_Invite, l_Transaction);
+            CalendarInvite* l_Invite = new CalendarInvite(sCalendarMgr->GetFreeInviteId(), l_CalendarEvent.GetEventId(), l_InvitedGuids[l_Iter], l_Guid, 946684800, CalendarInviteStatus(l_InvitedStatus[l_Iter]), CalendarModerationRank(l_InvitedRanks[l_Iter]), "");
+            sCalendarMgr->AddInvite(&l_CalendarEvent, l_Invite, l_Transaction);
         }
 
         if (l_Invites > 1)
             CharacterDatabase.CommitTransaction(l_Transaction);
     }
 
-    sCalendarMgr->AddEvent(l_CalendarEvent, (CalendarSendEventType)CALENDAR_SENDTYPE_ADD);
+    sCalendarMgr->AddEvent(new CalendarEvent(l_CalendarEvent, l_CalendarEvent.GetEventId()), CALENDAR_SENDTYPE_ADD);
 }
 
 void WorldSession::HandleCalendarUpdateEvent(WorldPacket& p_RecvData)
