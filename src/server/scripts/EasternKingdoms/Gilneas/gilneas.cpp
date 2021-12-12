@@ -1,10 +1,21 @@
-////////////////////////////////////////////////////////////////////////////////
-//
-//  MILLENIUM-STUDIO
-//  Copyright 2016 Millenium-studio SARL
-//  All Rights Reserved.
-//
-////////////////////////////////////////////////////////////////////////////////
+/*
+* Copyright (C) 2008-2020 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+* Copyright (C) 2021 WodCore Reforged
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "ScriptPCH.h"
 #include "Unit.h"
@@ -1886,6 +1897,7 @@ public:
 
         void Reset()
         {
+            me->InitCharmInfo();
             me->GetCharmInfo()->InitEmptyActionBar(false);
             me->GetCharmInfo()->SetActionBar(0, SPELL_ATTACK_LURKER, ACT_PASSIVE);
             me->SetReactState(REACT_DEFENSIVE);
@@ -1894,21 +1906,33 @@ public:
 
         void UpdateAI(uint32 const /*diff*/)
         {
-            Player* player = me->GetOwner()->ToPlayer();
-
-            if (player->GetQuestStatus(QUEST_FROM_THE_SHADOWS) == QUEST_STATUS_REWARDED)
+            if (me->GetOwner())
             {
-                me->DespawnOrUnsummon(1);
-            }
+                Player* player = me->GetOwner()->ToPlayer();
+                if (!player)
+                    return;
 
-            if (!UpdateVictim())
+                if (player->GetQuestStatus(QUEST_FROM_THE_SHADOWS) == QUEST_STATUS_REWARDED)
+                {
+                    me->DespawnOrUnsummon(1);
+                }
+
+                if (!UpdateVictim())
+                {
+                    me->GetCharmInfo()->SetIsFollowing(true);
+                    me->SetReactState(REACT_DEFENSIVE);
+                    return;
+                }
+
+                DoMeleeAttackIfReady();
+            }
+            else
             {
-                me->GetCharmInfo()->SetIsFollowing(true);
-                me->SetReactState(REACT_DEFENSIVE);
-                return;
-            }
+                if (!UpdateVictim())
+                    return;
 
-            DoMeleeAttackIfReady();
+                DoMeleeAttackIfReady();
+            }
         }
 
         void SpellHitTarget(Unit* Mastiff, SpellInfo const* cSpell)
