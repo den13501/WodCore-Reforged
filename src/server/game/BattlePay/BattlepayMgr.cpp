@@ -262,7 +262,7 @@ namespace Battlepay
     {
         /// Krw is the battle coins on retail
         /// @TODO: Move that to config files
-        return ShopCurrency::Krw;
+        return ShopCurrency::Tpt;
     }
 
     bool Manager::IsAvailable(WorldSession* p_Session) const
