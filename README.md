@@ -1,5 +1,5 @@
 # WodCore Reforged
-<b>WodCore : Reforged</b> is a open-source project for World of Warcraft, currently supporting the 6.3.3 (build 20779) game version.
+<b>WodCore : Reforged</b> is a open-source project for World of Warcraft, based on Firestorm wodcore, currently supporting the 6.2.3 (build 20779) game version.
 
 ## Why WodCore (Reforged) ?
 * OpenSource
